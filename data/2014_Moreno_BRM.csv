@@ -1,0 +1,821 @@
+word_spanish,translate_word_english,semantic_category,domain,aoa_subjective_mean,aoa_subjective_sd,familiar_mean,familiar_sd,manip_mean,manip_sd,typicality_mean,typicality_sd,percent_total_36,frequency_log,frequency_espal,frequency_crea,frequency_cuetosetal_2012,length,syllables,subjects
+águila,eagle,Animals,Living Things,3.19,1.35,3.47,1.13,2.23,1.52,4.06,1.15,0.03,14.58,3.83,888,2.27,6,3,38
+almeja,clam,Animals,Living Things,4.27,1.14,3.68,0.93,2.79,1.35,2.45,1.38,0.03,11.96,2.43,71,1.94,6,3,38
+ardilla,squirrel,Animals,Living Things,3.2,1.03,3.18,1.1,1.26,0.56,3.9,1.05,0.11,13.22,2.86,128,2.5,7,3,38
+asno,donkey,Animals,Living Things,3.47,1.45,3.19,1.32,1.76,1.08,4.07,0.74,0.08,11.84,3.1,257,2.03,4,2,38
+babuino,baboon,Animals,Living Things,5.63,2.2,1.82,1.31,1.18,0.65,2.16,1.4,0.06,9.49,1.88,12,1.15,7,3,36
+ballena,whale,Animals,Living Things,2.76,0.83,3.32,1.53,1.18,0.84,4.02,0.89,0.03,13.84,3.17,463,2.43,7,3,38
+besugo,sea ​​bream,Animals,Living Things,4.44,1.54,3.1,1.36,2.33,1.34,3.05,1.3,0.03,11.36,1.96,139,0.9,6,3,38
+bonito,tuna / bonito,Animals,Living Things,4.32,1.62,3.21,1.33,2.16,1.42,2.58,1.2,0.03,14.8,3.54,3429,3.59,6,3,38
+borrico,donkey,Animals,Living Things,3.41,1.26,2.92,1.25,1.58,0.96,3.55,1.42,0.03,10.8,2.19,58,0,7,3,38
+buey,ox,Animals,Living Things,3.6,1.33,3.25,1.21,1.55,1.11,3.71,1.03,0.14,13.59,3.45,639,1.91,4,1,38
+búfalo,buffalo,Animals,Living Things,4.46,1.24,2.27,1.11,1.24,0.86,3.42,1.29,0.03,14.79,2.58,126,2.21,6,3,38
+buitre,vulture,Animals,Living Things,4.27,1.39,3.26,1.05,1.26,0.53,3.57,1.1,0.03,11.86,3.18,185,1.7,6,2,38
+burra,she-donkey,Animals,Living Things,2.95,0.98,3.54,1.1,1.76,0.9,3.65,1,0.03,11.66,2.9,205,1.66,5,2,38
+burro,donkey,Animals,Living Things,2.24,0.94,3.86,1.38,2,0.94,4.29,0.83,0.5,13.69,3.56,962,2.6,5,2,38
+caballo,horse,Animals,Living Things,2.23,1.13,4.23,1.04,2.66,1.28,4.82,0.44,0.56,15.17,4.4,7990,3.41,7,3,38
+cabra,goat,Animals,Living Things,3.03,1.22,3.23,1.26,1.95,1.17,4.22,0.98,0.31,14.43,3.45,772,2.62,5,2,38
+cabrito,kid,Animals,Living Things,4.09,1.41,3.01,1.23,1.87,1.22,3.47,1.13,0.03,12.03,2.52,219,0.95,7,3,38
+canario,canary,Animals,Living Things,3,1.33,3.74,1.13,2.48,1.74,4,1.04,0.03,14.46,3.38,1171,1.87,7,3,38
+canguro,kangaroo,Animals,Living Things,3.15,1.33,3.12,1.1,2.1,1.48,3.63,1.25,0.03,13.88,2.48,160,2.06,7,3,38
+cebra,zebra,Animals,Living Things,3.23,1.26,3.42,1.07,1.24,0.53,3.9,1.05,0.03,12.94,2.59,102,1.88,5,2,38
+cerdo,pork / pig,Animals,Living Things,2.17,0.76,3.82,1.03,2,1.34,4.73,0.44,0.39,14.25,3.67,2463,3.22,5,2,38
+chimpancé,chimpanzee,Animals,Living Things,3.6,1.24,3.39,0.95,1.27,0.74,4.2,0.69,0.03,9.75,2.61,333,1.88,9,3,38
+chirla,baby clam,Animals,Living Things,5.13,1.7,2.97,1.42,2.55,1.39,2.09,1.31,0.03,10.24,1.08,6,0,6,2,37
+ciervo,deer,Animals,Living Things,3.33,1.05,3.53,0.99,1.29,0.73,4.32,0.97,0.03,13,3.06,409,2.45,6,2,38
+cigüeña,stork,Animals,Living Things,2.82,1.04,3.5,1.28,1.16,0.5,3.88,0.99,0.06,12.85,3.15,138,1.51,7,3,38
+cochinillo,piglet,Animals,Living Things,3.93,1.43,3.49,1.37,2.96,1.63,3.58,1.13,0.03,12.38,1.93,66,0.85,10,4,38
+cocodrilo,crocodile,Animals,Living Things,2.61,1.19,3.26,1.1,2.19,1.58,4.02,1.08,0.11,13.34,2.89,302,2.14,9,4,38
+codorniz,quail,Animals,Living Things,4.66,1.64,3.11,1.28,2.5,1.53,3.36,1.2,0.08,12.33,2.46,157,1.7,8,3,38
+comadreja,weasel,Animals,Living Things,4.89,1.23,2.23,1.17,1.48,1.04,2.79,1.2,0.03,10.53,3.38,62,2.06,9,4,38
+conejo,rabbit,Animals,Living Things,2.26,1.11,4.27,0.83,2.13,1.3,4.55,0.5,0.36,14.4,3.42,1017,2.96,6,3,38
+cordero,lamb,Animals,Living Things,3.06,1.39,3.82,1.12,1.9,1.02,4.13,0.94,0.17,14.03,3.63,1137,2.6,7,3,38
+coyote,coyote,Animals,Living Things,4.06,1.58,2.36,1.43,1.15,0.52,3.17,1.45,0.03,13.25,2.9,140,2.27,6,3,37
+culebra,snake,Animals,Living Things,3.1,1.16,3.12,1.3,1.32,0.63,3.4,0.96,0.03,12.24,2.91,360,1.51,7,3,38
+diplodoco,diplodocus,Animals,Living Things,4.48,2.85,1.38,1.4,0.84,0.57,1.7,1.34,0.03,6.33,1.34,4,0,9,4,31
+elefante,elephant,Animals,Living Things,2.22,0.67,3.84,1.34,1.33,0.69,4.49,0.63,0.31,14.06,3.34,785,2.63,8,4,38
+foca,seal,Animals,Living Things,2.76,1.04,3.4,1.26,2.53,1.77,4.12,1.03,0.06,12.32,2.81,125,2.02,4,2,38
+gallina,hen,Animals,Living Things,2.13,1.02,3.9,1.13,2.9,1.81,4.46,0.88,0.36,13.88,3.63,1564,2.78,7,3,38
+gamba,shrimp,Animals,Living Things,3.48,1.07,4.17,0.71,3.22,1.45,2.61,1.2,0.03,12.14,2.51,85,1.68,5,2,38
+gato,cat,Animals,Living Things,1.62,0.5,4.63,0.67,2.33,1.23,5,0,0.69,9.77,4.07,3556,3.35,4,2,38
+golondrina,swallow,Animals,Living Things,3.72,1.49,3.55,1.14,2.18,1.67,3.7,1.14,0.08,11.42,2.84,167,1.26,10,4,38
+gorrión,sparrow,Animals,Living Things,3.42,1.37,3.65,1.14,1.35,0.68,3.85,0.97,0.03,9.79,3.21,141,1.57,7,2,38
+guanaco,guanaco,Animals,Living Things,4.45,3.44,1.18,1.12,0.73,0.63,1.16,0.97,0.03,10.66,2.33,34,0,7,3,25
+hámster,hamster,Animals,Living Things,3.84,1.23,3.27,1.32,2.09,1.22,3.73,0.8,0.03,13.35,1.92,24,2.11,6,2,38
+hiena,hyena,Animals,Living Things,4.38,1.26,2.63,1.24,1.76,1.37,3.19,0.98,0.03,11.1,2.43,120,1.46,5,2,38
+hipopótamo,hippopotamus,Animals,Living Things,3.28,0.89,3.42,0.99,1.24,0.59,4.1,0.92,0.06,11.8,2.2,100,1.58,10,5,38
+hurón,ferret,Animals,Living Things,5.5,1.39,2.42,1.06,1.62,1.24,2.96,1.25,0.03,8.51,3.53,67,1.91,5,2,38
+jabalí,wild boar,Animals,Living Things,3.51,1.13,3.07,1.26,1.39,0.69,3.66,1.05,0.11,9.99,3.1,322,1.98,6,3,38
+jirafa,giraffe,Animals,Living Things,2.61,1.16,3.11,1.34,2.11,1.73,4.4,0.84,0.03,12.95,2.31,73,1.92,6,3,38
+lagartija,wall lizard,Animals,Living Things,2.84,0.96,3.4,1.34,1.5,0.72,3.57,1.17,0.03,11.35,2.66,216,1.85,9,4,38
+lagarto,lizard,Animals,Living Things,3.24,1.12,3.42,1.03,1.32,0.63,3.76,1.17,0.11,12.69,3.24,310,2.12,7,3,38
+león,lion,Animals,Living Things,2.03,0.84,3.51,1.14,2.29,1.71,4.89,0.45,0.31,13.8,4.5,1160,2.87,4,2,38
+liebre,hare,Animals,Living Things,3.47,1.29,3.47,1.17,2.44,1.64,3.86,1.09,0.28,12.86,3.09,572,2.15,6,2,38
+lince,lynx,Animals,Living Things,4.59,1.31,2.82,1.12,1.14,0.48,3.7,1.12,0.03,13.15,2.83,226,1.54,5,2,38
+llama,llama,Animals,Living Things,4.98,1.46,2.52,1.5,1.41,0.84,2.55,1.4,0.03,15.5,4.45,16656,4.04,5,2,38
+lobo,wolf,Animals,Living Things,2.66,1.33,3.39,1.1,2.35,1.55,4.41,0.84,0.14,14.67,3.75,1326,3,4,2,38
+loro,parrot,Animals,Living Things,2.95,0.98,3.56,1.28,2.5,1.74,3.83,1.33,0.03,13.68,3.34,472,2.23,4,2,38
+macho,male mule,Animals,Living Things,3.23,1.6,3.5,1.59,1.46,0.9,2.49,1.5,0.06,14,3.52,1917,2.73,5,2,38
+marta,pine marten,Animals,Living Things,4.55,2.9,1.35,1.06,1.02,0.57,1.39,1.19,0.03,15.38,3.69,38,2.49,5,2,30
+mejillón,mussel,Animals,Living Things,4.31,1.62,3.78,0.98,2.82,1.27,2.61,1.32,0.03,11.66,2.08,76,0,8,3,38
+merluza,hake,Animals,Living Things,3.87,1.39,4.02,1.07,3.21,1.61,3.32,1.38,0.03,13.39,2.7,456,1.08,7,3,38
+mono,monkey,Animals,Living Things,2.56,0.92,3.47,1.32,1.6,1.04,4.37,0.77,0.08,14.57,3.77,1560,3.14,4,2,38
+mula,mule,Animals,Living Things,3.15,1.16,3.01,1.3,1.79,1.23,3.82,1.27,0.28,13.77,3.36,656,2.28,4,2,38
+nutria,otter,Animals,Living Things,4.83,1.31,2.63,0.94,1.22,0.61,3.46,1.09,0.03,11.43,3.46,90,0.48,6,2,38
+okapi,okapi,Animals,Living Things,4.05,3.48,0.83,0.69,0.72,0.8,0.79,0.74,0.03,10.43,1.34,6,0,5,3,21
+orangután,orang-utan,Animals,Living Things,3.73,1.04,2.83,1.12,1.85,1.35,3.78,1.02,0.06,11.52,2.02,85,0.6,9,4,38
+oso,bear,Animals,Living Things,2.44,1.03,3.49,1.16,1.32,0.84,4.77,0.44,0.08,14.5,3.62,917,0.7,3,2,38
+oveja,sheep,Animals,Living Things,2.06,0.92,3.8,1.14,1.99,1.31,4.5,0.69,0.42,13.6,3.81,739,2.41,5,3,38
+pájaro,bird,Animals,Living Things,1.68,0.63,4.55,0.88,1.4,0.74,4.68,0.36,0.03,14.15,3.74,2074,2.85,6,3,38
+paloma,dove,Animals,Living Things,2.63,1.27,4.24,0.99,1.49,0.98,4.34,0.94,0.08,14.68,3.6,836,1.41,6,3,38
+pantera,panther,Animals,Living Things,3.89,1.2,2.69,1.31,1.13,0.48,3.82,1.17,0.14,13.43,3.03,273,1.84,7,3,38
+pato,duck,Animals,Living Things,2.08,0.6,4.18,1.09,1.62,1.03,4.28,0.72,0.14,14.2,3.65,713,0.48,4,2,38
+pavo,turkey,Animals,Living Things,3.32,1.2,3.5,1.32,1.99,1.2,3.61,1.22,0.11,13.78,3.64,653,0.6,4,2,38
+pavo real,peacock,Animals,Living Things,3.45,1.26,3.08,1.27,1.58,0.99,3.46,1.12,0.03,12.28,0,145,0,9,4,38
+perdiz,partridge,Animals,Living Things,4.19,1.54,3.32,1.14,1.66,1.22,3.53,1,0.11,13.12,3.61,455,3.96,6,2,38
+perezoso,sloth,Animals,Living Things,5.48,1.59,2.14,1.38,1.26,0.6,2.18,1,0.03,11.6,2.92,281,1.66,8,4,38
+perro,dog,Animals,Living Things,1.59,0.76,4.9,0.27,2.38,1.5,4.97,0.19,0.72,15.35,4.33,6489,3.4,5,2,38
+pescadilla,whiting,Animals,Living Things,4.68,1.45,3.73,1.16,2.97,1.37,3.13,1.36,0.03,11.03,1.95,116,1.23,10,4,38
+pez emperador,swordfish,Animals,Living Things,5.63,1.27,2.95,1.12,2.19,1.45,2.66,1.32,0.03,11.48,0,1,0,12,5,38
+pollo,chicken,Animals,Living Things,2.12,0.5,4.45,0.92,2.91,1.42,4.35,0.87,0.14,14.52,3.48,2605,2.36,5,2,38
+raposo,fox,Animals,Living Things,4.42,3,1.11,1.24,1.13,1.05,1.39,1.31,0.06,10.96,1.94,10,0,6,3,30
+rata,rat,Animals,Living Things,2.69,1.39,2.99,1.33,1.96,1.61,4.06,1.26,0.08,13.47,3.24,735,2.97,4,2,38
+ratón,mouse,Animals,Living Things,2.31,0.95,3.69,1.22,2.36,1.62,4.39,0.98,0.17,15.08,3.42,1577,1.23,5,2,38
+rinoceronte,rhinoceros,Animals,Living Things,3.51,1.13,3.14,1.44,1.12,0.31,3.85,1.14,0.06,11.43,2.68,121,1.3,11,5,38
+serpiente,snake,Animals,Living Things,2.61,1.18,3.19,1.2,2.13,1.64,3.85,1.23,0.06,13.96,3.6,1412,2.56,9,3,38
+tejón,badger,Animals,Living Things,5.2,1.51,2,1.04,1.44,1.22,2.46,1.23,0.03,14.33,2.37,16,1.15,5,2,36
+ternera,calf,Animals,Living Things,3.82,1.66,3.69,1.16,2.82,1.59,3.3,1.32,0.08,13.58,3.06,565,0.48,7,3,38
+tigre,tiger,Animals,Living Things,2.57,0.83,3.53,1.26,1.18,0.8,4.52,0.62,0.22,14.36,3.91,937,2.25,5,2,38
+topo,mole,Animals,Living Things,4.2,1.46,2.91,1.17,1.19,0.59,3.2,1.07,0.06,13.57,2.84,162,1.78,4,2,38
+toro,bull,Animals,Living Things,2.86,1.21,3.53,0.98,1.52,0.99,4.32,0.86,0.08,15.06,3.98,5725,1.49,4,2,38
+tortuga,tortoise,Animals,Living Things,2.42,0.92,3.55,1.17,2.1,1.6,3.93,1.17,0.03,14.07,3.24,688,2.27,7,3,38
+urraca,magpie,Animals,Living Things,4.83,1.34,2.94,1.28,1.34,0.69,3.07,1.15,0.03,11.4,3.42,66,0.78,6,3,38
+vaca,cow,Animals,Living Things,2.22,1.36,3.89,1.27,1.9,1.17,4.82,0.48,0.56,14.43,3.65,1947,1.57,4,2,38
+venado,deer,Animals,Living Things,5.53,1.3,2.75,0.78,1.56,1.1,3.14,1.17,0.03,12.3,3.17,402,1.51,6,3,38
+yegua,mare,Animals,Living Things,3.68,1.23,3.3,1.34,2.56,1.68,3.88,1.09,0.06,12.45,2.95,499,1.46,5,2,38
+abdominal,abdominal,Body Parts,Living Things,4.89,1.45,3.84,1.26,1.5,1.16,3.02,1.48,0.03,13.55,2.78,953,2.02,10,4,38
+antebrazo,forearm,Body Parts,Living Things,4.32,1.32,3.82,1.17,1.99,1.05,3.74,1.25,0.06,11.74,2.65,551,1.52,9,4,38
+asadura,offal,Body Parts,Living Things,3.94,3.17,1.29,1.32,0.97,1.22,1.2,1.2,0.11,10.1,1.57,23,0,7,4,27
+astrágalo,astragalus,Body Parts,Living Things,3.99,3.42,1.34,1.33,0.89,1.19,1.19,1.03,0.03,10.86,1.73,49,0,9,4,23
+barbilla,chin,Body Parts,Living Things,2.74,1.44,4.19,0.98,2.82,1.72,3.91,1.02,0.03,11.6,2.97,783,2.2,8,3,38
+boca,mouth,Body Parts,Living Things,1.76,0.99,4.89,0.19,2.38,1.42,4.71,0.42,0.31,15.17,4.42,17627,3.76,4,2,38
+brazo,arm,Body Parts,Living Things,1.78,1.28,4.69,0.82,3.65,1.19,4.82,0.7,0.69,13.97,4.18,9784,3.37,5,2,38
+cabellera,head of hair,Body Parts,Living Things,4.23,1.54,3.43,1.22,2.66,1.28,2.56,1.16,0.03,11.46,3.14,805,1.73,9,4,38
+cabeza,head,Body Parts,Living Things,1.66,0.81,4.97,0.19,2.11,1.25,4.9,0.38,0.72,15.29,4.83,39460,4.17,6,3,38
+cadera,hip,Body Parts,Living Things,4.16,1.43,4.14,1.14,1.82,1.27,3.66,0.9,0.03,13.48,2.96,1017,2.42,6,3,38
+calcáneo,calcaneus,Body Parts,Living Things,4.85,3.37,1.43,1.5,1,1.33,1.11,1.24,0.03,10.71,1.54,62,0,8,3,28
+cara,face,Body Parts,Living Things,1.56,0.58,4.92,0.32,2.24,1.4,4.68,0.72,0.11,15.67,4.58,28008,4,4,2,38
+carpo,carpus,Body Parts,Living Things,4.74,2.81,1.5,1.37,1.27,1.39,1.52,1.51,0.03,11.08,1.9,58,0,5,2,32
+caspa,dandruff,Body Parts,Living Things,4.99,1.55,2.89,1.32,2.24,1.47,1.44,0.62,0.03,12.8,2.14,122,1.46,5,2,38
+ceja,eyebrow,Body Parts,Living Things,2.91,1.28,4.28,0.69,1.74,1.22,3.73,1.14,0.03,12.04,2.92,537,1.81,4,2,38
+cerebro,brain,Body Parts,Living Things,3.73,1.27,4.75,0.62,1.68,1.23,4.46,0.69,0.06,14.2,3.99,6909,3.59,7,3,38
+cervical,neck bone,Body Parts,Living Things,5.48,1.29,3.61,0.98,2.72,1.57,2.99,1.2,0.03,13.28,2.63,524,1.53,8,3,38
+codo,elbow,Body Parts,Living Things,2.53,1.45,4.31,0.79,3.35,1.49,4.21,0.9,0.17,13.22,3.31,1284,2.35,4,2,38
+colon,colon,Body Parts,Living Things,5.86,1.14,2.89,1.17,1.86,1.37,2.77,1.27,0.03,14.95,2.88,588,2.1,5,2,38
+columna vertebral,backbone,Body Parts,Living Things,4.34,1.39,4.34,0.93,1.67,1.26,4.14,0.89,0.06,12.84,0,812,0,16,6,38
+corazón,heart,Body Parts,Living Things,2.4,1.07,4.57,0.74,1.23,0.59,4.69,0.78,0.31,15.81,4.66,17843,4.02,7,3,38
+costilla,rib,Body Parts,Living Things,3.48,1.16,4.09,0.94,1.26,0.68,3.94,1,0.08,12.38,2.76,373,2.11,8,3,38
+cúbito,ulna,Body Parts,Living Things,5.37,1.41,2.52,1.34,1.42,0.88,2.72,1.3,0.06,11.46,1.81,69,1.11,6,3,38
+cuello,neck,Body Parts,Living Things,2.21,0.99,4.61,0.73,1.92,1.18,4.39,0.69,0.22,14.26,4.05,8519,3.37,6,2,38
+cuerpo,body (thorax),Body Parts,Living Things,1.84,0.69,4.63,0.86,3.13,1.63,3.94,1.55,0.17,15.83,4.88,43491,3.96,6,2,38
+dedo,finger,Body Parts,Living Things,1.57,0.71,4.89,0.36,3.78,1.58,4.57,0.74,0.42,14.08,3.79,4860,3.28,4,2,38
+diente,tooth,Body Parts,Living Things,1.83,0.76,4.68,0.44,2.08,1.41,3.88,1.07,0.14,13.8,3.24,1194,2.61,6,2,38
+espalda,back,Body Parts,Living Things,2.35,1.07,4.76,0.45,1.95,1.31,4.51,0.57,0.11,14.29,4,7980,3.45,7,3,38
+estómago,stomach,Body Parts,Living Things,3.12,1.21,4.32,0.77,1.16,0.42,4.12,0.92,0.22,14.12,3.56,3760,3.13,8,4,38
+extremidades,limbs,Body Parts,Living Things,3.76,1.45,4.18,0.97,3.38,1.53,4.27,0.97,0.03,12.9,3.17,1327,1.97,12,5,38
+falange,phalanx,Body Parts,Living Things,5.35,1.56,3.11,1.37,2.9,1.66,2.72,1.31,0.06,11.62,3.02,130,1.43,7,3,38
+fémur,femur,Body Parts,Living Things,4.73,1.31,3.63,1.08,1.29,0.88,3.61,1.16,0.06,11.9,2.63,288,1.59,5,2,38
+fosa nasal,nostril,Body Parts,Living Things,4.81,1.8,3.89,1.19,1.85,1.17,2.82,1.28,0.06,11.34,0,45,0,9,4,38
+frente,forehead,Body Parts,Living Things,2.39,1.43,4.49,0.69,3.33,1.48,3.97,1.07,0.08,15.52,4.99,56243,3.77,6,2,38
+garganta,throat,Body Parts,Living Things,2.47,1,4.41,0.84,2.88,1.69,4.09,0.98,0.06,14.03,3.67,2817,3.01,8,3,38
+glúteo,gluteus,Body Parts,Living Things,5,1.87,3.71,1.1,1.86,1.2,3.62,1.23,0.03,11.45,1.78,133,1,6,2,38
+hígado,liver,Body Parts,Living Things,4.03,1.32,3.74,1.18,1.18,0.39,3.78,1.19,0.31,14.08,3.35,2694,2.9,6,3,38
+hombro,shoulder,Body Parts,Living Things,2.86,1.12,4.28,0.9,1.76,0.96,4.29,0.79,0.17,13.49,3.73,4038,2.96,6,2,38
+hueso,bone,Body Parts,Living Things,2.64,1.04,4.33,0.88,1.76,1.04,4.27,1.14,0.03,13.8,3.62,2761,2.85,5,2,38
+húmero,humerus,Body Parts,Living Things,5.81,1.31,3.13,1.21,1.44,0.8,3.18,1.12,0.03,13.04,2.14,125,1.11,6,3,38
+intestino,intestine,Body Parts,Living Things,4.59,1.17,3.54,1.18,1.34,0.84,3.35,1.12,0.08,13.45,2.99,1192,2.23,9,4,38
+labio,lip,Body Parts,Living Things,2.49,1.23,4.59,0.55,1.86,1.2,4.11,1.04,0.06,12.84,3.09,906,2.3,5,2,38
+lengua,tongue,Body Parts,Living Things,1.83,0.75,4.61,0.72,3.17,1.51,4.3,0.81,0.14,15.74,4.57,13021,3.22,6,2,38
+lumbar,lumbar,Body Parts,Living Things,5.74,1.47,3.34,1,2.42,1.35,2.78,1.05,0.03,13.22,2.47,475,2.06,6,2,38
+mano,hand,Body Parts,Living Things,1.47,0.75,4.97,0.19,4.08,1.03,4.89,0.76,0.58,16.52,4.86,47248,4.03,4,2,38
+matriz,womb,Body Parts,Living Things,5.5,2.37,2.52,1.65,1.8,1.65,1.84,1.42,0.03,13.88,3.67,1606,2.13,6,2,35
+metacarpo,metacarpus,Body Parts,Living Things,6.06,1.98,2.7,1.47,2.16,1.52,2.41,1.38,0.03,9.91,1.36,17,0.6,9,4,38
+metatarso,metatarsus,Body Parts,Living Things,5.89,1.95,2.18,1.46,1.84,1.42,2.27,1.48,0.03,10.54,1.62,24,0,9,4,34
+monte de venus,mound of venus,Body Parts,Living Things,6.13,2.18,2.66,1.45,1.92,1.39,2.18,1.36,0.06,11.81,0,4,0,12,5,35
+muela,back tooth / molar,Body Parts,Living Things,3.23,1.29,4.49,0.79,2.05,1.33,3.22,1.36,0.03,13.43,2.82,206,1.81,5,2,38
+muñeca,wrist,Body Parts,Living Things,3,1.42,4.15,1.15,2.56,1.31,3.97,0.9,0.17,11.22,3.34,1777,3.09,6,3,38
+músculo,muscle,Body Parts,Living Things,3.37,1.04,4.29,0.74,2.04,1.19,3.94,0.99,0.03,13.5,3.33,1937,2.42,7,3,38
+muslo,thigh,Body Parts,Living Things,3.43,1.37,4.3,0.81,1.87,1.19,3.98,0.84,0.14,12.27,3,1002,2.19,5,2,38
+nariz,nose,Body Parts,Living Things,1.51,0.79,4.83,0.42,2.5,1.31,4.68,0.45,0.36,13.86,3.8,4728,3.35,5,2,38
+nuca,nape,Body Parts,Living Things,3.81,1.32,4.18,1.08,1.84,1.17,3.74,1.2,0.03,12.25,3.14,1807,2.95,4,2,38
+nudillo,knuckle,Body Parts,Living Things,4.1,1.51,3.8,1.07,3.05,1.71,2.89,1.17,0.03,9.76,1.66,15,1.93,7,3,38
+oído,inner ear,Body Parts,Living Things,2.74,1.21,4.63,0.64,2.03,1.28,3.99,0.86,0.06,14.21,4.02,8668,2.9,4,3,38
+ojo,eye,Body Parts,Living Things,1.59,0.82,4.77,0.7,1.66,1.2,4.89,0.36,0.47,14.78,4.09,7420,4,3,2,38
+ombligo,navel,Body Parts,Living Things,2.39,1.26,4.12,0.85,2.92,1.67,3.86,1.18,0.06,13.05,2.93,719,0.95,7,3,38
+oreja,ear,Body Parts,Living Things,1.93,0.89,4.66,0.6,1.97,1.33,4.56,0.68,0.25,14.01,3.81,3258,2.76,5,3,38
+paladar,palate,Body Parts,Living Things,3.76,1.39,3.82,1.47,1.54,0.94,3.06,1.38,0.03,13.14,2.93,808,1,7,3,38
+palma,palm,Body Parts,Living Things,2.81,0.88,4.24,0.88,3.77,1.59,3.39,1.43,0.06,16.13,3.95,1702,1.95,5,2,38
+páncreas,pancreas,Body Parts,Living Things,5.5,1.16,3.16,1.17,1.32,0.82,3.04,1.13,0.08,12.92,2.73,528,0.6,8,2,38
+pantorrilla,calf,Body Parts,Living Things,4.16,1.45,3.66,1.23,1.61,0.95,3.48,1.22,0.06,10.95,2.3,164,1.45,11,4,38
+parietal,parietal bone,Body Parts,Living Things,6.67,0.65,3.08,1.37,1.27,0.84,2.11,1.18,0.03,11.16,2.38,149,0.48,8,3,38
+párpado,eyelid,Body Parts,Living Things,3.76,1.2,3.72,1.31,1.42,0.96,3.16,1.2,0.03,11.71,2.36,300,1.88,7,3,38
+pecho,chest,Body Parts,Living Things,3.31,1.62,4.18,1,1.86,1.4,3.96,0.94,0.25,14.32,4.15,7637,2.91,5,2,38
+pelo,hair,Body Parts,Living Things,1.55,0.69,4.74,0.31,3.39,1.18,3.8,1.34,0.36,15.19,4.03,9835,1.18,4,2,38
+pene,penis,Body Parts,Living Things,4.18,1.52,4.41,1.04,3.29,1.03,3.93,1.37,0.03,14.38,3.18,1023,2.28,4,2,38
+peroné,fibula,Body Parts,Living Things,4.85,1.39,3.26,1.31,1.34,0.74,3.16,1.35,0.08,12.5,2.29,94,1.15,6,3,38
+pie,foot,Body Parts,Living Things,1.54,0.69,4.75,0.73,2.97,1.31,4.86,0.62,0.69,15.49,4.52,20499,0.78,3,1,38
+pierna,leg,Body Parts,Living Things,1.81,0.72,4.89,0.19,1.82,1.12,4.77,0.38,0.67,13.76,3.68,3970,3.4,6,2,38
+piramidal,pyramidal,Body Parts,Living Things,5.95,2.75,1.76,1.35,1.16,0.97,1.34,1.14,0.03,11.86,2.65,235,0.48,9,4,35
+pisiforme,pisiform bone,Body Parts,Living Things,4.08,3.48,1.2,0.96,0.66,0.74,0.71,0.79,0.03,9.05,1.08,6,0,10,4,23
+pubis,pubis,Body Parts,Living Things,5.36,1.45,3.69,1.03,1.82,1.2,3.29,1.35,0.03,12.27,2.57,492,1.92,5,2,38
+pulmón,lung,Body Parts,Living Things,3.48,1.16,4.24,0.9,1.21,0.6,4.26,0.91,0.06,12.66,3.27,1243,2.24,6,2,38
+radio,radius,Body Parts,Living Things,5.03,1.63,2.89,1.4,2,1.7,2.21,1.41,0.06,14.81,4.51,14869,1.66,5,2,38
+riñón,kidney,Body Parts,Living Things,4.41,1.27,3.91,1.2,1.48,1.08,3.87,1.13,0.11,12.96,2.99,954,1.15,5,2,38
+rodilla,knee,Body Parts,Living Things,2.46,1,4.52,0.62,1.63,1.01,4.41,0.64,0.19,13.79,3.57,2116,3.01,7,3,38
+sangre,blood,Body Parts,Living Things,2.18,0.84,3.96,1.25,1.71,1.14,2.97,1.4,0.06,15.03,4.51,20665,1.23,6,2,38
+semilunar,semilunar bone,Body Parts,Living Things,5.01,3.05,1.9,1.04,1.79,1.04,1.37,1,0.03,9.6,1.58,8,0,9,4,28
+sobaco,armpit,Body Parts,Living Things,3.26,1.19,3.86,1.3,2.64,1.7,3.31,1.16,0.03,10.57,1.98,149,0.95,6,3,38
+talón,heel,Body Parts,Living Things,3.59,1.32,3.61,1.12,1.54,0.96,3.32,1.2,0.08,10.72,2.87,655,1.2,5,2,38
+tarso,tarsus,Body Parts,Living Things,5.78,2.19,1.68,1.36,1.61,1.14,1.76,1.27,0.03,11.31,2.62,57,0,5,2,34
+tendón,tendon,Body Parts,Living Things,5.27,1.27,3.32,1.1,2.35,1.56,2.84,1.26,0.06,12.74,2.61,286,1.51,6,2,38
+tibia,tibia / shinbone,Body Parts,Living Things,4.89,1.29,3.19,1.15,1.86,1.4,2.97,1.07,0.11,12.84,3.04,1313,1.46,5,2,38
+tobillo,ankle,Body Parts,Living Things,3.19,1.36,4.59,0.7,1.89,1.46,4.18,1.02,0.03,13.11,3.1,861,2.27,7,3,38
+tórax,thorax,Body Parts,Living Things,5.03,1.23,3.62,1.23,1.34,0.46,3.63,1.12,0.06,12.53,2.83,827,1.75,5,2,38
+tripa,belly,Body Parts,Living Things,2.73,1.62,4.38,1.09,1.66,1.22,3.92,1.18,0.03,12.72,2.54,343,2.32,5,2,38
+tronco,trunk,Body Parts,Living Things,3.53,1.17,4.05,1.12,1.65,1.06,3.82,1.12,0.06,13.58,3.59,2723,0.48,6,2,38
+uña,finger nail / toenail,Body Parts,Living Things,1.99,0.86,4.71,0.42,3.69,1.33,3.76,1.34,0.33,14.47,2.71,493,2.85,3,2,38
+vagina,vagina,Body Parts,Living Things,4.73,1.47,4.45,0.88,2.31,1.33,3.92,1.34,0.03,14.01,2.98,722,1.93,6,3,38
+vejiga,bladder,Body Parts,Living Things,4.84,1.57,3.67,0.92,2.47,1.49,3.11,1.29,0.03,12.9,2.82,707,1,6,3,38
+vena,vein,Body Parts,Living Things,3.74,1.31,3.86,1.12,1.34,0.53,3.28,1.52,0.06,13.51,3.08,804,2.13,4,2,38
+vértebra,vertebra,Body Parts,Living Things,4.74,1.2,3.4,1.26,1.53,0.74,3.45,1.21,0.03,11.9,2.52,193,1.04,8,3,38
+vesícula biliar,gallbladder,Body Parts,Living Things,6.51,0.76,2.51,1.18,1.33,1.05,2.43,1.21,0.03,11.72,0,182,0,14,6,38
+vientre,stomach / abdomen,Body Parts,Living Things,3.62,1.29,4.26,0.91,1.53,0.94,3.92,1.22,0.11,13.84,3.53,3386,1.15,7,2,38
+víscera,entrails,Body Parts,Living Things,5.87,1.03,2.73,1.21,1.47,0.94,2.93,1.34,0.03,10.69,1.83,131,1.45,7,2,38
+alegrías,busy lizzie,Flowers,Living Things,5.24,2.37,1.84,1.29,1.58,1.15,2.08,1.37,0.03,10.35,3.12,646,1.78,8,4,35
+amapola,poppy,Flowers,Living Things,3.31,1.23,4.11,0.85,2.94,1.47,4.44,0.79,0.28,12.1,2.54,149,1.18,7,4,38
+azalea,azalea,Flowers,Living Things,5.26,2.6,2.42,1.61,1.94,1.61,2.35,1.51,0.06,12.14,1.69,17,1.18,6,4,34
+azucena,madonna lily,Flowers,Living Things,4.62,2.1,2.51,1.42,2.11,1.52,3.04,1.52,0.17,12.13,2.57,33,0.78,7,4,36
+cala,calla lily / arum lily,Flowers,Living Things,4.91,3.08,1.67,1.66,1.82,1.71,1.67,1.62,0.08,14.64,2.99,221,1.43,4,2,30
+camelia,camellia,Flowers,Living Things,5.72,1.86,2.26,1.2,1.83,1.17,2.8,1.17,0.03,11.79,1.97,41,0.85,7,3,37
+campanilla,bell flowers,Flowers,Living Things,4.56,2.17,2.29,1.45,1.8,1.17,2.26,1.19,0.14,12.88,2.94,358,1.7,10,4,36
+cantueso,wild thyme,Flowers,Living Things,3.56,3.36,0.92,1.27,0.82,1.25,0.95,1.13,0.03,10.24,1.98,34,0,8,3,19
+chiribita,daisy,Flowers,Living Things,3.26,3.02,0.63,0.81,0.82,1.24,0.61,0.74,0.08,9.33,0,0,0,8,4,19
+clavel,carnation,Flowers,Living Things,3.7,1.42,3.88,1.08,2.32,1.31,4.43,0.9,0.67,12.31,2.71,228,0.85,6,2,38
+clavelina,little carnation   (pink),Flowers,Living Things,6.04,1.53,2.01,1.21,1.76,1.2,2.53,1.4,0.06,9.35,1.04,3,1.08,9,4,37
+dalia,dahlia,Flowers,Living Things,5.98,1.89,2.11,0.92,1.73,1.06,2.57,1.25,0.08,12.1,2.24,48,1.23,5,2,36
+dama de noche,night jasmine,Flowers,Living Things,5.66,2.53,1.91,1.37,1.62,0.89,1.97,1.53,0.06,14,0,7,0,4,5,34
+flor de lis,fleur de lis,Flowers,Living Things,6.07,1.24,2.31,1.07,1.78,0.92,2.89,1.17,0.03,11.78,0,24,0,9,3,38
+flor de pascua,poinsettia,Flowers,Living Things,5.46,2.07,2.53,1.43,1.88,1.33,2.9,1.36,0.03,11.72,0,2,0,12,4,36
+geranio,geranium,Flowers,Living Things,3.89,1.43,3.83,1.03,2.86,1.47,4.22,0.9,0.19,11.5,1.69,57,0.95,7,3,38
+gladiolo,gladiolus,Flowers,Living Things,5.72,1.83,2.65,1.45,1.65,1.09,2.82,1.47,0.08,10.09,1.61,8,0,8,3,36
+hortensia,hydrangea,Flowers,Living Things,5.22,1.73,2.94,1.3,2.08,1.55,3.19,1.21,0.06,11.57,2.81,20,1.23,9,3,37
+jazmín,jasmine,Flowers,Living Things,4.65,1.49,3.2,1.31,2.18,1.19,3.83,0.86,0.08,13.4,2.54,146,1.63,6,2,38
+lila,lilac,Flowers,Living Things,4.47,1.59,3.07,1.4,2.02,1.28,3.74,1.28,0.08,13.75,2.77,225,2.45,4,2,38
+lirio,iris,Flowers,Living Things,5.09,1.22,2.65,1.13,1.81,1.07,3.77,1.11,0.14,11.72,2.66,183,1.45,5,2,38
+malva,mallow,Flowers,Living Things,5.29,1.68,2.07,1.09,1.61,1.03,2.66,1.31,0.03,12.26,2.78,246,1.2,5,2,37
+manzanilla,chamomile,Flowers,Living Things,4.52,1.55,3.51,1.21,2.17,1.23,2.66,0.99,0.11,13.35,2.59,241,1.61,10,4,38
+margarita,daisy,Flowers,Living Things,2.88,1.07,4.14,0.97,2.2,1.26,5,0,0.44,14.72,3.84,159,2.24,9,4,38
+nardo,nard / spikenard,Flowers,Living Things,5.07,2.59,2.28,1.53,1.47,1.23,2.74,1.71,0.08,11.03,2.1,47,0,5,2,33
+orquídea,orchid,Flowers,Living Things,5.26,1.27,3.51,1.28,2,1.28,3.81,1.12,0.06,12.72,2.49,107,1.85,8,3,38
+pendientes de la reina,hummingbird fuchsia / hardy fuchsia,Flowers,Living Things,4.45,3.44,1.21,1.38,1.08,1.13,1.29,1.17,0.03,12.55,0,0,0,20,7,24
+pensamiento,pansy,Flowers,Living Things,5.26,2.23,2.86,1.68,2.37,1.74,2.78,1.5,0.11,14.74,4.39,12913,2.97,11,4,36
+peonia,peony,Flowers,Living Things,4.17,3.36,1.26,1.19,1.51,1.78,1.37,1.41,0.03,10.65,1.63,1,0,6,3,24
+petunia,petunia,Flowers,Living Things,5.5,1.72,2.62,1.04,1.8,1.35,3.22,1.33,0.11,11.13,1.96,6,0.85,7,3,38
+rosa,rose,Flowers,Living Things,2.26,0.98,4.52,0.89,2.54,1.48,4.91,0,0.78,16.01,4.27,3407,1.89,4,2,38
+sauquera,elder,Flowers,Living Things,3.17,3.14,0.61,0.74,0.87,1.42,0.55,0.69,0.03,11.74,0,0,0,8,3,18
+tulipán,tulip,Flowers,Living Things,4.01,1.29,3.58,1.15,2.05,1.33,4.07,0.79,0.03,11.86,2.6,33,1.75,7,3,38
+violeta,violet,Flowers,Living Things,4.22,1.23,3.25,1.06,1.81,1.07,3.5,1.09,0.11,13.95,3.44,816,1.52,7,3,38
+abridero,(type of) peach,Fruits,Living Things,2.68,2.52,0.55,0.79,1.18,1.29,0.47,0.66,0.14,6.03,0.7,0,0,8,4,15
+aguacate,avocado,Fruits,Living Things,5.24,1.51,3.1,1.4,2.88,1.78,3.06,1.18,0.08,13.6,2.54,401,1.54,8,4,38
+albaricoque,apricot,Fruits,Living Things,3.82,1.55,3.69,1.17,2.69,1.47,4.09,0.98,0.22,11.86,1.99,100,1.2,11,5,38
+albérchigo,clingstone peach,Fruits,Living Things,2.4,3.16,0.69,1.29,0.96,1.4,0.5,1,0.08,8.7,0,6,0,10,4,18
+almendra,almond,Fruits,Living Things,3.22,1.13,3.76,1.04,2.96,1.2,2.61,1.29,0.08,13.33,2.77,300,1.41,8,3,38
+avellana,hazelnut,Fruits,Living Things,3.53,1.1,3.58,1.03,3.43,1.37,2.42,0.99,0.03,11.83,2.36,109,1.36,8,4,38
+breva,early fig,Fruits,Living Things,4.47,1.86,3.16,1.32,2.83,1.46,2.92,1.33,0.08,10.95,1.99,73,0,5,2,36
+cacahuete,peanut,Fruits,Living Things,3.1,0.81,3.74,1.25,3.81,1.38,2.64,1.26,0.06,11.34,2.23,72,1.73,9,4,38
+castaña,chestnut,Fruits,Living Things,3.68,1.21,3.33,1.14,3.3,1.22,2.29,1.07,0.08,10.57,2.4,146,1.38,7,3,38
+cereza,cherry,Fruits,Living Things,2.93,1.37,4.11,0.97,3.3,1.62,4.32,1.08,0.39,12.51,2.64,184,2.31,6,3,38
+ciruela,plum,Fruits,Living Things,3.54,1.37,3.76,1.17,3.39,1.62,4.13,1.06,0.44,12.34,2.26,168,1.83,7,3,38
+coco,coconut,Fruits,Living Things,3.39,1.33,3.32,1.32,3.29,1.26,3.43,1.26,0.03,14.67,3.29,929,2.62,4,2,38
+fresa,strawberry,Fruits,Living Things,2.48,0.91,4.65,0.68,3.4,1.31,4.64,0.65,0.36,14.15,2.79,354,2.17,5,2,38
+fresquilla,peach,Fruits,Living Things,4.53,2.99,2.15,1.56,2.32,1.66,1.83,1.32,0.03,7.66,0,1,0,10,3,29
+granada,pomegranate,Fruits,Living Things,4.47,1.37,3.09,1.28,3.1,1.24,2.82,1.15,0.06,16.86,4.14,476,2.5,7,3,38
+guinda,cherry,Fruits,Living Things,4.24,1.33,3.04,1.07,2.8,1.43,2.94,1.39,0.19,11.94,2.4,259,1.23,6,2,38
+higo,fig,Fruits,Living Things,3.74,1.52,3.21,1.12,2.61,1.55,3.38,1.13,0.17,11.95,2.31,212,1.38,4,2,38
+kiwi,kiwi,Fruits,Living Things,4.37,1.78,4.27,1.04,3.6,1.28,4.1,1.03,0.22,13.54,2.16,76,1.72,4,2,38
+lima,lima,Fruits,Living Things,5.84,1.67,2.46,1.3,3.03,1.29,2.59,1.21,0.03,11.57,4.18,197,2.28,4,2,38
+limón,lemon,Fruits,Living Things,2.36,1.14,4.46,1.07,3.72,1.35,4.34,0.94,0.08,14.5,3.33,3442,2.57,5,2,38
+mandarina,tangerine,Fruits,Living Things,2.86,1.27,4.39,0.53,3.96,0.73,4.59,0.55,0.36,12.71,2.14,203,1.58,9,4,38
+mango,mango,Fruits,Living Things,5.47,1.57,3.32,1.21,3.09,1.14,3.45,0.96,0.06,14.48,3.19,928,2.34,5,2,38
+manzana,apple,Fruits,Living Things,2.02,1.04,4.76,0.45,3.89,1.04,4.96,0,0.94,14.48,3.4,2094,2.9,7,3,38
+melocotón,peach,Fruits,Living Things,2.85,1,4.55,0.64,3.81,1.19,4.55,0.79,0.5,13.27,2.47,246,2,9,4,38
+melón,melon,Fruits,Living Things,2.7,0.76,4.49,0.69,3.68,1.14,4.41,0.64,0.33,13.75,2.7,473,2.11,5,2,38
+mora,blackberry,Fruits,Living Things,3.51,1.42,3.8,1.33,3.34,1.31,3.73,1.14,0.06,14.98,3.71,513,1.63,4,2,38
+naranja,orange,Fruits,Living Things,2.12,0.87,4.76,0.45,4.02,1.13,4.92,0.31,0.75,14.8,3.66,2613,2.89,7,3,38
+nuez,walnut,Fruits,Living Things,2.98,0.79,3.97,0.92,3.66,1.3,2.86,1.29,0.14,13.43,2.96,1068,1.57,4,1,38
+papaya,papaya,Fruits,Living Things,5.7,1.56,2.53,1.23,2.51,1.57,2.47,1.17,0.06,13.52,2.37,267,1.04,6,3,37
+paraguaya,saturn peach,Fruits,Living Things,5.1,2.05,2.53,1.45,2.26,1.52,2.64,1.32,0.03,12.62,2.96,499,0.95,9,4,36
+pasa,raisin,Fruits,Living Things,4.33,1.2,3.27,1.14,2.49,1.4,2.8,1.23,0.03,15.96,4.5,26226,3.06,4,2,38
+pera,pear,Fruits,Living Things,2.11,0.64,4.74,0.39,3.6,1.33,4.8,0.5,0.89,14.72,3.04,448,1.28,4,2,38
+picota,cherry,Fruits,Living Things,4.06,2.36,3.02,1.83,2.92,1.72,2.9,1.73,0.03,11.18,2.69,186,0,6,3,32
+piña,pineapple,Fruits,Living Things,3.12,1.22,4.23,1.04,3.16,1.25,4.39,0.85,0.06,13.34,2.88,740,1.59,4,2,38
+piñón,pine nut,Fruits,Living Things,3.69,1.42,3.32,1.23,2.68,1.56,2.46,1.19,0.03,14.84,2.4,149,1.08,5,2,38
+pistacho,pistachio,Fruits,Living Things,4.07,1.35,4,1.05,3.62,1.31,2.66,1.22,0.03,12.06,1.84,22,1.2,8,3,38
+plátano,banana,Fruits,Living Things,2.18,0.8,4.67,0.42,3.9,0.83,4.82,0.48,0.44,10.48,3.27,847,2.11,7,3,38
+pomelo,grapefruit,Fruits,Living Things,4.89,1.49,3.03,1.41,3.01,1.43,3.41,1.2,0.14,12.19,1.96,166,0.78,6,3,38
+sandía,watermelon,Fruits,Living Things,2.6,0.96,4.4,0.84,3.55,1.43,4.59,0.79,0.28,11.34,2.56,254,1.57,6,3,38
+tomate,tomato,Fruits,Living Things,2.35,0.82,4.51,1.07,3.51,1.21,3.27,1.48,0.03,11.4,3.33,2867,2.62,6,3,38
+uva,grape,Fruits,Living Things,2.53,0.92,4.06,1.15,3.43,1.52,4.38,0.69,0.5,14.32,3.28,1092,2.21,3,2,38
+abeja,bee,Insects,Living Things,2.68,1.29,4.08,1.18,2.78,1.73,4.56,0.79,0.39,13.59,3.23,303,2.49,5,3,38
+abejorro,bumblebee,Insects,Living Things,3.63,1.41,3.05,1.33,1.15,0.36,3.96,0.94,0.08,10.37,1.86,35,1.41,8,4,38
+ácaro,mite,Insects,Living Things,5.98,1.53,2.48,1.23,1.37,0.92,2.33,1.4,0.03,14.39,1.99,38,0,5,3,38
+araña,spider,Insects,Living Things,2.39,0.81,3.89,1.1,1.53,0.85,4.61,0.66,0.17,14.47,3.57,918,2.8,5,3,38
+avispa,wasp,Insects,Living Things,2.53,0.84,4.02,0.96,1.41,0.79,4.53,0.58,0.42,11.54,2.52,123,1.72,6,3,38
+avispón,hornet,Insects,Living Things,4.31,1.75,2.98,1.32,2.01,1.48,3.67,1.17,0.03,10.93,1.54,3,1.23,7,3,38
+chinche,bedbug,Insects,Living Things,4.62,1.4,2.15,1.06,1.26,0.53,3.09,1.31,0.14,11.08,2.13,71,1.11,7,2,38
+ciempiés,centipede,Insects,Living Things,3.42,1.4,3.28,1.42,1.24,0.61,3.87,1.05,0.03,11.07,1.96,62,1.23,8,2,38
+cínife,gadfly,Insects,Living Things,3.29,3.07,0.59,0.7,1.35,0.57,0.7,0.97,0.03,7.06,1.49,2,0,6,3,21
+cucaracha,cockroach,Insects,Living Things,3.29,1.29,3.27,1.48,1.41,0.92,4.57,0.63,0.17,11.6,3.1,169,2.24,9,4,38
+escarabajo,beetle,Insects,Living Things,3,0.98,3.64,1.29,1.54,1.06,4.27,0.63,0.14,13.05,3.32,265,1.92,10,5,38
+garrapata,tick,Insects,Living Things,4.17,1.41,2.87,1.39,1.79,1.34,3.09,1.16,0.08,11,2.07,44,1.67,9,4,38
+grillo,cricket,Insects,Living Things,2.93,0.83,3.32,1.32,1.26,0.62,3.91,0.9,0.06,12.38,2.63,105,2.09,6,2,38
+gusano,worm,Insects,Living Things,2.73,1.05,3.58,1.04,1.59,0.94,3.66,1.1,0.03,13.34,3.24,487,2.62,6,3,38
+hormiga,ant,Insects,Living Things,2.11,1,4.33,0.92,1.67,1.13,4.66,0.53,0.25,12.84,3.56,348,2.05,7,3,38
+ladilla,crab louse,Insects,Living Things,6.43,0.86,2.07,0.81,1.16,0.51,2.36,1.26,0.03,10.64,1.65,28,1.11,7,3,38
+libélula,dragon-fly,Insects,Living Things,4.51,1.31,2.7,1.42,1.26,0.68,3.65,1.06,0.08,11.47,2.04,55,1.67,8,4,38
+luciérnaga,firefly,Insects,Living Things,4.15,1.54,2.76,1.15,1.71,1.2,3.46,0.96,0.03,11.3,3.02,54,1.4,10,4,38
+mantis,praying mantis,Insects,Living Things,4.85,1.99,2.03,1.28,1.24,0.66,2.81,1.4,0.03,12.03,2.43,22,1.69,7,2,35
+mariposa,butterfly,Insects,Living Things,2.52,1.07,4.21,1.01,1.3,0.64,4.44,0.83,0.28,14.27,3.58,807,2.45,8,4,38
+mariquita,ladybird,Insects,Living Things,2.53,1.26,3.65,1.22,2.36,1.62,3.99,1.21,0.03,12.51,2.59,88,2.31,9,4,38
+mosca,fly,Insects,Living Things,2.32,0.86,4.54,0.75,1.76,1.1,4.88,0.31,0.69,13.79,3.42,996,2.5,5,2,38
+moscardón,botfly,Insects,Living Things,3.59,1.49,3.28,0.94,1.33,0.74,3.89,1.17,0.11,10.89,1.97,55,0.48,9,3,38
+moscón,bluebottle,Insects,Living Things,3.65,1.42,3.29,1.07,2.03,1.29,3.51,1.14,0.14,10.32,2.89,18,0.6,6,2,38
+mosquito,mosquito,Insects,Living Things,2.64,1.19,4.89,0.36,1.71,1.29,4.83,0.31,0.64,12.93,3.25,319,1.91,8,3,38
+piojo,louse,Insects,Living Things,3.24,1.1,2.98,1.53,1.91,1.31,3.16,1.4,0.22,11.41,2.47,117,2.09,5,2,38
+polilla,moth,Insects,Living Things,4.56,1.53,3.11,1.2,2.12,1.46,3.42,1.26,0.03,11.24,2.65,102,1.6,7,3,38
+pulga,flea,Insects,Living Things,3.76,1.38,2.6,1.35,1.6,1,3.82,1.24,0.28,11.81,2.76,123,2.11,5,2,38
+pulgón,plant louse,Insects,Living Things,5.16,1.77,2.6,1.32,1.72,1.21,2.9,1.41,0.03,15.35,1.32,25,0,6,2,36
+saltamontes,grasshopper,Insects,Living Things,3.02,1.1,3.55,1.26,1.63,0.9,4.15,0.64,0.03,11.71,2.32,78,1.99,11,4,38
+tábano,gadfly,Insects,Living Things,4.61,2.28,2.34,1.44,1.21,0.98,2.68,1.62,0.08,10.09,2.4,51,0,6,3,35
+tarántula,tarantula,Insects,Living Things,4.68,1.17,2.72,1.51,1.26,0.85,3.5,1.26,0.03,11.39,2.15,52,0.7,9,4,38
+abedul,birch,Trees,Living Things,4.8,1.73,2.9,1.37,2.24,1.54,3.47,1.2,0.06,12.07,2.45,137,1.18,6,3,37
+abeto,fir,Trees,Living Things,4.13,1.73,3.58,1.31,1.58,1,4.17,0.74,0.11,12,2.5,124,1.4,5,3,38
+acacia,acacia,Trees,Living Things,5.62,1.82,2.46,1.21,1.37,0.93,2.88,1.24,0.08,12.11,2.58,105,0.85,6,3,37
+álamo,poplar,Trees,Living Things,5.2,1.48,3.25,1.19,1.48,0.93,3.8,1.07,0.08,11.22,2.9,100,1.32,5,3,38
+albaricoquero,apricot tree,Trees,Living Things,4.55,1.64,2.8,1.48,2.18,1.26,3.11,1.33,0.06,10.34,1.08,8,0,13,6,37
+alcornoque,cork oak,Trees,Living Things,4.74,1.35,2.95,1.2,2.17,1.44,3.6,1.24,0.08,11.02,2.16,119,1.38,10,4,38
+algarrobo,carob tree,Trees,Living Things,5.58,2.68,1.87,1.49,1.42,1.23,2.21,1.54,0.03,12.58,2.69,158,1.41,9,4,33
+almendro,almond tree,Trees,Living Things,3.66,1.39,3.85,1,2.22,1.3,4.27,0.75,0.08,12.37,2.63,94,0,8,3,38
+avellano,hazel tree,Trees,Living Things,4.5,1.4,2.76,1.24,1.94,1.24,3.48,1,0.11,11.09,2.2,66,0.6,8,4,38
+boj,box tree,Trees,Living Things,4.47,3.32,1.29,1.35,1.37,1.49,1.24,1.04,0.03,12.56,2.4,118,0,3,1,27
+caoba,mahogany tree,Trees,Living Things,5.61,1.85,2.18,1.15,1.96,1.36,2.47,1.29,0.03,11.84,2.71,398,1.63,5,3,36
+castaño,chestnut tree,Trees,Living Things,4.19,1.6,3.42,1.32,2,1.28,3.86,1.14,0.19,13.97,3.31,591,2.2,7,3,38
+cerezo,cherry tree,Trees,Living Things,4.22,1.16,3.35,1.26,1.89,1.21,3.8,0.99,0.39,13.62,3.02,88,1.64,6,3,38
+chopo,poplar,Trees,Living Things,4.87,1.83,3.3,1.57,1.24,0.6,3.44,1.49,0.39,11.86,2.38,91,0,5,2,36
+ciprés,cypress,Trees,Living Things,4.79,1.33,3.08,1.21,1.53,1.15,3.97,1.13,0.06,12.2,2.64,148,1.08,6,2,38
+ciruelo,plum tree,Trees,Living Things,4.26,1.44,2.98,1.29,2.15,1.32,3.74,1.1,0.56,11.36,2.19,75,0,7,3,38
+encina,holm oak,Trees,Living Things,4.39,1.72,3.28,1.43,1.79,1.17,3.79,1.25,0.25,13.43,3.16,312,0,6,3,37
+enebro,juniper,Trees,Living Things,6.21,1.6,2.19,0.85,1.39,0.93,2.47,1.37,0.03,11.56,2.37,132,0,6,3,37
+espino,hawthorn,Trees,Living Things,5.58,1.62,2.1,0.93,1.24,0.86,2.23,1.15,0.03,13.81,2.89,150,0.7,6,3,37
+eucalipto,gum tree,Trees,Living Things,4.67,1.2,3.55,1.19,1.45,0.93,3.61,1.26,0.06,12.39,2.45,217,1.38,9,4,38
+fresno,ash tree,Trees,Living Things,5.17,2.01,2.22,1.39,1.6,1.26,2.83,1.41,0.03,13.92,2.99,96,1.93,6,2,36
+guindo,mazzard cherry tree,Trees,Living Things,5.86,1.79,2.32,1.09,1.35,0.97,2.55,1.17,0.08,11.39,1.86,32,0,6,2,37
+higuera,fig tree,Trees,Living Things,3.78,1.63,3.63,1.4,2,1.12,3.72,1.11,0.17,13.35,2.9,220,0.95,7,3,38
+laurel,bay tree,Trees,Living Things,4.55,1.23,3.47,1.23,2.24,1.17,2.89,1.26,0.03,13.65,3.22,1036,2.09,6,2,38
+limonero,lemon tree,Trees,Living Things,3.49,1.2,3.53,1.29,2.97,1.7,4.01,1,0.14,11.62,2.08,85,1.34,8,4,38
+majuelo,common hawthorn,Trees,Living Things,3.33,3.46,0.73,0.87,0.65,0.8,0.68,0.94,0.03,8.17,1.83,23,0,7,3,22
+mandarino,tangerine tree,Trees,Living Things,4.9,2.02,2.05,1.32,1.96,1.16,2.28,1.32,0.03,10.44,1.15,8,0,9,4,37
+manzano,apple tree,Trees,Living Things,3.4,1.35,3.76,1.1,3.08,1.64,4.45,0.88,0.53,13.47,3.18,176,1.28,7,3,38
+melocotonero,peach tree,Trees,Living Things,4.35,1.4,3,1.09,2.32,1.31,3.63,1.14,0.14,10.73,1.61,21,0,12,6,38
+membrillo,quince tree,Trees,Living Things,4.95,1.41,2.85,1.38,2.23,1.54,2.68,1.44,0.06,12.45,2.39,287,0.6,9,3,38
+mimosa,silver wattle,Trees,Living Things,5.22,2.5,1.91,1.25,1.39,1.35,2.04,1.33,0.03,13.2,2.16,72,1.43,6,3,33
+moral,black mulberry,Trees,Living Things,5.03,1.99,2.22,1.34,1.67,1.19,2.08,0.98,0.11,14.55,4.32,12560,2.9,5,2,35
+morera,mulberry tree,Trees,Living Things,4.09,2.01,2.72,1.7,1.97,1.36,2.52,1.64,0.03,12.43,2.49,40,0,6,3,38
+naranjo,orange tree,Trees,Living Things,3.49,1.2,3.84,1.13,2.53,1.23,4.28,0.82,0.22,14.28,2.98,191,1.34,7,3,38
+negrillo,elm tree,Trees,Living Things,4.89,3.41,0.87,0.72,1.15,0.5,1.11,1.3,0.06,10.34,1.56,14,0,8,3,29
+níspero,medlar tree,Trees,Living Things,5.2,1.67,2.88,1.29,2.18,1.31,2.88,1.25,0.08,11.38,1.65,41,0,7,3,38
+nogal,walnut (tree),Trees,Living Things,4.76,1.45,2.98,1.35,1.62,1.1,3.95,0.98,0.17,13.47,2.7,260,1.4,5,2,38
+olivo,olive tree,Trees,Living Things,3.86,1.52,4.19,0.94,2.46,1.42,4.41,0.77,0.06,13.92,3.18,509,1.26,5,3,38
+olmo,elm tree,Trees,Living Things,4.61,1.19,2.62,1.17,1.41,0.79,3.61,1.12,0.14,13.57,3.08,145,1.32,4,2,38
+palmera,palm tree,Trees,Living Things,3.52,1.24,3.91,0.95,1.62,1.05,3.87,0.98,0.06,13.95,2.97,332,1.04,7,3,38
+peral,pear tree,Trees,Living Things,3.62,1.32,3.5,1.47,2.41,1.2,3.96,1.15,0.47,13.14,2.79,60,1.68,5,2,37
+pino,pine tree,Trees,Living Things,2.96,1.39,4.38,1.01,1.75,1.16,4.82,0.52,0.42,14.72,3.62,1116,1.46,4,2,38
+platanero,banana tree,Trees,Living Things,4.64,1.75,2.9,1.62,2.29,1.29,3.17,1.21,0.08,10.51,1.34,6,2.11,9,4,37
+plátano,plane tree,Trees,Living Things,2.78,1.32,3.83,1.08,2.97,1.56,3.26,1.52,0.03,13.76,3.27,847,2.11,7,3,38
+roble,oak,Trees,Living Things,4.47,1.37,3.58,1.23,1.58,1.2,4.43,0.64,0.33,14.14,3.3,659,0.48,5,2,38
+sabuco,elder,Trees,Living Things,4.62,3.3,1.13,1.23,1.05,1.22,1.34,1.31,0.03,10.61,1.64,0,0,6,3,26
+sapeli,sapele tree,Trees,Living Things,4.08,3.43,1.01,1.17,0.82,1.04,1,1.21,0.03,10.12,0,0,0,6,3,22
+sauce,willow,Trees,Living Things,4.69,1.38,3.56,1.08,1.37,0.8,4.14,0.99,0.08,14.48,3.3,183,1.11,5,2,38
+acelga,chard,Vegetables,Living Things,3.84,1.38,3.96,1.12,3.49,1.62,4.33,0.83,0.36,11.57,1.81,146,0.6,6,3,38
+ajo,garlic,Vegetables,Living Things,3.24,1.48,4.64,0.52,4.3,0.84,3.26,1.27,0.11,14.3,3.2,3546,2.43,3,2,38
+alcachofa,artichoke,Vegetables,Living Things,4.26,1.39,3.64,1.31,3.04,1.33,3.97,0.92,0.14,13.12,2,126,1.57,9,4,38
+alubia verde,green bean,Vegetables,Living Things,4.05,1.59,3.56,1.37,3.35,1.25,3.66,1.37,0.11,11.5,0,1,0,12,5,38
+apio,celery,Vegetables,Living Things,5.19,1.48,3.23,1.29,3.06,1.09,3.13,0.95,0.08,13.09,2.53,680,1.77,4,2,38
+batata,sweet potato,Vegetables,Living Things,5.67,2.17,2.12,0.98,2.94,1.55,2.05,1.15,0.03,11.53,2.29,147,1.28,6,3,36
+berenjena,eggplant / aubergine,Vegetables,Living Things,4.31,1.38,3.81,1.24,3.17,1.51,3.91,1.02,0.11,12.8,2.2,199,1.76,9,4,38
+berro,watercress,Vegetables,Living Things,5.88,2.55,1.89,0.96,2.7,1.62,2.24,1.25,0.17,11.91,2.31,88,1.15,5,2,33
+berza,cabbage,Vegetables,Living Things,5.19,1.88,2.05,1.27,2.07,1.35,2.45,1.55,0.33,10.82,1.85,59,0,5,2,35
+brécol,broccoli,Vegetables,Living Things,5.46,1.84,3.18,1.65,3.3,1.48,3.44,1.37,0.08,12.93,1.15,56,0.6,6,2,37
+brócoli,broccoli,Vegetables,Living Things,5.47,1.59,3.58,1.37,3.03,1.23,3.7,1.07,0.06,12.76,1.77,122,1.93,7,3,38
+calabacín,zucchini / courgette,Vegetables,Living Things,3.99,1.33,4.05,1.21,3.39,1.2,3.98,0.84,0.17,13.29,1.78,115,1.11,9,4,38
+calabaza,pumpkin,Vegetables,Living Things,3.6,1.53,3.65,1.25,2.85,1.4,3.74,0.98,0.19,13.88,2.91,534,2.49,8,4,38
+cardo,artichoke thistle,Vegetables,Living Things,4.76,1.64,2.82,1.28,2.55,1.57,2.61,1.13,0.03,11.74,2.94,169,1.04,5,2,38
+cebolla,onion,Vegetables,Living Things,3.06,1.29,4.75,0.62,3.55,1.1,4.08,0.9,0.33,14.14,3.21,4304,2.41,7,3,38
+cebolleta,spring onion,Vegetables,Living Things,5.04,1.32,3.41,1.13,3.11,1.07,3.27,1.21,0.14,11.6,1.68,455,0.85,9,4,38
+col,cabbage,Vegetables,Living Things,4.52,1.39,3.54,1.26,3.21,1.31,3.92,1.07,0.08,15.46,3.24,699,0,3,1,38
+col de bruselas,brussels sprouts,Vegetables,Living Things,5.18,1.65,2.93,1.45,2.87,1.33,3.37,1.35,0.08,13.55,0,4,0,15,5,37
+coliflor,cauliflower,Vegetables,Living Things,3.79,1.31,4.09,1.16,3.31,1.07,4.29,0.88,0.28,12.77,2.16,423,1.54,8,3,38
+escarola,endive,Vegetables,Living Things,4.92,2.06,2.76,1.5,2.87,1.52,2.97,1.31,0.19,11.09,1.64,145,0,8,4,36
+espárrago,asparagus,Vegetables,Living Things,3.68,1.27,4.03,0.92,3.39,1.45,4.11,0.89,0.14,11.65,2.25,107,0.9,9,4,38
+espinacas,spinach,Vegetables,Living Things,3.27,1.23,4.02,1.03,3.39,1.34,4.43,0.9,0.22,13.55,2.3,529,1.38,9,4,38
+garbanzo,chickpea,Vegetables,Living Things,2.51,1.21,4.29,1.08,3.55,1.48,3.02,1.6,0.08,12.59,2.45,118,1.36,8,3,38
+grelos,turnip tops,Vegetables,Living Things,5.45,2.83,1.67,1.11,1.73,1.25,1.89,1.44,0.06,10.95,1.48,55,0,6,2,31
+guisante,pea,Vegetables,Living Things,3.18,1.04,3.91,1.15,3.41,1.6,4.11,0.82,0.17,11.48,2.62,80,1.28,8,3,38
+haba,broad bean,Vegetables,Living Things,4.27,1.29,3.69,1.01,3.23,1.33,3.6,1,0.03,12.03,2.38,96,1.08,5,2,38
+judías verdes,fench beans,Vegetables,Living Things,3.24,1.44,4.28,1.06,3.89,1.51,4.76,0.5,0.22,13.17,0,132,0,12,5,38
+lechuga,lettuce,Vegetables,Living Things,3,1.22,4.68,0.86,3.6,1.05,4.79,0.32,0.67,13.52,2.72,885,2.2,7,3,38
+lenteja,lentil,Vegetables,Living Things,2.79,1.18,4.6,0.7,3.08,1.39,3.27,1.4,0.03,11.26,1.92,59,0.48,7,3,38
+nabo,turnip,Vegetables,Living Things,5,1.07,3.1,1.26,3,1.24,3.47,1.13,0.14,12.1,2.22,135,1.78,4,2,38
+patata,potato,Vegetables,Living Things,2.03,1.17,4.51,0.84,3.98,1.4,3.86,1.27,0.25,13.96,3.03,657,2.53,6,3,38
+pepino,cucumber,Vegetables,Living Things,3.58,1.35,4.15,1.1,3.59,1.22,4.16,0.74,0.19,13.66,2.7,332,1.62,6,3,38
+perejil,parsley,Vegetables,Living Things,3.83,1.37,4.43,0.89,3.51,0.96,3.39,1.3,0.03,13.52,3.15,2320,1.11,7,3,38
+pimiento,pepper,Vegetables,Living Things,3.35,0.95,4.42,0.69,3.67,1.04,4.27,0.92,0.25,13.53,2.65,1040,1.89,8,3,38
+puerro,leek,Vegetables,Living Things,4.9,1.59,3.93,1.23,3.33,1.28,4.08,1.15,0.39,12.1,1.97,288,1,6,2,38
+rábano,radish,Vegetables,Living Things,4.53,1.45,2.62,1.07,2.4,1.38,2.85,1.14,0.14,15.03,2.38,180,1.15,6,3,38
+remolacha,beet,Vegetables,Living Things,4.39,1.45,3.39,1.17,3.1,1.37,3.49,1.17,0.06,12.69,2.82,478,1.73,9,4,38
+repollo,cabbage,Vegetables,Living Things,4.48,1.64,3.51,1.42,3.29,1.26,3.6,1.18,0.36,12.28,2.69,305,0.85,7,3,38
+tomate,tomato,Vegetables,Living Things,2.35,1,4.68,0.45,3.68,0.93,4.45,0.7,0.33,10.83,3.33,2867,2.62,6,3,38
+yeros,bitter vetch,Vegetables,Living Things,3.64,3.33,0.62,0.75,0.83,0.57,0.53,0.49,0.03,9.99,1.46,0,0,4,2,20
+zanahoria,carrot,Vegetables,Living Things,2.86,1.12,4.59,0.64,3.51,1.25,4.54,0.55,0.36,13.85,2.83,1029,2.16,9,4,38
+aeropuerto,airport,Buildings,Non-Living Things,3.56,1.35,3.78,1.24,3,1.65,3.22,1.37,0.03,15.4,4.26,5697,3.3,10,5,38
+apartamento,apartment,Buildings,Non-Living Things,4.58,1.69,3.76,1,1.97,1,4.04,1.02,0.03,15.18,3.4,2242,3.49,11,5,38
+ayuntamiento,town hall,Buildings,Non-Living Things,4.57,1.48,4.12,1.04,1.79,1.12,4.07,0.83,0.06,16.36,4.34,1571,2.54,12,5,38
+bodega,wine cellar,Buildings,Non-Living Things,4.81,1.53,3.11,1.39,1.95,1.29,2.63,1.28,0.14,14.56,3.29,1151,2.49,6,3,38
+cabaña,cabin,Buildings,Non-Living Things,3.7,1.07,2.78,1.25,2.29,1.17,2.96,1.09,0.08,11.86,3.32,746,2.88,6,3,38
+campo de fútbol,soccer field,Buildings,Non-Living Things,2.79,0.66,4.09,0.98,1.89,1.17,2.88,1.21,0.08,15.28,0,257,0,13,5,38
+capilla,chapel,Buildings,Non-Living Things,4.4,1.23,3.24,1.2,1.7,1.12,2.69,1.22,0.03,14.05,4.02,2136,2.48,7,3,38
+cárcel,jail,Buildings,Non-Living Things,3.63,1.69,2.91,1.56,1.65,1.12,3.47,1.23,0.03,14.23,4.15,9366,3.52,6,2,38
+casa,house,Buildings,Non-Living Things,1.55,0.69,5,0,2.04,1.25,4.95,0.26,0.78,17.31,5.09,81383,4.76,4,2,38
+casa de cultura,municipal arts centre,Buildings,Non-Living Things,5.95,1.27,3.06,1.08,1.36,0.69,2.68,1.23,0.03,15.55,0,40,0,13,6,38
+casa de socorro,first-aid post,Buildings,Non-Living Things,4.71,1.89,2.76,1.51,1.65,1.22,2.37,1.24,0.06,12.55,0,31,0,11,6,37
+caseta,booth,Buildings,Non-Living Things,3.68,1.07,3.28,1.2,2.35,1.48,3.15,1.09,0.08,13.64,2.82,534,1.84,6,3,38
+castillo,castle,Buildings,Non-Living Things,2.69,1.03,3.66,1.08,1.95,1.37,4.03,0.92,0.08,15.66,4.41,2458,2.95,8,3,38
+catedral,cathedral,Buildings,Non-Living Things,3.86,1.25,3.97,0.92,1.82,1.31,4.26,0.62,0.11,14.76,4.09,2638,2.09,8,3,38
+centro comercial,shopping center,Buildings,Non-Living Things,4.2,1.62,4.57,0.74,2.32,1.6,4.11,0.96,0.06,15.95,0,740,0,14,5,38
+centro médico,clinic,Buildings,Non-Living Things,4.09,1.59,4.08,1.03,2.02,1.38,3.45,1.32,0.06,15.5,0,218,0,12,5,38
+chabola,shanty,Buildings,Non-Living Things,5.16,1.4,2.49,1.31,1.88,1.18,2.55,1.17,0.11,10.55,1.85,112,0,7,3,38
+chalet,chalet,Buildings,Non-Living Things,4.15,1.5,4.12,1.07,1.71,1.03,4.05,0.88,0.5,14.56,2.67,779,1.78,6,2,38
+chamizo,shack,Buildings,Non-Living Things,5.86,2.38,1.71,0.74,1.83,1.28,1.68,1.2,0.03,11.56,2.34,40,0,7,3,33
+choza,hut,Buildings,Non-Living Things,4.33,1.35,2.41,1.09,1.95,1.14,2.59,0.98,0.06,11.25,3.18,566,2.11,5,2,38
+cine,cinema,Buildings,Non-Living Things,2.81,1.17,4.4,0.84,2.89,1.64,3.57,1.26,0.06,16.36,4.61,20880,3.39,4,2,38
+cobertizo,shed,Buildings,Non-Living Things,5.39,1.31,2.02,1.08,1.55,0.93,2.24,0.93,0.03,10.8,2.66,171,2.19,9,4,38
+cochera,garage,Buildings,Non-Living Things,4.34,1.65,3,1.22,2.12,1.51,2.67,1.1,0.06,12.79,2.36,124,2.24,7,3,38
+colegiata,collegiate church,Buildings,Non-Living Things,4.79,3.12,1.77,1.51,1.3,1.17,1.82,1.62,0.03,12.03,2.76,76,0,9,4,29
+colegio,school,Buildings,Non-Living Things,1.72,0.55,4.67,0.63,3.39,1.23,4.11,1.29,0.11,16.46,4.3,8420,3.28,7,3,38
+comercio,store / shop,Buildings,Non-Living Things,4.53,1.5,4.45,0.86,2.56,1.53,2.83,1.24,0.03,15.84,4.64,10504,2.61,8,3,38
+convento,convent,Buildings,Non-Living Things,4.78,1.42,2.26,1.17,1.47,1.07,2.89,1.08,0.06,14.15,3.9,2250,2.28,8,3,38
+corral,farmyard   corral,Buildings,Non-Living Things,3.5,1.47,2.88,1.09,2.35,1.45,2.07,1.1,0.03,14.12,3.71,927,2.04,6,2,38
+correos,post office,Buildings,Non-Living Things,4.51,1.12,4.19,0.9,2.14,1.18,3.01,1.17,0.08,15.63,3.5,678,2.49,7,3,38
+cortijo,farmhouse,Buildings,Non-Living Things,5.59,1.93,2.3,1.34,1.69,1.28,2.38,1.34,0.08,14.09,2.84,122,0,7,3,37
+cuadra,stable,Buildings,Non-Living Things,4.19,1.62,2.49,1.45,1.79,1.02,2.24,1.2,0.08,13.12,3.33,1425,2.62,6,2,38
+cuartel,barracks /quarters,Buildings,Non-Living Things,4.59,1.41,3.1,1.16,1.63,1.29,2.94,1.08,0.03,13.39,3.8,2988,2.68,7,2,38
+embajada,embassy,Buildings,Non-Living Things,5.89,1.07,2.52,1.16,1.29,0.79,2.89,1.2,0.03,14.87,3.69,2732,2.57,8,4,38
+ermita,hermitage,Buildings,Non-Living Things,4.76,1.39,3.3,1.19,1.87,1.24,3.16,1.27,0.08,14.14,3.89,727,0.48,6,3,38
+escuela,school,Buildings,Non-Living Things,2,0.72,4.59,0.72,3.37,1.41,4.14,1.05,0.11,16.61,4.64,14055,3.99,7,3,38
+estación,station,Buildings,Non-Living Things,3.11,1.01,4.11,0.88,1.96,1.42,3.6,0.97,0.03,15.81,4.43,6860,3.37,8,3,38
+estudio,studio flat,Buildings,Non-Living Things,5.37,1.61,3.43,1.05,2.04,1.3,2.72,1.06,0.03,16.48,4.7,28904,3.37,7,3,38
+fábrica,factory,Buildings,Non-Living Things,3.45,1.07,3.77,1.37,2.24,1.42,4.1,0.94,0.14,15.89,3.99,4054,3.04,7,3,38
+gallinero,hen house,Buildings,Non-Living Things,3.43,1.36,3.06,1.06,2.03,1.19,2.08,1.36,0.03,12.73,2.95,333,1.94,9,4,38
+garaje,garage,Buildings,Non-Living Things,3.56,1.61,4.39,0.74,1.7,0.98,3.34,1.3,0.06,14.38,3.27,827,2.96,6,3,38
+granero,barn,Buildings,Non-Living Things,4.51,1.23,2.33,1.17,2.22,1.1,2.6,1.2,0.03,11.96,2.92,251,2.47,7,3,38
+hospital,hospital,Buildings,Non-Living Things,2.61,0.74,4.29,0.83,2.02,1.38,4.33,0.92,0.19,15.78,4.33,10001,3.84,8,3,38
+hostal,hostel,Buildings,Non-Living Things,5.26,1.37,3.65,1.22,1.78,1.11,3.6,1.07,0.03,15.4,2.65,132,1.46,6,2,38
+hotel,hotel,Buildings,Non-Living Things,3.49,1.26,4,0.86,1.72,0.97,4.53,0.64,0.06,16.68,4.12,10075,3.66,5,2,38
+iglesia,church,Buildings,Non-Living Things,2.82,1.12,3.57,1.37,1.47,0.91,4.11,1.14,0.31,15.42,4.82,8983,3.54,7,3,38
+local,establishment,Buildings,Non-Living Things,4.56,1.5,4.03,1.16,1.95,1.26,3.58,1.29,0.08,16.42,4.55,15889,3.23,5,2,38
+matadero,slaughterhouse,Buildings,Non-Living Things,4.87,1.22,2.65,1.33,2.22,1.5,2.33,1.1,0.03,13.25,3.01,446,1.98,8,4,38
+mercado,market,Buildings,Non-Living Things,2.97,1.33,4.22,0.95,2.45,1.4,3.26,1.22,0.03,16.2,4.91,33083,3.24,7,3,38
+ministerio,ministry,Buildings,Non-Living Things,5.56,1.4,3.51,1.03,1.82,1.36,3.11,1.24,0.03,15.64,4.53,3389,2.52,10,4,38
+molino,mill,Buildings,Non-Living Things,3.77,1.64,3.02,1.29,2.22,1.23,2.87,1.16,0.03,14.5,3.47,860,2.12,6,3,38
+monasterio,monastery,Buildings,Non-Living Things,4.59,1.26,3.27,1.32,1.91,1.47,3.36,1.23,0.06,14.53,3.99,1499,2.25,10,4,38
+monumento,monument,Buildings,Non-Living Things,4.18,1.36,3.82,0.94,1.85,1.4,3.27,1.32,0.06,13.84,3.95,1981,2.12,9,4,38
+museo,museum,Buildings,Non-Living Things,3.76,1.35,3.59,1.15,1.59,0.86,3.82,0.77,0.06,15.51,4.46,4304,3.01,5,3,38
+nave industrial,warehouse,Buildings,Non-Living Things,5.52,1.21,3.4,1.2,2.02,1.11,3.59,1.02,0.06,14.11,0,48,0,14,5,38
+pajar,straw loft,Buildings,Non-Living Things,3.76,1.69,2.75,1.44,2.11,1.37,2.14,1.09,0.06,12.04,2.28,173,1.2,5,2,37
+palacio,palace,Buildings,Non-Living Things,2.99,1.45,3.34,1.15,1.88,1.29,4.05,1.15,0.11,15.47,4.49,6016,1.53,7,3,38
+palomar,dovecote,Buildings,Non-Living Things,4.74,1.14,2.42,1.06,1.94,1.06,1.97,0.96,0.03,12.95,2.93,146,2.32,7,3,38
+panteón,vault / mausoleum,Buildings,Non-Living Things,5.87,0.99,2.44,0.92,1.81,1.24,2.4,1.26,0.03,11.18,3.24,547,1.94,7,3,38
+piscina,pool,Buildings,Non-Living Things,2.23,0.97,4.26,0.99,3.07,1.62,2.04,1.15,0.03,15.72,3.5,2158,1.97,7,4,38
+piso,apartment,Buildings,Non-Living Things,3.13,1.53,4.86,0.62,2.4,1.64,4.46,1.06,0.11,15.62,4.04,9991,1.97,4,2,38
+plaza de toros,bullring,Buildings,Non-Living Things,3.7,1.53,3.12,1.54,1.66,1.05,2.99,1.25,0.08,14.33,0,516,0,12,5,38
+rascacielos,skyscraper,Buildings,Non-Living Things,4.18,1.39,3.76,1.28,2.13,1.49,4.49,0.69,0.11,12.2,3.19,493,0.95,11,4,38
+residencia,residence,Buildings,Non-Living Things,5.24,1.4,3.38,1.14,1.68,0.97,3.32,1.29,0.14,15.4,4.09,6081,1.99,10,4,38
+secretaría,secretary´s office,Buildings,Non-Living Things,4.76,1.55,3.72,0.93,2.67,1.51,2.49,1.1,0.03,15.49,3.8,1421,0.9,10,5,38
+senado,senate,Buildings,Non-Living Things,5.82,1.56,3.31,1.45,2.37,1.63,2.76,1.43,0.03,13.51,4.13,311,3.16,6,3,37
+silo,silo,Buildings,Non-Living Things,4.39,2.93,1.59,1.28,1.35,1.23,1.58,1.4,0.03,12,2.57,41,1.08,4,2,29
+sinagoga,synagogue,Buildings,Non-Living Things,5.93,1.04,2.24,1.1,1.71,1.23,2.48,0.85,0.03,11.38,2.9,195,0.9,8,4,38
+taller,repair shop,Buildings,Non-Living Things,3.67,1.34,3.7,1.13,2.84,1.53,3.41,1.2,0.03,16.12,3.7,3547,1.79,6,2,38
+teatro,theater,Buildings,Non-Living Things,3.21,0.98,4.03,0.92,1.96,1.36,3.64,1.04,0.06,15.74,4.55,15875,1.72,6,3,38
+tienda,shop,Buildings,Non-Living Things,2.53,0.69,4.61,0.39,2.5,1.42,3.8,0.96,0.03,16.79,3.91,4387,0.7,6,2,38
+torre,tower,Buildings,Non-Living Things,3.32,1.5,3.63,0.97,1.75,1.26,3.71,0.88,0.19,15.82,4.28,2966,1.2,5,2,38
+túnel aerodinámico,wind tunnel,Buildings,Non-Living Things,6.39,1.61,1.7,1.01,1.47,1.22,1.54,1.06,0.03,9.44,0,2,0,17,9,36
+vivienda,dwelling,Buildings,Non-Living Things,3.59,1.58,4.81,0.45,2.62,1.55,4.44,0.91,0.08,15.57,4.14,6690,2.07,8,3,38
+abrigo,coat,Clothing,Non-Living Things,2.08,1.2,4.61,1,3.87,1.28,4.82,0.65,0.67,13.46,3.52,2055,3.02,6,3,38
+alpargata,espadrille,Clothing,Non-Living Things,4.33,1.66,3.15,1.27,2.48,1.42,2.96,1.21,0.03,10.53,1.81,50,0,9,4,38
+bañador,swimsuit,Clothing,Non-Living Things,2.32,0.96,4.32,0.86,3.33,1.53,3.89,1,0.03,12.8,2.07,232,1.56,7,3,38
+bata,house coat,Clothing,Non-Living Things,3.07,1.37,3.8,1.23,3.12,1.55,3.71,0.88,0.17,12.92,3.07,1362,2.64,4,2,38
+blusa,blouse,Clothing,Non-Living Things,3.63,1.49,4.1,1,3.43,1.14,4.43,0.92,0.17,12.51,2.91,990,2.57,5,2,38
+boina,beret,Clothing,Non-Living Things,4.14,1.29,2.86,1.42,2.47,1.16,2.83,1.29,0.08,11.45,2.52,477,1.69,5,2,38
+bota,boot,Clothing,Non-Living Things,2.54,1.07,4.43,0.79,3.63,1.39,3.97,0.79,0.11,13.57,3.02,656,2.33,4,2,38
+braga,neck gaiter,Clothing,Non-Living Things,2.68,1.58,4.32,1.16,3.56,1.34,3.96,1.12,0.19,13.25,2.89,59,1.15,5,2,38
+bufanda,scarf,Clothing,Non-Living Things,2.65,1.25,4.26,0.85,3.39,1.07,3.97,1.07,0.25,13.01,2.5,337,2.23,7,3,38
+calcetín,sock,Clothing,Non-Living Things,2.09,0.86,4.9,0.26,4.18,0.89,4.7,0.42,0.61,11.7,2.21,164,2.02,8,3,38
+calzón de baño,bathing trunks,Clothing,Non-Living Things,4.52,2.38,2.4,1.52,3.03,1.39,2.65,1.42,0.06,12.34,0,4,0,12,5,37
+calzoncillos,underpants,Clothing,Non-Living Things,2.55,1,4.56,1,3.21,1.07,4.31,1.08,0.44,10.89,2.56,627,2.47,11,4,38
+camisa,shirt,Clothing,Non-Living Things,2.64,0.92,4.76,0.36,3.83,1.13,4.83,0.31,0.56,13.83,3.63,4075,3.28,6,3,38
+camiseta,t-shirt,Clothing,Non-Living Things,2.16,0.99,4.7,0.42,3.44,1.08,4.88,0.31,0.42,14.78,3.64,1672,2.93,8,4,38
+casaca,dress coat,Clothing,Non-Living Things,5.61,1.79,2.14,1.14,3.01,1.33,2.47,1.26,0.03,11.16,2.96,245,0.7,6,2,38
+cazadora,jacket,Clothing,Non-Living Things,3.55,1.52,4.6,0.75,3.15,1.28,4.59,0.64,0.14,12.79,2.84,299,1.99,8,4,38
+chal,shawl,Clothing,Non-Living Things,6.24,0.9,2.68,1.05,2.96,1.19,2.37,1.12,0.08,11.88,2.63,260,0,4,1,38
+chaleco,vest,Clothing,Non-Living Things,3.96,1.47,3.27,1.1,3.26,1,3.79,0.94,0.11,13.27,3.09,736,2.5,7,3,38
+chándal,track-suit,Clothing,Non-Living Things,3.04,0.73,4.15,1.33,3.32,1.32,4.26,0.91,0.14,12.85,1.97,140,0,7,2,38
+chaqué,morning coat,Clothing,Non-Living Things,5.95,2.13,1.97,1.19,2.95,1.52,2.47,1.42,0.03,9.47,1.67,98,0.6,6,2,36
+chaqueta,jacket,Clothing,Non-Living Things,2.83,1.27,4.76,0.53,3.58,1.21,4.77,0.44,0.75,13.93,3.37,1926,3.19,8,2,38
+chaquetón,short coat,Clothing,Non-Living Things,3.94,1.71,4.03,1.26,3.65,1.52,4.12,0.83,0.17,13.93,2.17,163,0.9,9,3,38
+chistera,top hat,Clothing,Non-Living Things,5,1.4,2.44,0.91,2.46,1.11,2.12,1.07,0.06,11.17,2.27,177,0,8,3,38
+cinturón,belt,Clothing,Non-Living Things,3.02,1.28,4.62,0.58,3.73,1.17,3.97,1,0.11,13.75,3.51,1422,2.98,8,3,38
+combinación,undergarment  slip,Clothing,Non-Living Things,4.89,1.99,2.88,1.34,3.11,1.38,2.24,1.29,0.22,14.29,3.97,4043,2.83,11,4,37
+corbata,tie,Clothing,Non-Living Things,3.64,1.07,3.97,1.07,4.03,0.81,4.09,0.92,0.25,12.61,3.2,1810,2.8,7,3,38
+delantal,apron,Clothing,Non-Living Things,3.74,1.4,3.79,0.92,3.02,1.19,2.49,1.26,0.03,11.98,2.74,435,1.97,8,3,38
+enagua,petticoat,Clothing,Non-Living Things,5.16,1.82,2.1,1.13,2.79,1.22,2.16,1.29,0.06,10.66,1.78,96,0.7,6,3,38
+esmoquin,tuxedo,Clothing,Non-Living Things,5.66,1.27,2.2,1.26,2.96,1.28,3.14,1.17,0.03,11.26,1.99,122,2.37,8,3,38
+faja,girdle,Clothing,Non-Living Things,4.69,1.5,2.76,1.31,3.55,1,2.92,1.23,0.11,12.5,2.94,606,1.68,4,2,38
+falda,skirt,Clothing,Non-Living Things,2.29,1.07,4.22,1.09,3.29,1.83,4.74,0.73,0.44,13.94,3.41,2117,2.61,5,2,38
+frac,tailcoat,Clothing,Non-Living Things,5.43,1.93,2.2,1.4,2,1.42,2.39,1.53,0.03,12.19,3.6,250,0,4,1,35
+gabardina,raincoat,Clothing,Non-Living Things,4.64,1.27,3.53,1.07,2.93,1.22,3.77,0.84,0.25,11.18,2.18,539,1.43,9,4,38
+gorra,cap,Clothing,Non-Living Things,3.07,1.04,3.94,1.06,2.84,1.29,3.81,0.97,0.06,13.07,3.19,880,2.56,5,2,38
+gorro,bonnet,Clothing,Non-Living Things,2.34,1.01,3.74,1.09,3.14,1.23,3.97,0.85,0.08,13.43,3.22,566,2.21,5,2,38
+guantes,gloves,Clothing,Non-Living Things,2.39,1.29,4.16,1.05,3.85,1.53,3.8,1.2,0.06,13.88,3.24,1251,2.78,7,2,38
+guardapolvos,overalls,Clothing,Non-Living Things,5.73,2.51,1.57,1.27,1.69,1.1,1.45,0.96,0.03,10.9,1.68,60,1.11,12,4,33
+impermeable,raincoat,Clothing,Non-Living Things,4.07,1.43,3.61,1.08,3,1.04,3.41,1.06,0.11,12.52,2.7,515,1.89,11,5,38
+jersey,sweater,Clothing,Non-Living Things,2.43,0.91,4.63,0.36,3.4,1.1,4.82,0.39,0.58,14.47,3.5,554,0,6,2,38
+levita,frock-coat,Clothing,Non-Living Things,4.66,2.99,1.11,1.18,2.16,1.83,1.32,1.37,0.03,11,2.94,249,0.6,6,3,29
+medias,stockings,Clothing,Non-Living Things,3.54,0.96,3.97,1.4,3.82,1.22,3.94,0.92,0.36,14.51,3.91,4789,2.89,6,2,38
+niqui,t-shirt,Clothing,Non-Living Things,3.51,2.08,2.94,1.86,2.71,1.69,2.8,1.71,0.03,9.53,0.3,6,0,5,2,32
+pantalón,pants / trousers,Clothing,Non-Living Things,2.11,1.18,4.84,0.57,4.03,1.03,4.89,0.45,0.72,13.98,3.55,2336,1.54,8,3,38
+pañoleta,headscarf,Clothing,Non-Living Things,4.73,2.77,2.12,1.52,2.74,2.05,1.45,1.29,0.03,8.21,1.85,56,1.36,8,4,30
+pañuelo,handkerchief,Clothing,Non-Living Things,2.62,0.83,4.07,1.07,4.24,0.96,2.88,1.12,0.14,12.85,3.52,2305,2.03,7,3,38
+pañuelo de cuello,neckerchief,Clothing,Non-Living Things,4.49,1.58,3.76,1.29,3.27,1.24,3.06,1.1,0.03,11.57,0,5,0,15,6,38
+pelele,rompers,Clothing,Non-Living Things,5.14,2.43,1.86,1.18,2.43,1.42,1.78,1.26,0.03,10.79,2.1,122,0.85,6,3,34
+pijama,pyjamas,Clothing,Non-Living Things,1.9,0.75,4.5,0.55,3.7,1.12,4.32,0.82,0.06,12.86,2.56,671,1.23,6,3,38
+playero,sneakers,Clothing,Non-Living Things,4.44,2.28,2.76,1.61,2.57,1.48,2.5,1.68,0.03,11.44,1.95,81,0.85,7,3,36
+sandalia,sandal,Clothing,Non-Living Things,2.97,1.3,3.82,1.21,3,1.25,3.56,1.23,0.03,11.5,2.06,59,2.09,8,3,38
+saya,petticoat,Clothing,Non-Living Things,4.09,3.23,1.21,1.37,1.96,1.73,1.26,1.65,0.03,11.75,2.73,73,0,4,2,26
+sombrero,hat,Clothing,Non-Living Things,2.88,1.37,3.45,1.24,2.82,1.14,3.61,1.1,0.28,13.68,3.82,3427,2.36,8,3,38
+sudadera,sweatshirt,Clothing,Non-Living Things,3.76,1.5,4.24,0.92,3.68,1.36,4.11,0.9,0.03,12.71,1.68,35,1.48,8,4,38
+sujetador,bra,Clothing,Non-Living Things,3.88,1.1,4.5,0.84,4.32,0.84,4.24,0.79,0.17,13.3,2.11,186,1.15,9,4,38
+traje,suit,Clothing,Non-Living Things,3.64,1.07,3.82,0.98,3.22,1.49,4.51,0.63,0.11,14.61,3.99,4996,0.78,6,2,38
+traje de boda,wedding dress,Clothing,Non-Living Things,3.68,1.6,3.29,1.26,3.32,1.26,3.31,1.17,0.11,14.01,0,14,0,9,5,38
+trinchera,trench coat,Clothing,Non-Living Things,4.58,3.13,1.18,1.05,1.85,1.44,1.09,0.76,0.03,11.51,2.79,436,2.08,9,3,28
+uniforme,uniform,Clothing,Non-Living Things,3.72,1.16,3.55,1.29,3.17,1.36,3.85,0.96,0.03,14.48,3.97,4169,1.2,8,4,38
+vestido,dress,Clothing,Non-Living Things,2.4,1.24,4.44,1.1,3.4,1.25,4.64,0.79,0.39,14.68,3.98,7073,2.06,7,3,38
+visera,visor,Clothing,Non-Living Things,4.74,1.58,2.61,1.33,2.95,1.15,2.22,1.06,0.11,11.55,2.64,229,1.84,6,3,38
+zapatilla,slipper,Clothing,Non-Living Things,2.18,1.08,4.46,0.85,3.62,1.47,4.38,0.83,0.06,12.66,2.26,143,2.51,9,4,38
+zapato,shoe,Clothing,Non-Living Things,1.87,1.34,4.89,0.36,3.63,1.06,4.52,0.56,0.56,13.77,3.02,877,0.9,6,3,38
+alacena,cupboard,Furniture,Non-Living Things,5.21,1.73,2.53,1.28,2.13,1.37,2.74,1.24,0.03,11.57,2.15,177,1.87,7,4,38
+aparador,sideboard,Furniture,Non-Living Things,4.74,1.44,3.21,1.25,2.82,1.32,3.32,1.07,0.22,11.64,2.39,243,1.69,8,4,38
+arca,coffer,Furniture,Non-Living Things,5.4,1.49,2.36,1.27,2.83,1.47,2.4,1.08,0.03,13.8,3.15,346,2.36,4,2,38
+archivador,filing cabinet,Furniture,Non-Living Things,5.11,1.17,3.62,1.26,3.77,1.14,2.68,1.2,0.03,11.19,1.72,45,1.2,10,4,38
+arcón,trunk,Furniture,Non-Living Things,5.13,1.87,2.85,1.36,2.81,1.33,2.82,1.3,0.03,11.9,2.26,166,1.34,5,2,37
+armario,closet,Furniture,Non-Living Things,2.61,0.91,4.68,0.7,3.02,1.16,4.74,0.48,0.53,14.39,3.21,1580,3.06,7,3,38
+balda,shelf,Furniture,Non-Living Things,5.05,1.69,3.63,1.28,2.55,1.48,2.76,1.48,0.03,11.34,1.82,27,0,5,2,37
+banco,bench,Furniture,Non-Living Things,3.68,1.73,4.43,0.58,2.09,1.35,3.45,1.23,0.17,10.53,4.56,9256,3.51,5,2,38
+banqueta,stool,Furniture,Non-Living Things,3.76,1.63,3.59,1.12,2.54,1.36,3.54,1.02,0.11,11.41,2.46,295,1.28,8,3,38
+baúl,trunk,Furniture,Non-Living Things,3.62,1.36,3.8,1.22,2.54,1.15,3.41,1.06,0.03,13.42,2.82,844,2.61,4,2,38
+buró,bureau,Furniture,Non-Living Things,4.48,3.17,2.07,1.45,1.71,1.33,2.11,1.6,0.03,12.42,2.5,183,0,4,2,30
+butaca,armchair,Furniture,Non-Living Things,3.93,1.46,3.64,1.2,1.98,1.17,3.89,1,0.17,13.64,2.86,863,1.3,6,3,38
+butacón,large armchair,Furniture,Non-Living Things,4.51,1.95,2.93,1.45,1.99,1.18,3.11,1.4,0.06,13.63,1.36,100,0.48,7,3,37
+cama,bed,Furniture,Non-Living Things,1.59,0.55,4.92,0.42,2.6,1.15,4.76,0.61,0.64,15.18,4.15,15551,3.87,4,2,38
+camilla,stretcher,Furniture,Non-Living Things,4.71,1.34,2.82,1.18,2.76,1.25,2.65,1.19,0.03,13.23,2.93,783,2.5,7,3,38
+cómoda,chest of drawers,Furniture,Non-Living Things,4.66,1.36,3.47,1.4,2.4,1.26,3.32,1.33,0.17,15.97,3.34,1682,2.88,6,3,38
+coqueta,dressing table,Furniture,Non-Living Things,4.91,2.79,2.32,1.71,2.11,1.59,1.68,1.41,0.03,11.9,2.84,285,1.68,7,3,32
+cuna,cradle,Furniture,Non-Living Things,2.29,1.5,3.23,1.24,2.61,1.27,3.05,1.09,0.03,14.41,3.52,1677,2.58,4,2,38
+descalzadora,vanity stool,Furniture,Non-Living Things,6.09,1.59,1.89,0.88,2.63,1.53,1.74,0.78,0.06,9.27,0,4,0,12,5,37
+escritorio,desk,Furniture,Non-Living Things,3.67,1.37,4.27,0.79,3.7,1.34,3.99,0.92,0.03,15.33,3.43,2320,3.13,10,4,38
+espejo,mirror,Furniture,Non-Living Things,2.34,0.94,4.61,0.53,2.06,1.36,3.68,1.25,0.06,14.61,3.91,6684,3.07,6,3,38
+estantería,bookcase,Furniture,Non-Living Things,3.96,1.31,4.31,0.69,2.66,1.3,4.32,0.84,0.03,13.27,2.37,304,1.59,10,5,38
+lámpara,lamp,Furniture,Non-Living Things,2.87,1.05,4.58,0.69,2.79,1.29,3.74,1.19,0.08,13.96,3.45,1650,2.63,7,3,38
+librería,bookcase,Furniture,Non-Living Things,3.75,1.47,4.16,0.83,2.93,1.27,3.87,1.09,0.03,14.96,3.28,1102,2.42,8,4,38
+litera,bunk,Furniture,Non-Living Things,3.18,1.12,3.38,1.1,2.39,1.45,3.44,1.14,0.03,13.02,2.86,206,1.92,6,3,38
+mecedora,rocking chair,Furniture,Non-Living Things,3.98,1.46,3.37,1.14,2.77,1.46,3.16,1.13,0.08,11.13,2.08,480,1.34,8,4,38
+mesa,table,Furniture,Non-Living Things,1.87,0.86,5,0,2.57,1.17,4.97,0.19,0.78,15.76,4.49,19930,3.66,4,2,38
+mesilla,night table,Furniture,Non-Living Things,3.21,1.14,4.45,0.69,2.62,1.27,4.32,0.84,0.31,11.47,2.37,399,1.11,7,3,38
+mueble-bar,liquor cabinet,Furniture,Non-Living Things,4.94,1.62,3.18,1.19,2.55,1.53,3.34,1.18,0.03,10.71,0,61,0,9,3,38
+mural,mural,Furniture,Non-Living Things,5.84,1.71,2.24,1.14,2.08,1.17,2.05,1.28,0.03,13.97,3.05,753,2.02,5,2,38
+perchero,coat stand,Furniture,Non-Living Things,3.81,1.13,3.86,0.84,2.77,1.09,3.16,0.96,0.03,11.55,1.83,152,0.48,8,3,38
+reloj de pared,wall clock,Furniture,Non-Living Things,3.74,1.42,3.37,1.17,2.02,1.06,2.4,1.03,0.03,13.58,0,83,0,12,5,38
+sifonier,chest of drawers / bureau,Furniture,Non-Living Things,5.59,1.93,3.41,1.5,2.76,1.7,3.03,1.51,0.06,11.03,0,1,0,9,3,37
+silla,chair,Furniture,Non-Living Things,1.83,0.99,4.84,0.63,3.76,1.07,4.82,0.52,0.81,14.79,3.88,5676,2.64,5,2,38
+sillón,armchair,Furniture,Non-Living Things,2.7,0.88,4.72,0.72,2.27,1.37,4.7,0.53,0.33,13.71,3.42,2990,1.52,6,2,38
+sofá,sofa,Furniture,Non-Living Things,2.17,1.03,4.82,0.59,3.51,1.39,4.74,0.6,0.31,12.43,3.27,2091,1,4,2,38
+somier,mattress base,Furniture,Non-Living Things,5.16,1.36,3.5,1.2,2.47,1.65,3.05,1.21,0.03,12.01,1.56,77,0,6,2,38
+taburete,stool,Furniture,Non-Living Things,3.53,1.16,4.06,0.81,2.48,1.31,3.59,0.88,0.28,11.7,2.58,392,0.85,8,4,38
+taquillón,wooden cabinet,Furniture,Non-Living Things,5.17,2.42,2.26,1.52,1.9,1.44,2.23,1.25,0.03,9.46,0,6,0,9,3,34
+tresillo,three-seat sofa,Furniture,Non-Living Things,4.45,2.2,3.31,1.52,1.75,1.26,3.35,1.69,0.03,10.72,2.09,148,0,8,3,35
+vitrina,glass cabinet,Furniture,Non-Living Things,4.82,1.73,3.51,1.1,2.56,1.16,3.35,1.16,0.03,12.88,2.5,371,1.04,7,3,38
+zapatero,shoe rack,Furniture,Non-Living Things,4.56,1.39,3.62,1.04,2.69,1.17,3.39,1.19,0.03,14.08,4.13,238,0.6,8,4,38
+aceitera,oilcan,Kitchen Utensils,Non-Living Things,4.6,1.21,3.92,1.09,4,1.06,3.76,1.16,0.03,10.74,1.99,30,0,8,4,38
+almirez,pestle,Kitchen Utensils,Non-Living Things,3.24,2.97,1.45,1.52,2.07,2.15,1.08,1.17,0.06,11.02,1.88,29,0,7,3,22
+asador,spit,Kitchen Utensils,Non-Living Things,5.05,1.63,3.03,1.32,2.86,1.73,2.97,1.32,0.03,13.9,2.5,128,1.58,6,3,38
+azucarero,sugar bowl,Kitchen Utensils,Non-Living Things,3.32,1.33,4.59,0.7,4.09,0.96,3.76,1.06,0.03,10.74,2.67,264,0,9,5,38
+balde,pail,Kitchen Utensils,Non-Living Things,4.5,2.6,2.07,1.56,3.05,1.75,1.92,1.55,0.03,11.45,2.98,682,2.38,5,2,33
+bandeja,tray,Kitchen Utensils,Non-Living Things,3.35,1.13,4.27,0.84,4.51,0.63,3.65,1.1,0.22,14.19,3.07,1598,2.48,7,3,38
+batidora,mixer,Kitchen Utensils,Non-Living Things,4.01,1.23,4.44,0.64,4.58,0.79,4.36,0.92,0.08,12.88,1.96,307,1.34,8,3,38
+bayeta,dishcloth,Kitchen Utensils,Non-Living Things,4.02,1.25,4.67,0.58,4.6,0.63,3.87,0.86,0.03,9.93,2.14,63,0,7,3,38
+botella,bottle,Kitchen Utensils,Non-Living Things,2.13,0.9,4.61,0.62,3.92,1.25,3.44,1.3,0.03,14.36,3.68,4288,3.25,7,3,38
+cacerola,pot,Kitchen Utensils,Non-Living Things,3.04,1.02,4.62,0.69,4.27,0.74,4.78,0.48,0.11,11.88,2.47,634,1.72,8,4,38
+cacillo,ladle,Kitchen Utensils,Non-Living Things,4.71,1.93,3.37,1.41,3.92,1.2,3.08,1.33,0.03,8.95,0.48,12,0,7,3,37
+cafetera,coffee pot,Kitchen Utensils,Non-Living Things,3.53,1.34,4.28,1.09,4.06,0.86,4.13,0.73,0.03,13.3,2.61,357,2.11,8,4,38
+caldero,cauldron,Kitchen Utensils,Non-Living Things,4.39,1.66,2.66,1.17,2.63,1.54,3.06,1.21,0.03,11.81,2.66,225,1.53,7,3,38
+cascanueces,nutcracker,Kitchen Utensils,Non-Living Things,4.51,1.23,3.18,1.09,3.18,1.49,2.97,1.21,0.08,11.58,2.46,19,1.48,11,4,38
+cazo,dipper,Kitchen Utensils,Non-Living Things,3.71,1.37,4.32,0.97,4.16,0.96,4.32,0.72,0.47,12.14,2.41,314,1.64,4,2,38
+cazuela,(kind of) sauce pan,Kitchen Utensils,Non-Living Things,3.62,1.62,4.34,0.74,4.11,0.96,4.49,0.63,0.69,12.85,2.69,1218,1.45,7,3,38
+cesto,basket,Kitchen Utensils,Non-Living Things,4.04,1.54,3.16,1.29,3.34,1.17,2.69,1.47,0.03,12.24,2.77,365,2.06,5,2,38
+cocina,kitchen,Kitchen Utensils,Non-Living Things,2.53,1.35,4.72,0.94,3.89,1.41,3.77,1.49,0.06,16.28,4.07,10382,3.53,6,3,38
+colador,strainer,Kitchen Utensils,Non-Living Things,4.02,1.33,4.35,0.85,4.33,0.88,4.15,1.11,0.03,11.43,2.08,232,1.32,7,3,38
+copa,wineglass,Kitchen Utensils,Non-Living Things,3.18,1.14,4.29,0.79,4.26,0.85,3.89,0.88,0.06,15.31,4.56,4885,3.17,4,2,38
+cubierto,cutlery,Kitchen Utensils,Non-Living Things,3.03,1.41,4.68,0.67,4.41,1.16,4.6,0.63,0.06,14.35,3.85,2998,2.82,8,3,38
+cubremantel,table overlay,Kitchen Utensils,Non-Living Things,5.36,1.52,3.09,1.23,3.18,1.29,2.47,1.45,0.03,8.46,0,0,0,11,4,37
+cuchara,spoon,Kitchen Utensils,Non-Living Things,1.71,1,4.84,0.42,4.46,1.18,4.81,0.36,0.64,13.46,3.06,858,2.47,7,3,38
+cucharilla,teaspoon,Kitchen Utensils,Non-Living Things,2.53,1.13,4.73,0.59,4.81,0.36,4.32,0.77,0.08,11.11,1.91,144,0.78,10,4,38
+cucharón,ladle,Kitchen Utensils,Non-Living Things,3.95,1.37,4.13,0.78,4.51,0.8,4.21,0.94,0.17,11.24,2.16,130,1.34,8,3,38
+cuchillo,knife,Kitchen Utensils,Non-Living Things,2.18,0.72,4.9,0.26,4.76,0.45,4.82,0.61,0.81,13.41,3.72,2665,3.24,8,3,38
+cueceleches,milk boiling pot,Kitchen Utensils,Non-Living Things,4.68,2.87,1.82,1.2,2.92,1.91,1.66,1.29,0.08,5.2,0,0,0,11,4,32
+difusor de calor,heat diffuser,Kitchen Utensils,Non-Living Things,6.24,1.99,2.04,1.09,2.87,1.66,1.66,1,0.03,10.35,0,4,0,14,7,36
+ensaladera,salad bowl,Kitchen Utensils,Non-Living Things,4.23,1.04,3.97,0.96,3.52,1.5,3.77,1.04,0.03,10.46,1.84,119,1.04,10,5,38
+escurreplatos,drainer,Kitchen Utensils,Non-Living Things,4.85,1.41,3.65,1.16,3.07,1.42,3.18,1.25,0.08,10.04,0,3,0,13,5,38
+escurridor,colander,Kitchen Utensils,Non-Living Things,4.63,1.5,4.12,0.92,3.92,1.15,4,0.94,0.08,10.44,1.11,10,0.85,11,4,38
+espumadera,skimmer,Kitchen Utensils,Non-Living Things,4.7,1.8,3.85,1.49,4.38,1.18,3.82,1.21,0.17,10.2,1.28,84,0.48,10,5,37
+exprimidor,squeezer,Kitchen Utensils,Non-Living Things,4.29,1.5,4.38,0.83,4.66,0.75,3.97,0.9,0.06,11.31,1.52,19,1.43,10,4,38
+fiambrera,lunchbox,Kitchen Utensils,Non-Living Things,4.34,1.5,3.86,1.14,3.61,0.98,3.39,1.2,0.03,10.44,2.28,28,1.18,9,3,38
+filtro,filter,Kitchen Utensils,Non-Living Things,5.22,1.44,3.18,1.21,3.59,1.22,2.71,1.32,0.03,14.55,3.21,866,2.23,6,2,38
+fuente,platter,Kitchen Utensils,Non-Living Things,4.42,1.69,3.61,1.18,3.11,1.64,3.13,1.28,0.11,16.58,4.54,12361,3.26,6,2,38
+horno,oven,Kitchen Utensils,Non-Living Things,3.52,1.5,4.6,0.65,3.81,0.96,4.36,0.69,0.03,14.52,3.46,6058,2.76,5,2,38
+jarra,pitcher,Kitchen Utensils,Non-Living Things,3.06,1.41,4.51,0.64,4.1,0.9,4.12,0.92,0.11,12.44,2.82,581,2.19,5,2,38
+lengua,rubber spatula,Kitchen Utensils,Non-Living Things,3.33,2.84,2.68,2.08,1.95,1.8,1.45,1.11,0.03,11.52,4.57,13021,3.22,6,2,32
+manga pastelera,pastry bag,Kitchen Utensils,Non-Living Things,5.47,1.85,2.74,1.42,3.04,1.79,2.57,1.46,0.03,11.25,0,11,0,14,6,36
+molde,mould,Kitchen Utensils,Non-Living Things,5.15,1.46,3.19,0.86,2.97,1.47,3.32,1.2,0.03,14.23,3.16,1410,2.18,6,2,38
+olla,pot,Kitchen Utensils,Non-Living Things,3.13,1.09,4.76,0.42,4,0.9,4.86,0.26,0.31,13.92,3.17,1369,1.85,4,2,38
+panera,breadbasket,Kitchen Utensils,Non-Living Things,3.89,1.53,3.08,1.27,2.74,1.64,3.13,1.28,0.03,13.24,1.88,23,0,6,3,38
+paño,(kitchen) cloth,Kitchen Utensils,Non-Living Things,3.53,1.07,4.39,0.64,4.2,0.79,4.06,1.01,0.06,13.21,3.25,993,1.11,5,2,38
+pelador,peeler,Kitchen Utensils,Non-Living Things,5.44,1.32,3.38,1.26,3.54,1.6,3.17,1,0.03,10.46,0.78,7,0.6,7,3,38
+perol,cauldron,Kitchen Utensils,Non-Living Things,4.06,2.77,2.45,1.89,3.13,1.96,2.62,1.87,0.03,10.64,1.61,87,0,5,2,30
+piedra de afilar,whetstone,Kitchen Utensils,Non-Living Things,5,1.48,2.97,0.96,4.06,1.16,2.68,1.14,0.06,10.52,0,9,0,14,6,38
+pincho,skewer,Kitchen Utensils,Non-Living Things,5.11,1.69,2.66,1.17,2.77,1.5,2.69,1.22,0.06,12.79,2.26,118,1.72,6,2,38
+pinzas,tongs,Kitchen Utensils,Non-Living Things,4.35,1.34,3.68,1.25,4.56,0.84,3.24,1.31,0.03,13.45,2.68,408,0.78,6,2,38
+plato,dish,Kitchen Utensils,Non-Living Things,1.77,0.9,4.92,0.31,4,1.12,4.7,0.6,0.64,10.18,3.76,4612,3.06,5,2,38
+pocillo de café,coffee cup,Kitchen Utensils,Non-Living Things,5.26,2.92,2.07,1.76,3.05,1.79,2.08,1.76,0.03,10.15,0,22,0,13,6,32
+porrón,glass wine pitcher,Kitchen Utensils,Non-Living Things,4.77,1.82,2.88,1.15,3.65,1.31,2.63,1.33,0.03,10.33,2,77,0,6,2,38
+puchero,pot,Kitchen Utensils,Non-Living Things,3.76,1.48,3.22,1.25,2.82,1.73,3.36,1.27,0.36,12.01,2.73,302,1.54,7,3,38
+rallador,grater,Kitchen Utensils,Non-Living Things,4.64,1.37,3.82,1.02,4.68,0.72,3.64,1,0.03,10.53,1.41,30,0.7,8,3,38
+reloj de cocina,kitchen timer,Kitchen Utensils,Non-Living Things,3.38,1.23,4.16,0.83,2.21,1.21,2.49,1.24,0.03,14.18,0,2,0,13,6,38
+salvamanteles,table mat,Kitchen Utensils,Non-Living Things,4.92,1.59,3.36,1.55,2.96,1.78,2.74,1.26,0.03,10.39,0,5,0,11,5,38
+sartén,frying pan,Kitchen Utensils,Non-Living Things,3,1.2,4.86,0.4,4.41,0.7,4.84,0.5,0.67,13.07,2.72,1456,1.2,6,2,38
+sopera,tureen,Kitchen Utensils,Non-Living Things,4.29,1.21,3.68,1.1,3.89,0.86,3.8,0.84,0.03,11.56,1.9,409,0.6,6,3,38
+tabla cortar,cutting board,Kitchen Utensils,Non-Living Things,4.71,1.5,4.28,0.58,3.99,0.94,3.94,1.03,0.08,13.32,0,0,0,11,5,38
+tapadera,lid,Kitchen Utensils,Non-Living Things,3.61,1.59,3.87,1.12,4.03,0.92,3.43,1.27,0.03,11.64,2.59,256,0.78,9,4,38
+tarro,jar,Kitchen Utensils,Non-Living Things,3,1.28,3.95,1.12,3.42,1.66,3.7,1.21,0.03,11.91,2.4,336,1.38,5,2,38
+taza,cup,Kitchen Utensils,Non-Living Things,2.43,0.9,4.71,0.42,4.43,0.62,4.26,0.85,0.17,13.82,3.28,4942,2.33,4,2,38
+tazón,bowl,Kitchen Utensils,Non-Living Things,3.14,1.35,4.42,1,3.93,1.09,3.96,1.19,0.06,11.49,2.49,229,1.56,5,2,38
+tenedor,fork,Kitchen Utensils,Non-Living Things,1.94,1.14,4.88,0.42,4.57,0.88,4.73,0.59,0.67,12.51,2.77,538,1.83,7,3,38
+tijera,scissors,Kitchen Utensils,Non-Living Things,2.61,0.94,4.52,0.56,4.89,0.36,3.85,1.33,0.03,8.89,2.61,365,2.04,6,3,38
+timbal,kettledrum,kitchen Utensils,Non-Living Things,5.05,1.42,2.92,1.3,2.99,1.71,3.31,1.31,0.06,11.53,2.25,41,0.9,6,2,38
+tostador,toaster,Kitchen Utensils,Non-Living Things,3.6,1.36,4.44,0.89,4.17,0.95,4.23,0.98,0.03,11.18,1.18,28,2.03,8,3,38
+trinchero,carving knife,Kitchen Utensils,Non-Living Things,6.03,1.93,2.29,1.19,3.99,1.53,2.5,1.32,0.03,8.82,0.7,2,0,9,3,36
+tupper,tupperware,Kitchen Utensils,Non-Living Things,5.34,1.21,4.42,1,3.81,1.21,3.66,1.09,0.03,11.57,2.01,2,0,6,2,38
+vasija,(kind of) bridge-spouted vessel,Kitchen Utensils,Non-Living Things,4.37,1.23,2.82,1.19,2.81,1.58,2.89,1.26,0.03,11.49,2.8,398,1.41,6,3,38
+vaso,glass,Kitchen Utensils,Non-Living Things,1.83,0.65,5,0,4.36,0.88,4.5,0.48,0.28,13.95,3.67,5962,0.6,4,2,38
+vinagrera,cruet / vinegar bottle,Kitchen Utensils,Non-Living Things,4.61,1.24,3.74,1.15,3.88,1.07,3.35,1.39,0.03,9.56,0.9,5,0,9,4,38
+acordeón,accordion,Musical Instruments,Non-Living Things,3.92,1.27,2.97,1.25,3.21,1.73,3.96,1.09,0.36,12.86,2.88,339,1.65,8,4,38
+armónica,harmonica,Musical Instruments,Non-Living Things,4.09,1.44,3.16,1.35,4.12,0.98,3.81,0.97,0.08,11.32,3.13,621,1.8,8,4,38
+arpa,harp,Musical Instruments,Non-Living Things,4.7,1.31,2.89,1.24,4.52,1.08,3.71,1.1,0.06,12.4,3.12,452,1.74,4,2,38
+bajo,bass,Musical Instruments,Non-Living Things,5.82,1.36,3.21,1.4,4.67,0.88,3.89,1.1,0.06,16.33,5.13,50692,4.02,4,2,38
+bandurria,lute type (instrument),Musical Instruments,Non-Living Things,5.54,1.46,2.82,1.3,4.3,1.37,2.99,1.35,0.19,10.79,2.23,36,0,9,3,38
+batería,drum set,Musical Instruments,Non-Living Things,3.83,1.24,3.52,1.06,4.82,0.7,4.35,0.87,0.03,11.24,4.03,1418,2.87,7,4,38
+bocina,horn,Musical Instruments,Non-Living Things,3.89,1.41,3.05,1.3,4.03,1.04,2.29,1.34,0.03,11.53,2.54,287,2.24,6,3,38
+bombo,bass drum,Musical Instruments,Non-Living Things,3.98,1.23,2.74,1.22,4.41,1.12,3.68,1.28,0.14,12.43,2.87,340,1.36,5,2,38
+caja acústica,acoustic box,Musical Instruments,Non-Living Things,5.72,1.84,2.49,1.37,3.55,1.48,2.61,1.13,0.03,12.22,0,4,0,12,6,38
+castañuelas,castanets,Musical Instruments,Non-Living Things,3.71,1.53,3.21,1.26,3.39,1.54,3.39,1.04,0.06,11.29,2.41,132,0.7,11,4,38
+chiflo,whistle,Musical Instruments,Non-Living Things,3.55,3.08,0.97,0.94,1.95,1.69,1.03,1.36,0.06,8.99,1.28,7,0,6,2,22
+chirimía,hornpipe,Musical Instruments,Non-Living Things,3.73,3.4,0.91,0.75,1.7,1.01,0.6,0.65,0.03,9.5,2.17,22,0,9,4,22
+clarín,bugle,Musical Instruments,Non-Living Things,5.06,2.36,1.88,1.31,3.88,1.82,2.54,1.48,0.03,13.28,3.2,75,1.11,6,2,34
+clarinete,clarinet,Musical Instruments,Non-Living Things,5,1.12,2.78,1.28,4.62,0.92,3.91,1.04,0.19,12.15,2.95,343,1.79,9,4,38
+contrabajo,contrabass,Musical Instruments,Non-Living Things,5.63,1.29,2.61,1.36,4.66,0.88,3.47,1.23,0.08,11.46,2.86,202,1.04,10,4,38
+corneta,cornet,Musical Instruments,Non-Living Things,4.62,1.81,2.63,1.36,4.05,0.97,3.24,1.19,0.06,11.12,2.64,183,1.4,7,3,38
+cornetín,cornet,Musical Instruments,Non-Living Things,5.9,1.36,1.61,0.83,4.27,1.11,2.4,1.17,0.03,11.92,1.63,48,0,8,3,38
+dulzaina,bombarde,Musical Instruments,Non-Living Things,4.68,2.88,1.63,1.37,3.68,2.15,1.78,1.44,0.06,10.78,2.12,30,0,8,3,31
+fiscorno,flugelhorn,Musical Instruments,Non-Living Things,3.3,3.47,1.34,0.5,1.77,1.13,1.18,0.96,0.06,10.17,0,0,0,8,3,20
+flauta,flute,Musical Instruments,Non-Living Things,2.81,1.24,3.65,1.19,3.77,1.73,4.66,0.8,0.39,13.95,3.38,992,2.17,6,2,38
+flautín,piccolo,Musical Instruments,Non-Living Things,5.22,1.28,2.39,1.14,4.58,1.1,3.23,1.3,0.08,10.56,1.79,16,0.9,7,2,38
+gaita,bagpipe,Musical Instruments,Non-Living Things,4.53,1.34,2.89,1.2,4.51,1.13,3.54,1.26,0.08,11.95,2.83,170,1.45,5,2,38
+guitarra,guitar,Musical Instruments,Non-Living Things,2.83,0.94,4.49,0.99,4.6,0.84,4.87,0.48,0.61,14.66,4.22,2621,2.87,8,3,38
+laúd,lute,Musical Instruments,Non-Living Things,4.88,2.19,2.04,1.37,4.13,1.68,2.67,1.53,0.11,12.7,2.62,163,1,4,2,35
+mandolina,mandolin,Musical Instruments,Non-Living Things,6.06,2.25,1.99,1.08,3.88,1.76,2.24,1.37,0.03,10.94,2.42,82,0,9,4,35
+maraca,maraca,Musical Instruments,Non-Living Things,3.9,1.3,2.82,1.25,2.97,1.55,3.16,1.29,0.03,12.2,1.62,44,0.9,6,3,38
+oboe,oboe,Musical Instruments,Non-Living Things,5.39,1.79,2.13,1.33,4.11,1.59,2.87,1.42,0.06,11.58,2.78,136,3.46,4,3,36
+órgano,organ,Musical Instruments,Non-Living Things,4.32,1.27,3,1.09,4.84,0.63,3.83,1.05,0.11,14.21,4.1,5595,2.76,6,3,38
+palillos,drumsticks,Musical Instruments,Non-Living Things,4.24,1.69,2.5,1.4,4.52,0.99,2.44,1.32,0.03,12.08,2.56,169,1.77,8,3,36
+pandereta,tambourine,Musical Instruments,Non-Living Things,2.61,1.04,3.74,1.24,4.71,0.5,3.7,0.99,0.08,11.46,2.48,110,0.78,9,4,38
+piano,piano,Musical Instruments,Non-Living Things,3.22,1.43,4.16,1.19,4.59,1.22,4.92,0.31,0.44,14.64,4.04,3910,1,5,2,38
+pianola,pianola,Musical Instruments,Non-Living Things,5.92,1.89,1.79,0.92,2.47,1.42,2.45,1.29,0.06,10.39,1.93,139,1.45,7,3,36
+platillos,cymbals,Musical Instruments,Non-Living Things,4.43,1.77,2.9,1.34,3.17,1.69,3.26,1.25,0.11,12.81,2.84,380,0.7,9,3,37
+plato,cymbals,Musical Instruments,Non-Living Things,5.11,1.56,2.71,1.29,4.24,1.07,2.37,1.37,0.03,9.8,3.76,4612,3.06,5,2,38
+rabel,rebec,Musical Instruments,Non-Living Things,3.71,3.27,0.91,1.26,2.12,1.99,1.11,1.33,0.03,10.68,2.03,33,0,5,2,21
+saxofón,saxophone,Musical Instruments,Non-Living Things,4.7,1.35,2.94,1.23,4.57,1.1,4.27,0.88,0.69,11.88,2.88,172,0.78,7,3,38
+tambor,drum,Musical Instruments,Non-Living Things,2.48,1.23,3.77,1.14,3.68,1.56,4.6,0.69,0.39,13.37,3.38,1095,2.05,6,2,38
+tamboril,little drum,Musical Instruments,Non-Living Things,5.21,1.55,2.23,1,2.66,1.31,2.68,1.29,0.03,10.71,2.11,59,0,8,3,38
+triángulo,triangle,Musical Instruments,Non-Living Things,4.61,1.53,2.51,1.14,2.74,1.45,2.76,1.27,0.08,13.97,3.48,1331,1.6,9,3,38
+trombón,trombone,Musical Instruments,Non-Living Things,4.93,1.26,2.54,1.12,4.28,1.12,3.64,1.14,0.14,11.4,2.68,117,0.78,7,2,38
+trombón de varas,slide trombone,Musical Instruments,Non-Living Things,5,2.93,1.43,0.97,3.34,2.06,1.79,1.45,0.03,9.73,0,3,0,14,5,31
+trompa,horn,Musical Instruments,Non-Living Things,5.24,1.6,2.34,1.2,2.79,1.56,2.8,1.14,0.08,12.16,3.05,334,1.11,6,2,34
+trompa de caza,hunting horn,Musical Instruments,Non-Living Things,4.72,2.52,2.01,1.52,3.81,1.63,2.59,1.56,0.11,11.28,0,1,0,6,2,38
+trompeta,trumpet,Musical Instruments,Non-Living Things,2.84,1.35,3.77,1.18,3.67,1.73,4.74,0.56,0.44,13.05,3.25,532,1.45,8,3,38
+trompetín,curnet,Musical Instruments,Non-Living Things,5.63,1.24,2.12,0.79,3.97,1.13,2.92,1.1,0.03,13.02,0,1,0,9,3,38
+tuba,tuba,Musical Instruments,Non-Living Things,5.63,1.59,2.2,1.1,2.57,1.6,2.47,1.42,0.03,11.81,2.38,55,0.9,4,2,37
+viola,viola,Musical Instruments,Non-Living Things,5.81,1.42,2.07,1.23,4.47,0.92,3.23,1.17,0.03,15,3.38,744,1.46,5,2,38
+violín,violin,Musical Instruments,Non-Living Things,3.4,1.28,3.03,1.37,4.71,1.1,4.74,0.81,0.36,13.58,3.55,1320,1.52,6,2,38
+violonchelo,cello,Musical Instruments,Non-Living Things,5.01,1.42,2.83,1.18,3.19,1.64,3.82,0.88,0.08,11.06,2.92,138,2.33,11,4,38
+xilófono,xylophone,Musical Instruments,Non-Living Things,4.37,2.06,2.66,1.58,4.3,1.42,3.26,1.53,0.06,10.92,1.96,36,0,8,4,36
+zambomba,(kind of) rustic drum,Musical Instruments,Non-Living Things,3.47,1.4,3.11,1.32,4.38,0.84,3.2,1.29,0.03,10.81,1.73,20,0.48,8,3,38
+alicates,pliers,Tools,Non-Living Things,3.73,1.33,3.94,1.05,3.94,1.68,4.7,0.71,0.5,11.49,1.6,51,1.26,8,4,38
+arado,plow,Tools,Non-Living Things,4.82,1.62,2.68,1.22,3.73,1.4,3.33,1.29,0.14,11.98,3.11,255,1.23,5,3,38
+atornillador,screwdriver,Tools,Non-Living Things,4.11,1.69,4.26,1.28,4.59,1.12,4.4,1.14,0.03,10.97,0,14,0,12,5,37
+azada,hoe,Tools,Non-Living Things,4.84,1.79,2.69,1.5,3.04,1.77,3.14,1.27,0.11,11.1,2.33,68,0.7,5,3,37
+azadilla,little hoe,Tools,Non-Living Things,5.07,2.73,1.99,1.26,3.39,1.83,2.15,1.37,0.03,8.23,0.85,2,0,8,4,32
+azadón,hoe,Tools,Non-Living Things,4.29,2.44,2.5,1.55,2.89,1.89,2.89,1.65,0.11,11.6,2.25,54,0.6,6,3,34
+azuela,adze,Tools,Non-Living Things,4.47,3.51,1.39,0.92,2.76,2.16,1.61,0.97,0.08,11.59,1.99,6,0,6,3,23
+banco,worktable,Tools,Non-Living Things,3.6,1.23,3.69,0.98,2.53,1.27,3.11,1.06,0.03,9.86,4.56,9256,3.51,5,6,38
+banco de trabajo,workbench,Tools,Non-Living Things,5.17,1.34,3.22,1.25,2.89,1.47,3.19,1.29,0.03,15.5,0,9,0,14,2,38
+bieldo,winnowing fork,Tools,Non-Living Things,2.08,3.15,0.56,0.93,0.85,1.54,0.43,0.79,0.03,8.61,1.2,4,0,6,2,18
+bolígrafo,ballpoint pen,Tools,Non-Living Things,2.4,1.17,4.9,0.38,4.68,0.82,2.77,1.6,0.03,12.74,2.17,405,2.54,9,4,38
+botador,nail set,Tools,Non-Living Things,5.23,3.08,1.41,1.06,2.84,1.94,1.32,1.32,0.03,9.63,0.9,6,0,9,4,28
+broca,drilling bit,Tools,Non-Living Things,5.32,1.51,3.32,1.07,3.97,1.02,3.71,1.08,0.08,11.53,2.57,39,1.36,5,2,38
+buril,burin,Tools,Non-Living Things,3.51,3.12,0.81,0.89,2.06,1.98,1.11,1.23,0.03,10.18,2.15,182,0,5,2,20
+cepillo,brush,Tools,Non-Living Things,4.09,2.04,3.23,1.4,4.69,0.56,3.01,1.25,0.11,13.12,2.71,606,2.6,7,3,38
+chincheta,pushpin,Tools,Non-Living Things,3.3,1.18,3.89,1.27,3.98,0.96,2.46,1.31,0.03,10.81,1.3,17,0,9,3,38
+cinta métrica,tape measure,Tools,Non-Living Things,5.2,1.54,3.29,1.25,3.03,1.63,1.13,0.55,0.08,11.09,0,43,0,12,5,38
+clavo,nail,Tools,Non-Living Things,3.47,1.24,4.38,0.85,4.22,0.91,4.19,1.14,0.08,13.03,3.28,1002,2.42,5,2,38
+corta-alambre,wire cutter,Tools,Non-Living Things,5.94,1.4,2.38,1.29,4.39,0.99,2.54,1.18,0.08,8.18,0,0,0,12,5,38
+cortafríos,cold chisel,Tools,Non-Living Things,4.98,2.63,2.5,1.74,3.65,1.9,2.5,1.73,0.08,10.04,0.95,0,0,10,4,33
+cultivador,cultivator,Tools,Non-Living Things,5.08,3.07,1.57,1.14,2.95,1.86,1.6,1.2,0.03,11.25,2.26,105,0.48,10,4,29
+dallo,scythe,Tools,Non-Living Things,3.06,2.92,0.45,0.44,0.76,1.54,0.42,0.42,0.03,10.01,1.08,0,0,11,2,16
+destornillador,screwdriver,Tools,Non-Living Things,3.38,1.04,4.45,0.84,4.76,0.46,4.86,0.26,0.42,11.93,2.1,87,2.04,14,5,38
+escafilador,stone mason chisel,Tools,Non-Living Things,2.42,3.28,0.69,1.05,1.07,1.69,0.48,0.85,0.03,4.78,0,0,0,11,5,19
+escoba,broom,Tools,Non-Living Things,2.36,0.88,4.41,0.79,4.03,1.39,2.82,1.38,0.03,13.33,2.83,497,2.28,6,3,38
+escoplo,ice chisel,Tools,Non-Living Things,3.49,3.43,0.99,0.88,2.17,2.08,1.13,1.31,0.06,8.93,1.76,23,0,7,3,20
+escuadra,set-square,Tools,Non-Living Things,5.47,1.29,2.84,1.2,4.28,1.12,3.04,1.22,0.03,12.42,3.45,854,1.53,8,3,38
+formón,chisel,Tools,Non-Living Things,5.39,2.77,1.97,1.71,2.58,1.74,2.18,1.55,0.08,14.44,1.38,25,0,6,2,33
+garieta,pitchfork,Tools,Non-Living Things,2.81,2.74,0.56,0.97,1.68,1.37,0.5,0.72,0.03,10.32,0,0,0,7,3,16
+garlopa,jointer,Tools,Non-Living Things,2.38,2.38,0.53,0.7,1.43,1.4,0.53,0.59,0.03,9.46,1.41,11,0,7,3,15
+gato,hydraulic jack,Tools,Non-Living Things,5.2,1.93,3.19,1.26,4.22,0.96,3.55,1.13,0.03,9.43,4.07,3556,3.35,4,2,38
+grifo,faucet,Tools,Non-Living Things,3.02,1.62,4.21,1.14,3.89,1.24,2.37,1.26,0.03,13.25,2.85,424,1.96,5,2,38
+gubia,gouge,Tools,Non-Living Things,3.7,3.37,1.09,1.58,2.19,1.84,1.26,1.19,0.03,10.4,1.64,16,0,5,2,22
+hacha,ax,Tools,Non-Living Things,3.52,1.22,3.26,1.26,4.58,0.96,3.99,1.2,0.19,12.35,3.3,600,2.53,5,2,38
+horca,pitchfork,Tools,Non-Living Things,5.24,2.15,1.76,1.31,3.66,1.71,1.92,1.2,0.03,11.17,3,288,1.88,5,2,35
+hoz,sickle,Tools,Non-Living Things,4.77,1.7,2.58,1.13,2.78,1.58,3.32,1.23,0.08,12.78,3.04,217,1.46,3,1,37
+lápiz,pencil,Tools,Non-Living Things,1.83,0.88,4.76,0.63,4.39,1.1,2.88,1.36,0.03,14.11,3.22,1236,2.79,5,2,38
+latiguillo,patch cord,Tools,Non-Living Things,4.79,3.2,1.75,1.47,2.89,2.09,1.34,1.2,0.03,11.17,1.6,45,0,10,4,30
+lezna,awl,Tools,Non-Living Things,2.92,2.77,1.19,0.99,1.97,1.65,1.47,1.1,0.03,8.68,1.57,12,0,5,2,17
+lima,file,Tools,Non-Living Things,4.53,1.27,3.11,0.88,4.53,1.06,3.57,1.26,0.14,10.33,4.18,197,2.28,4,2,38
+llana,trowel tool,Tools,Non-Living Things,4.26,3.06,2.21,1.72,3.53,2.24,2.42,1.68,0.03,12.25,3.03,284,1.11,5,2,30
+llave,wrench,Tools,Non-Living Things,3.38,1.64,4.18,1.16,4.74,0.71,4.13,0.98,0.03,14.44,3.83,3181,3.51,6,2,38
+llave allen,allen wrench,Tools,Non-Living Things,5.34,2.44,2.87,1.84,4.08,1.79,3,1.6,0.08,10.06,0,1,0,10,4,35
+llave fija,wrench,Tools,Non-Living Things,5.45,1.93,2.9,1.64,3.37,1.84,3.47,1.48,0.03,12.11,0,3,0,9,4,37
+llave grifa,pipe wrench,Tools,Non-Living Things,5.39,2.87,2.1,1.28,3.82,1.97,2.5,1.57,0.03,10.98,0,1,0,10,4,32
+llave inglesa,monkey wrench,Tools,Non-Living Things,4.27,1.62,4.14,1.04,4.63,0.75,4.72,0.67,0.11,12.71,0,37,0,12,5,38
+mandriladora,milling machine,Tools,Non-Living Things,3.93,3.45,1.54,1.07,1.68,1.51,1.82,1.22,0.03,9.27,0,0,0,11,5,19
+máquina,machine,Tools,Non-Living Things,3.2,1.66,3.97,0.89,3.68,1.4,3.48,1.35,0.06,15.33,4.07,6554,3.41,7,3,38
+martillo,hammer,Tools,Non-Living Things,2.98,1.4,4.48,0.69,4.57,0.84,4.89,0.36,0.64,13.52,3.44,665,2.7,8,3,38
+maza,mallet,Tools,Non-Living Things,5.01,1.55,3.14,1.01,4.37,0.85,3.53,1.04,0.03,12.51,3.14,124,1.49,4,2,38
+mazo,mallet,Tools,Non-Living Things,4.47,1.57,3.16,1.23,4.43,1.08,3.63,0.98,0.11,12.79,3.03,215,1.99,4,2,38
+metro,meter / ruler,Tools,Non-Living Things,3.63,1.2,4.23,1,4.41,0.9,4.26,0.88,0.03,10.83,4.18,4152,2.94,5,2,38
+mezcladora,mixer,Tools,Non-Living Things,5.34,2,2.23,1.01,3.19,1.42,2.58,1.15,0.03,11.32,1.45,19,1.54,10,4,36
+mordaza,clamp,Tools,Non-Living Things,5.48,2.67,1.69,1.09,3.23,1.72,1.92,1.42,0.03,11.13,2.38,179,1.79,7,3,32
+motosierra,chainsaw,Tools,Non-Living Things,4.66,1.38,3.23,1.09,4.35,1.07,4.21,0.83,0.03,12.19,1.86,14,1.76,10,4,38
+navaja,clasp knife,Tools,Non-Living Things,3.63,1.66,3.69,1.18,4.37,1.02,3.9,1.04,0.03,12.99,3.09,1169,2.5,6,3,38
+pala,shovel,Tools,Non-Living Things,2.91,1.47,3.8,1.17,4.68,0.61,4.32,0.9,0.19,14.05,3.1,460,3.86,4,2,38
+palanca,lever,Tools,Non-Living Things,4.55,1.29,2.9,1.09,4.52,0.84,3.18,1.12,0.03,13.16,3.07,651,1.51,7,3,38
+paleta,trowel,Tools,Non-Living Things,4.87,1.47,2.86,1.21,4.68,0.84,3.39,1.08,0.06,13.43,3,433,1.99,6,3,38
+pico,pick,Tools,Non-Living Things,4.14,1.35,3.03,1.29,4.76,0.72,4.24,0.94,0.11,14.47,3.96,2584,2.23,4,2,38
+pinza,tweezers,Tools,Non-Living Things,4.24,1.6,3.18,1.17,4.37,0.98,3.03,1.18,0.03,12.95,2.5,325,2.16,5,2,38
+piqueta,pickaxe,Tools,Non-Living Things,5.65,2.02,2.68,1.57,4.08,1.44,2.78,1.52,0.03,10.49,1.96,107,0,7,3,35
+punta,nail,Tools,Non-Living Things,4.53,2.44,2.52,1.5,3.46,1.71,2.22,1.45,0.06,15.14,4.14,6224,1.36,5,2,35
+punteadora,surfacing machine,Tools,Non-Living Things,5.5,2.91,1.45,1.2,2.11,1.28,1.58,1.36,0.03,8.6,0,0,0,10,4,33
+puntero,stonecutter's chisel,Tools,Non-Living Things,6.06,1.6,2.32,1.09,4.02,1.29,2.41,1.36,0.03,13.22,2.76,559,1.41,7,3,37
+punzón,awl,Tools,Non-Living Things,4.18,2.25,3.01,1.49,4.26,1.38,2.99,1.34,0.08,10.84,2.27,81,2.51,6,2,36
+rastrillo,rake,Tools,Non-Living Things,3.43,1.37,3.68,1.05,4.31,1.08,3.92,0.85,0.06,12.46,2.36,186,1.11,9,3,38
+regla,ruler,Tools,Non-Living Things,3.56,1.33,4.35,0.67,4.52,0.57,3.84,0.96,0.03,14.47,4,3933,0.95,5,2,38
+serrucho,saw,Tools,Non-Living Things,4.21,1.37,3.25,0.98,4.67,0.75,4.44,0.78,0.22,10.89,2.47,97,0.6,8,3,38
+sierra,saw,Tools,Non-Living Things,3.29,1.1,4.09,1.19,4.53,0.53,4.62,0.48,0.31,16.04,4.31,2859,1.49,6,2,38
+taco,wall plug,Tools,Non-Living Things,5.68,1.23,3.25,1.09,3.89,1.06,2.97,1.2,0.03,16.69,2.74,375,1.85,4,2,38
+taladradora,drill,Tools,Non-Living Things,4.97,1.5,3.53,1.42,4.65,0.56,4.24,0.92,0.06,10.71,1.67,27,0.85,11,5,38
+taladro,auger,Tools,Non-Living Things,4.18,1.25,4.18,0.84,4.56,0.62,4.6,0.44,0.06,12.83,2.41,119,0.6,7,3,38
+tenaza,pincers,Tools,Non-Living Things,4.7,1.42,3.57,0.91,4.49,0.7,4.03,0.94,0.53,10.72,2.24,119,1.72,6,3,38
+tijera,scissors,Tools,Non-Living Things,2.57,1.03,4.68,0.69,4.71,0.36,4.43,0.76,0.22,2.83,2.61,365,2.04,6,3,38
+tornillo,screw,Tools,Non-Living Things,3.39,1.61,4,0.95,3.84,1.55,4.08,1.12,0.11,13.08,2.78,326,1.86,8,3,38
+torno,lathe,Tools,Non-Living Things,5.9,1.62,2.27,1.32,3.89,1.6,2.66,1.27,0.03,14.36,4.39,14188,1.76,5,2,37
+yunque,anvil,Tools,Non-Living Things,5.16,1.85,1.84,1.09,2.18,1.27,2.68,1.13,0.03,11.32,2.95,121,0,6,2,38
+ala delta,hang-glider,Vehicles,Non-Living Things,5.97,1.13,1.88,1.25,4.18,1.08,1.94,1.01,0.03,14.5,0,25,0,8,4,38
+autobús,bus,Vehicles,Non-Living Things,2.5,1.31,4.66,0.81,4.3,1.24,4.65,0.56,0.36,15.33,3.61,2659,3.45,7,3,38
+autocar,coach,Vehicles,Non-Living Things,3.23,1.46,3.91,1.16,3.86,1.51,4.24,0.9,0.03,12.91,2.6,364,1.23,7,3,38
+autogiro,autogyro / gyroplane,Vehicles,Non-Living Things,5.38,2.65,1.24,0.86,3.1,1.87,1.64,1.26,0.03,11.44,1.9,64,0,8,4,32
+automóvil,automobile,Vehicles,Non-Living Things,2.76,1.79,4.97,0.19,4.65,0.73,4.95,0.26,0.06,14.75,3.79,4593,2.52,9,4,38
+avión,plane,Vehicles,Non-Living Things,2.17,0.99,4.26,1.09,3.11,1.56,4.22,1.19,0.39,10.92,4.17,7308,3.71,5,2,38
+avioneta,light plane,Vehicles,Non-Living Things,3.74,1.41,3.14,1.21,3.54,1.3,2.96,1.16,0.03,12.19,2.8,538,1.41,8,4,38
+barca,rowboat,Vehicles,Non-Living Things,3.17,1.26,3.11,1.22,3.87,1.09,3.33,1.23,0.06,15.19,3.47,728,1.81,5,2,38
+barco,boat,Vehicles,Non-Living Things,2.53,0.95,3.91,1.03,3.11,1.4,3.94,1.27,0.28,15.37,4.12,5519,3.55,5,2,38
+bicicleta,bicycle,Vehicles,Non-Living Things,2.39,0.84,4.24,0.88,4.62,0.69,4.44,0.83,0.69,14.89,3.36,2308,3.01,9,4,38
+camión,lorry,Vehicles,Non-Living Things,2.4,1.2,3.82,1.12,4.49,0.74,4.84,0.19,0.5,11.71,3.54,3081,3.42,6,2,38
+camioneta,van,Vehicles,Non-Living Things,3.78,1.56,3.31,1.19,3.3,1.62,3.88,0.92,0.08,13.31,2.81,1333,3.38,9,4,38
+canoa,canoe,Vehicles,Non-Living Things,4.18,1.44,2.7,1.36,3.82,1.12,2.24,1.3,0.03,12.41,2.92,288,1.97,5,3,38
+carabela,caravel,Vehicles,Non-Living Things,4.71,2.15,1.83,1.34,2.18,1.56,1.47,1.14,0.03,11.58,2.36,97,0,8,4,37
+carreta,cart,Vehicles,Non-Living Things,4.32,1.32,2.61,1.09,2.7,1.47,2.27,1.07,0.03,11.86,3.05,482,2.27,7,3,38
+carretilla,wheelbarrow,Vehicles,Non-Living Things,3.78,1.15,2.88,1.21,4.07,1.07,2.12,1.03,0.06,12.8,2.41,138,1.88,10,4,38
+carrito,shopping cart,Vehicles,Non-Living Things,3.27,1.67,3.31,1.08,3.66,1.01,2.54,1.11,0.03,14.14,2.82,466,2.31,7,3,38
+carro,horse drawn  cart,Vehicles,Non-Living Things,3.11,1.3,3.11,1.45,3.35,1.37,3,1.28,0.31,14.88,3.71,3424,2.87,5,2,38
+ciclomotor,moped,Vehicles,Non-Living Things,4.43,1.83,3.83,0.96,3.62,1.45,4.12,0.83,0.03,12.86,1.92,70,1.2,10,4,38
+coche,car,Vehicles,Non-Living Things,1.68,1.1,4.96,0,4.54,0.51,5,0,0.81,16.06,4.23,11927,3.68,5,2,38
+coche de caballos,carriage,Vehicles,Non-Living Things,3.98,1.37,2.84,1.25,2.72,1.37,2.53,1.17,0.03,14.92,0,64,0,15,6,38
+furgoneta,van,Vehicles,Non-Living Things,3.28,1.01,4.24,1.03,3.96,1.09,4.32,0.64,0.06,14.02,3,688,2.49,9,4,38
+globo,balloon,Vehicles,Non-Living Things,3.45,1.34,2.32,1.29,3.43,1.35,2.16,1.14,0.08,14.28,3.72,1699,2.69,5,2,38
+helicóptero,helicopter,Vehicles,Non-Living Things,3.23,1.26,3.26,1.24,3.24,1.59,3.57,1.22,0.11,13.88,3.51,1583,3.11,11,5,38
+metro,underground   subway,Vehicles,Non-Living Things,4.69,1.69,4.07,1.38,2.48,1.15,3.51,1.13,0.06,10.74,4.18,4152,2.94,5,2,38
+microbús,minibus,Vehicles,Non-Living Things,4.95,1.59,3.24,1.09,2.79,1.51,3.09,1.11,0.03,10.5,2.03,96,0,8,3,38
+monociclo,unicycle,Vehicles,Non-Living Things,5.72,1.82,2.08,1.2,3.47,1.4,2.39,1.28,0.03,10.15,1.08,34,0.48,9,4,38
+monopatín,skateboard,Vehicles,Non-Living Things,3.73,1.18,2.97,1.31,2.47,1.58,2.21,1.08,0.03,11.72,1.76,22,1.52,9,4,38
+moto,motorbike,Vehicles,Non-Living Things,2.23,1.17,4.22,1.16,4.07,1.53,4.76,0.53,0.61,15.46,3.24,1431,2.85,4,2,38
+motocarro,auto rickshaw,Vehicles,Non-Living Things,5.39,1.25,1.9,1.12,2.47,1.46,2.4,1.14,0.03,9.97,0,3,0,9,4,38
+motora,motorboat,Vehicles,Non-Living Things,4.67,2.35,1.91,1,3.34,1.72,2.26,1.31,0.08,12.31,2.54,390,1.28,6,3,35
+parapente,paragliding,Vehicles,Non-Living Things,6.17,1.49,2.15,1.22,3.57,1.51,1.44,0.88,0.03,12.89,2.15,35,0.95,9,4,37
+patín,skate,Vehicles,Non-Living Things,3.3,0.94,3.35,1.34,2.93,1.21,2.54,1.26,0.06,12.42,2.44,69,1.64,5,2,38
+patinete,scooter,Vehicles,Non-Living Things,3.26,1.18,3.14,1.12,2.84,1.38,2.39,1,0.11,11.78,1.56,26,1.26,8,4,38
+piragua,canoe,Vehicles,Non-Living Things,4.65,1.3,2.63,1.25,4.13,1.06,2.18,0.94,0.06,11.81,2.29,88,0,7,3,38
+planeador,glider,Vehicles,Non-Living Things,5.69,1.34,1.96,1.31,2.38,1.48,2.18,1.21,0.03,10.99,2.31,21,1.15,9,3,38
+reactor,jet plane,Vehicles,Non-Living Things,5.94,1.32,2.4,1.15,2.83,1.39,2.32,1.12,0.03,13.23,3.48,488,1.88,7,3,38
+remolque,trailer,Vehicles,Non-Living Things,4.48,1.23,3.04,1.16,2.7,1.63,2.83,1.17,0.03,13.76,2.84,342,0.48,8,3,38
+sidecar,sidecar,Vehicles,Non-Living Things,5.47,1.27,2.46,1.1,2.41,1.42,2.29,1.1,0.03,11.86,1.6,37,4.3,7,3,38
+silla de ruedas,wheelchair,Vehicles,Non-Living Things,4.34,1.37,2.82,1.25,4.28,1.11,1.94,1.11,0.03,12.51,0,674,0,13,5,38
+submarino,submarine,Vehicles,Non-Living Things,3.97,1.35,3.05,1.15,2.99,1.41,2.63,1.23,0.03,13.57,3.34,837,2.12,9,4,38
+tanque,tank,Vehicles,Non-Living Things,3.98,1.29,2.82,1.36,3.46,1.43,2.7,1.05,0.03,13.85,3.4,838,2.62,6,2,38
+tartana,light carriage,Vehicles,Non-Living Things,5.19,2.14,1.94,1.43,2.41,1.52,1.74,1.34,0.03,#NUM!,2.04,77,0,7,3,35
+taxi,taxi,Vehicles,Non-Living Things,3.46,1.26,4.17,1.01,3.74,1.32,4.32,0.72,0.06,14.8,3.34,2699,1.23,4,2,38
+tractor,tractor,Vehicles,Non-Living Things,3.15,1.34,3.46,1.14,3.28,1.53,3.87,1.12,0.22,13.82,2.61,284,1.48,7,2,38
+tráiler,trailer,Vehicles,Non-Living Things,5.29,1.51,3.07,1.13,3.18,1.54,3.51,1.07,0.14,15.22,1.93,42,1.32,7,2,38
+tranvía,trolley,Vehicles,Non-Living Things,4.29,1.4,2.95,1.47,2.86,1.4,3.46,1.17,0.08,13.47,3.25,935,1.15,7,3,38
+trasatlántico,ocean liner,Vehicles,Non-Living Things,5.29,1.4,2.69,1.42,2.03,1.49,2.53,1.04,0.03,10.75,2.28,81,2.21,13,5,38
+tren,train,Vehicles,Non-Living Things,2.37,0.78,4.43,1.09,2.71,1.46,4.53,0.69,0.47,15.42,4.09,6379,0.48,4,1,38
+triciclo,tricycle,Vehicles,Non-Living Things,2.37,1.34,3.35,1.14,3.57,1.21,2.8,1.23,0.28,11.78,2.15,82,0.6,8,3,38
+trillo,threshing board,Vehicles,Non-Living Things,3.55,2.98,1.39,1.62,2.13,1.93,1.16,1.05,0.03,12.38,3.17,27,1.32,6,2,27
+trineo,sled,Vehicles,Non-Living Things,3.39,1.39,2.32,1.09,2.38,1.38,1.98,1.07,0.03,13.19,2.74,77,1.11,6,3,38
+turismo,private car / car,Vehicles,Non-Living Things,4.38,1.85,4.4,0.74,3.92,1.36,3.88,1.34,0.03,16.74,4.26,5245,2.29,7,3,38
+velero,sailboat,Vehicles,Non-Living Things,4.81,1.49,2.61,1.28,3.77,1.24,2.6,1.07,0.03,13.47,2.75,320,1.2,6,3,38

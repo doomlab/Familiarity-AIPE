@@ -1,0 +1,315 @@
+---
+title: "Estimate Reliability and Sample Size"
+author: "Erin M. Buchanan"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Libraries
+
+```{r}
+library(rio)
+library(dplyr)
+library(semanticprimeR)
+library(purrr)
+library(tidyr)
+library(truncnorm)
+library(psych)
+library(udpipe)
+library(reticulate)
+
+# For Chinese stroke count using Python strokes package
+# py_install("strokes", pip = TRUE)
+use_python("/Users/erinbuchanan/Library/r-miniconda-arm64/envs/r-reticulate/bin/python")
+
+st <- rio::import("strokes")
+```
+
+## Functions
+
+```{r}
+# Power AIPE
+run_simulation_pipeline <- function(
+  df,
+  item_col,
+  mean_col,
+  sd_col,
+  n_per_item = 68,
+  min_score = 0,
+  max_score = 9,
+  start = 20,
+  stop = 100,
+  increase = 5,
+  nsim = 500,
+  pilot_sample_size = 100,
+  power_levels = c(80, 85, 90, 95)
+) {
+
+  
+  # ---- STEP 1: Build items dataframe ----
+  items <- data.frame(
+    item = df[[item_col]],
+    mean = df[[mean_col]],
+    sd   = df[[sd_col]],
+    n    = rep(n_per_item, nrow(df))
+  ) %>%
+    na.omit()
+  
+  # ---- STEP 2: Simulate data ----
+  sim_data <- items %>%
+    mutate(scores = pmap(list(mean, sd, n),
+                         ~ rtruncnorm(..3,
+                                      a = min_score,
+                                      b = max_score,
+                                      mean = ..1,
+                                      sd = ..2))) %>%
+    unnest(scores) %>%
+    mutate(score = round(scores)) %>%
+    select(item, score)
+  
+  # ---- STEP 3: Cutoff ----
+  cutoff <- calculate_cutoff(
+    population = sim_data,
+    grouping_items = "item",
+    score = "score",
+    minimum = min_score,
+    maximum = max_score
+  )
+  
+  # ---- STEP 4: Sampling ----
+  samples <- simulate_samples(
+    start = start,
+    stop = stop,
+    increase = increase,
+    population = sim_data,
+    replace = TRUE,
+    nsim = nsim,
+    grouping_items = "item"
+  )
+  
+  # ---- STEP 5: Proportion ----
+  proportion_summary <- calculate_proportion(
+    samples = samples,
+    cutoff = cutoff$cutoff,
+    grouping_items = "item",
+    score = "score"
+  )
+  
+  # ---- STEP 6: Correction ----
+  corrected_summary <- calculate_correction(
+    proportion_summary = proportion_summary,
+    pilot_sample_size = pilot_sample_size,
+    proportion_variability = cutoff$prop_var,
+    power_levels = power_levels
+  )
+  
+  return(list(
+    sim_data = sim_data,
+    cutoff = cutoff,
+    samples = samples,
+    proportion_summary = proportion_summary,
+    corrected_summary = corrected_summary
+  ))
+}
+
+# Split Half
+split_half_item_rel <- function(dat, item_col = "item", score_col = "score") {
+  
+  dat <- dat %>% 
+    group_by(.data[[item_col]]) %>% 
+    mutate(id = row_number()) %>% 
+    ungroup()
+  
+  ids <- unique(dat$id)
+  half1_ids <- sample(ids, length(ids) / 2)
+  
+  half1 <- dat %>%
+    filter(id %in% half1_ids) %>%
+    group_by(.data[[item_col]]) %>%
+    summarise(mean1 = mean(.data[[score_col]], na.rm = TRUE), .groups = "drop")
+  
+  half2 <- dat %>%
+    filter(!id %in% half1_ids) %>%
+    group_by(.data[[item_col]]) %>%
+    summarise(mean2 = mean(.data[[score_col]], na.rm = TRUE), .groups = "drop")
+  
+  merged <- inner_join(half1, half2, by = item_col)
+  
+  r <- cor(merged$mean1, merged$mean2, use = "complete.obs")
+  
+  # Spearman-Brown correction
+  rel <- (2 * r) / (1 + r)
+  
+  rel
+}
+```
+
+## Data
+
+```{r}
+dfs <- list(
+  zechmeister = rio::import("data/1975_Zechmeister_BRM.csv"),
+  gilhooly = rio::import("data/1977_Gilhooly_BRM.csv"),
+  surprenant = rio::import("data/1999_Surprenant_BRM.csv"),
+  barca = rio::import("data/2002_Barca_BRM.csv"),
+  morrow = rio::import("data/2005_Morrow_BRM.csv"),
+  dedeyne = rio::import("data/2008_De Deyne_BRM.csv"),
+  ferrand = rio::import("data/2008_Ferrand_BRM.csv"),
+  janschewitz = rio::import("data/2008_Janschewitz_BRM.csv"),
+  desrochers = rio::import("data/2009_Desrochers_BRM.csv"),
+  dellarosa = rio::import("data/2010_DellaRosa_BRM.csv"),
+  desrochers10 = rio::import("data/2010_Desrochers_BRM.csv"),
+  #eilola = rio::import("data/2010_Eilola_BRM.csv"),
+  schroder = rio::import("data/2011_Schroder_BRM.csv"),
+  ferre = rio::import("data/2012_Ferre_BRM.csv"),
+  montefinese = rio::import("data/2013_Montefinese_BRM.csv"),
+  montefinese14 = rio::import("data/2014_Montefinese_BRM.csv"),
+  moreno = rio::import("data/2014_Moreno_BRM.csv"),
+  juhasz = rio::import("data/2015_Juhasz_BRM.csv"), 
+  guasch = rio::import("data/2016_Guasch_BRM.csv"),
+  hinojosa = rio::import("data/2016_Hinojosa_BRM.csv"),
+  sianipar = rio::import("data/2016_Sianipar_FrontPsychol.csv"),
+  soares = rio::import("data/2017_Soares_BRM.csv"),
+  yee = rio::import("data/2017_Yee_PLoSONE.csv"),
+  borelli = rio::import("data/2018_Borelli_PLOSONE.csv"),
+  chedid = rio::import("data/2019_Chedid_BRM.csv"),
+  bonin = rio::import("data/2022_Bonin_BRM.csv")
+  
+)
+
+# not usable
+# "data/2004_Clark_BRM.csv"
+# "data/2005_Izura_BRM.csv"
+# "data/2006_Stadthagen-Gonzalez_BRM.csv"
+# "data/2007_Liu_BRM.csv"
+# "data/2015_Bonin_BRM.csv"
+# "data/2015_Moldovan_BRM.csv"
+# "data/2016_Chang_BRM.csv"
+# "data/2016_Gruhn_PsycholRep.csv"
+# "data/2023_Su_BRM.csv"
+
+
+
+# c(
+#   "data/2016_Yao_BRM.pdf",
+#   "data/2018_Miklashevsky_JPsycholinguistRes.xlsx",
+#   "data/2019_Morucci_JCogn.csv",
+#   "data/2019_Scott_BRM.csv",
+#   "data/2020_Verheyen_BRM.xlsx",
+#   "data/2020_Wang_FrontPsychol.xlsx",
+#   "data/2021_Borelli_PLOSONE.docx",
+#   "data/2021_de Lima_SAGEOpen.xlsx",
+#   "data/2021_Liu_FrontPsychol.XLSX",
+#   "data/2021_Peti-Stantić_BRM_1.tsv",
+#   "data/2021_Peti-Stantić_BRM_2.tsv",
+#   "data/2021_Peti-Stantić_BRM.xlsx",
+#   "data/2021_Song_SAGE Open.xls",
+#   "data/2022_Ballot_BRM.zip",
+#   "data/2022_Sarli_BRM.xlsx",
+#   "data/2023_Raslescu_DIB.zip",
+#   "data/2023_Su_BRM_2.pdf",
+#   "data/2023_Su_BRM.csv",
+#   "data/2024_Chan_BRM.zip",
+#   "data/2024_Conca_BRM.xlsx",
+#   "data/2024_Falcinellli_Collabra.xlsx",
+#   "data/2024_Mahjoubnavaz_JPsycholinguistRes.xlsx",
+#   "data/2025_Borsa_BrainSci.xlsx"
+# )
+```
+
+## Get Word Length, Stroke Count, and POS
+
+```{r}
+# Extract unique languages from word column names
+languages <- sapply(dfs, function(df) {
+  word_col <- grep("^word", names(df), value = TRUE)[1]
+  if (!is.na(word_col)) {
+    lang <- sub("^word_", "", word_col)
+    lang <- gsub("_", "-", lang)
+    lang <- gsub("-name", "", lang) # specific issues
+    lang
+  } else {
+    NA
+  }
+})
+languages <- unique(languages[!is.na(languages)])
+
+# Download UDPipe models for each unique language and store paths
+model_paths <- list()
+for (lang in languages) {
+  model_paths[[lang]] <- udpipe_download_model(language = lang)
+}
+
+# Process each dataset to add POS and word length
+for (i in seq_along(dfs)) {
+  df <- dfs[[i]]
+  word_col <- grep("^word", names(df), value = TRUE)[1]  # Get the first column starting with "word"
+  if (!is.na(word_col)) {
+    # Extract language from column name and convert underscores to hyphens for model format
+    lang <- sub("^word_", "", word_col)
+    lang <- gsub("_", "-", lang)
+    lang <- gsub("-name", "", lang)
+    
+    # Load the pre-downloaded model
+    model <- udpipe_load_model(model_paths[[lang]])
+    
+    # Annotate the words with UDPipe
+    anno <- udpipe_annotate(model, x = df[[word_col]], doc_id = seq_along(df[[word_col]]))
+    anno_df <- as.data.frame(anno)
+    
+    # Group by doc_id and aggregate - if multiple words, mark as NOUN, otherwise take the annotated POS
+    pos_aggregated <- anno_df %>%
+      group_by(doc_id) %>%
+      summarise(
+        upos = if_else(n() > 1, "NOUN", first(upos)),
+        .groups = "drop"
+      ) %>%
+      mutate(doc_id = as.numeric(doc_id)) %>%
+      arrange(doc_id)
+    
+    # Ensure we have the correct number of rows
+    pos_aggregated <- pos_aggregated[1:nrow(df), ]
+    
+    # Add POS and word length columns
+    df$pos <- pos_aggregated$upos
+    df$word_length <- nchar(df[[word_col]])
+    
+    # Add stroke count for Chinese
+    if (grepl("chinese", lang, ignore.case = TRUE)) {
+      df$stroke_count <- sapply(df[[word_col]], function(word) sum(st$strokes(word)))
+    }
+  }
+  dfs[[i]] <- df
+}
+```
+
+## Estimate Scores
+
+### zechmeister
+
+```{r}
+# zechmeister
+run_simulation_pipeline(df = dfs[["zechmeister"]],
+                        item_col = "word_english_name",
+                        mean_col = "frequency_mean")
+
+
+df,
+  item_col,
+  mean_col,
+  sd_col,
+  n_per_item = 68,
+  min_score = 0,
+  max_score = 9,
+  start = 20,
+  stop = 100,
+  increase = 5,
+  nsim = 500,
+  pilot_sample_size = 100,
+  power_levels = c(80, 85, 90, 95)
+
+```

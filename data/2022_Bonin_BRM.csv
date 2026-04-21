@@ -1,0 +1,507 @@
+word_french,translate_word_english,aoa_mean,aoa_sd,familiar_mean,familiar_sd,imagine_mean,imagine_sd
+a priori,a priori,3.65,0.95,4.43,0.86,2.1,1.42
+abaisse-langue,tongue depressor,4.74,0.58,1.7,0.95,1.83,1.37
+abat-jour,lampshade,3.42,1.09,3.87,1.41,4.1,0.99
+accroche-cœur,kiss-curl,4.32,0.91,2.4,1.4,1.77,0.97
+accusé de réception,acknowledgment of receipt,4.23,0.76,4.23,1.28,3.63,1.1
+âge d'or,Golden age,3.97,0.84,3.77,1.33,2.4,1.35
+aide à domicile,home help,3.74,0.89,4.5,1.04,4,1.05
+aide-mémoire,checklist,3.61,0.99,3.8,1.52,2.8,1.32
+aide-soignante,caregiver,3.52,0.89,4.53,1.01,4.2,0.96
+aigre-doux,bittersweet,4.13,0.81,3.43,1.57,2.47,1.41
+aller-retour,round trip,2.42,0.67,4.8,0.61,3.4,1.3
+allume-cigares,cigarette lighter,3.65,0.84,4.43,1.01,4.33,1.15
+allume-gaz,gas lighter,3.77,0.76,4.03,1.45,4.2,1.1
+amour-propre,pride,3.97,0.95,4.37,1.13,2.43,1.36
+amuse-bouche,taster,3.68,0.79,4.4,0.97,4.3,0.79
+amuse-gueule,appetizer,3.55,0.81,4.13,1.36,4.33,0.96
+anglo-saxon,Anglo-Saxon,3.97,0.8,4.23,1.17,3,1.44
+année-lumière,light year,4,0.89,4.2,1.19,2.43,1.36
+anti-âge,anti-aging,3.94,0.85,3.83,1.42,3.3,1.47
+anti-inflammatoire,anti-inflammatory,3.84,0.93,4.57,0.94,3.67,1.24
+appareil-photo,camera,2.16,0.73,4.93,0.37,4.9,0.31
+appui-main,hand rest,3.68,0.91,2.93,1.53,3.07,1.44
+après-demain,after tomorrow,2.13,0.72,4.87,0.43,2.93,1.66
+après-midi,afternoon,1.68,0.65,4.93,0.37,3.47,1.43
+après-rasage,after-shave,3.58,0.85,4.6,0.86,4.27,0.98
+après-ski,after ski,3.52,0.85,3.77,1.63,3.3,1.64
+après-soleil,after-sun,3.23,0.92,4.33,1.24,3.67,1.58
+arc-boutant,flying buttress,4.68,0.54,2,1.14,1.73,1.11
+arc-en-ciel,rainbow,1.61,0.62,4.87,0.43,4.93,0.25
+arme à feu,firearm,2.87,0.62,4.63,0.96,4.7,0.7
+arrêt de mort,death warrant,3.9,0.94,3.5,1.63,2.1,1.27
+arrière-boutique,back of shop,3.61,0.72,4.03,1.3,3.73,1.14
+arrière-goût,aftertaste,3.06,0.93,4.53,0.94,3.07,1.53
+arrière-pays,hinterland,4.26,0.73,3.23,1.68,2.03,1.43
+arrière-pensée,afterthought,3.84,0.73,4.67,0.96,2.73,1.48
+arrière-train,rump,3.26,1.06,4.17,1.23,3.07,1.41
+atout maître,master asset,4.77,0.43,2.2,1.4,1.6,0.86
+attaché-case,attache case,4.55,0.68,2.7,1.7,2.87,1.59
+attrape-mouche,flytrap,2.97,1.05,3.7,1.49,3.6,1.43
+attrape-nigaud,hoax,3.94,0.96,3.87,1.61,2.33,1.4
+au-delà,beyond,3.39,1.02,4.33,1.21,2.7,1.47
+audio-visuel,audio-visual,3.84,0.82,4.53,1.01,3.17,1.37
+aujourd'hui,today,1.58,0.67,4.93,0.37,3.43,1.5
+auto-accusation,self-accusation,4.42,0.76,3.17,1.51,1.9,1.03
+auto-adhésif,self-adhesive,3.84,0.93,3.87,1.46,3.5,1.46
+auto-école,driving school,3.84,0.82,4.73,0.78,4.73,0.64
+auto-stoppeur,hitchhiker,3.45,0.93,4.2,1.21,4.6,0.62
+autre part,somewhere else,2.55,0.96,4.43,1.14,2.3,1.39
+avant-bras,forearm,2.32,0.83,4.87,0.51,4.8,0.41
+avant-dernière,penultimate,2.68,0.91,4.83,0.38,3.03,1.54
+avant-garde,avant-garde,4.03,0.91,3.17,1.49,2.17,1.15
+avant-goût,foretaste,3.58,0.89,4.37,0.89,2.57,1.43
+avant-hier,before yesterday,2.19,0.7,4.87,0.35,2.87,1.61
+avant-poste,outpost,4.19,0.75,3.27,1.6,2.23,1.28
+avant-première,preview,3.74,0.82,4.4,1.3,3.1,1.47
+avocat-conseil,legal advisor,4.58,0.56,2.57,1.65,2.47,1.41
+ayant droit,beneficiary,4.32,0.83,3.47,1.48,1.67,1.06
+bain-marie,bain marie,4,0.77,4.1,1.35,3.37,1.54
+balai-brosse,broom,2.65,0.71,4.47,0.97,4.47,0.94
+bande dessinée,comic strip,1.9,0.54,4.77,0.82,4.77,0.73
+bande-annonce,trailer,2.94,0.89,4.8,0.76,4,1.31
+bas-coté,verge,3.74,0.89,4.2,1.1,3.6,1.33
+bas-fond,underworld,3.97,0.75,3.2,1.54,1.83,0.99
+basket-ball,basketball (basketball),2.23,0.8,4.63,0.76,4.73,0.78
+basse-cour,farmyard,2.71,1.16,3.77,1.57,4.1,1.09
+beau-frère,brother-in-law,2.84,0.82,4.83,0.75,3.9,1.27
+beau-père,father-in-law,2.61,0.84,4.73,0.78,3.9,1.3
+beaux-arts,fine arts,4.1,1.01,4.13,1.33,3.03,1.45
+beaux-parents,stepparents,2.74,0.86,4.57,1.17,4,1.14
+bec de gaz,gas burner,4.65,0.71,2.07,1.31,1.93,1.23
+bec-de-lièvre,harelip,4.26,0.82,2.9,1.52,3.87,1.36
+belle-sœur,sister-in-law,2.71,0.9,4.53,1.14,3.93,1.28
+belles manières,beautiful manners,3.48,0.93,3.63,1.43,2.77,1.52
+bernard-l'ermite,hermit crab,3.06,1.24,3.43,1.74,3.7,1.29
+best-seller,bestseller,3.94,0.85,4.23,1.14,3.23,1.22
+bien-aimé,beloved,3.23,1.02,4.4,1.07,2.97,1.38
+bien-être,well-being,3.45,0.89,4.83,0.38,3.67,1.24
+bien-fondé,justification,4.42,0.72,3.2,1.52,1.67,0.96
+big-bang,big bang,3.87,0.96,3.77,1.38,2.77,1.43
+blanc d'œuf,egg white,2.26,0.68,4.63,0.96,4.67,0.71
+bleu marine,navy blue,2,0.73,4.47,1.11,4.63,0.67
+bleu-ciel,sky blue,1.74,0.63,4.63,1,4.5,0.73
+Bloc-notes,Notepad (notepad),2.97,0.95,4.63,0.72,4.63,0.81
+bouche-à-bouche,mouth-to-mouth,2.84,1,4.37,1.3,4.43,1.07
+bouche-trou,stand-in,3.45,0.99,4.57,1.01,3.17,1.32
+boui-boui,transport caf,3.06,1.44,2.83,1.64,2.17,1.18
+boute-en-train,the life and soul of the party,4,0.89,3.7,1.51,2.57,1.43
+bouton-pression,popper,3.42,1.03,3.37,1.59,3.37,1.45
+bras droit,right arm,2.68,0.91,4.33,1.35,4.17,1.23
+bric-à-brac,odds and ends,3.26,1.03,3.7,1.53,3,1.14
+brise-glace,icebreaker,3.65,0.75,4,1.29,3.6,1.4
+brosse à dents,toothbrush,1.55,0.51,4.87,0.73,4.9,0.31
+bucco-dentaire,oral (care),4.42,0.81,3.9,1.4,2.47,1.31
+cache-cache,hide-and-seek,1.58,0.56,4.63,0.72,3.83,1.15
+cache-cœur,wrap-over top,3.77,1.2,3.27,1.66,2.8,1.52
+cache-col,muffler,3.9,0.98,2.8,1.58,3.1,1.45
+cache-misère,fig leaf,4,0.93,3.4,1.65,2.77,1.63
+cache-nez,muffler,2.81,0.95,4.1,1.35,3.97,1.35
+cale-pied,foot bar,3.13,0.88,3.57,1.59,3.73,1.41
+carte d'identité,ID card,3.16,0.9,4.93,0.37,4.97,0.18
+carte de crédit,credit card,3.35,0.88,4.93,0.25,4.8,0.66
+cas type,typical case,4.32,0.75,3.27,1.36,1.8,1.06
+casse-croûte,snack,2.26,0.73,4.73,0.64,4.47,0.97
+casse-noisette,nutcracker,2.61,0.8,4,1.44,3.97,1.22
+casse-noix,nutcracker,2.52,0.77,4.33,1.21,4.43,0.9
+casse-pied,pain in the neck,2.23,0.67,4.37,1.16,2.8,1.47
+casse-pipe,combat zone,4,1.03,3.1,1.52,2.23,1.17
+casse-tête,brain teaser,2.68,0.87,4.43,1.1,3.63,1.16
+centre-ville,downtown,2.71,0.78,4.93,0.25,4.2,1.03
+céphalo-rachidien,cerebrospinal,4.9,0.4,3.33,1.49,2.8,1.45
+cerf-volant,kite,1.87,0.43,4.5,0.94,4.57,0.94
+cessez-le-feu,ceasefire,3.71,0.78,4.07,1.36,2.77,1.36
+chaîne de montagnes,mountain chain,2.84,0.73,4.5,0.94,4.53,0.78
+chasse-neige,snow plow,2.77,0.88,4.6,0.93,4.23,1.04
+château d'eau,water tower,2.74,0.73,4.17,1.23,4.03,1.43
+château-fort,fortified castle,2,0.73,4.07,1.53,4.87,0.57
+chauffe-assiettes,plate warmer,3.71,1.04,3.53,1.53,3.17,1.37
+chauffe-biberon,bottle warmer,2.9,1.04,3.63,1.54,4.1,1.12
+chauffe-eau,water heater,3.42,0.99,4.33,0.92,4.1,1.3
+chauffe-lit,bed warmer,3.94,0.81,2.6,1.57,2.73,1.28
+chauffe-plats,warming drawer,3.45,0.85,3.83,1.42,3.57,1.36
+chausse-pieds,shoehorn,2.9,1.08,4.07,1.44,4.33,1.06
+chauve-souris,bat,1.9,0.6,4.53,1.07,4.8,0.66
+chef d'État,head of state,3.45,0.81,4.3,1.39,4.23,0.94
+chef-d'œuvre,masterpiece,3.03,0.8,4.17,1.34,3.83,1.12
+chemin de fer,railway,2.42,0.72,4.37,1.19,4.73,0.69
+chien-loup,wolf-dog,2.68,1.05,3.87,1.5,4.03,1.16
+chiffre d'affaires,turnover,4.35,0.75,3.97,1.38,3.03,1.25
+chou-fleur,cauliflower,2.06,0.77,4.8,0.66,4.63,0.85
+clair-obscur,chiaroscuro,3.97,0.91,3.27,1.55,2.73,1.14
+clin d'œil,wink,2.19,0.87,4.8,0.48,4.6,0.72
+cocotte-minute,pressure cooker,2.74,0.77,4.53,0.86,4.47,0.9
+coffre-fort,safe-deposit box,2.42,0.67,4,1.6,4.47,0.97
+compte-courant,checking account,4.55,0.68,4.23,1.22,2.63,1.5
+compte-gouttes,dropper,3.77,0.92,3.9,1.37,3,1.34
+compte-minute,timer,3.77,0.96,2.73,1.44,2.47,1.41
+compte-rendu,report,4.1,0.79,4.77,0.63,3.87,1.14
+compte-tours,tachometer,4.29,0.86,3.03,1.63,3.3,1.29
+conte de fées,fairy tale,1.81,0.75,4.57,1.07,4.13,1.11
+contre-attaque,counterattack,3.29,0.78,4.27,1.26,2.9,1.4
+contre-courant,against the flow,3.65,1.02,4,1.34,2.87,1.36
+contre-enquête,counter-inquiry,4.55,0.68,3.27,1.62,1.97,1.25
+contre-exemple,counter-example,3.97,0.84,4.2,1.24,2.53,1.55
+contre-indication,contraindication,4.16,0.69,3.93,1.41,2.33,1.09
+contre-jour,backlight,3.45,1.18,4.53,0.94,3.27,1.26
+contre-la-montre,time trial,3.39,0.92,4.1,1.45,3.57,1.14
+contre-productif,counterproductive,4.61,0.62,3.87,1.41,2.4,1.43
+cordon-bleu,cordon bleu,2.45,0.85,4.53,1.07,4.47,1.11
+coup de pied,kick,1.81,0.6,4.57,1.07,4.5,0.78
+coup de pouce,boost,2.74,0.93,4.5,0.97,3.03,1.56
+coup de soleil,sunburn,2.13,0.76,4.8,0.55,4.77,0.43
+coup-de-poing,punch,2,0.77,4.57,1.14,4.53,0.78
+coupe-choux,cut-throat razor,4.06,0.96,2.43,1.41,2.5,1.53
+coupe-cigare,cigar cutter,4.26,0.89,3.57,1.59,3.63,1.45
+coupe-faim,appetite suppressants,3.9,0.87,4.17,1.37,3.03,1.35
+coupe-feu,firewall,3.74,0.86,3.67,1.42,2.77,1.22
+coupe-froid,weatherstrip,3.52,1.03,3.07,1.64,2.57,1.38
+coupe-jambon,ham slicer,3.29,0.97,2.77,1.43,3.23,1.48
+coupe-légume,vegetable cutter,2.9,0.91,3.6,1.48,4.13,1.31
+coupe-ongle,nail clipper,2.42,0.72,4.63,0.81,4.93,0.25
+coupe-papier,paper knife,3.45,0.89,3.63,1.56,4,1.34
+coupe-vent,windbreaker,3.13,1.09,4.3,1.12,3.73,1.39
+court-bouillon,stock,4.16,0.82,2.97,1.67,2.43,1.5
+court-circuit,short circuit,3.65,0.95,4.27,1.26,2.83,1.29
+court-métrage,short film,4.06,0.81,4.57,0.77,3.57,1.25
+couvre-chef,headgear,3.94,0.96,3.57,1.43,3.77,1.41
+couvre-feu,curfew,3.48,1,4.07,1.46,3.1,1.52
+couvre-lit,bed-cover,3,0.97,4.17,1.02,4.37,1.1
+crayon de papier,pencil,1.74,0.58,4.9,0.4,4.87,0.51
+crise de nerfs,nervous breakdown,3.32,0.94,4.67,0.76,3.8,1.19
+croche-pied,"trip, tackle",1.94,0.68,4.4,1.22,4.33,0.8
+croque-mitaine,bogeyman,3.29,1.16,3.23,1.63,2.43,1.38
+croque-monsieur,croque-monsieur,2.26,1,4.87,0.35,4.63,1.07
+croque-mort,undertaker,3.71,1.07,3.7,1.62,3.97,1.19
+cul-de-jatte,legless person,4.42,0.76,2.6,1.52,2.43,1.68
+cul-de-sac,dead-end,3.23,0.92,4.5,0.97,4,1.08
+cure-dent,toothpick,2.52,0.72,4.7,0.7,4.77,0.5
+cure-ongles,nail cleaner,3.52,0.89,3.43,1.52,3.43,1.55
+curriculum-vitae,curriculum vitae,4.52,0.68,4.4,1.28,4.07,1.36
+demi-cercle,semi circle,2.48,0.89,4.33,1.15,4.2,1.03
+demi-frère,stepbrother,2.61,0.76,4.57,1.22,3.67,1.49
+demi-heure,half-hour,2.23,0.72,4.93,0.37,3.8,1.21
+demi-lune,half Moon,2.71,0.97,4.03,1.35,4.33,1.15
+demi-sœur,stepsister,2.74,0.89,4.67,1.03,3.8,1.32
+demi-tarif,half price,3.45,0.81,4.33,1.15,3.23,1.41
+demi-tour,about-turn,2.26,0.86,4.7,0.92,4.1,1.12
+dessous-de-plat,table mat,2.74,0.77,4.63,0.76,4.47,0.86
+dessous-de-table,backhander,3.06,0.68,4,1.39,4.03,1.03
+dessus-de-lit,bedspread,3.35,0.91,3.73,1.48,4.2,1.06
+disc-jockey,disc jockey,4.32,0.79,3.4,1.63,3.27,1.46
+doigts de fée,fairy-finger biscuits,3.29,1.01,4.17,1.32,3.13,1.36
+don Juan,don Juan,4.29,0.78,4.3,1.26,3.27,1.31
+dos-d'âne,speed bump,3.16,1,4.37,0.96,4.3,0.92
+drap-housse,fitted sheet,2.84,0.82,4.63,0.89,4.43,0.9
+eau de Javel,bleach,2.87,0.85,4.6,0.81,4.43,0.86
+électro-aimant,electromagnet,4.61,0.84,2.87,1.57,2.37,1.33
+éléphant de mer,elephant seal,3.13,1.15,3.3,1.42,3.5,1.5
+emporte-pièce,cookie-cutter,3.94,1.03,3.4,1.48,3.57,1.55
+en-cas,snack,3.26,1,4.33,1.12,3.87,1.2
+entre-temps,meanwhile,3.32,0.91,3.97,1.35,1.97,1.19
+épargne-logement,save-to-buy (housing),4.74,0.44,3.6,1.38,2.47,1.41
+épluche-légumes,vegetable peeler,2.68,0.91,4.57,0.97,4.7,0.47
+essuie-glace,windshield wiper,2.61,0.84,4.47,1.01,4.73,0.69
+essuie-mains,hand towel,2.29,0.69,4.43,0.94,4.47,0.9
+essuie-tout,paper towels,2.29,0.94,4.7,0.6,4.8,0.48
+étoile de mer,starfish,1.84,0.52,4.47,0.97,4.97,0.18
+étude de cas,case study,4.65,0.55,4.63,0.76,3,1.39
+expert-comptable,accountant,4.45,0.62,3.83,1.29,3.2,1.32
+extra-terrestre,extraterrestrial,2.35,0.88,4.4,1.19,4.3,1.06
+face-à-face,face to face,2.74,0.73,4.7,0.65,4.17,1.12
+facteur-clé,key factor,4.48,0.68,3.5,1.46,2.13,1.25
+fair-play,fair play,4.03,1.08,4.43,1.1,2.8,1.37
+faire-part,announcement,3.81,0.91,4.27,1.23,3.87,1.57
+faire-valoir,stooge,4.48,0.68,3.4,1.28,1.87,1.25
+fait d'armes,feat of arms,4.35,0.84,2.43,1.55,2,0.98
+fait-divers,miscellaneous news item,3.84,0.86,4.43,1.17,3.13,1.38
+fan-club,fan club,3.39,0.72,4.27,1.14,3.77,1.14
+far-west,far-west,2.97,0.91,3.97,1.3,3.8,1.32
+fausse-couche,miscarriage,4.03,0.84,4.57,1.1,3.23,1.38
+fausse-route,wrong way,3.23,0.92,3.83,1.32,3,1.51
+faux-filet,sirloin steak,3.68,1.08,3.97,1.43,3.5,1.55
+faux-monnayeur,counterfeiter,4.81,0.4,2.33,1.42,1.7,1.02
+faux-semblant,false pretense,4.52,0.63,3.07,1.62,1.9,1.21
+fer à lisser,hair straightener,3.55,0.81,4.37,1.27,4.77,0.63
+fer à repasser,flatiron,2.55,0.81,4.57,1.14,4.8,0.48
+flash-back,flashback,4.1,0.79,4.5,0.94,3.43,1.45
+fourre-tout,holdall,3.42,0.99,4.1,1.49,3.1,1.3
+franc-maçon,freemason,4.29,0.69,2.93,1.44,2.3,1.15
+franc-parleur,outspoken person,4.16,0.78,3.4,1.45,2.3,1.32
+franc-tireur,maverick,4.39,0.67,2.5,1.5,2,1.23
+fume-cigare,cigar holder,3.97,0.84,2.93,1.6,2.53,1.38
+fusil-mitrailleur,machine gun,3.58,0.96,3.6,1.54,4.13,1.17
+gagne-pain,livelihood,4.03,0.87,4.1,1.4,2.5,1.41
+garde à vue,custody,3.48,0.89,4.37,1.19,3.63,1.3
+garde du corps,bodyguard,3.06,0.96,4.33,1.27,4.53,0.82
+garde-à-vous,attention,2.9,1.01,4.3,1.37,4.03,1.03
+garde-boue,fender,3.9,1.01,3.4,1.79,3.43,1.63
+garde-chasse,gamekeeper,3.81,0.83,3.3,1.47,2.83,1.34
+garde-côte,coastguard,3.87,0.85,3.27,1.66,3.17,1.46
+garde-fou,railing,4.16,0.78,2.53,1.38,2.13,1.17
+garde-manger,pantry,3.19,1.05,4.03,1.47,3.87,1.17
+garde-meuble,furniture storage,3.94,0.96,3.03,1.63,3.43,1.45
+garde-pêche,fishery protection officer,4.16,0.9,2.93,1.64,2.37,1.33
+garde-robe,wardrobe,3.03,0.87,4.63,0.81,4.33,0.92
+goutte-à-goutte,drip,3.23,0.88,4,1.49,3.67,1.37
+grand-mère,grandmother,1.52,0.57,4.83,0.65,4.73,0.52
+grand-père,grandfather,1.68,0.94,4.93,0.37,4.6,0.77
+gratte-papier,penpusher,4.06,0.81,2.5,1.43,2.4,1.35
+grille-pain,toaster,2.35,0.88,4.7,0.92,4.87,0.73
+guet-apens,ambush,3.87,0.85,3.67,1.47,2.7,1.44
+haut-de-forme,top hat,3.94,0.85,3.57,1.61,3.7,1.6
+haut-le-cœur,retching,3.58,0.89,4.27,1.11,3.47,1.41
+haut-parleur,loud speaker,2.84,0.78,4.73,0.69,4.67,0.84
+hold-up,holdup,3.77,0.88,3.9,1.52,3.7,1.18
+homme d'affaires,business man,3.42,0.92,4.37,1.19,4.1,0.92
+hors-bord,outboard,4.19,0.75,2.63,1.5,2.6,1.52
+hors-champ,offscreen,4.1,0.79,3.17,1.56,2.03,1.1
+hors-d'œuvre,appetizers,4.19,0.91,3.57,1.55,3.03,1.63
+hors-jeu,off-side,3,0.86,4.6,0.93,3.6,1.35
+hors-la-loi,outlaw,3.16,0.78,4.3,1.29,3.57,1.33
+hors-piste,off road,3.29,0.86,4.3,1.24,3.77,1.19
+hors-série,special issue,3.71,0.82,4.37,0.96,2.77,1.41
+hors-sujet,off topic,3.55,1.03,4.7,0.79,2.87,1.5
+hot-dog,hot dog,2.48,0.89,4.73,0.74,4.93,0.25
+hôtel de ville,city hall,3.58,0.85,4.47,1.01,4.23,1.19
+intra-muros,Intramural,4.65,0.55,2.47,1.66,2,1.31
+jet-set,jet-set,4.52,0.68,3.17,1.62,2.83,1.29
+juke-box,jukebox,4,0.86,3.53,1.57,3.8,1.49
+laissé-pour-compte,left behind,4.35,0.88,3.13,1.57,1.8,0.96
+laissez-passer,ID pass,3.58,0.96,4.43,1.19,2.9,1.27
+lance-flamme,flame thrower,3.03,0.84,4.03,1.47,4,1.41
+lance-fusée,missile launcher,3.19,0.91,3.57,1.55,3.27,1.48
+lance-roquette,rocket launcher,3.39,1.02,4,1.44,3.97,1.35
+lave-linge,washing machine,2.52,0.68,4.83,0.46,4.83,0.38
+lave-vaisselle,dishwasher,2.42,0.76,4.77,0.82,4.9,0.31
+lèche-botte,lickspittle,3.39,0.92,4.37,1.22,3.2,1.49
+libre-penseur,free thinker,4.39,0.62,3.27,1.34,2.33,1.21
+libre-service,self-service,3.71,0.78,4.67,0.61,3.33,1.37
+lieu-dit,locality,4.19,0.87,3.87,1.36,3.03,1.25
+lits jumeaux,twin beds,3.45,0.99,3.3,1.62,3.93,1.31
+livret de famille,family record book,3.74,1,4.6,0.81,4.43,0.9
+longue-vue,telescope,2.94,0.89,4.03,1.45,4.43,1.22
+longueur d'onde,wave length,4.42,0.76,4.43,0.9,2.9,1.58
+loup-garou,werewolf,1.97,0.71,4.33,1.27,4.53,0.86
+main-d'œuvre,workforce,3.71,0.82,4.43,0.82,3.17,1.49
+maître chanteur,blackmailer,4,0.82,3.4,1.63,2.5,1.33
+maître-chien,dog trainer,3.81,0.83,3.8,1.4,3.97,1.16
+mal-aimé,unloved,3.42,1.06,4.37,1.16,2.77,1.52
+mal-en-point,ailing,3.32,0.91,4.37,1.13,3.17,1.44
+mandat-poste,money order,4.55,0.81,2.17,1.42,1.73,0.98
+maniaco-depressif,manic-depressive,4.87,0.43,4.03,1.4,2.73,1.48
+marque de fabrique,brand,3.68,0.91,4.37,0.96,2.8,1.32
+marque-page,bookmark,2.48,0.77,4.8,0.66,4.63,0.72
+marteau-piqueur,jackhammer,3,0.89,3.93,1.57,4.2,1.19
+martin-pêcheur,kingfisher,3.19,1.08,3,1.74,3,1.55
+medico-légal,juste 'forensic',4.71,0.53,3.37,1.4,1.9,1.03
+mètre cube,cubic meter,3.84,0.73,4.2,1.24,3.17,1.29
+metteur en scène,director,3.77,0.84,4.37,1.16,3.6,1.28
+mi-bas,knee-socks,3.87,0.96,3.3,1.58,2.8,1.71
+mi-clos,half closed,4.23,0.72,2.83,1.49,2.43,1.19
+mi-temps,half time,3.32,0.83,4.47,1.17,3.33,1.27
+micro-ondes,microwave,2.26,0.68,4.87,0.57,4.83,0.46
+micro-ordinateur,microcomputer,3.81,0.95,3.33,1.6,3.77,1.38
+micro-organisme,microorganism,4.65,0.61,4.23,1.07,3,1.14
+mille-feuille,mille-feuille,2.61,0.92,4.67,0.76,4.73,0.58
+mille-pattes,millipede,1.9,0.65,4.43,1.14,4.67,0.84
+mini-jupe,mini skirt,2.71,0.97,4.5,1.22,4.73,0.64
+moissonneuse-batteuse,combine harvester,2.97,1.14,3.77,1.61,4.27,1.2
+monte-charge,freight elevator,4.06,0.85,3.23,1.77,2.93,1.62
+mort-aux-rats,rat poison,3.45,1.06,4.1,1.24,3.7,1.18
+mort-né,stillborn,4.23,0.88,3.83,1.44,3.5,1.33
+mot de passe,password,2.58,0.85,4.83,0.59,4.27,1.05
+mot-clé,keyword,3.1,0.98,4.67,0.88,2.73,1.53
+moto-cross,motocross,2.74,0.96,4.4,1.16,4.5,0.94
+mots-croisés,crossword,2.65,0.61,4.5,0.94,4.33,0.92
+music-hall,music hall,4.19,0.75,2.9,1.67,2.4,1.1
+nature morte,still life,3.9,0.87,3.93,1.41,3.27,1.57
+nid-d'abeilles,honeycomb,2.13,0.56,4.3,1.21,4.57,0.77
+nid-de-poule,pothole,3.84,0.86,3.9,1.35,4.17,1.23
+non-dit,unsaid things,4.06,0.81,4,1.34,1.83,1.12
+non-fumeur,non-smoking,2.77,0.92,4.77,0.63,4.17,1.12
+non-lieu,dismissal,4.35,0.71,3.33,1.52,1.93,1.05
+non-retour,non-return,3.77,0.92,4.23,1.28,2.07,1.26
+non-sens,nonsense,4.1,0.87,4,1.26,1.77,1.1
+non-stop,nonstop,3.42,0.85,4.57,0.97,2.47,1.5
+nouveau-né,new born,2.74,1,4.57,1.04,4.57,0.77
+oiseau-mouche,hummingbird,3.68,1.11,2.6,1.43,3.07,1.53
+on-dit,rumor,3.1,1.14,4.17,1.26,2.03,1.27
+ouï-dire,hearsay,4.39,0.76,3.8,1.4,1.9,1.21
+ouvre-boîte,can opener,2.71,0.74,4.6,0.77,4.43,0.97
+ouvre-bouteille,bottle opener,3.42,0.99,4.33,1.27,4.2,1.13
+ouvre-huitre,oyster knife,3.58,0.96,3.93,1.26,3.93,1.28
+pain de sucre,sugar loaf,3.55,1.18,2.73,1.66,3,1.55
+papier-calque,tracing paper,2.9,0.7,4.23,1.36,4.33,1.24
+par-dessus,above,2.65,0.84,4.13,1.31,3.43,1.55
+pare-balles,bulletproof,3.45,0.89,4.27,1.17,3.97,1.16
+pare-boue,mudguard,3.84,1.07,2.93,1.68,2.73,1.68
+pare-brise,windshield,2.68,0.87,4.73,0.74,4.67,0.88
+pare-feu,firewall,3.97,0.84,4.1,1.12,3.37,1.33
+Pare-vent,windbreak,3.48,0.93,4,1.2,3.6,1.3
+pas-de-porte,doorstep,3.71,0.97,3.83,1.46,2.43,1.36
+passe-droit,free pass,4.48,0.81,2.7,1.64,1.77,1.04
+passe-montagne,balaclava,4.32,0.83,3.07,1.68,2.33,1.56
+pause-café,coffee break,3.45,0.99,4.77,0.68,3.77,1.28
+pelle à gateau,cake server,3.23,0.99,3.93,1.39,4.33,1.06
+pense-bête,reminder,3.48,0.93,4.6,1.04,4.07,1.05
+perce-muraille,upright pellitoty,4.39,0.72,2.13,1.38,1.6,0.93
+perce-oreille,earwig,2.68,0.94,3.83,1.42,4.03,1.07
+permis de conduire,driver's license,3.1,0.91,4.77,0.82,4.87,0.35
+pèse-personne,bathroom scale,3.26,1.06,4.47,1.04,4.53,0.78
+petit-beurre,petit-beurre biscuit,2.23,0.99,4.3,1.18,4.2,1.27
+petit-déjeuner,breakfast,1.52,0.51,4.97,0.18,4.67,0.8
+petit-fils,grandson,2.23,0.8,4.7,0.88,3.83,1.34
+petit-lait,whey,3,1.06,3.1,1.58,2.97,1.47
+petite-fille,granddaughter,1.58,0.72,4.67,0.96,4.47,1.01
+pied-à-terre,townhouse,3.87,1.06,3.6,1.45,2.9,1.32
+pied-de-biche,crowbar,3.94,0.85,3.87,1.53,4.5,0.9
+pince-oreille,earwig,2.61,1.05,4.13,1.2,4.6,0.77
+pique-assiette,sponger,3.65,1.08,3.7,1.56,2.8,1.42
+pique-nique,picnic,1.87,0.56,4.7,0.79,4.43,0.9
+plate-bande,flowerbed,4.06,0.85,3.17,1.51,2.73,1.46
+plate-forme,platform,3.48,1.09,4.4,1.19,3.7,1.02
+plateau-repas,meal tray,2.97,0.91,4.4,1.16,4.43,0.9
+plein-air,outdoors,2.32,0.79,4.7,0.84,3.77,1.17
+plein-temps,full-time,3.61,0.92,4.47,1.14,2.83,1.51
+pleine-lune,full moon,2.35,0.88,4.83,0.46,4.7,0.84
+plus-value,capital gain,4.81,0.4,3.23,1.38,2.07,1.23
+point de vue,point of view,3.32,0.83,4.83,0.38,2.97,1.35
+point-virgule,semicolon,2.68,0.65,4.53,0.78,4.7,0.6
+poisson-chat,catfish,2.29,0.78,4.13,1.46,3.93,1.23
+pomme de pin,pine cone,2,0.73,4.43,1.14,4.63,0.76
+pont-levis,drawbridge,2.74,0.77,4,1.46,4.1,1.21
+porc-épic,porcupine,2.61,0.99,4,1.39,4.33,1.12
+porte-à-porte,door-to-door,3.26,0.86,4.3,1.18,3.8,1.03
+porte-affiche,poster holder,3.71,0.9,3.37,1.3,3.3,1.47
+porte-avions,aircraft carrier,3.61,0.92,3.4,1.54,4.07,1.34
+porte-bébé,baby carrier,3.26,0.89,3.83,1.44,4,1.26
+porte-bonheur,lucky charm,2.26,0.73,4.73,0.58,4.17,0.99
+porte-carte,card holder,3.45,0.89,3.97,1.43,4,1.17
+porte-clés,key ring,2.26,0.86,4.87,0.57,4.8,0.61
+porte-crayon,pencil holder,2.55,0.93,4,1.39,4.03,1.19
+porte-documents,document holder,3.65,0.84,4.3,1.06,4.13,1.04
+porte-drapeau,flag bearer,3.61,0.76,3.93,1.48,3.5,1.17
+porte-jarretelles,suspender belt,4.61,0.62,3.83,1.56,4.2,1.1
+porte-malheur,jinxed,2.52,0.72,4.27,1.46,3.1,1.45
+porte-mine,propelling pencil,3.45,1.03,3.43,1.52,3.27,1.55
+porte-monnaie,wallet,2.26,0.68,4.87,0.57,4.7,0.79
+porte-parole,spokesman,3.65,1.02,4.6,0.86,3.43,1.28
+porte-plume,penholder,3.26,0.89,3.6,1.52,4,1.02
+porte-savon,soap dish,2.77,0.88,4.33,1.12,4.5,0.97
+porte-serviettes,towel rack,2.84,0.9,4.53,1.01,4.47,0.86
+porte-ski,ski-rack,3.55,0.93,3.4,1.67,3.33,1.45
+porte-voix,megaphone,3.81,0.98,3.57,1.59,3.37,1.45
+portrait-robot,identikit portrait,3.68,0.83,4.03,1.43,4.07,1.2
+pot-au-feu,stew,3.16,0.86,4.27,1.05,4.33,1.09
+pot-de-vin,bribe,4.26,0.77,3.57,1.65,2.67,1.35
+pot-pourri,potpourri,3.87,1.15,3.6,1.5,3.27,1.72
+presqu'île,peninsula,3.94,0.93,3.37,1.5,3.47,1.28
+presse-agrume,juicer,3.26,1.06,4.13,1.11,4.3,1.21
+presse-bouton,press button,3.68,0.94,2.73,1.64,2.57,1.33
+presse-papiers,clipboard,3.55,0.81,3.73,1.53,3.9,1.37
+prêt-à-porter,ready-to-wear,3.65,0.8,4.27,1.17,3.7,1.29
+prie-Dieu,prayer desk,4.16,1.04,2.33,1.42,2.23,1.57
+protège cahier,dust cover (book),2.48,0.68,4.43,1.04,4.77,0.5
+protège-cou,neck protector,3.06,1.06,3.77,1.48,3.6,1.45
+protège-dents,mouth guard,3.52,0.89,4.13,1.31,4.17,1.29
+protège-genou,knee protector,2.84,0.78,4.23,1.17,4.27,1.23
+protège-jambe,leg guard,3.1,0.91,3.43,1.57,3.8,1.19
+prud'homme,ombudsman,4.84,0.37,3.6,1.48,2.47,1.53
+pur-sang,purebred,3.48,1.21,4.17,1.34,3.53,1.55
+rabat-joie,kill-joy,3.81,0.87,4,1.26,2.83,1.51
+radio-réveil,alarm clock,2.39,0.72,4.67,0.84,4.67,0.92
+ramasse-miettes,crumb tray,3.23,1.02,3.63,1.5,3.6,1.3
+ramasse-poussière,dustpan,3.03,0.87,3.67,1.56,3.83,1.18
+raz-de-marée,tsunami,3.19,0.83,4.03,1.4,3.7,1.34
+remonte-pente,chair lift,3.84,0.93,3.33,1.58,3.3,1.49
+remue-méninges,brainstorm,3.77,0.99,3.9,1.21,2.57,1.41
+rendez-vous,appointment,2.32,0.75,4.83,0.59,3.4,1.35
+repose-pied,footrest,3,0.86,4.33,1.24,4,1.08
+réveille-matin,alarm clock,2.61,0.92,3.97,1.43,4.1,1.18
+rez-de-chaussée,ground floor,2.45,0.93,4.8,0.61,4.17,1.12
+rince-doigts,finger bowl,3.71,0.97,3.73,1.36,3.93,1.44
+robe de chambre,dressing gown,2.55,0.89,4.37,1.25,4.43,1.01
+rocking-chair,rocking chair,3.9,1.14,3,1.8,3.6,1.73
+roman-photo,photo comic,3.71,1.07,3.6,1.5,3.37,1.38
+rond-point,roundabout,2.68,0.65,4.87,0.35,4.73,0.64
+rouge à lèvres,lipstick,2.19,0.65,4.63,0.89,4.83,0.53
+rouge-gorge,robin,2.42,0.96,4.53,0.73,4.43,0.94
+sac à main,handbag,2.03,0.71,4.73,0.91,4.8,0.61
+sac-poubelle,garbage bag,2,0.52,4.87,0.35,4.8,0.41
+sage-femme,midwife,3.45,0.85,4.43,1.14,4.53,0.73
+sain et sauf,safe and sound,3.13,0.85,4.73,0.69,3.23,1.38
+sang-froid,cold blood,3.55,0.89,4.3,1.15,2.83,1.42
+sans-abri,homeless,3.03,0.84,4.53,1.01,4.5,0.78
+sans-cœur,heartless,3.03,1.02,4.23,1.38,2.93,1.41
+sans-culotte,sans-culotte,3.71,0.97,3.6,1.25,3.17,1.46
+sans-emploi,unemployed,3.32,0.87,4.7,0.88,3.33,1.49
+sans-faute,faultless,2.71,0.9,4.47,0.97,2.83,1.6
+sans-grade,rank and file,4.35,0.8,2.97,1.54,2.03,1.25
+sans-papier,illegal immigrant,3.35,0.8,4.37,1.22,3.43,1.33
+sapeur-pompier,firefighter,2.32,0.75,4.5,1.01,4.6,0.77
+saute-mouton,leapfrog,1.9,0.54,4.4,1.19,4.37,0.85
+sauve-qui-peut,run for your life,2.68,0.98,4.37,1.22,2.8,1.56
+savoir-faire,know how,3.29,0.9,4.6,0.89,2.57,1.28
+savoir-vivre,good manners,3.48,0.96,4.6,0.81,2.6,1.43
+science-fiction,science fiction,3.06,0.85,4.7,0.6,3.6,1.35
+sèche-cheveux,hair dryer,2.1,0.7,4.87,0.57,4.97,0.18
+sèche-linge,tumble drier,2.52,0.81,4.77,0.77,4.77,0.77
+sèche-main,hand dryer,2.74,0.82,4.43,0.97,4.63,0.61
+semi-remorque,tractor-trailer,3.39,0.95,3.57,1.65,4.23,1.07
+serre-tête,headband,2.13,0.88,4.37,1.19,4.57,0.73
+souffre-douleur,scapegoat,3.58,0.89,4.37,1.03,3.43,1.45
+sourd-muet,deaf mute,2.74,0.73,4.3,1.26,3.93,1.2
+sous-bois,undergrowth,3.45,1.06,3.57,1.5,3.33,1.45
+sous-couche,undercoat,3.61,1.05,3.6,1.63,2.9,1.32
+sous-entendu,implication,3.68,0.87,4.6,0.86,2.7,1.53
+sous-fifre,underling,4.23,0.76,3.03,1.61,2.07,1.08
+sous-main,desk blotter,3.58,1.29,3.2,1.69,2.77,1.55
+sous-marin,submarine,2.26,0.63,4.13,1.53,4.7,0.6
+sous-pull,under-sweater,2.29,0.94,4.13,1.28,4.03,1.3
+sous-sols,Basements,2.55,0.68,4.7,0.75,4.23,0.86
+sous-traitant,subcontractor,4.58,0.62,3.03,1.54,1.9,1.06
+sous-verre,coaster,3.29,1.01,4.4,1.13,4.23,1.07
+sous-vêtement,underwear,2.52,0.93,4.87,0.43,4.8,0.48
+soutien-gorge,bra,2.77,0.92,4.83,0.75,4.93,0.25
+spatio-temporel,spatio-temporal,4.39,0.72,4.13,1.2,2.33,1.42
+strip-tease,striptease,4.13,0.72,4.27,1.39,4.5,0.82
+surprise-partie,surprise party,3.26,0.73,3.83,1.51,3.27,1.26
+taille de guêpe,hourglas figure,3.84,1.04,4.1,1.27,4.27,0.91
+taille-crayon,sharpener,2.06,0.51,4.67,0.92,4.97,0.18
+taille-haie,hedge trimmer,3.61,0.76,4.13,1.22,4.2,1.13
+talkie-walkie,walkie-talkie,2.55,0.81,4.37,1.33,4.7,0.7
+tam-tam,tam tam,1.84,0.86,3.87,1.53,4.43,1.01
+terre-plein,central reservation (highway),3.94,0.89,3.97,1.4,3.47,1.33
+tête-à-queue,head-to-tail,3.84,0.93,3.8,1.45,3.37,1.52
+tête-à-tête,face-to-face,3.13,0.88,4.73,0.69,4.07,1.05
+tête-bêche,topsy-turvy,4.29,0.82,2.13,1.46,2.37,1.54
+tête-de-nègre,dark brown,4.1,0.91,3.43,1.55,3.4,1.48
+tic-tac,tick-tock,1.77,0.72,4.57,1.01,4.1,1.32
+tiers-monde,Third World,4.1,0.91,4.13,0.94,3.13,1.25
+timbre-poste,stamp,3.06,1.03,4.27,1.08,4.57,0.86
+tire-au-flanc,shirker,4.1,0.79,3.63,1.3,2.43,1.3
+tire-bouchon,corkscrew,2.61,0.88,4.7,0.7,4.83,0.59
+tire-fesses,drag lift,2.94,1.15,4.4,1.25,4.27,0.87
+touche-à-tout,jack of all trades,3.23,1.26,4.2,1.16,2.7,1.47
+tour de force,tour de force,4.19,0.75,2.47,1.5,1.6,0.97
+tourne-disque,record player,3.42,0.96,3.73,1.39,4.17,1.42
+traine-misère,misery guts,4.32,0.75,2.2,1.49,1.87,1.14
+traine-savate,lazybones,3.87,1.06,3.03,1.47,2.37,1.54
+trompe-l'œil,optical illusion,3.68,1.05,4.2,1.13,3.6,1.35
+trompe-la-mort,death-dodger,4.55,0.62,1.83,1.05,1.73,1.11
+trop-perçu,overpayment,4.55,0.72,2.63,1.61,1.83,1.12
+trouble-fête,spoilsport,4.23,0.76,3.37,1.63,2.4,1.16
+tue-mouche,fly swatter,3.06,0.81,4,1.44,4,1.29
+ultra-violet,ultraviolet,4.23,0.72,4.33,1.03,2.8,1.37
+va-et-vient,toing and froing,3.45,0.77,4.3,1.32,3.53,1.36
+ver à soie,silkworm,4.26,1,2.8,1.61,2.7,1.53
+vice-président,vice-president,3.65,0.8,4.23,1.3,3.2,1.54
+vide-bouteille,siphon,4.23,0.84,3.07,1.62,2.43,1.36
+vide-ordures,garbage chute,3.26,0.82,4.03,1.43,4.13,1.07
+vide-poches,storage compartment,4.06,0.85,3.8,1.52,3.1,1.45
+vol-au-vent,vol-au-vent,4,0.68,2.5,1.38,2.17,1.44
+volte-face,U-turn,4.32,0.83,3.23,1.55,1.97,1.33
+wagon-citerne,tank wagon,3.87,0.88,3.2,1.54,3.43,1.72
+wagon-lit,sleeping car,3.94,0.89,3.17,1.6,3.17,1.42
+week-end,week-end,1.94,0.68,5,0,3.6,1.52

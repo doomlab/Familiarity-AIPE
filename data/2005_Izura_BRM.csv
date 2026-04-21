@@ -1,0 +1,500 @@
+word_spanish,translate_word_english,typicality,familiarity,aoa_mean,imagine_mean,lexical_availability_mean,frequency,length,type
+abeja,bee,4.28,3.56,4.48,6.76,7.672,4,3,animals
+águila,eagle,4.84,3.24,5.24,6.8,19.365,15,3,animals
+araña,spider,3.96,4.16,4.12,6.92,12.969,8,3,animals
+ardilla,squirrel,4.28,2.56,5.24,6.84,5.977,21,3,animals
+avestruz,ostrich,3.68,1.92,6.72,6.76,7.158,4,3,animals
+avispa,wasp,3.6,3.64,4.48,6.88,4.123,1,3,animals
+ballena,whale,5,3,5.08,6.84,11.232,4,3,animals
+buey,ox,4.4,2.04,5.56,6.32,3.278,6,1,animals
+búho,owl,3.92,2.64,5.4,6.8,6.917,12,2,animals
+buitre,vulture,3.6,2.92,6.24,6.64,8.827,2,2,animals
+burro,donkey,5.56,4.28,3.72,6.92,23.995,17,2,animals
+caballo,horse,6.48,4.2,3.64,7,34.723,93,3,animals
+cabra,goat,5.32,3.64,3.88,6.96,12.242,10,2,animals
+calamar,squid,2.48,3.4,5.64,6.24,6.51,1,3,animals
+camello,camel,4.2,2.84,5.68,6.8,2.916,4,3,animals
+canario,canary,4.24,3.4,4.96,6.68,15.616,7,3,animals
+cangrejo,crab,3.28,2.88,4.96,6.56,2.777,2,3,animals
+canguro,kangaroo,3.92,2.48,5.96,6.84,3.801,1,3,animals
+cebra,zebra,4.32,2.84,6.04,6.84,6.838,3,2,animals
+cerdo,pig,6.48,5.28,3.76,6.88,17.991,17,2,animals
+ciervo,deer,4.92,3.08,4.98,6.84,11.601,4,2,animals
+cigüeña,stork,4.6,3.84,4.82,6.64,2.644,5,3,animals
+cocodrilo,crocodile,4.2,2.36,5.16,6.76,7.753,6,4,animals
+codorniz,quail,3.12,2.8,7.44,5.44,5.091,2,3,animals
+colibrí,hummingbird,2.32,1.68,9.48,5.16,4.832,0,3,animals
+colorín,goldfinch,1.88,1.68,7.56,4.32,4.516,1,3,animals
+conejo,rabbit,6.12,4.2,3.54,6.84,30.302,9,3,animals
+cordero,lamb,5.76,4.28,3.84,6.8,7.306,14,3,animals
+cucaracha,cockroach,2.8,3.2,4.56,6.84,3.545,2,4,animals
+cuervo,crow,3.56,2.76,4.88,6.64,10.398,4,2,animals
+culebra,snake,3.84,3.24,4.68,6.84,7.098,1,3,animals
+delfín,dolphin,5.44,3.2,5.4,6.88,8.164,2,2,animals
+elefante,elephant,6.32,3.36,4.36,6.92,21.565,9,4,animals
+foca,seal,4.84,3.52,5,6.88,3.533,1,2,animals
+gallina,hen,5.88,4.88,3.36,6.88,25.464,19,3,animals
+gallo,rooster,5.56,4.48,3.52,6.92,11.802,16,2,animals
+gamba,prawn,2.56,4.52,5.72,6.76,3.811,1,2,animals
+gamo,fallow deer,3.08,1.64,8.04,5.36,2.892,1,2,animals
+gato,cat,6.72,5.48,3,6.84,76.056,70,2,animals
+gaviota,seagull,4.32,2.76,5.08,6.72,5.783,6,3,animals
+golondrina,swallow,4.32,3.28,5.04,6.36,6.082,6,4,animals
+gorila,gorilla,4.64,2.88,5.6,6.56,5.408,4,2,animals
+gorrino,pig,3.64,3,5.32,6.4,6.804,1,3,animals
+gorrión,sparrow,3.92,3.32,5,6.28,11.579,1,2,animals
+guepardo,cheetah,3.32,2.64,7.08,5.68,2.746,0,3,animals
+gusano,worm,3.12,4.12,4,6.72,5.827,6,3,animals
+halcón,falcon,3.76,2.64,6.68,6.4,3.029,2,2,animals
+hamster,hamster,3.92,3.6,7.56,6.68,8.385,1,2,animals
+hiena,hyena,3.08,2.28,7.16,6.24,7.051,1,2,animals
+hipopótamo,hippopotamus,4.44,2.28,6.16,6.84,10.631,2,5,animals
+hormiga,aunt,4.28,3.68,4.64,6.96,9.531,5,3,animals
+iguana,iguana,3.72,1.88,9.16,5.72,3.109,7,3,animals
+jabalí,wild boar,5.28,2.32,8.32,6.68,12.549,5,3,animals
+jirafa,giraffe,5.4,2.16,6.48,7,18.874,1,3,animals
+koala,koala,4.52,1.68,9,6.67,4.209,0,3,animals
+lagartija,lizard,4.04,2.64,5.64,6.68,6.384,4,4,animals
+lagarto,lizard,3.8,2.04,6.76,6.32,4.21,4,3,animals
+langostino,prawn,3.16,3.56,8.36,6.72,4.634,0,4,animals
+lechuza,owl,4.68,2.24,7.96,6.4,3.313,1,3,animals
+león,lion,6.8,3.12,5.28,6.92,37.723,27,2,animals
+leopardo,leopard,6.28,2.24,7.16,6.28,12.136,1,4,animals
+liebre,hare,6.4,3,6.16,6.52,17.27,5,2,animals
+lince,lynx,5.8,2,8.08,6.2,3.93,2,2,animals
+lobo,wolf,6.76,3.2,5.44,6.72,9.537,24,2,animals
+loro,parrot,5.24,2.88,6.32,6.76,7.277,7,2,animals
+mariposa,butterfly,4.2,3.44,4.84,6.96,8.377,8,4,animals
+mono/s,monkey,5.96,3.32,4.92,6.8,19.337,24,2,animals
+mosca,fly,3.64,5.68,4.52,6.96,10.921,16,2,animals
+mosquito,mosquito,3.4,4.8,5.12,6.56,5.761,4,3,animals
+orangután,orangutan,5.52,1.88,7.36,6.13,4.282,2,4,animals
+oso,bear,6.68,2.88,5.32,6.88,16.204,22,2,animals
+oveja,sheep,6.64,3.4,4.36,6.92,20.824,5,3,animals
+pájaro,bird,6.12,5.6,4.08,6.8,18.035,35,3,animals
+paloma,pigeon,5.64,4.88,4.96,6.92,17.684,16,3,animals
+pantera,panther,5.96,1.68,7.08,6.52,17.211,13,3,animals
+pato,duck,6.04,3.48,4.8,6.92,9.48,5,2,animals
+perdiz,partridge,5.2,1.96,6.96,6.08,12.093,3,2,animals
+periquito,budgerigar,4.92,2.16,7.12,6.12,18.087,0,4,animals
+perro,dog,6.92,6.04,3.88,7,82.771,112,2,animals
+pez,fish,5.52,5,4.2,6.92,13.734,30,1,animals
+pollo,chicken,5.76,4.96,4.56,6.84,12.675,14,2,animals
+potro,colt,5.64,2.48,7.2,6.64,3.285,4,2,animals
+puma,puma,5.4,1.44,7.96,5.4,3.645,0,2,animals
+rana,frog,4.8,2.8,5.24,6.64,6.324,5,2,animals
+rata,rat,5.6,3.2,5.8,6.68,14.897,17,2,animals
+ratón,mouse,5.72,3.16,5.08,6.8,20.367,18,2,animals
+rinoceronte,rhinoceros,5.2,1.6,7.92,6.6,6.872,1,5,animals
+salmón,salmon,4.12,2.84,8.8,5.56,5.836,3,2,animals
+saltamontes,grasshopper,3.48,2.2,6.64,6.56,4.558,2,4,animals
+sapo,toad,4.12,2.28,6.4,6.44,5.616,5,2,animals
+sardina,sardine,3.92,3.36,6.32,6.12,3.826,3,3,animals
+serpiente,snake,4.76,2.88,5.6,6.84,19.985,18,3,animals
+tiburón,shark,5,2.16,6.68,6.72,10.96,1,3,animals
+tigre,tiger,6.52,2.44,6.04,6.88,25.222,7,2,animals
+toro,bull,6.48,4.2,5.28,6.96,11.169,16,2,animals
+tortuga,turtle,5.56,3.04,5.68,7,8.514,8,3,animals
+trucha,trout,4,3,7.32,5.92,7.759,3,2,animals
+vaca,cow,6.72,4.32,4.52,6.96,27.32,14,2,animals
+yegua,mare,6,2.88,7.08,6.64,7.9,15,2,animals
+zorro,fox,6.52,3.2,5.72,6.52,10.864,4,2,animals
+abdomen,abdomen,4.92,3.32,8.68,5.08,4.195,5,3,body parts
+ano,anus,3.36,3,8.36,5.08,2.672,2,2,body parts
+antebrazo,forearm,4.12,2.92,8.2,6.08,11.107,6,4,body parts
+arteria,artery,2.88,2.52,8.88,4.68,1.423,1,3,body parts
+articulaciones,joints,3.4,3.92,8.72,4.6,1.611,3,5,body parts
+axila,armpit,4.24,4.48,7.84,6.32,2.444,2,3,body parts
+barba,beard,3.52,4.8,4.04,6.88,1.045,36,2,body parts
+barbilla,chin,5.04,4.84,4.36,6.88,1.639,16,3,body parts
+biceps,biceps,4.48,4,8.8,5.76,2.067,0,2,body parts
+bigote,moustache,3.72,4.68,3.88,6.92,1.106,34,3,body parts
+boca,mouth,6.84,6.36,3.02,6.92,39.497,200,2,body parts
+brazo,arm,7,6.32,2.98,6.92,71.694,96,2,body parts
+cabello,hair,5.4,5.6,4.72,6.84,1.078,44,3,body parts
+cabeza,head,7,6.28,2.98,6.8,71.287,418,3,body parts
+cadera,hip,5.76,4.88,5.84,6.72,12.007,7,3,body parts
+cara,face,6.7,6.52,3.14,6.76,8.897,315,2,body parts
+ceja,eyebrow,4.2,5.72,3.92,6.92,12.159,8,2,body parts
+cerebelo,cerebellum,2.44,1.68,9.79,4.16,1.001,1,4,body parts
+cerebro,brain,4.28,4.36,7.44,5.28,7.956,87,3,body parts
+cintura,waist,5.2,5.16,5.72,6,5.811,34,3,body parts
+clavícula,collarbone,4.48,3.24,8.68,5.36,1.143,1,4,body parts
+codo,elbow,5.28,4.92,5.48,6.28,29.918,17,2,body parts
+colon,colon,2.48,2.04,10.44,3.68,1.058,0,2,body parts
+corazón,heart,5.36,5.44,5.44,6.4,17.079,190,3,body parts
+costilla,rib,4.92,4.2,6.48,6.44,1.918,2,3,body parts
+cubito,fibula,2.32,2.24,9.6,4.64,1.253,1,3,body parts
+cuello,neck,5.88,5.6,4.08,6.64,31.656,99,2,body parts
+culo,bottom,6.04,5.76,3.12,6.76,13.216,37,2,body parts
+dedo,finger,6.36,6.04,3.04,6.92,53.948,66,2,body parts
+diente,tooth,5.56,6.4,3.78,6.88,19.575,8,2,body parts
+esófago,oesophagus,2.84,2.72,8.84,4.4,3.474,2,4,body parts
+espalda,back,6.48,5.92,4.4,6.76,19.081,92,3,body parts
+esqueleto,skeleton,4,3.32,6.56,6.56,0.982,14,4,body parts
+esternocleidomastoideo,a neck muscle,2.44,2.04,10.95,2.6,4.144,0,9,body parts
+estómago,stomach,4.84,5.32,6.56,5.28,12.166,43,4,body parts
+extremidades,extremities,4.76,4.04,7.04,6.28,3.855,5,5,body parts
+falange,phalange,2.64,2.52,9.13,4.76,4.685,4,3,body parts
+faringe,pharynx,3.04,2.6,9.12,4.24,2.642,1,3,body parts
+femur,femur,3.36,2.48,9.24,5.08,2.564,0,2,body parts
+frente,forehead,5.56,4.96,4.88,6.48,5.747,375,2,body parts
+gemelo,calf muscle,4.08,4.76,8.68,6.12,3.222,3,3,body parts
+glúteo,gluteus,4.24,3.88,8.92,6.48,4.044,1,3,body parts
+hígado,liver,4.16,4,7.92,5.56,7.299,12,3,body parts
+hombro,shoulder,5.72,5.32,4.68,6.8,29.002,45,2,body parts
+hueso,bone,4.96,5.08,4.4,6.68,5.329,22,2,body parts
+húmero,humerus,2.96,2.4,8.6,4.6,1.576,0,3,body parts
+incisivo,incisor,2.8,2.44,8.6,5,93.5,2,4,body parts
+ingle,groin,4,3.48,8.6,5.56,110,3,2,body parts
+intestino,intestine,3.64,3.04,8.08,4.92,6.1,3,3,body parts
+labio,lip,6.08,6.04,4.3,6.92,8.3,12,2,body parts
+laringe,larynx,3.36,2,9.84,4.36,3.3,2,3,body parts
+lengua,tongue,5.44,5.8,4.72,6.88,13.5,177,2,body parts
+mano,hand,6.92,6.56,3.96,6.96,63,550,2,body parts
+mejilla,cheek,5.52,4.96,6.56,6.84,0.9,27,3,body parts
+moflete,chubby cheek,5.16,4.48,5.8,6.8,1,4,3,body parts
+muñeca/s,wrist,5.64,4.2,5.56,6.88,21.2,16,3,body parts
+muela,molar,3.92,4.12,6.2,6.96,2.4,2,3,body parts
+músculo,muscle,4.6,4.04,7.44,5.68,6.5,9,3,body parts
+muslo,thigh,5.4,3.84,7.36,6.76,6.7,11,2,body parts
+nariz,nose,6.48,5.48,4.16,6.96,50.4,71,2,body parts
+nuca,nape,5.12,3.48,6.8,6.36,2.1,23,2,body parts
+oído,ear,5.48,5.24,5.16,5.8,2.9,107,3,body parts
+ojo,eye,6.64,6.24,4.08,6.76,60.1,96,2,body parts
+ombligo,bellybutton,4.68,4.12,5.4,6.96,8.3,8,3,body parts
+omóplato,shoulder blade,3.48,2.16,9.24,5.52,2.6,1,4,body parts
+oreja,ear,6.56,4.92,4.32,6.84,48.1,35,3,body parts
+ovario,ovary,3.32,3.16,10.48,4.44,1.6,1,3,body parts
+pancreas,pancreas,3.12,1.72,10.8,4.04,4.7,0,3,body parts
+pantorrilla,calf,4.68,2.4,8.92,5.92,1.4,2,4,body parts
+párpado,eyelid,4.16,3.36,7.92,6.68,2.4,3,3,body parts
+pecho,breast,6.12,4.08,6.76,6.56,21.7,94,2,body parts
+pechos,breasts,5.96,4.96,7.52,6.72,2.2,34,2,body parts
+pelo,hair,5.36,6.24,4.4,6.92,27.9,153,2,body parts
+pelvis,pelvis,4,2.32,10.48,5.64,1.1,1,2,body parts
+pene,penis,5.36,3.52,9.68,6.72,16.1,7,2,body parts
+peroné,fibula,3.4,1.96,9.76,5.12,2.2,0,3,body parts
+pestaña,eyelash,3.92,4.2,6.44,6.88,8.7,1,3,body parts
+pie,foot,6.6,5.96,4.08,7,61.8,193,1,body parts
+piel,skin,4.52,5.4,5.44,6.2,1,163,1,body parts
+pierna,leg,6.68,5.92,4.64,6.6,58.1,39,2,body parts
+pulmón,lung,4.36,4.08,8.28,5.84,13.2,6,2,body parts
+radio,radius,2.88,2.44,8.52,5.2,1.9,75,2,body parts
+riñón,kidney,4.24,2.8,9.04,5.52,11.7,5,2,body parts
+rodilla,knee,5.92,4.04,6,6.56,31.7,11,3,body parts
+rótula,kneecap,3.48,2.36,10.28,5.8,1.5,0,3,body parts
+talón,heel,4.6,2.36,8.24,6.52,2.6,3,2,body parts
+tendón,tendon,3.36,2.36,9.84,5.04,2.2,1,2,body parts
+testículo,testicle,4.28,2.64,9.68,6.72,4.1,4,4,body parts
+tibia,tibia,3.56,1.92,9.24,5.4,2.8,14,2,body parts
+tobillo,ankle,5.36,3.24,6.84,6.48,20.9,4,3,body parts
+tórax,thorax,4.52,2,9.6,6,3.2,6,2,body parts
+trasero,bottom,5.6,3.56,7.12,6.88,1.3,19,3,body parts
+triceps,triceps,3.36,2.24,10.95,5.56,1.4,0,2,body parts
+tripa,belly,5.24,4.52,6.32,6.72,3.4,9,2,body parts
+tronco,trunk,5.24,2.8,8.14,6.36,15.3,18,2,body parts
+uña,nail,4.8,5.28,6.18,6.84,27.6,8,2,body parts
+vagina,vagina,4.16,2.96,9.95,6.28,3.8,4,3,body parts
+vejiga,bladder,3.72,2.92,9.73,5.56,1,1,3,body parts
+vena,vein,3.48,3.24,8.73,5.88,2.4,5,2,body parts
+alacena,cupboard,3.36,1.92,8.23,5.28,2.394,4,4,furniture
+alfombra,rug,3.4,5.64,4.58,6.6,9.652,22,3,furniture
+aparador,sideboard,3.68,2.76,8,5.44,7.18,7,4,furniture
+arca,chest,3.4,2.28,6.88,6.08,2.423,11,2,furniture
+arcón,chest,3.4,2.8,7.04,6.32,1.355,3,2,furniture
+armario,wardrobe,7,6.36,4,6.72,63.039,38,3,furniture
+balancin,seesaw,2.88,2.52,6.48,5.92,2.785,1,3,furniture
+banco,bench,4.92,5.52,4.04,6.72,0.87,52,2,furniture
+bañera,bath,3.6,5.96,4.08,6.88,4.623,8,3,furniture
+banqueta,stool,4.92,4.08,5.38,6.44,5.731,3,3,furniture
+barandilla,railing,2.64,4.72,4.64,6.72,0.91,5,4,furniture
+barra,bar,1.88,4.52,5.32,6.16,0.719,45,2,furniture
+baúl,trunk,5.04,3.6,4.8,6.64,9.128,8,2,furniture
+bide,bidet,3.44,4.72,5.68,6.4,2.313,1,2,furniture
+buró,bureau,3.16,1.16,11,4.16,1.574,1,2,furniture
+butaca,armchair,5.6,4.32,5.96,6.44,4.788,18,3,furniture
+cajón,drawer,5.76,5.84,3.88,6.84,5.344,18,2,furniture
+cajonera,chest of drawers,5.12,4.12,6.13,6.52,3.218,2,4,furniture
+cama,bed,6.92,6.76,3.08,6.84,67.877,199,2,furniture
+cocina,kitchen,4.36,6.24,3.16,6.72,4.895,112,3,furniture
+cómoda,sideboard,5.68,4.08,6.8,6.32,13.009,14,3,furniture
+comodín,chest of drawers,3.52,2.68,7.3,4.96,3.633,1,3,furniture
+consola,console table,3.44,3.28,10.92,4.92,1.424,7,3,furniture
+coqueta,dressing table,3.36,2.88,10.56,4.2,2.281,4,3,furniture
+cortina,curtain,3.68,5.36,4,6.68,0.745,20,3,furniture
+cuadro,picture,3.8,5.24,3.76,6.56,16.83,61,2,furniture
+descalzadora,shoe horn,1.84,1.84,8.86,4.68,0.85,1,5,furniture
+diván,divan,3.92,1.92,10.52,5.76,1.468,10,2,furniture
+ducha,shower,3.24,6.52,5.56,6.76,1.87,21,2,furniture
+encimera,worktop,4.48,5.12,7.79,6.4,9.094,0,4,furniture
+entradita,entrance hall,2.68,2.92,9.19,5.44,2.156,0,4,furniture
+escabel,footstool,2,1.16,11.18,2.88,0.641,2,3,furniture
+escritor,desk,5.88,5.8,7.46,6.76,28.341,14,4,furniture
+escurreplatos,plate rack,3.24,4.52,7.88,6.68,0.842,0,5,furniture
+espejo,mirror,4.56,6.32,3.76,6.92,13.704,74,3,furniture
+estante,shelf,5.52,5.04,5.46,6.8,0.699,4,3,furniture
+estantería,shelves,6.28,6.24,5.28,6.88,44.794,5,5,furniture
+flexo,reading lamp,3.52,6.12,8.2,6.32,1.925,2,2,furniture
+fogón,ring,2.64,3.16,7.71,6.08,0.679,4,2,furniture
+fregadero,sink,4.08,4.76,5.52,6.8,1.464,6,4,furniture
+fregador,sink,2.08,3,7.08,4.96,1.343,0,3,furniture
+frigorífico,fridge,4.52,5.68,5.08,6.84,6.182,3,5,furniture
+guardarropa,wardrobe,4.96,3.08,8.63,6.52,1.304,3,4,furniture
+hamaca,hammock,3.44,2.6,8,6.6,7.29,5,3,furniture
+horno,oven,3.36,4.76,5.08,6.8,5.384,6,2,furniture
+jarrón,vase,2.88,4.44,4.44,6.76,0.857,5,2,furniture
+lámpara,lamp,3.8,5.64,3.96,6.76,24.219,22,3,furniture
+lavabo,washbasin,3.8,6.16,4.27,6.68,6.246,18,3,furniture
+lavadora,washing machine,2.8,5.16,7.16,6.64,6.74,2,4,furniture
+lavaplatos,dishwasher,2.88,4.44,8.33,6.6,0.935,1,4,furniture
+lavavajillas,dishwasher,2.56,4,9.16,6.84,3.946,1,5,furniture
+librería,book shelves,5.4,4.76,7.04,6.68,3.829,9,4,furniture
+litera,bunk bed,5.08,2.36,8.28,6.92,4.466,1,3,furniture
+mecedora,rocking chair,5.16,2.24,8.2,6.76,5.343,4,4,furniture
+mesa,table,6.92,6.76,4.2,7,78.615,228,2,furniture
+mesita,bedside table,6.36,5.48,5.04,6.84,42.025,2,3,furniture
+microondas,microwaves,2.64,5.32,11.42,7,8.237,3,4,furniture
+minicadena,mini hi-fi,2.28,5.44,10.88,6.96,1.89,0,5,furniture
+mural,mural,2,2.12,9,5.04,0.641,3,2,furniture
+nevera,fridge,2.72,5.96,6.52,6.96,6.282,12,3,furniture
+nido,truckle bed,3.28,1.88,6.92,6,0.9,13,2,furniture
+ordenador,computer,2.24,6.44,10.75,6.96,4.671,67,4,furniture
+papelera,litter,2.84,6,6.24,7,2.398,4,4,furniture
+paragüero,umbrella stand,3.04,3.28,7.6,6.76,1.694,1,4,furniture
+percha,hanger,2.76,5.28,6.4,6.96,4.559,7,2,furniture
+perchero,clothes stand,3.84,3.88,7.12,6.68,5.286,4,3,furniture
+piano,piano,2.2,3.28,6.04,7,1.858,31,3,furniture
+portalibros,book shelf,2.84,2.28,11.15,5.2,0.641,0,4,furniture
+posaplatos,place mat,2.04,2.36,11.64,5.36,0.679,0,4,furniture
+puerta,door,3.48,6.56,4.24,7,4.876,301,2,furniture
+puf,pouffe,3,2.48,10.86,5.08,3.812,0,1,furniture
+pupitre,school desk,5.44,3.68,6,6.76,1.752,9,3,furniture
+radio,radio,2.24,5.76,5.68,6.96,1.787,75,2,furniture
+recibidor,hall,3.88,3.16,8.72,5.96,2.872,7,4,furniture
+reloj,clock,2.52,6.24,4.92,7,2.519,43,2,furniture
+repisa,shelf,3.6,4.04,7.84,6.64,1,3,3,furniture
+retrete,loo,1.8,3.36,8.64,7,1.261,14,3,furniture
+revistero,magazine rack,3.44,2.8,10.25,6.2,0.914,0,4,furniture
+rinconera,cornerboard,4.84,2.44,11.58,5.76,1.99,0,4,furniture
+ropero,wardrobe,6.08,3.32,9.84,6.48,2.893,6,3,furniture
+secreter,writing desk,4.44,1.36,16.89,4.12,1.215,0,3,furniture
+silla,chair,6.8,6.72,4.64,7,78.805,58,2,furniture
+sillón,armchair,6.76,5.84,5,7,61.626,31,2,furniture
+sinfonier,chest of drawers,4.2,1.64,13.69,3.24,3.479,0,3,furniture
+sofá,sofa,6.8,6.36,6.24,7,56.795,4,2,furniture
+taburete,stool,5.72,4.48,6.08,6.96,18.16,2,4,furniture
+taquillón,traditional Spanish table,4.84,2.32,9.95,5.52,2.278,0,3,furniture
+televisión,television,4,6.24,4.35,6.8,14.852,85,4,furniture
+televisor,television,2.88,5.76,6.52,6.96,2.819,25,4,furniture
+tiestos,flowerpot,1.56,3.48,5.8,6.92,0.641,3,2,furniture
+tocador,dressing table,5.24,1.8,9.16,6.32,5.394,5,3,furniture
+tresillo,sofa,6.04,2.88,9.96,5.96,8.622,4,3,furniture
+tumbona,deck chair,4.32,2.04,9.72,6.52,1.454,2,3,furniture
+váter,toilet,1.68,5.8,5.36,6.56,2.025,1,2,furniture
+ventana,window,2.2,6.56,4.36,6.96,3.336,120,3,furniture
+video,video,1.84,5.52,10.6,7,1.808,30,3,furniture
+vidriera,stained-glass window,1.72,2.36,10.36,6.56,1.463,5,3,furniture
+vitrina,glass cabinet,4.12,2.64,10.6,6.44,2.906,6,3,furniture
+wc,toilet,1.88,3.64,9.69,6.68,2.658,0,2,furniture
+zapatero,shoe rack,4.56,2.6,7.24,6.2,8.043,0,4,furniture
+abrigo,coat,6,5.56,3.8,6.76,33.065,78,3,clothing
+albornoz,bathrobe,3,4.2,8.32,6.84,0.796,2,3,clothing
+americana,jacket,4.16,1.8,9.4,6.52,4.846,27,5,clothing
+anillo,ring,2.2,4.36,4.44,6.96,0.938,20,3,clothing
+anorak,anorak,3.88,3,8.4,6.32,6.798,2,3,clothing
+bañador,swimsuit,3.76,2.2,4.32,6.92,6.461,5,3,clothing
+bata,robe,3.4,3.04,4.6,6.96,1.399,25,2,clothing
+bermudas,bermuda shorts,3.52,1.84,8.28,6.8,2.927,0,3,clothing
+biquini,bikini,3.44,2.76,8.12,6.92,3.99,1,3,clothing
+blusa,blouse,5.76,2.76,6.56,6.8,9.95,15,2,clothing
+body,body stocking,2.76,2.04,10.42,5.88,1.137,0,2,clothing
+boina,beret,2.16,1.52,6.04,6.72,1.246,7,2,clothing
+bolsa,bag,1.4,5.44,4.28,6.52,0.807,34,2,clothing
+bolso,bag,2.56,5.76,4.72,6.92,2.066,19,2,clothing
+bota,boot,3.44,5.8,4.36,6.92,17.199,26,2,clothing
+botines,ankle boot,2.48,2.96,7.72,6.8,2.672,4,3,clothing
+botón,button,1.6,3.6,4.4,6.92,1.662,25,2,clothing
+bragas,pants,4.44,5.28,3.64,6.88,45.394,9,2,clothing
+bufanda,scarf,4.16,5.16,3.88,6.84,31.043,6,3,clothing
+calcetines,socks,4.92,5.8,3.44,6.92,58.667,12,3,clothing
+calzoncillos,pants,4.64,4.04,3.84,6.88,46.91,5,4,clothing
+calzones,underpants,3.88,2.4,6.24,6.52,1.592,2,3,clothing
+camisa,shirt,6.48,4.8,4.28,6.84,62.484,61,3,clothing
+camiseta,T-shirt,6.64,6.16,3.64,7,64.236,12,4,clothing
+camisón,night-dress,3.8,2.12,4.68,6.76,7.354,8,3,clothing
+capa,cloak,2.6,1.52,6.16,6.44,0.928,43,2,clothing
+cazadora,jacket,6,6.16,6.84,6.8,20.456,16,4,clothing
+chal,shawl,3.13,2.36,9.76,6.4,2.255,2,1,clothing
+chaleco,vest,4.2,2.68,6.72,6.72,13.603,18,3,clothing
+chancla,flip-flop,2.36,3.08,7.24,6.68,6.211,1,2,clothing
+chándal,sportsuit,5.64,5.16,6.6,6.68,30.959,0,2,clothing
+chaqueta,jacket,6.16,4.92,4.64,6.76,37.792,33,3,clothing
+chaquetón,short coat,4.88,2.88,6.52,6.56,3.743,2,3,clothing
+chubasquero,raincoat,4.36,3,7.76,6.64,6.823,1,4,clothing
+chupa,leather jacket,3.92,3,12.76,6.48,1.92,2,2,clothing
+cinturón,belt,3.16,4.64,5.6,6.84,7.745,23,3,clothing
+collares,necklaces,1.72,4.12,4.52,6.8,1.265,6,3,clothing
+corbata,tie,3.6,2.6,5.36,6.84,7.711,26,3,clothing
+correa,belt,1.96,1.76,6.2,6.52,8,4,3,clothing
+corsé,corset,2.32,1.2,10.64,6.12,0.831,2,2,clothing
+deportivas,trainers,3.8,5.92,8.2,6.6,4.521,1,4,clothing
+diadema,hairband,1.84,2.72,5.16,6.44,1.288,4,3,clothing
+ejecutivos,sock,2.2,2.08,13.1,5.68,0.843,7,5,clothing
+faja,girdle,2.6,1.36,8,6.04,5.029,3,2,clothing
+falda,skirt,6.44,4.32,4.04,6.84,34.14,36,2,clothing
+frac,tailcoat,3.12,1.24,11.68,6.04,0.831,2,1,clothing
+fular,foulard scarf,3.04,1.96,11.65,6.04,3.544,2,2,clothing
+gabardina,raincoat,5,2.52,8.28,6.64,4.663,9,4,clothing
+gorra,cap,3.64,4.2,4.84,6.6,8.258,13,2,clothing
+gorro,hat,3.6,4,4.96,6.72,19.931,7,2,clothing
+guante,glove,3.28,4.36,5.64,6.88,24.063,16,2,clothing
+impermeable,raincoat,3.68,2.92,7.61,6.44,2.088,4,4,clothing
+jeans,jeans,5.92,3.08,10.29,6.64,1.284,0,1,clothing
+jersey,pullover,6.56,5.52,5.78,6.84,70.819,10,2,clothing
+leotardo,woolen tights,3.16,2.76,7.83,6.48,5.25,1,4,clothing
+liga,garter,1.76,1.16,10.21,6.56,1.823,8,2,clothing
+mallas,leotard,3.28,1.72,10.16,6.48,4.771,2,2,clothing
+manoplas,mitten,2.68,2.04,7.2,6.56,3.166,0,3,clothing
+medias,tights,3.44,3.64,7.08,6.92,25.545,49,2,clothing
+minifalda,miniskirt,5.48,3.2,9.28,6.96,5.097,5,4,clothing
+mono,dungarees,3.76,1.92,8.83,6.56,2.196,24,2,clothing
+muñequera,wristband,1.28,1.8,9.6,6.64,1.647,0,4,clothing
+niqui,t-shirt,5.84,3.48,9.92,6.44,1.913,0,2,clothing
+orejeras,earflaps,1.72,1.4,9.08,6.56,3.677,3,4,clothing
+pajarita,bow tie,1.64,1.44,8.92,6.8,1.787,2,4,clothing
+palestina/o,Palestinian scarf,1.72,2.92,13.55,5.96,1.449,2,4,clothing
+pantaloon,trousers,6.72,6.68,4.44,6.76,70.674,35,3,clothing
+panty,tights,3.36,2.56,9.52,6.2,4.56,1,2,clothing
+pañuelo,handkerchief,2.44,5.08,5.76,6.8,5.489,27,3,clothing
+pareo,beach wrap,2.84,2.2,14.26,6.29,0.843,0,3,clothing
+peto,dungrarees,4.68,1.96,9.48,6.6,2.732,3,2,clothing
+peúcos,bootees,1.92,1.04,15.6,2,0.963,0,3,clothing
+pichi,pinafore dress,4,1.28,8.58,4.67,1.025,1,2,clothing
+pijama,pyjama,5.16,5.84,4.8,6.84,10.423,9,3,clothing
+plumas,quilted anorak,5.16,4.72,7.92,6.76,12.881,23,2,clothing
+plumífero,quilted anorak,4.52,3.84,11.88,6.24,0.894,0,4,clothing
+polar,fleece,5.48,5,11.79,6.48,10.771,2,2,clothing
+polo,polo shirt,6.12,3.6,9.92,6.72,7.966,25,2,clothing
+poncho,poncho,3.76,2.2,12.33,6.64,1.769,2,2,clothing
+pulsera,bracelet,1.32,4,6.24,6.64,1.216,7,3,clothing
+rebeca,cardigan,5.2,2.72,10.17,5.92,1.847,1,3,clothing
+reloj,watch,1.48,6.48,5.12,6.96,1.842,72,2,clothing
+rokys,rokys,2,1,14.14,2.68,0.883,0,2,clothing
+rodillera,kneeband,1.28,2.08,8.64,6.12,0.799,1,4,clothing
+sandalia,sandals,2.92,2.48,7.48,6.44,3.759,2,3,clothing
+shorts,shorts,4.8,1.8,12.54,5.88,1.737,0,1,clothing
+slips,slips,4.24,3.08,11.46,6.36,1.412,0,1,clothing
+sombrero,hat,2.76,2.8,5.48,6.92,5.212,44,3,clothing
+sudadera,sweater,6.4,5.04,8.83,6.92,37.104,0,4,clothing
+suéter,jumper,6.56,3.88,9.92,6.6,19.007,3,2,clothing
+sujetado,bra,4.4,5.04,8.84,6.96,36.895,5,4,clothing
+tanga,g-string,3.6,4.52,15.46,6.96,11.866,1,2,clothing
+tejano,jeans,6.24,3.52,12.76,6.48,1.7,2,3,clothing
+tirantes,braces,2.24,3.08,7.76,6.84,1.226,6,3,clothing
+tobillera,ankleband,1.2,1.76,9.84,6.6,0.987,0,4,clothing
+top,top,4.88,3.48,12,6.48,8.293,0,1,clothing
+traje,suit,6.6,3.84,9,6.8,7.34,63,2,clothing
+vestido,dress,6.72,4.52,6.2,6.92,14.336,85,3,clothing
+zapatilla,trainers,3.6,6.52,5.08,6.84,23.294,17,4,clothing
+zapato,shoes,3.76,6,4.76,6.8,39.132,69,3,clothing
+abundante,abundant,2.76,5.56,7.92,4.12,1.399,23,4,intelligence
+alma,soul,2.96,5.48,6.8,2.52,1.983,165,2,intelligence
+amistad,friendship,3.48,6.52,5.34,3.56,2.348,53,3,intelligence
+amor,love,3.8,6.52,5.02,3.96,2.042,378,2,intelligence
+analizar,to analyse,5.52,4.08,8.76,2.76,2.113,25,4,intelligence
+aplicado,conscientious,5.04,3.08,8.24,3.24,1.55,12,4,intelligence
+aprender,to learn,6.04,6.04,5.18,3.6,8.345,27,3,intelligence
+aprendiz,learner,5.72,4.92,10.16,3.28,3.398,30,5,intelligence
+aprobado,pass,4.6,5.56,6.88,5.08,1.427,3,4,intelligence
+aprobar,to pass,5.08,6.48,6.64,4.48,3.124,3,3,intelligence
+atención,attention,5.4,6.44,5.44,3.28,1.815,158,3,intelligence
+atento,attentive,5.36,6.16,5.56,3.88,1.47,18,3,intelligence
+cabeza,head,5.84,6.6,4.2,6.72,5.958,416,3,intelligence
+capacidad,capacity,5.92,6.16,8.13,3.48,4.713,114,4,intelligence
+carisma,charisma,3.76,4.44,11.32,3.24,1.47,0,3,intelligence
+carrera,career,4.48,6.52,8.84,4.72,2.268,77,3,intelligence
+cerebro,brain,6.12,5.4,7.04,5.48,23.892,87,3,intelligence
+ciencia,science,5.16,5.32,8.36,3.52,3.037,203,2,intelligence
+científico,scientist,5.12,4.64,8.52,6.24,2.268,85,4,intelligence
+comprender,to understand,6,6,6.52,3.6,2.972,67,3,intelligence
+concentración,concentration,5.2,6,8,3.64,1.635,40,4,intelligence
+conocer,to know,5.56,5.88,5.92,3.36,3.845,104,3,intelligence
+conocimiento,consciousness,6.08,5.52,6.84,3.24,2.265,203,5,intelligence
+conocimientos,knowledge,5.2,5.12,9.52,3.36,3.535,36,5,intelligence
+copier,to cheat,2.6,5.36,5.8,4.8,1.692,5,2,intelligence
+culto,cult,4.96,5.6,8.12,4.04,2.574,30,2,intelligence
+cultura,culture,5.36,6.68,7.48,4.08,5.333,165,3,intelligence
+descubrir,to discover,5.2,6.12,6.2,4,1.854,55,3,intelligence
+diez,ten,4.32,6.76,3.96,6.36,1.732,134,1,intelligence
+dinero,money,2.72,6.56,4.04,6.56,2.845,199,3,intelligence
+empollón,swot,3.92,3.6,6.56,5.24,3.461,0,3,intelligence
+escasa,slim/limited,2.44,4.48,7.28,3.08,1.372,23,3,intelligence
+escribir,to write,4.12,6.68,4,5.6,1.345,128,3,intelligence
+espabilado,sharp,4.84,5.48,6.28,4.68,1.441,3,5,intelligence
+estímulo,stimuli,3.48,5.12,9.28,3.88,1.68,16,4,intelligence
+estudiante,student,4.52,5.84,5.96,6.28,2.454,19,4,intelligence
+estudiar,to study,5.4,6.52,5.56,4.68,12.902,45,3,intelligence
+studio,study,4.84,6.32,6,5.36,8.888,144,3,intelligence
+estudios,career,4.48,6.28,8.52,3.8,5.36,75,3,intelligence
+estudioso,expert,4.8,4.76,6.8,4.76,2.717,3,4,intelligence
+exámen,examination,3.76,5.72,6.64,6.68,3.246,21,3,intelligence
+familia,family,2.68,6.28,3.72,6.52,1.474,250,3,intelligence
+felicidad,happiness,3.44,5.84,5.64,3.76,1.652,85,4,intelligence
+filosofía,Philosophy,4.68,3.64,10,3.32,1.343,117,5,intelligence
+futuro,future,3.44,5.6,7.04,3.24,2.169,131,3,intelligence
+genio,genius,6.24,3.72,7.8,4.64,1.62,28,2,intelligence
+historia,History,3,4.8,6.52,3.68,1.695,406,3,intelligence
+hombre,man,4.08,6.24,4.24,6.68,2.652,869,2,intelligence
+idea,idea,5.76,5.36,6,3.4,3.505,128,3,intelligence
+imaginación,imagination,5.28,5.2,5.68,3.56,4.886,83,5,intelligence
+inteligencia,intelligence,7,6,8.04,3.24,2.586,3,5,intelligence
+inteligente,intelligent,6.72,4.88,6.76,3.68,3.14,3,5,intelligence
+instituto,secondary school,3.16,4.44,7.6,6.52,2.257,42,4,intelligence
+lectura,reading,5.32,5.32,4.68,4.72,2.81,83,3,intelligence
+leer,to read,4.76,6.72,5.12,5.24,2.482,97,2,intelligence
+letras,letters,3.2,6.56,4.8,6.64,2.761,51,2,intelligence
+libro,book,3.92,6.76,4.68,6.96,10.342,199,2,intelligence
+listo,smart,6.2,5.32,5.2,3.84,22.067,16,2,intelligence
+lógica,logic,6.16,4.12,10.28,3,2.795,74,3,intelligence
+matemáticas,maths,4.44,3.6,6.64,4.48,5.845,21,5,intelligence
+memoria,memory,4.96,5.32,6.48,3.2,13.008,203,3,intelligence
+memorizar,to memorize,4.6,5.24,7.6,3.4,2.235,2,4,intelligence
+mente,mind,6.24,4.68,8.2,2.68,10.509,87,2,intelligence
+mujer,woman,2.92,6.48,5.24,6.52,1.626,511,2,intelligence
+nasa,NASA,3.48,2.68,12.16,4.64,1.616,1,2,intelligence
+nervio,nerve,2.44,4.08,9.56,3.92,1.445,15,2,intelligence
+neurona,neurone,5.04,3.08,11.48,4.16,5.987,14,3,intelligence
+notas,grades,4,5.08,6.84,6.08,1.451,39,2,intelligence
+números,numbers,3.76,5.16,4.76,6.76,2.725,28,3,intelligence
+ordenador,computer,3.4,6.48,9.88,6.96,2.894,67,4,intelligence
+palabras,words,4.28,6.56,5.4,6.08,1.538,354,3,intelligence
+pensamieto,thought,5.72,5.56,8.32,3.28,14.611,134,4,intelligence
+pensar,to think,6.24,5.76,7.44,3.08,11.034,218,2,intelligence
+poder,power,3.32,4.72,6.96,2.96,1.903,388,2,intelligence
+profesor,teacher,3.24,6.16,5.44,6.28,3.667,55,4,intelligence
+rapidez,rapidity,5.24,5.24,6.4,3.44,3.96,24,3,intelligence
+razón,reason,5.76,5.44,8.6,2.84,1.695,275,2,intelligence
+razonamiento,reasoning,6.6,5,10.32,2.96,1.602,8,5,intelligence
+razonar,to reason,6.64,5.16,10.04,3.04,1.763,5,3,intelligence
+recordarto,remember,4.64,5.12,7.16,3.32,2.805,83,3,intelligence
+recuerdo,memory,3.52,5.84,7.4,4.08,1.418,177,3,intelligence
+reflexión,reflection,5.92,4.64,9.8,3.16,1.488,41,3,intelligence
+representación,play,3.48,3.44,9.72,3.72,2.235,46,5,intelligence
+resolver,to solve,6.04,4.76,8.68,3.12,1.627,30,3,intelligence
+responsabilidad,responsibility,3.48,5.52,9.04,2.92,3.498,39,6,intelligence
+respuesta,answer,4.6,5.28,6.32,3.44,1.527,95,3,intelligence
+saberto know,NA,5.52,5.64,6.36,3,14.086,287,2,intelligence
+sabiduría,wisdom,5.76,3.96,8.56,2.92,17.492,26,5,intelligence
+sabio,wise,5.92,3.32,7.56,5.16,5.051,22,2,intelligence
+sobresaliente,first class,4.92,3.6,7.76,5.72,2.998,3,5,intelligence
+soñar,to dream,3.04,6.04,5.76,3.92,2.09,16,2,intelligence
+superdotado,extremely gifted,5.96,3.12,9,5.12,4.178,1,5,intelligence
+test,test,4.04,3.04,11.04,6.52,2.317,5,1,intelligence
+tonto,fool,2.88,4.96,4.48,5.12,6.932,19,2,intelligence
+trabajar,to work,2.92,5.72,5.56,4.84,1.714,74,3,intelligence
+trabajo,work,3.08,5.88,5.56,5.56,7.89,354,3,intelligence
+universidad,university,3.88,6.56,10.36,6.24,3.585,109,5,intelligence
+vida,life,3.16,6.36,6.24,3.92,1.538,1145,2,intelligence
+voluntad,will,3.16,4.6,9.04,3.28,1.324,117,3,intelligence
+yo,I,3.4,6.32,4.16,4.32,3.6,1857,1,intelligence
