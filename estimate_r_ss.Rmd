@@ -92,6 +92,418 @@ run_population_pipeline <- function(
   )
 }
 
+summarise_split_half <- function(dat) {
+  if (is.null(dat) || nrow(dat) == 0) {
+    return(NULL)
+  }
+
+  if ("group" %in% names(dat)) {
+    dat %>%
+      group_by(sample_size, group) %>%
+      summarise(reliability_m = mean(reliability, na.rm = TRUE), .groups = "drop")
+  } else {
+    dat %>%
+      group_by(sample_size) %>%
+      summarise(reliability_m = mean(reliability, na.rm = TRUE), .groups = "drop")
+  }
+}
+
+build_save_data <- function(saved_sim) {
+  list(
+    overall_power = saved_sim$corrected_summary,
+    overall_rel = summarise_split_half(saved_sim$split_half_rel),
+    pos_power = purrr::map(saved_sim$pos_pipelines, "corrected_summary"),
+    pos_rel = summarise_split_half(saved_sim$split_half_by_pos),
+    length_power = purrr::map(saved_sim$length_pipelines, "corrected_summary"),
+    length_rel = summarise_split_half(saved_sim$split_half_by_length),
+    stroke_power = purrr::map(saved_sim$stroke_pipelines, "corrected_summary"),
+    stroke_rel = summarise_split_half(saved_sim$split_half_by_stroke)
+  )
+}
+
+load_and_summarize_simulations <- function(sim_dir = "simulations") {
+  if (!dir.exists(sim_dir)) {
+    stop(sprintf("Simulation directory not found: %s", sim_dir))
+  }
+  
+  sim_files <- list.files(sim_dir, pattern = "\\.rds$", full.names = TRUE)
+  if (length(sim_files) == 0) {
+    stop(sprintf("No .rds files found in %s", sim_dir))
+  }
+  
+  run_ids <- tools::file_path_sans_ext(basename(sim_files))
+  runs <- purrr::map(sim_files, readRDS)
+  
+  extract_overall_power <- function(run_obj) {
+    if (is.list(run_obj) && !is.null(run_obj$overall_power)) {
+      return(run_obj$overall_power)
+    }
+    if (is.list(run_obj) && !is.null(run_obj$corrected_summary)) {
+      return(run_obj$corrected_summary)
+    }
+    NULL
+  }
+
+  extract_overall_rel <- function(run_obj) {
+    if (is.list(run_obj) && !is.null(run_obj$overall_rel)) {
+      return(run_obj$overall_rel)
+    }
+    if (is.list(run_obj) && !is.null(run_obj$split_half_rel)) {
+      return(run_obj$split_half_rel)
+    }
+    NULL
+  }
+
+  extract_subgroup_power <- function(run_obj, field_name) {
+    if (!is.list(run_obj) || is.null(run_obj[[field_name]])) {
+      return(tibble::tibble())
+    }
+    
+    purrr::imap_dfr(run_obj[[field_name]], function(tbl, group_name) {
+      if (is.null(tbl) || nrow(tbl) == 0) {
+        return(tibble::tibble())
+      }
+      
+      tbl %>%
+        mutate(group = as.character(group_name))
+    })
+  }
+
+  extract_subgroup_rel <- function(run_obj, field_name) {
+    if (!is.list(run_obj) || is.null(run_obj[[field_name]])) {
+      return(tibble::tibble())
+    }
+    
+    run_obj[[field_name]]
+  }
+
+  ordered_group_levels <- function(x) {
+    x <- unique(as.character(x))
+    if (all(x %in% c("noun", "modifiers", "verb", "other"))) {
+      return(c("noun", "modifiers", "verb", "other")[c("noun", "modifiers", "verb", "other") %in% x])
+    }
+    
+    x_num <- suppressWarnings(as.numeric(gsub("\\+$", "", x)))
+    if (all(!is.na(x_num))) {
+      return(x[order(x_num, x)])
+    }
+    
+    x[order(x)]
+  }
+
+  summarize_subgroup_targets <- function(power_tbl, rel_tbl, target_power = 80, target_rel = 0.80) {
+    power_summary <- tibble::tibble()
+    rel_summary <- tibble::tibble()
+    
+    if (!is.null(power_tbl) && nrow(power_tbl) > 0) {
+      power_summary <- power_tbl %>%
+        mutate(
+          percent_below = as.numeric(percent_below),
+          corrected_sample_size = as.numeric(corrected_sample_size)
+        ) %>%
+        filter(percent_below == target_power) %>%
+        group_by(group) %>%
+        summarise(
+          n_runs = sum(!is.na(corrected_sample_size)),
+          mean_recommended_sample_size = mean(corrected_sample_size, na.rm = TRUE),
+          median_recommended_sample_size = median(corrected_sample_size, na.rm = TRUE),
+          recommended_sample_size = ceiling(median_recommended_sample_size),
+          sd_recommended_sample_size = sd(corrected_sample_size, na.rm = TRUE),
+          .groups = "drop"
+        ) %>%
+        mutate(target = paste0(target_power, "% power"))
+    }
+    
+    if (!is.null(rel_tbl) && nrow(rel_tbl) > 0) {
+      rel_summary <- rel_tbl %>%
+        mutate(
+          sample_size = as.numeric(sample_size),
+          reliability_m = as.numeric(reliability_m)
+        ) %>%
+        group_by(group, sample_size) %>%
+        summarise(
+          median_reliability = median(reliability_m, na.rm = TRUE),
+          .groups = "drop"
+        ) %>%
+        group_by(group) %>%
+        filter(median_reliability >= target_rel) %>%
+        arrange(sample_size) %>%
+        slice_head(n = 1) %>%
+        ungroup() %>%
+        mutate(
+          target = paste0(target_rel * 100, "% reliability"),
+          recommended_sample_size = sample_size
+        ) %>%
+        select(group, target, recommended_sample_size, median_reliability)
+    }
+    
+    summary_parts <- list()
+    if (nrow(power_summary) > 0) {
+      summary_parts[[length(summary_parts) + 1]] <- power_summary %>%
+        select(group, target, recommended_sample_size)
+    }
+    if (nrow(rel_summary) > 0) {
+      summary_parts[[length(summary_parts) + 1]] <- rel_summary %>%
+        select(group, target, recommended_sample_size)
+    }
+    
+    summary_tbl <- if (length(summary_parts) > 0) {
+      bind_rows(summary_parts) %>%
+        mutate(group = as.character(group))
+    } else {
+      tibble::tibble(group = character(), target = character(), recommended_sample_size = numeric())
+    }
+    
+    plot_tbl <- summary_tbl %>%
+      mutate(group = factor(group, levels = ordered_group_levels(group)))
+    
+    plot_obj <- NULL
+    if (nrow(plot_tbl) > 0) {
+      plot_obj <- ggplot2::ggplot(plot_tbl, ggplot2::aes(x = group, y = recommended_sample_size, color = target)) +
+        ggplot2::geom_point(position = ggplot2::position_dodge(width = 0.4), size = 2.4) +
+        ggplot2::geom_line(ggplot2::aes(group = target), position = ggplot2::position_dodge(width = 0.4), linewidth = 0.8) +
+        ggplot2::coord_flip() +
+        ggplot2::labs(
+          x = NULL,
+          y = "Recommended sample size",
+          color = NULL
+        ) +
+        ggplot2::theme_minimal()
+    }
+    
+    list(
+      power_summary = power_summary,
+      reliability_summary = rel_summary,
+      summary = summary_tbl,
+      plot = plot_obj
+    )
+  }
+  
+  overall_power <- purrr::imap_dfr(runs, function(run_obj, i) {
+    power_tbl <- extract_overall_power(run_obj)
+    if (is.null(power_tbl) || nrow(power_tbl) == 0) {
+      return(tibble::tibble())
+    }
+    
+    power_tbl %>%
+      mutate(
+        run_id = run_ids[[i]],
+        source_file = sim_files[[i]]
+      )
+  })
+
+  overall_rel <- purrr::imap_dfr(runs, function(run_obj, i) {
+    rel_tbl <- extract_overall_rel(run_obj)
+    if (is.null(rel_tbl) || nrow(rel_tbl) == 0) {
+      return(tibble::tibble())
+    }
+    
+    rel_tbl %>%
+      mutate(
+        run_id = run_ids[[i]],
+        source_file = sim_files[[i]]
+      )
+  })
+
+  pos_power <- purrr::imap_dfr(runs, function(run_obj, i) {
+    power_tbl <- extract_subgroup_power(run_obj, "pos_power")
+    if (nrow(power_tbl) == 0) return(tibble::tibble())
+    power_tbl %>%
+      mutate(run_id = run_ids[[i]], source_file = sim_files[[i]])
+  })
+
+  pos_rel <- purrr::imap_dfr(runs, function(run_obj, i) {
+    rel_tbl <- extract_subgroup_rel(run_obj, "pos_rel")
+    if (nrow(rel_tbl) == 0) return(tibble::tibble())
+    rel_tbl %>%
+      mutate(run_id = run_ids[[i]], source_file = sim_files[[i]])
+  })
+
+  length_power <- purrr::imap_dfr(runs, function(run_obj, i) {
+    power_tbl <- extract_subgroup_power(run_obj, "length_power")
+    if (nrow(power_tbl) == 0) return(tibble::tibble())
+    power_tbl %>%
+      mutate(run_id = run_ids[[i]], source_file = sim_files[[i]])
+  })
+
+  length_rel <- purrr::imap_dfr(runs, function(run_obj, i) {
+    rel_tbl <- extract_subgroup_rel(run_obj, "length_rel")
+    if (nrow(rel_tbl) == 0) return(tibble::tibble())
+    rel_tbl %>%
+      mutate(run_id = run_ids[[i]], source_file = sim_files[[i]])
+  })
+
+  stroke_power <- purrr::imap_dfr(runs, function(run_obj, i) {
+    power_tbl <- extract_subgroup_power(run_obj, "stroke_power")
+    if (nrow(power_tbl) == 0) return(tibble::tibble())
+    power_tbl %>%
+      mutate(run_id = run_ids[[i]], source_file = sim_files[[i]])
+  })
+
+  stroke_rel <- purrr::imap_dfr(runs, function(run_obj, i) {
+    rel_tbl <- extract_subgroup_rel(run_obj, "stroke_rel")
+    if (nrow(rel_tbl) == 0) return(tibble::tibble())
+    rel_tbl %>%
+      mutate(run_id = run_ids[[i]], source_file = sim_files[[i]])
+  })
+  
+  if (nrow(overall_power) == 0 && nrow(overall_rel) == 0 &&
+      nrow(pos_power) == 0 && nrow(pos_rel) == 0 &&
+      nrow(length_power) == 0 && nrow(length_rel) == 0 &&
+      nrow(stroke_power) == 0 && nrow(stroke_rel) == 0) {
+    return(list(
+      files = sim_files,
+      runs = runs,
+      overall_power = overall_power,
+      overall_rel = overall_rel,
+      recommendation_summary = tibble::tibble(),
+      recommendation_plot = NULL
+    ))
+  }
+  
+  if (nrow(overall_power) > 0) {
+    recommendation_summary <- overall_power %>%
+      mutate(
+        percent_below = as.numeric(percent_below),
+        corrected_sample_size = as.numeric(corrected_sample_size)
+      ) %>%
+      group_by(percent_below) %>%
+      summarise(
+        n_runs = sum(!is.na(corrected_sample_size)),
+        mean_recommended_sample_size = mean(corrected_sample_size, na.rm = TRUE),
+        median_recommended_sample_size = median(corrected_sample_size, na.rm = TRUE),
+        recommended_sample_size = ceiling(median_recommended_sample_size),
+        sd_recommended_sample_size = sd(corrected_sample_size, na.rm = TRUE),
+        min_recommended_sample_size = min(corrected_sample_size, na.rm = TRUE),
+        max_recommended_sample_size = max(corrected_sample_size, na.rm = TRUE),
+        .groups = "drop"
+      ) %>%
+      arrange(percent_below) %>%
+      mutate(recommended_sample_size = cummax(recommended_sample_size))
+    
+    recommendation_plot <- ggplot2::ggplot(
+      overall_power %>% mutate(percent_below = factor(percent_below, levels = as.character(recommendation_summary$percent_below))),
+      ggplot2::aes(x = percent_below, y = corrected_sample_size)
+    ) +
+      ggplot2::geom_boxplot(fill = "#d9e7ff", outlier.alpha = 0.2, width = 0.6) +
+      ggplot2::geom_jitter(width = 0.12, alpha = 0.35, size = 1.4) +
+      ggplot2::geom_line(
+        data = recommendation_summary,
+        ggplot2::aes(x = factor(percent_below, levels = as.character(recommendation_summary$percent_below)),
+                     y = recommended_sample_size,
+                     group = 1),
+        color = "#b00020",
+        linewidth = 0.9
+      ) +
+      ggplot2::geom_point(
+        data = recommendation_summary,
+        ggplot2::aes(x = factor(percent_below, levels = as.character(recommendation_summary$percent_below)),
+                     y = recommended_sample_size),
+        color = "#b00020",
+        size = 2.5
+      ) +
+      ggplot2::labs(
+        x = "Target Power",
+        y = "Corrected Sample Size",
+        title = "Recommended sample size by target power"
+      ) +
+      ggplot2::theme_minimal()
+  } else {
+    recommendation_summary <- tibble::tibble()
+    recommendation_plot <- NULL
+  }
+
+  if (nrow(overall_rel) > 0) {
+    reliability_summary <- overall_rel %>%
+      mutate(
+        sample_size = as.numeric(sample_size),
+        reliability_m = as.numeric(reliability_m)
+      ) %>%
+      group_by(sample_size) %>%
+      summarise(
+        n_runs = sum(!is.na(reliability_m)),
+        mean_reliability = mean(reliability_m, na.rm = TRUE),
+        median_reliability = median(reliability_m, na.rm = TRUE),
+        sd_reliability = sd(reliability_m, na.rm = TRUE),
+        min_reliability = min(reliability_m, na.rm = TRUE),
+        max_reliability = max(reliability_m, na.rm = TRUE),
+        .groups = "drop"
+      ) %>%
+      arrange(sample_size)
+    
+    reliability_targets <- c(0.80, 0.85, 0.90, 0.95)
+    reliability_recommendation <- purrr::map_dfr(reliability_targets, function(target) {
+      hit <- reliability_summary %>%
+        filter(median_reliability >= target) %>%
+        arrange(sample_size) %>%
+        slice_head(n = 1)
+      
+      if (nrow(hit) == 0) {
+        return(tibble::tibble(
+          target_reliability = target,
+          recommended_sample_size = NA_real_,
+          median_reliability = NA_real_
+        ))
+      }
+      
+      tibble::tibble(
+        target_reliability = target,
+        recommended_sample_size = hit$sample_size[[1]],
+        median_reliability = hit$median_reliability[[1]]
+      )
+    }) %>%
+      mutate(recommended_sample_size = as.numeric(recommended_sample_size))
+    
+    reliability_plot <- ggplot2::ggplot(
+      reliability_summary,
+      ggplot2::aes(x = sample_size, y = median_reliability)
+    ) +
+      ggplot2::geom_line(color = "#1f4e79", linewidth = 0.9) +
+      ggplot2::geom_point(color = "#1f4e79", size = 2) +
+      ggplot2::geom_hline(
+        data = reliability_recommendation,
+        ggplot2::aes(yintercept = target_reliability),
+        linetype = "dashed",
+        color = "#b00020"
+      ) +
+      ggplot2::geom_vline(
+        data = reliability_recommendation %>% filter(!is.na(recommended_sample_size)),
+        ggplot2::aes(xintercept = recommended_sample_size),
+        linetype = "dotted",
+        color = "#b00020"
+      ) +
+      ggplot2::labs(
+        x = "Sample Size",
+        y = "Median Split-Half Reliability",
+        title = "Sample size needed to reach target reliability"
+      ) +
+      ggplot2::theme_minimal()
+  } else {
+    reliability_summary <- tibble::tibble()
+    reliability_recommendation <- tibble::tibble()
+    reliability_plot <- NULL
+  }
+
+  pos_targets <- summarize_subgroup_targets(pos_power, pos_rel, target_power = 80, target_rel = 0.80)
+  length_targets <- summarize_subgroup_targets(length_power, length_rel, target_power = 80, target_rel = 0.80)
+  stroke_targets <- summarize_subgroup_targets(stroke_power, stroke_rel, target_power = 80, target_rel = 0.80)
+  
+  list(
+    files = sim_files,
+    runs = runs,
+    overall_power = overall_power,
+    overall_rel = overall_rel,
+    recommendation_summary = recommendation_summary,
+    recommendation_plot = recommendation_plot,
+    reliability_summary = reliability_summary,
+    reliability_recommendation = reliability_recommendation,
+    reliability_plot = reliability_plot,
+    pos_targets = pos_targets,
+    length_targets = length_targets,
+    stroke_targets = stroke_targets
+  )
+}
+
 run_simulation_core <- function(
   df,
   item_col,
@@ -555,7 +967,8 @@ dfs <- list(
   desrochers = rio::import("data/2009_Desrochers_BRM.csv"),
   dellarosa = rio::import("data/2010_DellaRosa_BRM.csv"),
   desrochers10 = rio::import("data/2010_Desrochers_BRM.csv"),
-  #eilola = rio::import("data/2010_Eilola_BRM.csv"),
+  eilola_finnish = rio::import("data/2010_Eilola_BRM_finnish.csv"),
+  eilola_english =  rio::import("data/2010_Eilola_BRM_english.csv"),
   schroder = rio::import("data/2011_Schroder_BRM.csv"),
   ferre = rio::import("data/2012_Ferre_BRM.csv"),
   montefinese = rio::import("data/2013_Montefinese_BRM.csv"),
@@ -569,7 +982,8 @@ dfs <- list(
   yee = rio::import("data/2017_Yee_PLoSONE.csv"),
   borelli = rio::import("data/2018_Borelli_PLOSONE.csv"),
   chedid = rio::import("data/2019_Chedid_BRM.csv"),
-  bonin = rio::import("data/2022_Bonin_BRM.csv")
+  bonin = rio::import("data/2022_Bonin_BRM.csv"),
+  yao = rio::import("data/2016_Yao_BRM.pdf")
   
 )
 
@@ -587,7 +1001,6 @@ dfs <- list(
 
 
 # c(
-#   "data/2016_Yao_BRM.pdf",
 #   "data/2018_Miklashevsky_JPsycholinguistRes.xlsx",
 #   "data/2019_Morucci_JCogn.csv",
 #   "data/2019_Scott_BRM.csv",
@@ -635,14 +1048,15 @@ model_paths <- list()
 for (lang in languages) {
   # Map language names to local model files
   lang_map <- list(
-    "chinese" = "chinese-gsd-ud-2.5-191206.udpipe",
+    "chinese-gsd" = "chinese-gsd-ud-2.5-191206.udpipe",
     "dutch" = "dutch-alpino-ud-2.5-191206.udpipe",
     "english" = "english-ewt-ud-2.5-191206.udpipe",
     "french" = "french-gsd-ud-2.5-191206.udpipe",
     "german" = "german-gsd-ud-2.5-191206.udpipe",
     "indonesian" = "indonesian-gsd-ud-2.5-191206.udpipe",
     "italian" = "italian-isdt-ud-2.5-191206.udpipe",
-    "spanish" = "spanish-gsd-ud-2.5-191206.udpipe"
+    "spanish" = "spanish-gsd-ud-2.5-191206.udpipe",
+    "finnish" = "finnish-tdt-ud-2.5-191206.udpipe"
   )
   
   # Check if local model file exists
@@ -667,6 +1081,13 @@ merge_pos_categories <- function(upos) {
   )
 }
 
+clean_udpipe_text <- function(x) {
+  x <- as.character(x)
+  x <- iconv(x, from = "", to = "UTF-8", sub = "")
+  x[is.na(x)] <- ""
+  x
+}
+
 for (i in seq_along(dfs)) {
   df <- dfs[[i]]
   word_col <- grep("^word", names(df), value = TRUE)[1]  # Get the first column starting with "word"
@@ -680,25 +1101,47 @@ for (i in seq_along(dfs)) {
     model <- udpipe_load_model(model_paths[[lang]])
     
     # Annotate the words with UDPipe
-    anno <- udpipe_annotate(model, x = df[[word_col]], doc_id = seq_along(df[[word_col]]))
-    anno_df <- as.data.frame(anno)
+    udpipe_input <- clean_udpipe_text(df[[word_col]])
+    anno_df <- tryCatch(
+      {
+        anno <- udpipe_annotate(model, x = udpipe_input, doc_id = seq_along(udpipe_input))
+        as.data.frame(anno)
+      },
+      error = function(e) {
+        warning(sprintf("UDPipe annotation failed for %s: %s. Falling back to 'other'.", word_col, conditionMessage(e)))
+        tibble::tibble(doc_id = seq_along(udpipe_input), upos = "other")
+      }
+    )
     
     # Group by doc_id and aggregate - if multiple words, mark as NOUN, otherwise take the annotated POS
-    pos_aggregated <- anno_df %>%
-      group_by(doc_id) %>%
-      summarise(
-        upos = if_else(n() > 1, "NOUN", first(upos)),
-        .groups = "drop"
-      ) %>%
-      mutate(doc_id = as.numeric(doc_id)) %>%
-      arrange(doc_id)
+    if (nrow(anno_df) == 0) {
+      pos_aggregated <- tibble::tibble(doc_id = seq_along(udpipe_input), upos = "other")
+    } else {
+      pos_aggregated <- anno_df %>%
+        group_by(doc_id) %>%
+        summarise(
+          upos = if_else(n() > 1, "NOUN", first(upos)),
+          .groups = "drop"
+        ) %>%
+        mutate(doc_id = as.numeric(doc_id)) %>%
+        arrange(doc_id)
+    }
     
     # Ensure we have the correct number of rows
-    pos_aggregated <- pos_aggregated[1:nrow(df), ]
+    if (nrow(pos_aggregated) < nrow(df)) {
+      pos_aggregated <- dplyr::bind_rows(
+        pos_aggregated,
+        tibble::tibble(
+          doc_id = seq.int(from = nrow(pos_aggregated) + 1, to = nrow(df)),
+          upos = "other"
+        )
+      )
+    }
+    pos_aggregated <- pos_aggregated[seq_len(nrow(df)), , drop = FALSE]
     
     # Add merged POS and word length columns
     df$pos <- merge_pos_categories(pos_aggregated$upos)
-    df$word_length <- nchar(df[[word_col]])
+    df$word_length <- nchar(clean_udpipe_text(df[[word_col]]))
     df$length_bucket <- dplyr::case_when(
       df$word_length >= 11 ~ "11+",
       df$word_length >= 3 ~ as.character(df$word_length),
@@ -726,10 +1169,9 @@ for (i in seq_along(dfs)) {
 
 ## Estimate Scores
 
-### zechmeister
+### zechmeister - done
 
-```{r}
-# zechmeister
+```{r eval = F}
 saved_sim <- run_simulation_pipeline(df = dfs[["zechmeister"]],
                         item_col = "word_english_name",
                         mean_col = "frequency_mean",
@@ -739,28 +1181,465 @@ saved_sim <- run_simulation_pipeline(df = dfs[["zechmeister"]],
                         max_score = 9)
 beepr::beep()
 
-save_data <- list(
-  overall_power = saved_sim$corrected_summary, 
-  overall_rel = saved_sim$split_half_rel %>% 
-    group_by(sample_size) %>% 
-    summarize(reliability_m = mean(reliability, na.rm = TRUE), .groups = "drop"),
-  pos_power = purrr::map(saved_sim$pos_pipelines, "corrected_summary"),
-  pos_rel = saved_sim$split_half_by_pos %>% 
-    group_by(sample_size, group) %>% 
-    summarize(reliability_m = mean(reliability, na.rm = TRUE), .groups = "drop"),
-  length_power = purrr::map(saved_sim$length_pipelines, "corrected_summary"),
-  length_rel = saved_sim$split_half_by_length %>% 
-    group_by(sample_size, group) %>% 
-    summarize(reliability_m = mean(reliability, na.rm = TRUE), .groups = "drop"),
-  stroke_power = purrr::map(saved_sim$stroke_pipelines, "corrected_summary"),
-  stroke_rel = saved_sim$split_half_by_stroke %>% 
-    group_by(sample_size, group) %>% 
-    summarize(reliability_m = mean(reliability, na.rm = TRUE), .groups = "drop")
-)
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/zechmeister.rds")
 ```
 
-## Get Data to Save
+### gilhooly - done
 
-```{r}
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["gilhooly"]],
+                        item_col = "word_english",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 40,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
 
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/gilhooly.rds")
 ```
+
+### surprenant here
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["surprenant"]],
+                        item_col = "word_english",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 63,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/surprenant.rds")
+```
+
+### barca ready
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["barca"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/barca.rds")
+```
+
+### morrow ready
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["morrow"]],
+                        item_col = "word_english",
+                        mean_col = "familiar_mean_older",
+                        sd_col = "frequency_sd_older",
+                        n_per_item = 54,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/morrow_old.rds")
+```
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["morrow"]],
+                        item_col = "word_english",
+                        mean_col = "familiar_mean_younger",
+                        sd_col = "familiar_sd_younger",
+                        n_per_item = 53,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/morrow_young.rds")
+```
+
+### dedeyne to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["dedeyne"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/dedeyne.rds")
+```
+
+### ferrand to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["ferrand"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/ferrand.rds")
+```
+
+### janschewitz to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["janschewitz"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/janschewitz.rds")
+```
+
+### desrochers to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["desrochers"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/desrochers.rds")
+```
+
+### dellarosa to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["dellarosa"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/dellarosa.rds")
+```
+  
+### desrochers10 to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["desrochers10"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/desrochers10.rds")
+```
+  
+### eilola_finnish to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["eilola_finnish"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/eilola_finnish.rds")
+```
+  
+### eilola_english to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["eilola_english"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/eilola_english.rds")
+```
+  
+### schroder to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["schroder"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/schroder.rds")
+```
+  
+### ferre to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["ferre"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/ferre.rds")
+```
+
+### montefinese to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["montefinese"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/montefinese.rds")
+```
+  
+### montefinese14 to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["montefinese14"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/montefinese14.rds")
+```
+  
+### moreno to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["moreno"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/moreno.rds")
+```
+  
+### juhasz to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["juhasz"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/juhasz.rds")
+```
+  
+### guasch to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["guasch"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/guasch.rds")
+```
+
+### hinojosa to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["hinojosa"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/hinojosa.rds")
+```
+  
+### sianipar to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["sianipar"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/sianipar.rds")
+```
+  
+### soares to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["soares"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/soares.rds")
+```
+  
+### yee to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["yee"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/yee.rds")
+```
+  
+### borelli to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["borelli"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/borelli.rds")
+```
+
+### chedid to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["chedid"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/chedid.rds")
+```  
+
+### bonin to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["bonin"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/bonin.rds")
+```
+
