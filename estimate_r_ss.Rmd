@@ -185,98 +185,110 @@ run_simulation_pipeline <- function(
   )
   
   # ---- STEP 10: Full pipeline by POS ----
-  pos_groups <- unique(na.omit(df$pos))
-  
-  # Identify small POS groups to combine
-  pos_counts <- df %>%
-    group_by(pos) %>%
-    summarise(n_items = n_distinct(.data[[item_col]]), .groups = "drop")
-  
-  small_pos <- pos_counts %>%
-    filter(n_items < 8) %>%
-    pull(pos)
-  
-  pos_results <- list()
-  for (pos in unique(na.omit(df$pos))) {
-    binned_pos <- if_else(pos %in% small_pos, "Other", pos)
+  # Only run if pos column exists
+  if ("pos" %in% names(df)) {
+    pos_groups <- unique(na.omit(df$pos))
     
-    if (!(binned_pos %in% names(pos_results))) {
-      df_pos <- df %>%
-        mutate(binned_pos = if_else(
-          .data[["pos"]] %in% small_pos,
-          "Other",
-          .data[["pos"]]
-        )) %>%
-        filter(binned_pos == binned_pos)
+    # Identify small POS groups to combine
+    pos_counts <- df %>%
+      group_by(pos) %>%
+      summarise(n_items = n_distinct(.data[[item_col]]), .groups = "drop")
+    
+    small_pos <- pos_counts %>%
+      filter(n_items < 8) %>%
+      pull(pos)
+    
+    pos_results <- list()
+    for (pos in unique(na.omit(df$pos))) {
+      binned_pos <- if_else(pos %in% small_pos, "Other", pos)
       
-      if (nrow(df_pos) > 0) {
-        pos_pipeline <- run_simulation_core(
-          df = df_pos,
-          item_col = item_col,
-          mean_col = mean_col,
-          sd_col = sd_col,
-          n_per_item = n_per_item,
-          min_score = min_score,
-          max_score = max_score,
-          start = start,
-          stop = stop,
-          increase = increase,
-          nsim = nsim,
-          pilot_sample_size = pilot_sample_size,
-          power_levels = power_levels
-        )
+      if (!(binned_pos %in% names(pos_results))) {
+        df_pos <- df %>%
+          mutate(binned_pos = if_else(
+            .data[["pos"]] %in% small_pos,
+            "Other",
+            .data[["pos"]]
+          )) %>%
+          filter(binned_pos == binned_pos)
         
-        pos_results[[binned_pos]] <- pos_pipeline
+        if (nrow(df_pos) > 0) {
+          pos_pipeline <- run_simulation_core(
+            df = df_pos,
+            item_col = item_col,
+            mean_col = mean_col,
+            sd_col = sd_col,
+            n_per_item = n_per_item,
+            min_score = min_score,
+            max_score = max_score,
+            start = start,
+            stop = stop,
+            increase = increase,
+            nsim = nsim,
+            pilot_sample_size = pilot_sample_size,
+            power_levels = power_levels
+          )
+          
+          pos_results[[binned_pos]] <- pos_pipeline
+        }
       }
     }
+  } else {
+    warning("'pos' column not found in data. Skipping POS subgroup analysis.")
+    pos_results <- NULL
   }
   
   # ---- STEP 11: Full pipeline by word length ----
-  length_groups <- unique(na.omit(df[[length_col]]))
-  
-  # For lengths, use binning logic: combine adjacent small ones
-  length_counts <- df %>%
-    group_by(!!sym(length_col)) %>%
-    summarise(n_items = n_distinct(.data[[item_col]]), .groups = "drop") %>%
-    arrange(!!sym(length_col))
-  
-  small_lengths <- length_counts %>%
-    filter(n_items < 8) %>%
-    pull(!!sym(length_col))
-  
-  length_results <- list()
-  for (len in unique(na.omit(df[[length_col]]))) {
-    binned_len <- if_else(len %in% small_lengths, "Other", as.character(len))
+  # Only run if length column exists
+  if (length_col %in% names(df)) {
+    length_groups <- unique(na.omit(df[[length_col]]))
     
-    if (!(binned_len %in% names(length_results))) {
-      df_len <- df %>%
-        mutate(binned_len = if_else(
-          .data[[length_col]] %in% small_lengths,
-          "Other",
-          as.character(.data[[length_col]])
-        )) %>%
-        filter(binned_len == binned_len)
+    # For lengths, use binning logic: combine adjacent small ones
+    length_counts <- df %>%
+      group_by(!!sym(length_col)) %>%
+      summarise(n_items = n_distinct(.data[[item_col]]), .groups = "drop") %>%
+      arrange(!!sym(length_col))
+    
+    small_lengths <- length_counts %>%
+      filter(n_items < 8) %>%
+      pull(!!sym(length_col))
+    
+    length_results <- list()
+    for (len in unique(na.omit(df[[length_col]]))) {
+      binned_len <- if_else(len %in% small_lengths, "Other", as.character(len))
       
-      if (nrow(df_len) > 0) {
-        length_pipeline <- run_simulation_core(
-          df = df_len,
-          item_col = item_col,
-          mean_col = mean_col,
-          sd_col = sd_col,
-          n_per_item = n_per_item,
-          min_score = min_score,
-          max_score = max_score,
-          start = start,
-          stop = stop,
-          increase = increase,
-          nsim = nsim,
-          pilot_sample_size = pilot_sample_size,
-          power_levels = power_levels
-        )
+      if (!(binned_len %in% names(length_results))) {
+        df_len <- df %>%
+          mutate(binned_len = if_else(
+            .data[[length_col]] %in% small_lengths,
+            "Other",
+            as.character(.data[[length_col]])
+          )) %>%
+          filter(binned_len == binned_len)
         
-        length_results[[binned_len]] <- length_pipeline
+        if (nrow(df_len) > 0) {
+          length_pipeline <- run_simulation_core(
+            df = df_len,
+            item_col = item_col,
+            mean_col = mean_col,
+            sd_col = sd_col,
+            n_per_item = n_per_item,
+            min_score = min_score,
+            max_score = max_score,
+            start = start,
+            stop = stop,
+            increase = increase,
+            nsim = nsim,
+            pilot_sample_size = pilot_sample_size,
+            power_levels = power_levels
+          )
+          
+          length_results[[binned_len]] <- length_pipeline
+        }
       }
     }
+  } else {
+    warning(paste0("'", length_col, "' column not found in data. Skipping length subgroup analysis."))
+    length_results <- NULL
   }
   
   return(list(
@@ -480,7 +492,28 @@ languages <- unique(languages[!is.na(languages)])
 # Download UDPipe models for each unique language and store paths
 model_paths <- list()
 for (lang in languages) {
-  model_paths[[lang]] <- udpipe_download_model(language = lang)
+  # Map language names to local model files
+  lang_map <- list(
+    "chinese" = "chinese-gsd-ud-2.5-191206.udpipe",
+    "dutch" = "dutch-alpino-ud-2.5-191206.udpipe",
+    "english" = "english-ewt-ud-2.5-191206.udpipe",
+    "french" = "french-gsd-ud-2.5-191206.udpipe",
+    "german" = "german-gsd-ud-2.5-191206.udpipe",
+    "indonesian" = "indonesian-gsd-ud-2.5-191206.udpipe",
+    "italian" = "italian-isdt-ud-2.5-191206.udpipe",
+    "spanish" = "spanish-gsd-ud-2.5-191206.udpipe"
+  )
+  
+  # Check if local model file exists
+  local_file <- lang_map[[lang]]
+  if (!is.null(local_file) && file.exists(local_file)) {
+    model_paths[[lang]] <- local_file
+    cat("Using local model for", lang, ":", local_file, "\n")
+  } else {
+    # Fall back to downloading if local file not found
+    cat("Local model not found for", lang, ". Downloading...\n")
+    model_paths[[lang]] <- udpipe_download_model(language = lang)
+  }
 }
 
 # Process each dataset to add POS and word length
@@ -539,6 +572,7 @@ saved_sim <- run_simulation_pipeline(df = dfs[["zechmeister"]],
                         n_per_item = 40,
                         min_score = 1,
                         max_score = 9)
+beepr::beep()
 
 saveRDS(saved_sim, "simulation/zechmeister_sim.Rds")
 ```
