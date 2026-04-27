@@ -987,7 +987,13 @@ dfs <- list(
   mikla = rio::import("data/2018_Miklashevsky_JPsycholinguistRes.xlsx"),
   morucci = rio::import("data/2019_Morucci_JCogn.csv"),
   scott = rio::import("data/2019_Scott_BRM.csv"),
-  verheyen = rio::import("data/2020_Verheyen_BRM.csv")
+  verheyen = rio::import("data/2020_Verheyen_BRM.csv"),
+  lima = rio::import("data/2021_de Lima_SAGEOpen.csv"),
+  liu = rio::import("data/2021_Liu_FrontPsychol.csv"),
+  petit = rio::import("data/2021_Peti-Stantic_BRM.xlsx"),
+  ballot = rio::import("2022_Ballot_BRM.xlsx"),
+  sarli = rio::import("data/2022_Sarli_BRM.xlsx"),
+  
   
 )
 
@@ -1002,17 +1008,11 @@ dfs <- list(
 # "data/2016_Gruhn_PsycholRep.csv"
 # "data/2023_Su_BRM.csv"
 # "data/2020_Wang_FrontPsychol.xlsx"
+# "data/2021_Borelli_PLOSONE.docx"
+# "data/2021_Song_SAGE Open.xls"
 
 
-#   "data/2021_Borelli_PLOSONE.docx",
-#   "data/2021_de Lima_SAGEOpen.xlsx",
-#   "data/2021_Liu_FrontPsychol.XLSX",
-#   "data/2021_Peti-Stantić_BRM_1.tsv",
-#   "data/2021_Peti-Stantić_BRM_2.tsv",
-#   "data/2021_Peti-Stantić_BRM.xlsx",
-#   "data/2021_Song_SAGE Open.xls",
-#   "data/2022_Ballot_BRM.zip",
-#   "data/2022_Sarli_BRM.xlsx",
+#   ,
 #   "data/2023_Raslescu_DIB.zip",
 #   "data/2023_Su_BRM_2.pdf",
 #   "data/2023_Su_BRM.csv",
