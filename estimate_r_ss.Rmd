@@ -48,14 +48,24 @@ run_simulation_core <- function(
   pilot_sample_size = 100,
   power_levels = c(80, 85, 90, 95)
 ) {
+  cat(sprintf("Core run started: %s\n", item_col))
+  cat(sprintf("  rows in input: %d\n", nrow(df)))
   
   # ---- STEP 1: Build items dataframe ----
-  items <- data.frame(
-    item = df[[item_col]],
-    mean = df[[mean_col]],
-    sd   = df[[sd_col]],
-    n    = rep(n_per_item, nrow(df))
-  ) %>%
+  items <- df %>%
+    mutate(
+      item = .data[[item_col]],
+      mean = .data[[mean_col]],
+      sd   = .data[[sd_col]],
+      n    = n_per_item
+    ) %>%
+    select(
+      item,
+      mean,
+      sd,
+      n,
+      everything()
+    ) %>%
     na.omit()
   
   # ---- STEP 2: Simulate data ----
@@ -68,7 +78,9 @@ run_simulation_core <- function(
                                       sd = ..2))) %>%
     unnest(scores) %>%
     mutate(score = round(scores)) %>%
-    select(item, score)
+    select(item, score, everything(), -scores, -mean, -sd, -n)
+  
+  cat(sprintf("  simulated data ready: %d rows\n", nrow(sim_data)))
   
   # ---- STEP 3: Cutoff ----
   cutoff <- calculate_cutoff(
@@ -106,6 +118,8 @@ run_simulation_core <- function(
     power_levels = power_levels
   )
   
+  cat("Core run done\n")
+  
   return(list(
     sim_data = sim_data,
     cutoff = cutoff,
@@ -132,6 +146,7 @@ run_simulation_pipeline <- function(
   power_levels = c(80, 85, 90, 95),
   length_col = "word_length"
 ) {
+  cat(sprintf("Pipeline started: %s\n", item_col))
   
   # Run core steps 1-6
   core_results <- run_simulation_core(
@@ -167,49 +182,79 @@ run_simulation_pipeline <- function(
       )
     })
   )
+  cat("  split-half reliability done\n")
   
   # ---- STEP 8: Split-half by POS ----
-  split_half_by_pos <- split_half_by_subgroup(
-    dat = sim_data,
-    item_col = "item",
-    score_col = "score",
-    group_col = "pos"
-  )
+  if ("pos" %in% names(sim_data)) {
+    pos_counts_check <- sim_data %>%
+      distinct(item, pos) %>%
+      group_by(pos) %>%
+      summarise(n_items = n_distinct(item), .groups = "drop")
+    
+    if (all(pos_counts_check$n_items >= 10)) {
+      split_half_by_pos <- split_half_by_subgroup(
+        dat = sim_data,
+        item_col = "item",
+        score_col = "score",
+        group_col = "pos",
+        min_items = 10
+      )
+      cat("  split-half by POS done\n")
+    } else {
+      warning(
+        paste0(
+          "Skipping POS analyses because at least one POS category has fewer than 10 items: ",
+          paste0(pos_counts_check$pos, "=", pos_counts_check$n_items, collapse = ", ")
+        )
+      )
+      split_half_by_pos <- NULL
+    }
+  } else {
+    warning("'pos' column not found in simulated data. Skipping POS split-half analysis.")
+    split_half_by_pos <- NULL
+  }
   
   # ---- STEP 9: Split-half by word length ----
-  split_half_by_length <- split_half_by_subgroup(
-    dat = sim_data,
-    item_col = "item",
-    score_col = "score",
-    group_col = length_col
-  )
+  if ("length_bucket" %in% names(sim_data)) {
+    length_counts_check <- sim_data %>%
+      filter(!is.na(.data[["length_bucket"]])) %>%
+      distinct(item, length_bucket) %>%
+      group_by(length_bucket) %>%
+      summarise(n_items = n_distinct(item), .groups = "drop")
+    
+    if (all(length_counts_check$n_items >= 10)) {
+      split_half_by_length <- split_half_by_subgroup(
+        dat = sim_data,
+        item_col = "item",
+        score_col = "score",
+        group_col = "length_bucket",
+        min_items = 10
+      )
+      cat("  split-half by length done\n")
+    } else {
+      warning(
+        paste0(
+          "Skipping length analyses because at least one length bucket has fewer than 10 items: ",
+          paste0(length_counts_check$length_bucket, "=", length_counts_check$n_items, collapse = ", ")
+        )
+      )
+      split_half_by_length <- NULL
+    }
+  } else {
+    warning("length_bucket column not found in simulated data. Skipping length split-half analysis.")
+    split_half_by_length <- NULL
+  }
   
   # ---- STEP 10: Full pipeline by POS ----
-  # Only run if pos column exists
-  if ("pos" %in% names(df)) {
-    pos_groups <- unique(na.omit(df$pos))
-    
-    # Identify small POS groups to combine
-    pos_counts <- df %>%
-      group_by(pos) %>%
-      summarise(n_items = n_distinct(.data[[item_col]]), .groups = "drop")
-    
-    small_pos <- pos_counts %>%
-      filter(n_items < 8) %>%
-      pull(pos)
-    
+  if ("pos" %in% names(df) && !is.null(split_half_by_pos)) {
     pos_results <- list()
     for (pos in unique(na.omit(df$pos))) {
-      binned_pos <- if_else(pos %in% small_pos, "Other", pos)
+      binned_pos <- pos
+      cat(sprintf("  POS subgroup: %s\n", binned_pos))
       
       if (!(binned_pos %in% names(pos_results))) {
         df_pos <- df %>%
-          mutate(binned_pos = if_else(
-            .data[["pos"]] %in% small_pos,
-            "Other",
-            .data[["pos"]]
-          )) %>%
-          filter(binned_pos == binned_pos)
+          filter(.data[["pos"]] == .env$binned_pos)
         
         if (nrow(df_pos) > 0) {
           pos_pipeline <- run_simulation_core(
@@ -229,9 +274,12 @@ run_simulation_pipeline <- function(
           )
           
           pos_results[[binned_pos]] <- pos_pipeline
+          cat(sprintf("  POS subgroup done: %s\n", binned_pos))
         }
       }
     }
+  } else if (is.null(split_half_by_pos)) {
+    pos_results <- NULL
   } else {
     warning("'pos' column not found in data. Skipping POS subgroup analysis.")
     pos_results <- NULL
@@ -239,31 +287,15 @@ run_simulation_pipeline <- function(
   
   # ---- STEP 11: Full pipeline by word length ----
   # Only run if length column exists
-  if (length_col %in% names(df)) {
-    length_groups <- unique(na.omit(df[[length_col]]))
-    
-    # For lengths, use binning logic: combine adjacent small ones
-    length_counts <- df %>%
-      group_by(!!sym(length_col)) %>%
-      summarise(n_items = n_distinct(.data[[item_col]]), .groups = "drop") %>%
-      arrange(!!sym(length_col))
-    
-    small_lengths <- length_counts %>%
-      filter(n_items < 8) %>%
-      pull(!!sym(length_col))
-    
+  if ("length_bucket" %in% names(df) && !is.null(split_half_by_length)) {
     length_results <- list()
-    for (len in unique(na.omit(df[[length_col]]))) {
-      binned_len <- if_else(len %in% small_lengths, "Other", as.character(len))
+    for (len in unique(na.omit(df$length_bucket))) {
+      binned_len <- as.character(len)
+      cat(sprintf("  length subgroup: %s\n", binned_len))
       
       if (!(binned_len %in% names(length_results))) {
         df_len <- df %>%
-          mutate(binned_len = if_else(
-            .data[[length_col]] %in% small_lengths,
-            "Other",
-            as.character(.data[[length_col]])
-          )) %>%
-          filter(binned_len == binned_len)
+          filter(.data[["length_bucket"]] == .env$len)
         
         if (nrow(df_len) > 0) {
           length_pipeline <- run_simulation_core(
@@ -283,13 +315,89 @@ run_simulation_pipeline <- function(
           )
           
           length_results[[binned_len]] <- length_pipeline
+          cat(sprintf("  length subgroup done: %s\n", binned_len))
         }
       }
     }
+  } else if (is.null(split_half_by_length)) {
+    length_results <- NULL
   } else {
-    warning(paste0("'", length_col, "' column not found in data. Skipping length subgroup analysis."))
+    warning("length_bucket column not found in data. Skipping length subgroup analysis.")
     length_results <- NULL
   }
+
+  # ---- STEP 12: Split-half by stroke count ----
+  if ("stroke_bucket" %in% names(sim_data)) {
+    stroke_counts_check <- sim_data %>%
+      filter(!is.na(.data[["stroke_bucket"]])) %>%
+      distinct(item, stroke_bucket) %>%
+      group_by(stroke_bucket) %>%
+      summarise(n_items = n_distinct(item), .groups = "drop")
+    
+    if (all(stroke_counts_check$n_items >= 10)) {
+      split_half_by_stroke <- split_half_by_subgroup(
+        dat = sim_data,
+        item_col = "item",
+        score_col = "score",
+        group_col = "stroke_bucket",
+        min_items = 10
+      )
+      cat("  split-half by stroke done\n")
+    } else {
+      warning(
+        paste0(
+          "Skipping stroke analyses because at least one stroke bucket has fewer than 10 items: ",
+          paste0(stroke_counts_check$stroke_bucket, "=", stroke_counts_check$n_items, collapse = ", ")
+        )
+      )
+      split_half_by_stroke <- NULL
+    }
+  } else {
+    warning("stroke_bucket column not found in simulated data. Skipping stroke split-half analysis.")
+    split_half_by_stroke <- NULL
+  }
+
+  # ---- STEP 13: Full pipeline by stroke count ----
+  if ("stroke_bucket" %in% names(df) && !is.null(split_half_by_stroke)) {
+    stroke_results <- list()
+    for (stroke in unique(na.omit(df$stroke_bucket))) {
+      binned_stroke <- as.character(stroke)
+      cat(sprintf("  stroke subgroup: %s\n", binned_stroke))
+      
+      if (!(binned_stroke %in% names(stroke_results))) {
+        df_stroke <- df %>%
+          filter(.data[["stroke_bucket"]] == .env$stroke)
+        
+        if (nrow(df_stroke) > 0) {
+          stroke_pipeline <- run_simulation_core(
+            df = df_stroke,
+            item_col = item_col,
+            mean_col = mean_col,
+            sd_col = sd_col,
+            n_per_item = n_per_item,
+            min_score = min_score,
+            max_score = max_score,
+            start = start,
+            stop = stop,
+            increase = increase,
+            nsim = nsim,
+            pilot_sample_size = pilot_sample_size,
+            power_levels = power_levels
+          )
+          
+          stroke_results[[binned_stroke]] <- stroke_pipeline
+          cat(sprintf("  stroke subgroup done: %s\n", binned_stroke))
+        }
+      }
+    }
+  } else if (is.null(split_half_by_stroke)) {
+    stroke_results <- NULL
+  } else {
+    warning("stroke_bucket column not found in data. Skipping stroke subgroup analysis.")
+    stroke_results <- NULL
+  }
+  
+  cat("Pipeline done\n")
   
   return(list(
     sim_data = sim_data,
@@ -300,8 +408,10 @@ run_simulation_pipeline <- function(
     split_half_rel = split_half_rel,
     split_half_by_pos = split_half_by_pos,
     split_half_by_length = split_half_by_length,
+    split_half_by_stroke = split_half_by_stroke,
     pos_pipelines = pos_results,
-    length_pipelines = length_results
+    length_pipelines = length_results,
+    stroke_pipelines = stroke_results
   ))
 }
 
@@ -352,7 +462,7 @@ split_half_by_subgroup <- function(dat,
   # Identify small groups
   small_groups <- group_counts %>%
     filter(n_items < min_items) %>%
-    pull(.data[[group_col]])
+    pull(!!sym(group_col))
   
   # Create binned group column
   if (group_col == "word_length") {
@@ -517,6 +627,15 @@ for (lang in languages) {
 }
 
 # Process each dataset to add POS and word length
+merge_pos_categories <- function(upos) {
+  dplyr::case_when(
+    upos %in% c("NOUN", "PROPN", "PRON", "NUM") ~ "noun",
+    upos %in% c("ADJ", "ADV") ~ "modifiers",
+    upos %in% c("AUX", "VERB") ~ "verb",
+    TRUE ~ "other"
+  )
+}
+
 for (i in seq_along(dfs)) {
   df <- dfs[[i]]
   word_col <- grep("^word", names(df), value = TRUE)[1]  # Get the first column starting with "word"
@@ -546,17 +665,32 @@ for (i in seq_along(dfs)) {
     # Ensure we have the correct number of rows
     pos_aggregated <- pos_aggregated[1:nrow(df), ]
     
-    # Add POS and word length columns
-    df$pos <- pos_aggregated$upos
+    # Add merged POS and word length columns
+    df$pos <- merge_pos_categories(pos_aggregated$upos)
     df$word_length <- nchar(df[[word_col]])
+    df$length_bucket <- dplyr::case_when(
+      df$word_length >= 11 ~ "11+",
+      df$word_length >= 3 ~ as.character(df$word_length),
+      TRUE ~ NA_character_
+    )
     
     # Add stroke count for Chinese
     if (grepl("chinese", lang, ignore.case = TRUE)) {
       df$stroke_count <- sapply(df[[word_col]], function(word) sum(st$strokes(word)))
+      df$stroke_bucket <- dplyr::case_when(
+        df$stroke_count >= 11 ~ "11+",
+        df$stroke_count >= 1 ~ as.character(df$stroke_count),
+        TRUE ~ NA_character_
+      )
     }
   }
   dfs[[i]] <- df
 }
+
+#noun = noun/propn/pron/num
+#modifiers = adj/adv
+#verb = aux/verb
+#other = x/part/intj/det/adp/parjt/cconj/sconj/punct/sym
 ```
 
 ## Estimate Scores
@@ -574,5 +708,5 @@ saved_sim <- run_simulation_pipeline(df = dfs[["zechmeister"]],
                         max_score = 9)
 beepr::beep()
 
-saveRDS(saved_sim, "simulation/zechmeister_sim.Rds")
+saveRDS(saved_sim, "simulations/zechmeister_sim.Rds")
 ```
