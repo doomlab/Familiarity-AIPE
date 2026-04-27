@@ -26,14 +26,14 @@ library(reticulate)
 # py_install("strokes", pip = TRUE)
 use_python("/Users/erinbuchanan/Library/r-miniconda-arm64/envs/r-reticulate/bin/python")
 
-st <- rio::import("strokes")
+st <- import("strokes")
 ```
 
 ## Functions
 
 ```{r}
-# Power AIPE
-run_simulation_pipeline <- function(
+# Power AIPE - Core steps 1-6 (helper function)
+run_simulation_core <- function(
   df,
   item_col,
   mean_col,
@@ -48,7 +48,6 @@ run_simulation_pipeline <- function(
   pilot_sample_size = 100,
   power_levels = c(80, 85, 90, 95)
 ) {
-
   
   # ---- STEP 1: Build items dataframe ----
   items <- data.frame(
@@ -116,6 +115,184 @@ run_simulation_pipeline <- function(
   ))
 }
 
+# Power AIPE - Full pipeline with split-half and subgroup analyses
+run_simulation_pipeline <- function(
+  df,
+  item_col,
+  mean_col,
+  sd_col,
+  n_per_item = 68,
+  min_score = 0,
+  max_score = 9,
+  start = 20,
+  stop = 100,
+  increase = 5,
+  nsim = 500,
+  pilot_sample_size = 100,
+  power_levels = c(80, 85, 90, 95),
+  length_col = "word_length"
+) {
+  
+  # Run core steps 1-6
+  core_results <- run_simulation_core(
+    df = df,
+    item_col = item_col,
+    mean_col = mean_col,
+    sd_col = sd_col,
+    n_per_item = n_per_item,
+    min_score = min_score,
+    max_score = max_score,
+    start = start,
+    stop = stop,
+    increase = increase,
+    nsim = nsim,
+    pilot_sample_size = pilot_sample_size,
+    power_levels = power_levels
+  )
+  
+  sim_data <- core_results$sim_data
+  samples <- core_results$samples
+  
+  # ---- STEP 7: Split-half reliability ----
+  sample_sizes <- rep(seq(start, stop, by = increase), each = nsim)
+  sample_sizes <- sample_sizes[1:length(samples)]
+  
+  split_half_rel <- data.frame(
+    sample_size = sample_sizes,
+    reliability = map_dbl(samples, function(sample_dat) {
+      split_half_item_rel(
+        dat = sample_dat,
+        item_col = "item", 
+        score_col = "score"
+      )
+    })
+  )
+  
+  # ---- STEP 8: Split-half by POS ----
+  split_half_by_pos <- split_half_by_subgroup(
+    dat = sim_data,
+    item_col = "item",
+    score_col = "score",
+    group_col = "pos"
+  )
+  
+  # ---- STEP 9: Split-half by word length ----
+  split_half_by_length <- split_half_by_subgroup(
+    dat = sim_data,
+    item_col = "item",
+    score_col = "score",
+    group_col = length_col
+  )
+  
+  # ---- STEP 10: Full pipeline by POS ----
+  pos_groups <- unique(na.omit(df$pos))
+  
+  # Identify small POS groups to combine
+  pos_counts <- df %>%
+    group_by(pos) %>%
+    summarise(n_items = n_distinct(.data[[item_col]]), .groups = "drop")
+  
+  small_pos <- pos_counts %>%
+    filter(n_items < 8) %>%
+    pull(pos)
+  
+  pos_results <- list()
+  for (pos in unique(na.omit(df$pos))) {
+    binned_pos <- if_else(pos %in% small_pos, "Other", pos)
+    
+    if (!(binned_pos %in% names(pos_results))) {
+      df_pos <- df %>%
+        mutate(binned_pos = if_else(
+          .data[["pos"]] %in% small_pos,
+          "Other",
+          .data[["pos"]]
+        )) %>%
+        filter(binned_pos == binned_pos)
+      
+      if (nrow(df_pos) > 0) {
+        pos_pipeline <- run_simulation_core(
+          df = df_pos,
+          item_col = item_col,
+          mean_col = mean_col,
+          sd_col = sd_col,
+          n_per_item = n_per_item,
+          min_score = min_score,
+          max_score = max_score,
+          start = start,
+          stop = stop,
+          increase = increase,
+          nsim = nsim,
+          pilot_sample_size = pilot_sample_size,
+          power_levels = power_levels
+        )
+        
+        pos_results[[binned_pos]] <- pos_pipeline
+      }
+    }
+  }
+  
+  # ---- STEP 11: Full pipeline by word length ----
+  length_groups <- unique(na.omit(df[[length_col]]))
+  
+  # For lengths, use binning logic: combine adjacent small ones
+  length_counts <- df %>%
+    group_by(!!sym(length_col)) %>%
+    summarise(n_items = n_distinct(.data[[item_col]]), .groups = "drop") %>%
+    arrange(!!sym(length_col))
+  
+  small_lengths <- length_counts %>%
+    filter(n_items < 8) %>%
+    pull(!!sym(length_col))
+  
+  length_results <- list()
+  for (len in unique(na.omit(df[[length_col]]))) {
+    binned_len <- if_else(len %in% small_lengths, "Other", as.character(len))
+    
+    if (!(binned_len %in% names(length_results))) {
+      df_len <- df %>%
+        mutate(binned_len = if_else(
+          .data[[length_col]] %in% small_lengths,
+          "Other",
+          as.character(.data[[length_col]])
+        )) %>%
+        filter(binned_len == binned_len)
+      
+      if (nrow(df_len) > 0) {
+        length_pipeline <- run_simulation_core(
+          df = df_len,
+          item_col = item_col,
+          mean_col = mean_col,
+          sd_col = sd_col,
+          n_per_item = n_per_item,
+          min_score = min_score,
+          max_score = max_score,
+          start = start,
+          stop = stop,
+          increase = increase,
+          nsim = nsim,
+          pilot_sample_size = pilot_sample_size,
+          power_levels = power_levels
+        )
+        
+        length_results[[binned_len]] <- length_pipeline
+      }
+    }
+  }
+  
+  return(list(
+    sim_data = sim_data,
+    cutoff = core_results$cutoff,
+    samples = samples,
+    proportion_summary = core_results$proportion_summary,
+    corrected_summary = core_results$corrected_summary,
+    split_half_rel = split_half_rel,
+    split_half_by_pos = split_half_by_pos,
+    split_half_by_length = split_half_by_length,
+    pos_pipelines = pos_results,
+    length_pipelines = length_results
+  ))
+}
+
 # Split Half
 split_half_item_rel <- function(dat, item_col = "item", score_col = "score") {
   
@@ -145,6 +322,68 @@ split_half_item_rel <- function(dat, item_col = "item", score_col = "score") {
   rel <- (2 * r) / (1 + r)
   
   rel
+}
+
+# Split Half by Subgroup (with intelligent binning of small groups)
+split_half_by_subgroup <- function(dat, 
+                                   item_col = "item", 
+                                   score_col = "score", 
+                                   group_col = "pos",
+                                   min_items = 8) {
+  
+  # Count items per group
+  group_counts <- dat %>%
+    distinct(.data[[item_col]], .data[[group_col]]) %>%
+    group_by(.data[[group_col]]) %>%
+    summarise(n_items = n(), .groups = "drop")
+  
+  # Identify small groups
+  small_groups <- group_counts %>%
+    filter(n_items < min_items) %>%
+    pull(.data[[group_col]])
+  
+  # Create binned group column
+  if (group_col == "word_length") {
+    # For numeric lengths, intelligently combine adjacent small groups
+    dat_binned <- dat %>%
+      mutate(
+        binned_group = if_else(
+          .data[[group_col]] %in% small_groups,
+          "Other",
+          as.character(.data[[group_col]])
+        )
+      )
+  } else {
+    # For categorical (POS), combine small ones into "Other"
+    dat_binned <- dat %>%
+      mutate(
+        binned_group = if_else(
+          .data[[group_col]] %in% small_groups,
+          "Other",
+          .data[[group_col]]
+        )
+      )
+  }
+  
+  # Calculate reliability for each binned group
+  results <- tibble()
+  for (grp in unique(dat_binned$binned_group)) {
+    grp_data <- dat_binned %>% filter(binned_group == grp)
+    
+    # Only calculate if there are items in this group
+    if (n_distinct(grp_data[[item_col]]) > 1) {
+      rel <- split_half_item_rel(grp_data, item_col, score_col)
+      
+      results <- bind_rows(results, tibble(
+        group = grp,
+        n_items = n_distinct(grp_data[[item_col]]),
+        n_observations = nrow(grp_data),
+        reliability = rel
+      ))
+    }
+  }
+  
+  results
 }
 ```
 
@@ -293,23 +532,13 @@ for (i in seq_along(dfs)) {
 
 ```{r}
 # zechmeister
-run_simulation_pipeline(df = dfs[["zechmeister"]],
+saved_sim <- run_simulation_pipeline(df = dfs[["zechmeister"]],
                         item_col = "word_english_name",
-                        mean_col = "frequency_mean")
+                        mean_col = "frequency_mean",
+                        sd_col = "frequency_sd",
+                        n_per_item = 40,
+                        min_score = 1,
+                        max_score = 9)
 
-
-df,
-  item_col,
-  mean_col,
-  sd_col,
-  n_per_item = 68,
-  min_score = 0,
-  max_score = 9,
-  start = 20,
-  stop = 100,
-  increase = 5,
-  nsim = 500,
-  pilot_sample_size = 100,
-  power_levels = c(80, 85, 90, 95)
-
+saveRDS(saved_sim, "simulation/zechmeister_sim.Rds")
 ```
