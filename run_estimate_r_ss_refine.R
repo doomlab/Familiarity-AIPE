@@ -18,7 +18,6 @@ main <- function() {
   dir.create("simulations/refined", showWarnings = FALSE, recursive = TRUE)
 
   log_file <- "simulations/refined/refine.log"
-  cat("", file = log_file)
 
   log_line("loading shared functions from functions.R", log_file = log_file)
 

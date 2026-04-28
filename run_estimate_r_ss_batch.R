@@ -768,7 +768,6 @@ main <- function() {
   dir.create("simulations", showWarnings = FALSE, recursive = TRUE)
 
   log_file <- "estimate_r_ss_batch.log"
-  cat("", file = log_file)
 
   log_line("loading shared functions from functions.R", log_file = log_file)
 

@@ -18,7 +18,6 @@ main <- function() {
   dir.create("simulations/pilot", showWarnings = FALSE, recursive = TRUE)
 
   log_file <- "simulations/pilot/pilot.log"
-  cat("", file = log_file)
 
   log_line("loading shared functions from functions.R", log_file = log_file)
 
