@@ -84,7 +84,6 @@ main <- function() {
     increase = 10,
     nsim = 10,
     power_levels = c(70, 75, 80, 85, 90, 95),
-    item_sample_limits = list(su = 500),
     log_file = log_file
   )
 
