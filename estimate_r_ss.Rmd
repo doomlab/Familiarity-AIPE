@@ -967,8 +967,7 @@ dfs <- list(
   desrochers = rio::import("data/2009_Desrochers_BRM.csv"),
   dellarosa = rio::import("data/2010_DellaRosa_BRM.csv"),
   desrochers10 = rio::import("data/2010_Desrochers_BRM.csv"),
-  eilola_finnish = rio::import("data/2010_Eilola_BRM_finnish.csv"),
-  eilola_english =  rio::import("data/2010_Eilola_BRM_english.csv"),
+  eilola =  rio::import("data/2010_Eilola_BRM.csv"),
   schroder = rio::import("data/2011_Schroder_BRM.csv"),
   ferre = rio::import("data/2012_Ferre_BRM.csv"),
   montefinese = rio::import("data/2013_Montefinese_BRM.csv"),
@@ -993,7 +992,13 @@ dfs <- list(
   petit = rio::import("data/2021_Peti-Stantic_BRM.xlsx"),
   ballot = rio::import("2022_Ballot_BRM.xlsx"),
   sarli = rio::import("data/2022_Sarli_BRM.xlsx"),
+  raslescu = rio::import("data/2023_Raslescu_DIB.xlsx"),
   
+  chan = rio::import("data/2024_Chan_BRM.xlsx"),
+  conca = rio::import("data/2024_Conca_BRM.xlsx"),
+  falcinelli = rio::import("data/2024_Falcinellli_Collabra.xlsx"),
+  mahjou = rio::import("data/2024_Mahjoubnavaz_JPsycholinguistRes.xlsx"),
+  borsa = rio::import("data/2025_Borsa_BrainSci.xlsx")
   
 )
 
@@ -1010,17 +1015,10 @@ dfs <- list(
 # "data/2020_Wang_FrontPsychol.xlsx"
 # "data/2021_Borelli_PLOSONE.docx"
 # "data/2021_Song_SAGE Open.xls"
+# "data/2023_Su_BRM.csv"
 
 
-#   ,
-#   "data/2023_Raslescu_DIB.zip",
 #   "data/2023_Su_BRM_2.pdf",
-#   "data/2023_Su_BRM.csv",
-#   "data/2024_Chan_BRM.zip",
-#   "data/2024_Conca_BRM.xlsx",
-#   "data/2024_Falcinellli_Collabra.xlsx",
-#   "data/2024_Mahjoubnavaz_JPsycholinguistRes.xlsx",
-#   "data/2025_Borsa_BrainSci.xlsx"
 ```
 
 ## Get Word Length, Stroke Count, and POS
@@ -1283,7 +1281,7 @@ save_data <- build_save_data(saved_sim)
 saveRDS(save_data, "simulations/dedeyne.rds")
 ```
 
-### ferrand ready
+### ferrand done
 
 ```{r eval = F}
 saved_sim <- run_simulation_pipeline(df = dfs[["ferrand"]],
@@ -1368,10 +1366,10 @@ save_data <- build_save_data(saved_sim)
 saveRDS(save_data, "simulations/desrochers10.rds")
 ```
   
-### eilola_finnish to do
+### eilola to do
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["eilola_finnish"]],
+saved_sim <- run_simulation_pipeline(df = dfs[["eilola"]],
                         item_col = "word_italian",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
@@ -1384,11 +1382,9 @@ save_data <- build_save_data(saved_sim)
 
 saveRDS(save_data, "simulations/eilola_finnish.rds")
 ```
-  
-### eilola_english to do
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["eilola_english"]],
+saved_sim <- run_simulation_pipeline(df = dfs[["eilola"]],
                         item_col = "word_italian",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
