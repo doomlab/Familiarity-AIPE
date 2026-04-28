@@ -1,13 +1,139 @@
 #!/usr/bin/env Rscript
 
 attach_required_packages <- function() {
-  pkgs <- c("rio", "dplyr", "semanticprimeR", "purrr", "tidyr", "truncnorm", "psych")
+  pkgs <- c("rio", "dplyr", "semanticprimeR", "purrr", "tidyr", "truncnorm", "psych",
+            "udpipe", "reticulate", "tibble")
 
   for (pkg in pkgs) {
     suppressPackageStartupMessages(
       library(pkg, character.only = TRUE)
     )
   }
+}
+
+LANG_MAP <- list(
+  "chinese-gsd"  = "chinese-gsd-ud-2.5-191206.udpipe",
+  "chinese-gsds" = "chinese-gsd-ud-2.5-191206.udpipe",
+  "chinese"      = "chinese-gsd-ud-2.5-191206.udpipe",
+  "dutch"        = "dutch-alpino-ud-2.5-191206.udpipe",
+  "english"      = "english-ewt-ud-2.5-191206.udpipe",
+  "french"       = "french-gsd-ud-2.5-191206.udpipe",
+  "german"       = "german-gsd-ud-2.5-191206.udpipe",
+  "indonesian"   = "indonesian-gsd-ud-2.5-191206.udpipe",
+  "italian"      = "italian-isdt-ud-2.5-191206.udpipe",
+  "spanish"      = "spanish-gsd-ud-2.5-191206.udpipe",
+  "finnish"      = "finnish-tdt-ud-2.5-191206.udpipe",
+  "croatian"     = "croatian-set-ud-2.5-191206.udpipe",
+  "portuguese"   = "portuguese-bosque-ud-2.5-191206.udpipe",
+  "russian"      = "russian-gsd-ud-2.5-191206.udpipe",
+  "turkish"      = "turkish-imst-ud-2.5-191206.udpipe",
+  "persian"      = "persian-seraji-ud-2.5-191206.udpipe"
+)
+
+item_col_to_lang <- function(item_col) {
+  lang <- sub("^word_", "", item_col)
+  lang <- gsub("_", "-", lang)
+  lang <- gsub("-name$", "", lang)
+  lang
+}
+
+merge_pos_categories <- function(upos) {
+  dplyr::case_when(
+    upos %in% c("NOUN", "PROPN", "PRON", "NUM") ~ "noun",
+    upos %in% c("ADJ", "ADV") ~ "modifiers",
+    upos %in% c("AUX", "VERB") ~ "verb",
+    TRUE ~ "other"
+  )
+}
+
+clean_udpipe_text <- function(x) {
+  x <- as.character(x)
+  x <- iconv(x, from = "", to = "UTF-8", sub = "")
+  x[is.na(x)] <- ""
+  x
+}
+
+load_udpipe_models <- function(jobs, log_file = "estimate_r_ss_batch.log") {
+  langs <- unique(vapply(jobs$item_col, item_col_to_lang, character(1)))
+  loaded <- list()
+  for (lang in langs) {
+    model_file <- LANG_MAP[[lang]]
+    if (is.null(model_file) || !file.exists(model_file)) {
+      log_line("no udpipe model for '", lang, "' - POS will be skipped", log_file = log_file)
+      next
+    }
+    loaded[[lang]] <- udpipe_load_model(model_file)
+    log_line("loaded udpipe model: ", lang, log_file = log_file)
+  }
+  loaded
+}
+
+tag_df_with_pos_length <- function(df, item_col, udpipe_models,
+                                   stroke_tagger = NULL,
+                                   log_file = "estimate_r_ss_batch.log") {
+  lang <- item_col_to_lang(item_col)
+  model <- udpipe_models[[lang]]
+
+  if (!is.null(model)) {
+    udpipe_input <- clean_udpipe_text(df[[item_col]])
+    anno_df <- tryCatch(
+      {
+        anno <- udpipe_annotate(model, x = udpipe_input, doc_id = seq_along(udpipe_input))
+        as.data.frame(anno)
+      },
+      error = function(e) {
+        warning(sprintf("UDPipe annotation failed for %s: %s", item_col, conditionMessage(e)))
+        tibble::tibble(doc_id = seq_along(udpipe_input), upos = "other")
+      }
+    )
+
+    if (nrow(anno_df) == 0) {
+      pos_aggregated <- tibble::tibble(doc_id = seq_along(udpipe_input), upos = "other")
+    } else {
+      pos_aggregated <- anno_df %>%
+        dplyr::group_by(doc_id) %>%
+        dplyr::summarise(
+          upos = dplyr::if_else(dplyr::n() > 1, "NOUN", dplyr::first(upos)),
+          .groups = "drop"
+        ) %>%
+        dplyr::mutate(doc_id = as.numeric(doc_id)) %>%
+        dplyr::arrange(doc_id)
+    }
+
+    if (nrow(pos_aggregated) < nrow(df)) {
+      pos_aggregated <- dplyr::bind_rows(
+        pos_aggregated,
+        tibble::tibble(
+          doc_id = seq.int(nrow(pos_aggregated) + 1L, nrow(df)),
+          upos = "other"
+        )
+      )
+    }
+    pos_aggregated <- pos_aggregated[seq_len(nrow(df)), , drop = FALSE]
+    df$pos <- merge_pos_categories(pos_aggregated$upos)
+  } else {
+    log_line("skipping POS tagging for: ", item_col, log_file = log_file)
+  }
+
+  df$word_length <- nchar(clean_udpipe_text(df[[item_col]]))
+  df$length_bucket <- dplyr::case_when(
+    df$word_length >= 11 ~ "11+",
+    df$word_length >= 3  ~ as.character(df$word_length),
+    TRUE ~ NA_character_
+  )
+
+  if (grepl("chinese", lang, ignore.case = TRUE) && !is.null(stroke_tagger)) {
+    df$stroke_count <- vapply(df[[item_col]], function(word) {
+      tryCatch(sum(stroke_tagger$strokes(word)), error = function(e) NA_integer_)
+    }, numeric(1))
+    df$stroke_bucket <- dplyr::case_when(
+      df$stroke_count >= 11 ~ "11+",
+      df$stroke_count >= 1  ~ as.character(df$stroke_count),
+      TRUE ~ NA_character_
+    )
+  }
+
+  df
 }
 
 load_rmd_functions <- function(path) {
@@ -514,7 +640,9 @@ build_jobs <- function() {
   )
 }
 
-run_job <- function(job, skip_existing = TRUE, log_file = "estimate_r_ss_batch.log") {
+run_job <- function(job, udpipe_models, stroke_tagger = NULL,
+                    skip_existing = TRUE,
+                    log_file = "estimate_r_ss_batch.log") {
   out_file <- file.path("simulations", job$output)
 
   if (skip_existing && file.exists(out_file)) {
@@ -529,6 +657,10 @@ run_job <- function(job, skip_existing = TRUE, log_file = "estimate_r_ss_batch.l
     rm(df)
     gc()
   }, add = TRUE)
+
+  df <- tag_df_with_pos_length(
+    df, job$item_col, udpipe_models, stroke_tagger, log_file
+  )
 
   saved_sim <- run_simulation_pipeline(
     df = df,
@@ -570,6 +702,25 @@ main <- function() {
   jobs <- build_jobs()
   jobs <- jobs[jobs$status != "done", , drop = FALSE]
 
+  log_line("loading udpipe models", log_file = log_file)
+  udpipe_models <- load_udpipe_models(jobs, log_file = log_file)
+
+  reticulate::use_python(
+    "/Users/erinbuchanan/Library/r-miniconda-arm64/envs/r-reticulate/bin/python",
+    required = FALSE
+  )
+
+  stroke_tagger <- tryCatch(
+    reticulate::import("strokes"),
+    error = function(e) {
+      log_line(
+        "strokes Python package unavailable - stroke analysis skipped",
+        log_file = log_file
+      )
+      NULL
+    }
+  )
+
   shard_total <- as.integer(Sys.getenv("SHARD_TOTAL", "1"))
   shard_index <- as.integer(Sys.getenv("SHARD_INDEX", "1"))
 
@@ -600,7 +751,8 @@ main <- function() {
   for (i in seq_len(nrow(jobs))) {
     job <- jobs[i, , drop = FALSE]
     results[[i]] <- tryCatch(
-      run_job(job, skip_existing = TRUE, log_file = log_file),
+      run_job(job, udpipe_models, stroke_tagger,
+              skip_existing = TRUE, log_file = log_file),
       error = function(e) {
         log_line("error ", job$name, ": ", conditionMessage(e), log_file = log_file)
         NULL

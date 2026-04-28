@@ -536,7 +536,7 @@ run_simulation_core <- function(
       n,
       everything()
     ) %>%
-    na.omit()
+    filter(!is.na(item) & !is.na(mean) & !is.na(sd))
   
   # ---- STEP 2: Simulate data ----
   sim_data <- items %>%
@@ -1055,7 +1055,8 @@ for (lang in languages) {
     "croatian" = "croatian-set-ud-2.5-191206.udpipe",
     "portuguese" = "portuguese-bosque-ud-2.5-191206.udpipe",
     "russian" = "russian-gsd-ud-2.5-191206.udpipe",
-    "turkish" = "russian-gsd-ud-2.5-191206.udpipe"
+    "turkish" = "turkish-imst-ud-2.5-191206.udpipe",
+    "persian" = "persian-seraji-ud-2.5-191206.udpipe"
   )
   
   # Check if local model file exists
