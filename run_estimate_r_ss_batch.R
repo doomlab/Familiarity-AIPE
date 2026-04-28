@@ -705,10 +705,15 @@ main <- function() {
   log_line("loading udpipe models", log_file = log_file)
   udpipe_models <- load_udpipe_models(jobs, log_file = log_file)
 
-  reticulate::use_python(
-    "/Users/erinbuchanan/Library/r-miniconda-arm64/envs/r-reticulate/bin/python",
-    required = FALSE
-  )
+  local({
+    py <- tryCatch(
+      reticulate::conda_python("r-reticulate"),
+      error = function(e) NULL
+    )
+    if (!is.null(py) && file.exists(py)) {
+      reticulate::use_python(py, required = FALSE)
+    }
+  })
 
   stroke_tagger <- tryCatch(
     reticulate::import("strokes"),
