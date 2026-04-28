@@ -677,6 +677,7 @@ run_job <- function(job, udpipe_models, stroke_tagger = NULL,
                     increase = 5,
                     nsim = 500,
                     power_levels = c(80, 85, 90, 95),
+                    item_sample_limits = list(su = 500),
                     log_file = "estimate_r_ss_batch.log") {
   out_file <- file.path(out_dir, job$output)
 
@@ -692,6 +693,19 @@ run_job <- function(job, udpipe_models, stroke_tagger = NULL,
     rm(df)
     gc()
   }, add = TRUE)
+
+  sample_limit <- item_sample_limits[[job$name]]
+  if (!is.null(sample_limit) && nrow(df) > sample_limit) {
+    log_line(
+      "sampling ",
+      sample_limit,
+      " rows for ",
+      job$name,
+      " test run",
+      log_file = log_file
+    )
+    df <- dplyr::slice_sample(df, n = sample_limit)
+  }
 
   df <- tag_df_with_pos_length(
     df, job$item_col, udpipe_models, stroke_tagger
@@ -733,6 +747,7 @@ run_jobs_stage <- function(jobs,
                            increase = 5,
                            nsim = 500,
                            power_levels = c(80, 85, 90, 95),
+                           item_sample_limits = list(su = 500),
                            log_file = "estimate_r_ss_batch.log") {
   results <- vector("list", nrow(jobs))
   for (i in seq_len(nrow(jobs))) {
@@ -749,6 +764,7 @@ run_jobs_stage <- function(jobs,
         increase = increase,
         nsim = nsim,
         power_levels = power_levels,
+        item_sample_limits = item_sample_limits,
         log_file = log_file
       ),
       error = function(e) {
@@ -835,6 +851,7 @@ main <- function() {
     increase = 5,
     nsim = 500,
     power_levels = c(80, 85, 90, 95),
+    item_sample_limits = list(su = 500),
     log_file = log_file
   )
 }
