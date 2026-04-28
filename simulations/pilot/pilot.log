@@ -37,3 +37,13 @@
 [2026-04-28 12:53:25] start  moreno  ->  simulations/pilot/moreno.rds 
 [2026-04-28 12:57:16] done  moreno  ->  simulations/pilot/moreno.rds 
 [2026-04-28 12:57:16] start  guasch  ->  simulations/pilot/guasch.rds 
+[2026-04-28 13:03:28] done  guasch  ->  simulations/pilot/guasch.rds 
+[2026-04-28 13:03:28] start  hinojosa  ->  simulations/pilot/hinojosa.rds 
+[2026-04-28 13:07:09] done  hinojosa  ->  simulations/pilot/hinojosa.rds 
+[2026-04-28 13:07:09] start  sianipar  ->  simulations/pilot/sianipar.rds 
+[2026-04-28 13:13:16] done  sianipar  ->  simulations/pilot/sianipar.rds 
+[2026-04-28 13:13:16] start  soares  ->  simulations/pilot/soares.rds 
+[2026-04-28 13:29:26] done  soares  ->  simulations/pilot/soares.rds 
+[2026-04-28 13:29:26] start  yee  ->  simulations/pilot/yee.rds 
+[2026-04-28 13:30:35] done  yee  ->  simulations/pilot/yee.rds 
+[2026-04-28 13:30:35] start  chedid  ->  simulations/pilot/chedid.rds 
