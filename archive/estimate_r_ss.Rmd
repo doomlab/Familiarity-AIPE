@@ -26,7 +26,7 @@ library(reticulate)
 # py_install("strokes", pip = TRUE)
 use_python("/Users/erinbuchanan/Library/r-miniconda-arm64/envs/r-reticulate/bin/python")
 
-st <- import("strokes")
+st <- tryCatch(import("strokes"), error = function(e) { message("strokes unavailable"); NULL })
 ```
 
 ## Functions
@@ -46,7 +46,7 @@ run_population_pipeline <- function(
 ) {
   population <- population %>%
     filter(is.finite(.data[["score"]]))
-  
+
   cutoff <- calculate_cutoff(
     population = population,
     grouping_items = "item",
@@ -54,7 +54,7 @@ run_population_pipeline <- function(
     minimum = min_score,
     maximum = max_score
   )
-  
+
   samples <- simulate_samples(
     start = start,
     stop = stop,
@@ -64,26 +64,35 @@ run_population_pipeline <- function(
     nsim = nsim,
     grouping_items = "item"
   )
-  
+
   samples <- purrr::map(samples, function(sample_dat) {
     sample_dat %>%
       filter(is.finite(.data[["score"]]))
   })
-  
+
   proportion_summary <- calculate_proportion(
     samples = samples,
     cutoff = cutoff$cutoff,
     grouping_items = "item",
     score = "score"
   )
-  
+
+  cat(sprintf("  cutoff: %.3f  prop_var: %.4f  n_items: %d\n",
+              cutoff$cutoff, cutoff$prop_var, n_distinct(population$item)))
+  cat(sprintf("  proportion_summary rows: %d  prop range: [%.3f, %.3f]\n",
+              nrow(proportion_summary),
+              if (nrow(proportion_summary) > 0) min(proportion_summary$percent_below, na.rm = TRUE) else NA,
+              if (nrow(proportion_summary) > 0) max(proportion_summary$percent_below, na.rm = TRUE) else NA))
+
   corrected_summary <- calculate_correction(
     proportion_summary = proportion_summary,
     pilot_sample_size = n_per_item,
     proportion_variability = cutoff$prop_var,
     power_levels = power_levels
   )
-  
+
+  cat(sprintf("  corrected_summary rows: %d\n", nrow(corrected_summary)))
+
   list(
     cutoff = cutoff,
     samples = samples,
@@ -111,12 +120,16 @@ summarise_split_half <- function(dat) {
 build_save_data <- function(saved_sim) {
   list(
     overall_power = saved_sim$corrected_summary,
+    overall_curve = saved_sim$proportion_summary,
     overall_rel = summarise_split_half(saved_sim$split_half_rel),
     pos_power = purrr::map(saved_sim$pos_pipelines, "corrected_summary"),
+    pos_curve = purrr::map(saved_sim$pos_pipelines, "proportion_summary"),
     pos_rel = summarise_split_half(saved_sim$split_half_by_pos),
     length_power = purrr::map(saved_sim$length_pipelines, "corrected_summary"),
+    length_curve = purrr::map(saved_sim$length_pipelines, "proportion_summary"),
     length_rel = summarise_split_half(saved_sim$split_half_by_length),
     stroke_power = purrr::map(saved_sim$stroke_pipelines, "corrected_summary"),
+    stroke_curve = purrr::map(saved_sim$stroke_pipelines, "proportion_summary"),
     stroke_rel = summarise_split_half(saved_sim$split_half_by_stroke)
   )
 }
@@ -125,15 +138,15 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
   if (!dir.exists(sim_dir)) {
     stop(sprintf("Simulation directory not found: %s", sim_dir))
   }
-  
+
   sim_files <- list.files(sim_dir, pattern = "\\.rds$", full.names = TRUE)
   if (length(sim_files) == 0) {
     stop(sprintf("No .rds files found in %s", sim_dir))
   }
-  
+
   run_ids <- tools::file_path_sans_ext(basename(sim_files))
   runs <- purrr::map(sim_files, readRDS)
-  
+
   extract_overall_power <- function(run_obj) {
     if (is.list(run_obj) && !is.null(run_obj$overall_power)) {
       return(run_obj$overall_power)
@@ -158,12 +171,12 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
     if (!is.list(run_obj) || is.null(run_obj[[field_name]])) {
       return(tibble::tibble())
     }
-    
+
     purrr::imap_dfr(run_obj[[field_name]], function(tbl, group_name) {
       if (is.null(tbl) || nrow(tbl) == 0) {
         return(tibble::tibble())
       }
-      
+
       tbl %>%
         mutate(group = as.character(group_name))
     })
@@ -173,7 +186,7 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
     if (!is.list(run_obj) || is.null(run_obj[[field_name]])) {
       return(tibble::tibble())
     }
-    
+
     run_obj[[field_name]]
   }
 
@@ -182,19 +195,19 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
     if (all(x %in% c("noun", "modifiers", "verb", "other"))) {
       return(c("noun", "modifiers", "verb", "other")[c("noun", "modifiers", "verb", "other") %in% x])
     }
-    
+
     x_num <- suppressWarnings(as.numeric(gsub("\\+$", "", x)))
     if (all(!is.na(x_num))) {
       return(x[order(x_num, x)])
     }
-    
+
     x[order(x)]
   }
 
   summarize_subgroup_targets <- function(power_tbl, rel_tbl, target_power = 80, target_rel = 0.80) {
     power_summary <- tibble::tibble()
     rel_summary <- tibble::tibble()
-    
+
     if (!is.null(power_tbl) && nrow(power_tbl) > 0) {
       power_summary <- power_tbl %>%
         mutate(
@@ -213,7 +226,7 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
         ) %>%
         mutate(target = paste0(target_power, "% power"))
     }
-    
+
     if (!is.null(rel_tbl) && nrow(rel_tbl) > 0) {
       rel_summary <- rel_tbl %>%
         mutate(
@@ -236,7 +249,7 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
         ) %>%
         select(group, target, recommended_sample_size, median_reliability)
     }
-    
+
     summary_parts <- list()
     if (nrow(power_summary) > 0) {
       summary_parts[[length(summary_parts) + 1]] <- power_summary %>%
@@ -246,17 +259,17 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
       summary_parts[[length(summary_parts) + 1]] <- rel_summary %>%
         select(group, target, recommended_sample_size)
     }
-    
+
     summary_tbl <- if (length(summary_parts) > 0) {
       bind_rows(summary_parts) %>%
         mutate(group = as.character(group))
     } else {
       tibble::tibble(group = character(), target = character(), recommended_sample_size = numeric())
     }
-    
+
     plot_tbl <- summary_tbl %>%
       mutate(group = factor(group, levels = ordered_group_levels(group)))
-    
+
     plot_obj <- NULL
     if (nrow(plot_tbl) > 0) {
       plot_obj <- ggplot2::ggplot(plot_tbl, ggplot2::aes(x = group, y = recommended_sample_size, color = target)) +
@@ -270,7 +283,7 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
         ) +
         ggplot2::theme_minimal()
     }
-    
+
     list(
       power_summary = power_summary,
       reliability_summary = rel_summary,
@@ -278,13 +291,13 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
       plot = plot_obj
     )
   }
-  
+
   overall_power <- purrr::imap_dfr(runs, function(run_obj, i) {
     power_tbl <- extract_overall_power(run_obj)
     if (is.null(power_tbl) || nrow(power_tbl) == 0) {
       return(tibble::tibble())
     }
-    
+
     power_tbl %>%
       mutate(
         run_id = run_ids[[i]],
@@ -297,7 +310,7 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
     if (is.null(rel_tbl) || nrow(rel_tbl) == 0) {
       return(tibble::tibble())
     }
-    
+
     rel_tbl %>%
       mutate(
         run_id = run_ids[[i]],
@@ -346,7 +359,7 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
     rel_tbl %>%
       mutate(run_id = run_ids[[i]], source_file = sim_files[[i]])
   })
-  
+
   if (nrow(overall_power) == 0 && nrow(overall_rel) == 0 &&
       nrow(pos_power) == 0 && nrow(pos_rel) == 0 &&
       nrow(length_power) == 0 && nrow(length_rel) == 0 &&
@@ -360,7 +373,7 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
       recommendation_plot = NULL
     ))
   }
-  
+
   if (nrow(overall_power) > 0) {
     recommendation_summary <- overall_power %>%
       mutate(
@@ -380,7 +393,7 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
       ) %>%
       arrange(percent_below) %>%
       mutate(recommended_sample_size = cummax(recommended_sample_size))
-    
+
     recommendation_plot <- ggplot2::ggplot(
       overall_power %>% mutate(percent_below = factor(percent_below, levels = as.character(recommendation_summary$percent_below))),
       ggplot2::aes(x = percent_below, y = corrected_sample_size)
@@ -430,14 +443,14 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
         .groups = "drop"
       ) %>%
       arrange(sample_size)
-    
+
     reliability_targets <- c(0.80, 0.85, 0.90, 0.95)
     reliability_recommendation <- purrr::map_dfr(reliability_targets, function(target) {
       hit <- reliability_summary %>%
         filter(median_reliability >= target) %>%
         arrange(sample_size) %>%
         slice_head(n = 1)
-      
+
       if (nrow(hit) == 0) {
         return(tibble::tibble(
           target_reliability = target,
@@ -445,7 +458,7 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
           median_reliability = NA_real_
         ))
       }
-      
+
       tibble::tibble(
         target_reliability = target,
         recommended_sample_size = hit$sample_size[[1]],
@@ -453,7 +466,7 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
       )
     }) %>%
       mutate(recommended_sample_size = as.numeric(recommended_sample_size))
-    
+
     reliability_plot <- ggplot2::ggplot(
       reliability_summary,
       ggplot2::aes(x = sample_size, y = median_reliability)
@@ -487,7 +500,7 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
   pos_targets <- summarize_subgroup_targets(pos_power, pos_rel, target_power = 80, target_rel = 0.80)
   length_targets <- summarize_subgroup_targets(length_power, length_rel, target_power = 80, target_rel = 0.80)
   stroke_targets <- summarize_subgroup_targets(stroke_power, stroke_rel, target_power = 80, target_rel = 0.80)
-  
+
   list(
     files = sim_files,
     runs = runs,
@@ -520,7 +533,7 @@ run_simulation_core <- function(
 ) {
   cat(sprintf("Core run started: %s\n", item_col))
   cat(sprintf("  rows in input: %d\n", nrow(df)))
-  
+
   # ---- STEP 1: Build items dataframe ----
   items <- df %>%
     mutate(
@@ -537,7 +550,7 @@ run_simulation_core <- function(
       everything()
     ) %>%
     filter(!is.na(item) & !is.na(mean) & !is.na(sd))
-  
+
   # ---- STEP 2: Simulate data ----
   sim_data <- items %>%
     mutate(scores = pmap(list(mean, sd, n),
@@ -550,9 +563,9 @@ run_simulation_core <- function(
     mutate(score = round(scores)) %>%
     filter(is.finite(.data[["score"]])) %>%
     select(item, score, any_of(c("pos", "length_bucket", "stroke_bucket")))
-  
+
   cat(sprintf("  simulated data ready: %d rows\n", nrow(sim_data)))
-  
+
   # ---- STEP 3: Cutoff ----
   pipeline_results <- run_population_pipeline(
     population = sim_data,
@@ -569,9 +582,9 @@ run_simulation_core <- function(
   samples <- pipeline_results$samples
   proportion_summary <- pipeline_results$proportion_summary
   corrected_summary <- pipeline_results$corrected_summary
-  
+
   cat("Core run done\n")
-  
+
   return(list(
     sim_data = sim_data,
     cutoff = cutoff,
@@ -598,7 +611,7 @@ run_simulation_pipeline <- function(
   length_col = "word_length"
 ) {
   cat(sprintf("Pipeline started: %s\n", item_col))
-  
+
   # Run core steps 1-6
   core_results <- run_simulation_core(
     df = df,
@@ -614,26 +627,26 @@ run_simulation_pipeline <- function(
     nsim = nsim,
     power_levels = power_levels
   )
-  
+
   sim_data <- core_results$sim_data
   samples <- core_results$samples
-  
+
   # ---- STEP 7: Split-half reliability ----
   sample_sizes <- rep(seq(start, stop, by = increase), each = nsim)
   sample_sizes <- sample_sizes[1:length(samples)]
-  
+
   split_half_rel <- data.frame(
     sample_size = sample_sizes,
     reliability = map_dbl(samples, function(sample_dat) {
       split_half_item_rel(
         dat = sample_dat,
-        item_col = "item", 
+        item_col = "item",
         score_col = "score"
       )
     })
   )
   cat("  split-half reliability done\n")
-  
+
   # ---- STEP 8: Split-half by POS ----
   if ("pos" %in% names(sim_data)) {
     split_half_by_pos <- split_half_by_subgroup_samples(
@@ -649,7 +662,7 @@ run_simulation_pipeline <- function(
     warning("'pos' column not found in simulated data. Skipping POS split-half analysis.")
     split_half_by_pos <- NULL
   }
-  
+
   # ---- STEP 9: Split-half by word length ----
   if ("length_bucket" %in% names(sim_data)) {
     split_half_by_length <- split_half_by_subgroup_samples(
@@ -665,7 +678,7 @@ run_simulation_pipeline <- function(
     warning("length_bucket column not found in simulated data. Skipping length split-half analysis.")
     split_half_by_length <- NULL
   }
-  
+
   # ---- STEP 10: Full pipeline by POS ----
   if ("pos" %in% names(df)) {
     pos_counts_check <- df %>%
@@ -673,16 +686,16 @@ run_simulation_pipeline <- function(
       group_by(pos) %>%
       summarise(n_items = n_distinct(.data[[item_col]]), .groups = "drop")
     valid_pos <- pos_counts_check %>% filter(n_items >= 10)
-    
+
     pos_results <- list()
     for (pos in valid_pos$pos) {
       binned_pos <- pos
       cat(sprintf("  POS subgroup: %s\n", binned_pos))
-      
+
       if (!(binned_pos %in% names(pos_results))) {
         df_pos <- sim_data %>%
           filter(.data[["pos"]] == .env$binned_pos)
-        
+
         if (nrow(df_pos) > 0) {
           pos_pipeline <- run_population_pipeline(
             population = df_pos,
@@ -695,7 +708,7 @@ run_simulation_pipeline <- function(
             nsim = nsim,
             power_levels = power_levels
           )
-          
+
           pos_results[[binned_pos]] <- pos_pipeline
           cat(sprintf("  POS subgroup done: %s\n", binned_pos))
         }
@@ -705,9 +718,8 @@ run_simulation_pipeline <- function(
     warning("'pos' column not found in data. Skipping POS subgroup analysis.")
     pos_results <- NULL
   }
-  
+
   # ---- STEP 11: Full pipeline by word length ----
-  # Only run if length column exists
   if ("length_bucket" %in% names(df)) {
     length_counts_check <- df %>%
       filter(!is.na(.data[["length_bucket"]])) %>%
@@ -715,16 +727,16 @@ run_simulation_pipeline <- function(
       group_by(length_bucket) %>%
       summarise(n_items = n_distinct(.data[[item_col]]), .groups = "drop")
     valid_length <- length_counts_check %>% filter(n_items >= 10)
-    
+
     length_results <- list()
     for (len in valid_length$length_bucket) {
       binned_len <- as.character(len)
       cat(sprintf("  length subgroup: %s\n", binned_len))
-      
+
       if (!(binned_len %in% names(length_results))) {
         df_len <- sim_data %>%
           filter(.data[["length_bucket"]] == .env$len)
-        
+
         if (nrow(df_len) > 0) {
           length_pipeline <- run_population_pipeline(
             population = df_len,
@@ -737,7 +749,7 @@ run_simulation_pipeline <- function(
             nsim = nsim,
             power_levels = power_levels
           )
-          
+
           length_results[[binned_len]] <- length_pipeline
           cat(sprintf("  length subgroup done: %s\n", binned_len))
         }
@@ -772,16 +784,16 @@ run_simulation_pipeline <- function(
       group_by(stroke_bucket) %>%
       summarise(n_items = n_distinct(.data[[item_col]]), .groups = "drop")
     valid_stroke <- stroke_counts_check %>% filter(n_items >= 10)
-    
+
     stroke_results <- list()
     for (stroke in valid_stroke$stroke_bucket) {
       binned_stroke <- as.character(stroke)
       cat(sprintf("  stroke subgroup: %s\n", binned_stroke))
-      
+
       if (!(binned_stroke %in% names(stroke_results))) {
         df_stroke <- sim_data %>%
           filter(.data[["stroke_bucket"]] == .env$stroke)
-        
+
         if (nrow(df_stroke) > 0) {
           stroke_pipeline <- run_population_pipeline(
             population = df_stroke,
@@ -794,7 +806,7 @@ run_simulation_pipeline <- function(
             nsim = nsim,
             power_levels = power_levels
           )
-          
+
           stroke_results[[binned_stroke]] <- stroke_pipeline
           cat(sprintf("  stroke subgroup done: %s\n", binned_stroke))
         }
@@ -804,9 +816,9 @@ run_simulation_pipeline <- function(
     warning("stroke_bucket column not found in data. Skipping stroke subgroup analysis.")
     stroke_results <- NULL
   }
-  
+
   cat("Pipeline done\n")
-  
+
   return(list(
     sim_data = sim_data,
     cutoff = core_results$cutoff,
@@ -825,32 +837,32 @@ run_simulation_pipeline <- function(
 
 # Split Half
 split_half_item_rel <- function(dat, item_col = "item", score_col = "score") {
-  
-  dat <- dat %>% 
-    group_by(.data[[item_col]]) %>% 
-    mutate(id = row_number()) %>% 
+
+  dat <- dat %>%
+    group_by(.data[[item_col]]) %>%
+    mutate(id = row_number()) %>%
     ungroup()
-  
+
   ids <- unique(dat$id)
   half1_ids <- sample(ids, length(ids) / 2)
-  
+
   half1 <- dat %>%
     filter(id %in% half1_ids) %>%
     group_by(.data[[item_col]]) %>%
     summarise(mean1 = mean(.data[[score_col]], na.rm = TRUE), .groups = "drop")
-  
+
   half2 <- dat %>%
     filter(!id %in% half1_ids) %>%
     group_by(.data[[item_col]]) %>%
     summarise(mean2 = mean(.data[[score_col]], na.rm = TRUE), .groups = "drop")
-  
+
   merged <- inner_join(half1, half2, by = item_col)
-  
+
   r <- cor(merged$mean1, merged$mean2, use = "complete.obs")
-  
+
   # Spearman-Brown correction
   rel <- (2 * r) / (1 + r)
-  
+
   rel
 }
 
@@ -863,33 +875,33 @@ split_half_by_subgroup_samples <- function(samples,
                                            min_items = 10) {
   sample_sizes <- sample_sizes[seq_along(samples)]
   results <- tibble()
-  
+
   for (i in seq_along(samples)) {
     sample_dat <- samples[[i]]
     sample_size <- sample_sizes[i]
-    
+
     if (!group_col %in% names(sample_dat)) {
       warning(sprintf("'%s' column not found in sample %d. Skipping subgroup split-half.", group_col, sample_size))
       next
     }
-    
+
     group_counts <- sample_dat %>%
       distinct(.data[[item_col]], .data[[group_col]]) %>%
       group_by(.data[[group_col]]) %>%
       summarise(n_items = n(), .groups = "drop")
     valid_groups <- group_counts %>%
       filter(n_items >= min_items)
-    
+
     if (nrow(valid_groups) == 0) {
       warning(sprintf("Skipping subgroup split-half for sample size %s because no %s buckets meet the %d-item minimum.", sample_size, group_col, min_items))
       next
     }
-    
+
     for (grp in valid_groups[[group_col]]) {
       grp_data <- sample_dat %>% filter(.data[[group_col]] == .env$grp)
       if (n_distinct(grp_data[[item_col]]) > 1) {
         rel <- split_half_item_rel(grp_data, item_col, score_col)
-        
+
         results <- bind_rows(results, tibble(
           sample_size = sample_size,
           group = as.character(grp),
@@ -900,23 +912,23 @@ split_half_by_subgroup_samples <- function(samples,
       }
     }
   }
-  
+
   results
 }
 
 # Split Half by Subgroup (with intelligent binning of small groups)
-split_half_by_subgroup <- function(dat, 
-                                   item_col = "item", 
-                                   score_col = "score", 
+split_half_by_subgroup <- function(dat,
+                                   item_col = "item",
+                                   score_col = "score",
                                    group_col = "pos",
                                    min_items = 8) {
-  
+
   # Count items per group
   group_counts <- dat %>%
     distinct(.data[[item_col]], .data[[group_col]]) %>%
     group_by(.data[[group_col]]) %>%
     summarise(n_items = n(), .groups = "drop")
-  
+
   # Calculate reliability for each group that meets the minimum size
   results <- tibble()
   for (grp in unique(group_counts[[group_col]])) {
@@ -933,12 +945,12 @@ split_half_by_subgroup <- function(dat,
       )
       next
     }
-    
+
     grp_data <- dat %>% filter(.data[[group_col]] == .env$grp)
-    
+
     if (n_distinct(grp_data[[item_col]]) > 1) {
       rel <- split_half_item_rel(grp_data, item_col, score_col)
-      
+
       results <- bind_rows(results, tibble(
         group = as.character(grp),
         n_items = n_distinct(grp_data[[item_col]]),
@@ -947,57 +959,135 @@ split_half_by_subgroup <- function(dat,
       ))
     }
   }
-  
+
   results
+}
+
+# POS and word length tagging helpers
+merge_pos_categories <- function(upos) {
+  dplyr::case_when(
+    upos %in% c("NOUN", "PROPN", "PRON", "NUM") ~ "noun",
+    upos %in% c("ADJ", "ADV") ~ "modifiers",
+    upos %in% c("AUX", "VERB") ~ "verb",
+    TRUE ~ "other"
+  )
+}
+
+clean_udpipe_text <- function(x) {
+  x <- as.character(x)
+  x <- iconv(x, from = "", to = "UTF-8", sub = "")
+  x[is.na(x)] <- ""
+  x
+}
+
+# Tags a single dataframe with POS, word length, and (for Chinese) stroke count.
+# udpipe_models: named list of loaded udpipe model objects keyed by language name.
+# stroke_tagger: imported Python strokes module, or NULL to skip.
+tag_df_with_pos_length <- function(df, item_col, udpipe_models, stroke_tagger = NULL) {
+  lang <- sub("^word_", "", item_col)
+  lang <- gsub("_", "-", lang)
+  lang <- gsub("-name$", "", lang)
+
+  model <- udpipe_models[[lang]]
+
+  if (!is.null(model)) {
+    udpipe_input <- clean_udpipe_text(df[[item_col]])
+    anno_df <- tryCatch(
+      {
+        anno <- udpipe_annotate(model, x = udpipe_input, doc_id = seq_along(udpipe_input))
+        as.data.frame(anno)
+      },
+      error = function(e) {
+        warning(sprintf("UDPipe annotation failed for %s: %s", item_col, conditionMessage(e)))
+        tibble::tibble(doc_id = seq_along(udpipe_input), upos = "other")
+      }
+    )
+
+    if (nrow(anno_df) == 0) {
+      pos_aggregated <- tibble::tibble(doc_id = seq_along(udpipe_input), upos = "other")
+    } else {
+      pos_aggregated <- anno_df %>%
+        dplyr::group_by(doc_id) %>%
+        dplyr::summarise(
+          upos = dplyr::if_else(dplyr::n() > 1, "NOUN", dplyr::first(upos)),
+          .groups = "drop"
+        ) %>%
+        dplyr::mutate(doc_id = as.numeric(doc_id)) %>%
+        dplyr::arrange(doc_id)
+    }
+
+    if (nrow(pos_aggregated) < nrow(df)) {
+      pos_aggregated <- dplyr::bind_rows(
+        pos_aggregated,
+        tibble::tibble(
+          doc_id = seq.int(nrow(pos_aggregated) + 1L, nrow(df)),
+          upos = "other"
+        )
+      )
+    }
+    pos_aggregated <- pos_aggregated[seq_len(nrow(df)), , drop = FALSE]
+    df$pos <- merge_pos_categories(pos_aggregated$upos)
+  } else {
+    message(sprintf("No udpipe model for '%s' - POS tagging skipped", lang))
+  }
+
+  df$word_length <- nchar(clean_udpipe_text(df[[item_col]]))
+  df$length_bucket <- dplyr::case_when(
+    df$word_length >= 11 ~ "11+",
+    df$word_length >= 3  ~ as.character(df$word_length),
+    TRUE ~ NA_character_
+  )
+
+  if (grepl("chinese", lang, ignore.case = TRUE) && !is.null(stroke_tagger)) {
+    df$stroke_count <- vapply(df[[item_col]], function(word) {
+      tryCatch(sum(stroke_tagger$strokes(word)), error = function(e) NA_integer_)
+    }, numeric(1))
+    df$stroke_bucket <- dplyr::case_when(
+      df$stroke_count >= 11 ~ "11+",
+      df$stroke_count >= 1  ~ as.character(df$stroke_count),
+      TRUE ~ NA_character_
+    )
+  }
+
+  df
 }
 ```
 
-## Data
+## Setup
 
 ```{r}
-dfs <- list(
-  zechmeister = rio::import("data/1975_Zechmeister_BRM.csv"),
-  gilhooly = rio::import("data/1977_Gilhooly_BRM.csv"),
-  surprenant = rio::import("data/1999_Surprenant_BRM.csv"),
-  barca = rio::import("data/2002_Barca_BRM.csv"),
-  morrow = rio::import("data/2005_Morrow_BRM.csv"),
-  dedeyne = rio::import("data/2008_De Deyne_BRM.csv"),
-  ferrand = rio::import("data/2008_Ferrand_BRM.csv"),
-  janschewitz = rio::import("data/2008_Janschewitz_BRM.csv"),
-  desrochers = rio::import("data/2009_Desrochers_BRM.csv"),
-  dellarosa = rio::import("data/2010_DellaRosa_BRM.csv"),
-  desrochers10 = rio::import("data/2010_Desrochers_BRM.csv"),
-  eilola =  rio::import("data/2010_Eilola_BRM.csv"),
-  schroder = rio::import("data/2011_Schroder_BRM.csv"),
-  ferre = rio::import("data/2012_Ferre_BRM.csv"),
-  montefinese14 = rio::import("data/2014_Montefinese_BRM.csv"),
-  moreno = rio::import("data/2014_Moreno_BRM.csv"),
-  guasch = rio::import("data/2016_Guasch_BRM.csv"),
-  hinojosa = rio::import("data/2016_Hinojosa_BRM.csv"),
-  sianipar = rio::import("data/2016_Sianipar_FrontPsychol.csv"),
-  soares = rio::import("data/2017_Soares_BRM.csv"),
-  yee = rio::import("data/2017_Yee_PLoSONE.csv"),
-  chedid = rio::import("data/2019_Chedid_BRM.csv"),
-  bonin = rio::import("data/2022_Bonin_BRM.csv"),
-  yao = rio::import("data/2016_Yao_BRM.csv"),
-  mikla = rio::import("data/2018_Miklashevsky_JPsycholinguistRes.xlsx"),
-  scott = rio::import("data/2019_Scott_BRM.csv"),
-  verheyen = rio::import("data/2020_Verheyen_BRM.csv"),
-  lima = rio::import("data/2021_de Lima_SAGEOpen.csv"),
-  liu = rio::import("data/2021_Liu_FrontPsychol.csv"),
-  petit = rio::import("data/2021_Peti-Stantic_BRM.xlsx"),
-  ballot = rio::import("data/2022_Ballot_BRM.xlsx"),
-  sarli = rio::import("data/2022_Sarli_BRM.xlsx"),
-  raslescu = rio::import("data/2023_Raslescu_DIB.xlsx"),
-  su = rio::import("data/2023_Su_BRM_2.xlsx"),
-  chan = rio::import("data/2024_Chan_BRM.xlsx"),
-  conca = rio::import("data/2024_Conca_BRM.xlsx"),
-  falcinelli = rio::import("data/2024_Falcinellli_Collabra.xlsx"),
-  mahjou = rio::import("data/2024_Mahjoubnavaz_JPsycholinguistRes.xlsx"),
-  borsa = rio::import("data/2025_Borsa_BrainSci.xlsx"),
-  kraljevic = rio::import("data/2018_Kraljevic_Suvremena.csv")
-  
+# Load udpipe models once; each simulation chunk reuses this list.
+LANG_MAP <- list(
+  "chinese-gsd"  = "chinese-gsd-ud-2.5-191206.udpipe",
+  "chinese-gsds" = "chinese-gsd-ud-2.5-191206.udpipe",
+  "chinese"      = "chinese-gsd-ud-2.5-191206.udpipe",
+  "dutch"        = "dutch-alpino-ud-2.5-191206.udpipe",
+  "english"      = "english-ewt-ud-2.5-191206.udpipe",
+  "french"       = "french-gsd-ud-2.5-191206.udpipe",
+  "german"       = "german-gsd-ud-2.5-191206.udpipe",
+  "indonesian"   = "indonesian-gsd-ud-2.5-191206.udpipe",
+  "italian"      = "italian-isdt-ud-2.5-191206.udpipe",
+  "spanish"      = "spanish-gsd-ud-2.5-191206.udpipe",
+  "finnish"      = "finnish-tdt-ud-2.5-191206.udpipe",
+  "croatian"     = "croatian-set-ud-2.5-191206.udpipe",
+  "portuguese"   = "portuguese-bosque-ud-2.5-191206.udpipe",
+  "russian"      = "russian-gsd-ud-2.5-191206.udpipe",
+  "turkish"      = "turkish-imst-ud-2.5-191206.udpipe",
+  "persian"      = "persian-seraji-ud-2.5-191206.udpipe"
 )
+
+udpipe_models <- list()
+for (lang in names(LANG_MAP)) {
+  model_file <- LANG_MAP[[lang]]
+  if (file.exists(model_file)) {
+    udpipe_models[[lang]] <- udpipe_load_model(model_file)
+    cat("Loaded model:", lang, "\n")
+  } else {
+    cat("Model file not found, skipping:", lang, "\n")
+  }
+}
+
+dir.create("simulations", showWarnings = FALSE, recursive = TRUE)
 
 # not usable
 # "data/2004_Clark_BRM.csv"
@@ -1020,876 +1110,733 @@ dfs <- list(
 # "data/2019_Morucci_JCogn.csv"
 ```
 
-## Get Word Length, Stroke Count, and POS
-
-```{r}
-# Extract unique languages from word column names
-languages <- sapply(dfs, function(df) {
-  word_col <- grep("^word", names(df), value = TRUE)[1]
-  if (!is.na(word_col)) {
-    lang <- sub("^word_", "", word_col)
-    lang <- gsub("_", "-", lang)
-    lang <- gsub("-name", "", lang) # specific issues
-    lang
-  } else {
-    NA
-  }
-})
-languages <- unique(languages[!is.na(languages)])
-
-# Download UDPipe models for each unique language and store paths
-model_paths <- list()
-for (lang in languages) {
-  # Map language names to local model files
-  lang_map <- list(
-    "chinese-gsd" = "chinese-gsd-ud-2.5-191206.udpipe",
-    "chinese" = "chinese-gsd-ud-2.5-191206.udpipe",
-    "dutch" = "dutch-alpino-ud-2.5-191206.udpipe",
-    "english" = "english-ewt-ud-2.5-191206.udpipe",
-    "french" = "french-gsd-ud-2.5-191206.udpipe",
-    "german" = "german-gsd-ud-2.5-191206.udpipe",
-    "indonesian" = "indonesian-gsd-ud-2.5-191206.udpipe",
-    "italian" = "italian-isdt-ud-2.5-191206.udpipe",
-    "spanish" = "spanish-gsd-ud-2.5-191206.udpipe",
-    "finnish" = "finnish-tdt-ud-2.5-191206.udpipe",
-    "croatian" = "croatian-set-ud-2.5-191206.udpipe",
-    "portuguese" = "portuguese-bosque-ud-2.5-191206.udpipe",
-    "russian" = "russian-gsd-ud-2.5-191206.udpipe",
-    "turkish" = "turkish-imst-ud-2.5-191206.udpipe",
-    "persian" = "persian-seraji-ud-2.5-191206.udpipe"
-  )
-  
-  # Check if local model file exists
-  local_file <- lang_map[[lang]]
-  if (!is.null(local_file) && file.exists(local_file)) {
-    model_paths[[lang]] <- local_file
-    cat("Using local model for", lang, ":", local_file, "\n")
-  } else {
-    # Fall back to downloading if local file not found
-    cat("Local model not found for", lang, ". Downloading...\n")
-    model_paths[[lang]] <- udpipe_download_model(language = lang)
-  }
-}
-
-# Process each dataset to add POS and word length
-merge_pos_categories <- function(upos) {
-  dplyr::case_when(
-    upos %in% c("NOUN", "PROPN", "PRON", "NUM") ~ "noun",
-    upos %in% c("ADJ", "ADV") ~ "modifiers",
-    upos %in% c("AUX", "VERB") ~ "verb",
-    TRUE ~ "other"
-  )
-}
-
-clean_udpipe_text <- function(x) {
-  x <- as.character(x)
-  x <- iconv(x, from = "", to = "UTF-8", sub = "")
-  x[is.na(x)] <- ""
-  x
-}
-
-for (i in seq_along(dfs)) {
-  df <- dfs[[i]]
-  word_col <- grep("^word", names(df), value = TRUE)[1]  # Get the first column starting with "word"
-  if (!is.na(word_col)) {
-    # Extract language from column name and convert underscores to hyphens for model format
-    lang <- sub("^word_", "", word_col)
-    lang <- gsub("_", "-", lang)
-    lang <- gsub("-name", "", lang)
-    
-    # Load the pre-downloaded model
-    model <- udpipe_load_model(model_paths[[lang]])
-    
-    # Annotate the words with UDPipe
-    udpipe_input <- clean_udpipe_text(df[[word_col]])
-    anno_df <- tryCatch(
-      {
-        anno <- udpipe_annotate(model, x = udpipe_input, doc_id = seq_along(udpipe_input))
-        as.data.frame(anno)
-      },
-      error = function(e) {
-        warning(sprintf("UDPipe annotation failed for %s: %s. Falling back to 'other'.", word_col, conditionMessage(e)))
-        tibble::tibble(doc_id = seq_along(udpipe_input), upos = "other")
-      }
-    )
-    
-    # Group by doc_id and aggregate - if multiple words, mark as NOUN, otherwise take the annotated POS
-    if (nrow(anno_df) == 0) {
-      pos_aggregated <- tibble::tibble(doc_id = seq_along(udpipe_input), upos = "other")
-    } else {
-      pos_aggregated <- anno_df %>%
-        group_by(doc_id) %>%
-        summarise(
-          upos = if_else(n() > 1, "NOUN", first(upos)),
-          .groups = "drop"
-        ) %>%
-        mutate(doc_id = as.numeric(doc_id)) %>%
-        arrange(doc_id)
-    }
-    
-    # Ensure we have the correct number of rows
-    if (nrow(pos_aggregated) < nrow(df)) {
-      pos_aggregated <- dplyr::bind_rows(
-        pos_aggregated,
-        tibble::tibble(
-          doc_id = seq.int(from = nrow(pos_aggregated) + 1, to = nrow(df)),
-          upos = "other"
-        )
-      )
-    }
-    pos_aggregated <- pos_aggregated[seq_len(nrow(df)), , drop = FALSE]
-    
-    # Add merged POS and word length columns
-    df$pos <- merge_pos_categories(pos_aggregated$upos)
-    df$word_length <- nchar(clean_udpipe_text(df[[word_col]]))
-    df$length_bucket <- dplyr::case_when(
-      df$word_length >= 11 ~ "11+",
-      df$word_length >= 3 ~ as.character(df$word_length),
-      TRUE ~ NA_character_
-    )
-    
-    # Add stroke count for Chinese
-    if (grepl("chinese", lang, ignore.case = TRUE)) {
-      df$stroke_count <- sapply(df[[word_col]], function(word) sum(st$strokes(word)))
-      df$stroke_bucket <- dplyr::case_when(
-        df$stroke_count >= 11 ~ "11+",
-        df$stroke_count >= 1 ~ as.character(df$stroke_count),
-        TRUE ~ NA_character_
-      )
-    }
-  }
-  dfs[[i]] <- df
-}
-
-#noun = noun/propn/pron/num
-#modifiers = adj/adv
-#verb = aux/verb
-#other = x/part/intj/det/adp/parjt/cconj/sconj/punct/sym
-```
-
 ## Estimate Scores
 
 ### zechmeister - done
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["zechmeister"]],
+df <- rio::import("data/1975_Zechmeister_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_english_name", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_english_name",
                         mean_col = "frequency_mean",
                         sd_col = "frequency_sd",
                         n_per_item = 40,
                         min_score = 1,
                         max_score = 9)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/zechmeister.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### gilhooly - done
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["gilhooly"]],
+df <- rio::import("data/1977_Gilhooly_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_english", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_english",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 40,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/gilhooly.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### surprenant - done
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["surprenant"]],
+df <- rio::import("data/1999_Surprenant_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_english", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_english",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 63,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/surprenant.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### barca - done
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["barca"]],
+df <- rio::import("data/2002_Barca_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_italian", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_italian",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 44,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/barca.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
-### morrow - half done
+### morrow - ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["morrow"]],
+df <- rio::import("data/2005_Morrow_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_english", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_english",
                         mean_col = "familiar_mean_older",
                         sd_col = "frequency_sd_older",
                         n_per_item = 54,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/morrow_old.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["morrow"]],
+df <- rio::import("data/2005_Morrow_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_english", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_english",
                         mean_col = "familiar_mean_younger",
                         sd_col = "familiar_sd_younger",
                         n_per_item = 53,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/morrow_young.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### dedeyne - done
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["dedeyne"]],
+df <- rio::import("data/2008_De Deyne_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_dutch", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_dutch",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 28,
                         min_score = 1,
                         max_score = 5)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/dedeyne.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### ferrand - done
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["ferrand"]],
+df <- rio::import("data/2008_Ferrand_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_french", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_french",
                         mean_col = "frequency_mean",
                         sd_col = "frequency_sd",
                         n_per_item = 28,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/ferrand.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### janschewitz ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["janschewitz"]],
+df <- rio::import("data/2008_Janschewitz_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_english", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_english",
                         mean_col = "familiarity_mean",
                         sd_col = "familiarity_sd",
                         n_per_item = 78,
                         min_score = 1,
-                        max_score = 9)
-beepr::beep()
-
+                        max_score = 9,
+                        start = 100,
+                        stop = 400,
+                        increase = 10,
+                        nsim = 10)
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/janschewitz.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### desrochers ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["desrochers"]],
+df <- rio::import("data/2009_Desrochers_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_french", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_french",
                         mean_col = "frequency_sd",
                         sd_col = "frequency_sd",
                         n_per_item = 56,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/desrochers.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### dellarosa ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["dellarosa"]],
+df <- rio::import("data/2010_DellaRosa_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_italian", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_italian",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 35,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/dellarosa.rds")
+rm(df, saved_sim, save_data); gc()
 ```
-  
+
 ### desrochers10 ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["desrochers10"]],
+df <- rio::import("data/2010_Desrochers_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_french", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_french",
                         mean_col = "frequency_mean",
                         sd_col = "frequency_sd",
                         n_per_item = 102,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/desrochers10.rds")
+rm(df, saved_sim, save_data); gc()
 ```
-  
+
 ### eilola ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["eilola"]],
+df <- rio::import("data/2010_Eilola_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_finnish", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_finnish",
                         mean_col = "familiar_mean_finnish",
                         sd_col = "familiar_sd_finnish",
                         n_per_item = 152,
                         min_score = 0,
                         max_score = 9)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/eilola_finnish.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["eilola"]],
+df <- rio::import("data/2010_Eilola_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_english", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_english",
                         mean_col = "familiar_mean_english",
                         sd_col = "familiar_mean_english",
                         n_per_item = 68,
                         min_score = 0,
                         max_score = 9)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/eilola_english.rds")
+rm(df, saved_sim, save_data); gc()
 ```
-  
+
 ### schroder ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["schroder"]],
+df <- rio::import("data/2011_Schroder_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_german", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_german",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 20,
                         min_score = 1,
                         max_score = 5)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/schroder.rds")
+rm(df, saved_sim, save_data); gc()
 ```
-  
+
 ### ferre ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["ferre"]],
+df <- rio::import("data/2012_Ferre_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_spanish", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_spanish",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 25,
                         min_score = 1,
                         max_score = 9)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/ferre.rds")
+rm(df, saved_sim, save_data); gc()
 ```
-  
+
 ### montefinese14 ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["montefinese14"]],
+df <- rio::import("data/2014_Montefinese_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_italian", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_italian",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 20,
                         min_score = 1,
                         max_score = 9)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/montefinese14.rds")
+rm(df, saved_sim, save_data); gc()
 ```
-  
+
 ### moreno ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["moreno"]],
+df <- rio::import("data/2014_Moreno_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_spanish", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_spanish",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 15,
                         min_score = 1,
                         max_score = 5)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/moreno.rds")
+rm(df, saved_sim, save_data); gc()
 ```
-  
+
 ### guasch ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["guasch"]],
+df <- rio::import("data/2016_Guasch_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_spanish", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_spanish",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 20,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/guasch.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### hinojosa ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["hinojosa"]],
+df <- rio::import("data/2016_Hinojosa_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_spanish", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_spanish",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 30,
                         min_score = 1,
                         max_score = 9)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/hinojosa.rds")
+rm(df, saved_sim, save_data); gc()
 ```
-  
+
 ### sianipar ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["sianipar"]],
+df <- rio::import("data/2016_Sianipar_FrontPsychol.csv")
+df <- tag_df_with_pos_length(df, "word_indonesian", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_indonesian",
                         mean_col = "frequency_mean_all",
                         sd_col = "frequency_sd_all",
                         n_per_item = 61,
                         min_score = 1,
                         max_score = 9)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/sianipar.rds")
+rm(df, saved_sim, save_data); gc()
 ```
-  
+
 ### soares ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["soares"]],
+df <- rio::import("data/2017_Soares_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_spanish", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_spanish",
                         mean_col = "frequency_s_mean",
                         sd_col = "frequency_s_sd",
                         n_per_item = 42,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/soares.rds")
+rm(df, saved_sim, save_data); gc()
 ```
-  
+
 ### yee ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["yee"]],
+df <- rio::import("data/2017_Yee_PLoSONE.csv")
+df <- tag_df_with_pos_length(df, "word_chinese_gsd", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_chinese_gsd",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 32,
                         min_score = 1,
                         max_score = 5)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/yee.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### chedid ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["chedid"]],
+df <- rio::import("data/2019_Chedid_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_french", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_french",
                         mean_col = "familiarity_mean_conceptual",
                         sd_col = "familiarity_sd_conceptual",
                         n_per_item = 23,
                         min_score = 0,
                         max_score = 100)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/chedid.rds")
-```  
+rm(df, saved_sim, save_data); gc()
+```
 
 ### bonin ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["bonin"]],
+df <- rio::import("data/2022_Bonin_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_french", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_french",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 28,
                         min_score = 1,
                         max_score = 5)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/bonin.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### yao ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["yao"]],
+df <- rio::import("data/2016_Yao_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_chinese-gsd", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_chinese-gsd",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 48,
                         min_score = 1,
                         max_score = 9)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/yao.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### mikla ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["mikla"]],
+df <- rio::import("data/2018_Miklashevsky_JPsycholinguistRes.xlsx")
+df <- tag_df_with_pos_length(df, "word_russian", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_russian",
                         mean_col = "frequency_mean",
                         sd_col = "frequency_sd",
                         n_per_item = 22,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/mikla.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### scott ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["scott"]],
+df <- rio::import("data/2019_Scott_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_english", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_english",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 22,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/scott.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### verheyen ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["verheyen"]],
+df <- rio::import("data/2020_Verheyen_BRM.csv")
+df <- tag_df_with_pos_length(df, "word_dutch", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_dutch",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 13,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/verheyen.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### lima ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["lima"]],
+df <- rio::import("data/2021_de Lima_SAGEOpen.csv")
+df <- tag_df_with_pos_length(df, "word_portuguese", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_portuguese",
                         mean_col = "familiar_mean_portuguese",
                         sd_col = "familiar_sd_portuguese",
                         n_per_item = 18,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/lima.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### liu ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["liu"]],
+df <- rio::import("data/2021_Liu_FrontPsychol.csv")
+df <- tag_df_with_pos_length(df, "word_chinese", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_chinese",
                         mean_col = "familiarity_mean_all",
                         sd_col = "familiarity_sd_all",
                         n_per_item = 20,
                         min_score = 1,
                         max_score = 9)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/liu.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### petit ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["petit"]],
+df <- rio::import("data/2021_Peti-Stantic_BRM.xlsx")
+df <- tag_df_with_pos_length(df, "word_croatian", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_croatian",
                         mean_col = "freq_subjective_mean_all",
                         sd_col = "freq_subjective_sd_all",
                         n_per_item = 19,
                         min_score = 1,
                         max_score = 5)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/petit.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### ballot ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["ballot"]],
+df <- rio::import("data/2022_Ballot_BRM.xlsx")
+df <- tag_df_with_pos_length(df, "word_french", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_french",
                         mean_col = "freq_subjective_mean_all",
                         sd_col = "freq_subjective_sd_all",
                         n_per_item = 137,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/ballot.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### sarli ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["sarli"]],
+df <- rio::import("data/2022_Sarli_BRM.xlsx")
+df <- tag_df_with_pos_length(df, "word_spanish", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_spanish",
                         mean_col = "familiar_mean_all",
                         sd_col = "familiar_sd_all",
                         n_per_item = 23,
                         min_score = 1,
                         max_score = 9)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/sarli.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### raslescu ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["raslescu"]],
+df <- rio::import("data/2023_Raslescu_DIB.xlsx")
+df <- tag_df_with_pos_length(df, "word_english", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_english",
                         mean_col = "freq_mean",
                         sd_col = "freq_sd",
                         n_per_item = 198,
                         min_score = 0,
                         max_score = 100)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/raslescu.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### su ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["su"]],
+df <- rio::import("data/2023_Su_BRM_2.xlsx")
+df <- tag_df_with_pos_length(df, "word_chinese-gsds", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_chinese-gsds",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 21,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/su.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### chan ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["chan"]],
+df <- rio::import("data/2024_Chan_BRM.xlsx")
+df <- tag_df_with_pos_length(df, "word_chinese-gsd", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_chinese-gsd",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 20,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/chan.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### conca ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["conca"]],
+df <- rio::import("data/2024_Conca_BRM.xlsx")
+df <- tag_df_with_pos_length(df, "word_turkish", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_turkish",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 8,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/conca.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### falcinelli ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["falcinelli"]],
+df <- rio::import("data/2024_Falcinellli_Collabra.xlsx")
+df <- tag_df_with_pos_length(df, "word_italian", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_italian",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 20,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/falcinelli.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["falcinelli"]],
+df <- rio::import("data/2024_Falcinellli_Collabra.xlsx")
+df <- tag_df_with_pos_length(df, "word_italian", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_italian",
                         mean_col = "freq_subjective_mean",
                         sd_col = "freq_subjective_sd",
                         n_per_item = 20,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/falcinelli_freq.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### mahjou ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["mahjou"]],
+df <- rio::import("data/2024_Mahjoubnavaz_JPsycholinguistRes.xlsx")
+df <- tag_df_with_pos_length(df, "word_persian", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_persian",
                         mean_col = "familiar_mean_persian",
                         sd_col = "familiar_sd_persian",
                         n_per_item = 50,
                         min_score = 1,
                         max_score = 5)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/mahjou.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### borsa ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["borsa"]],
+df <- rio::import("data/2025_Borsa_BrainSci.xlsx")
+df <- tag_df_with_pos_length(df, "word_italian", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_italian",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 20,
                         min_score = 1,
                         max_score = 7)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/borsa.rds")
+rm(df, saved_sim, save_data); gc()
 ```
 
 ### kraljevic ready
 
 ```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["kraljevic"]],
+df <- rio::import("data/2018_Kraljevic_Suvremena.csv")
+df <- tag_df_with_pos_length(df, "word_croatian", udpipe_models, st)
+saved_sim <- run_simulation_pipeline(df = df,
                         item_col = "word_croatian",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
                         n_per_item = 33,
                         min_score = 1,
                         max_score = 5)
-beepr::beep()
-
 save_data <- build_save_data(saved_sim)
-
 saveRDS(save_data, "simulations/kraljevic.rds")
+rm(df, saved_sim, save_data); gc()
 ```

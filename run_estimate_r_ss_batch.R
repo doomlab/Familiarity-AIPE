@@ -11,23 +11,30 @@ attach_required_packages <- function() {
   }
 }
 
+load_shared_functions <- function(path = "functions.R") {
+  if (!file.exists(path)) {
+    stop("Missing shared functions file: ", path)
+  }
+  source(path, local = .GlobalEnv)
+}
+
 LANG_MAP <- list(
-  "chinese-gsd"  = "chinese-gsd-ud-2.5-191206.udpipe",
-  "chinese-gsds" = "chinese-gsd-ud-2.5-191206.udpipe",
-  "chinese"      = "chinese-gsd-ud-2.5-191206.udpipe",
-  "dutch"        = "dutch-alpino-ud-2.5-191206.udpipe",
-  "english"      = "english-ewt-ud-2.5-191206.udpipe",
-  "french"       = "french-gsd-ud-2.5-191206.udpipe",
-  "german"       = "german-gsd-ud-2.5-191206.udpipe",
-  "indonesian"   = "indonesian-gsd-ud-2.5-191206.udpipe",
-  "italian"      = "italian-isdt-ud-2.5-191206.udpipe",
-  "spanish"      = "spanish-gsd-ud-2.5-191206.udpipe",
-  "finnish"      = "finnish-tdt-ud-2.5-191206.udpipe",
-  "croatian"     = "croatian-set-ud-2.5-191206.udpipe",
-  "portuguese"   = "portuguese-bosque-ud-2.5-191206.udpipe",
-  "russian"      = "russian-gsd-ud-2.5-191206.udpipe",
-  "turkish"      = "turkish-imst-ud-2.5-191206.udpipe",
-  "persian"      = "persian-seraji-ud-2.5-191206.udpipe"
+  "chinese-gsd"  = "models/chinese-gsd-ud-2.5-191206.udpipe",
+  "chinese-gsds" = "models/chinese-gsd-ud-2.5-191206.udpipe",
+  "chinese"      = "models/chinese-gsd-ud-2.5-191206.udpipe",
+  "dutch"        = "models/dutch-alpino-ud-2.5-191206.udpipe",
+  "english"      = "models/english-ewt-ud-2.5-191206.udpipe",
+  "french"       = "models/french-gsd-ud-2.5-191206.udpipe",
+  "german"       = "models/german-gsd-ud-2.5-191206.udpipe",
+  "indonesian"   = "models/indonesian-gsd-ud-2.5-191206.udpipe",
+  "italian"      = "models/italian-isdt-ud-2.5-191206.udpipe",
+  "spanish"      = "models/spanish-gsd-ud-2.5-191206.udpipe",
+  "finnish"      = "models/finnish-tdt-ud-2.5-191206.udpipe",
+  "croatian"     = "models/croatian-set-ud-2.5-191206.udpipe",
+  "portuguese"   = "models/portuguese-bosque-ud-2.5-191206.udpipe",
+  "russian"      = "models/russian-gsd-ud-2.5-191206.udpipe",
+  "turkish"      = "models/turkish-imst-ud-2.5-191206.udpipe",
+  "persian"      = "models/persian-seraji-ud-2.5-191206.udpipe"
 )
 
 item_col_to_lang <- function(item_col) {
@@ -35,22 +42,6 @@ item_col_to_lang <- function(item_col) {
   lang <- gsub("_", "-", lang)
   lang <- gsub("-name$", "", lang)
   lang
-}
-
-merge_pos_categories <- function(upos) {
-  dplyr::case_when(
-    upos %in% c("NOUN", "PROPN", "PRON", "NUM") ~ "noun",
-    upos %in% c("ADJ", "ADV") ~ "modifiers",
-    upos %in% c("AUX", "VERB") ~ "verb",
-    TRUE ~ "other"
-  )
-}
-
-clean_udpipe_text <- function(x) {
-  x <- as.character(x)
-  x <- iconv(x, from = "", to = "UTF-8", sub = "")
-  x[is.na(x)] <- ""
-  x
 }
 
 load_udpipe_models <- function(jobs, log_file = "estimate_r_ss_batch.log") {
@@ -68,120 +59,158 @@ load_udpipe_models <- function(jobs, log_file = "estimate_r_ss_batch.log") {
   loaded
 }
 
-tag_df_with_pos_length <- function(df, item_col, udpipe_models,
-                                   stroke_tagger = NULL,
-                                   log_file = "estimate_r_ss_batch.log") {
-  lang <- item_col_to_lang(item_col)
-  model <- udpipe_models[[lang]]
-
-  if (!is.null(model)) {
-    udpipe_input <- clean_udpipe_text(df[[item_col]])
-    anno_df <- tryCatch(
-      {
-        anno <- udpipe_annotate(model, x = udpipe_input, doc_id = seq_along(udpipe_input))
-        as.data.frame(anno)
-      },
-      error = function(e) {
-        warning(sprintf("UDPipe annotation failed for %s: %s", item_col, conditionMessage(e)))
-        tibble::tibble(doc_id = seq_along(udpipe_input), upos = "other")
-      }
-    )
-
-    if (nrow(anno_df) == 0) {
-      pos_aggregated <- tibble::tibble(doc_id = seq_along(udpipe_input), upos = "other")
-    } else {
-      pos_aggregated <- anno_df %>%
-        dplyr::group_by(doc_id) %>%
-        dplyr::summarise(
-          upos = dplyr::if_else(dplyr::n() > 1, "NOUN", dplyr::first(upos)),
-          .groups = "drop"
-        ) %>%
-        dplyr::mutate(doc_id = as.numeric(doc_id)) %>%
-        dplyr::arrange(doc_id)
-    }
-
-    if (nrow(pos_aggregated) < nrow(df)) {
-      pos_aggregated <- dplyr::bind_rows(
-        pos_aggregated,
-        tibble::tibble(
-          doc_id = seq.int(nrow(pos_aggregated) + 1L, nrow(df)),
-          upos = "other"
-        )
-      )
-    }
-    pos_aggregated <- pos_aggregated[seq_len(nrow(df)), , drop = FALSE]
-    df$pos <- merge_pos_categories(pos_aggregated$upos)
-  } else {
-    log_line("skipping POS tagging for: ", item_col, log_file = log_file)
-  }
-
-  df$word_length <- nchar(clean_udpipe_text(df[[item_col]]))
-  df$length_bucket <- dplyr::case_when(
-    df$word_length >= 11 ~ "11+",
-    df$word_length >= 3  ~ as.character(df$word_length),
-    TRUE ~ NA_character_
-  )
-
-  if (grepl("chinese", lang, ignore.case = TRUE) && !is.null(stroke_tagger)) {
-    df$stroke_count <- vapply(df[[item_col]], function(word) {
-      tryCatch(sum(stroke_tagger$strokes(word)), error = function(e) NA_integer_)
-    }, numeric(1))
-    df$stroke_bucket <- dplyr::case_when(
-      df$stroke_count >= 11 ~ "11+",
-      df$stroke_count >= 1  ~ as.character(df$stroke_count),
-      TRUE ~ NA_character_
-    )
-  }
-
-  df
-}
-
-load_rmd_functions <- function(path) {
-  lines <- readLines(path, warn = FALSE)
-  start_at <- which(grepl("^## Functions\\s*$", lines))[1]
-  stop_at <- which(grepl("^## Data\\s*$", lines))[1]
-
-  if (is.na(start_at) || is.na(stop_at) || stop_at <= start_at) {
-    stop("Could not find the functions section in the Rmd.")
-  }
-
-  lines <- lines[(start_at + 1):(stop_at - 1)]
-
-  in_chunk <- FALSE
-  chunk_opts <- NULL
-  chunk_code <- character()
-
-  for (line in lines) {
-    if (!in_chunk && grepl("^```\\{r", line)) {
-      in_chunk <- TRUE
-      chunk_opts <- line
-      chunk_code <- character()
-      next
-    }
-
-    if (in_chunk && identical(trimws(line), "```")) {
-      if (!grepl("eval\\s*=\\s*F", chunk_opts, ignore.case = TRUE)) {
-        expr <- paste(chunk_code, collapse = "\n")
-        if (nchar(trimws(expr)) > 0) {
-          eval(parse(text = expr), envir = .GlobalEnv)
-        }
-      }
-      in_chunk <- FALSE
-      chunk_opts <- NULL
-      chunk_code <- character()
-      next
-    }
-
-    if (in_chunk) {
-      chunk_code <- c(chunk_code, line)
-    }
-  }
-}
-
 log_line <- function(..., log_file = "estimate_r_ss_batch.log") {
   msg <- paste0("[", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", paste(..., collapse = ""))
   cat(msg, "\n")
   cat(msg, "\n", file = log_file, append = TRUE)
+}
+
+normalize_percent_below <- function(x) {
+  x <- as.numeric(x)
+  if (length(x) == 0 || all(is.na(x))) {
+    return(x)
+  }
+
+  if (max(x, na.rm = TRUE) <= 1.5) {
+    return(x * 100)
+  }
+
+  x
+}
+
+recommend_followup_window <- function(curve,
+                                      lower_target = 70,
+                                      upper_target = 95,
+                                      min_start = 20,
+                                      max_stop = 500,
+                                      step = 5) {
+  if (is.null(curve) || nrow(curve) == 0) {
+    return(tibble::tibble(
+      lower_target = lower_target,
+      upper_target = upper_target,
+      start_sample_size = NA_real_,
+      stop_sample_size = NA_real_,
+      lower_hit_sample_size = NA_real_,
+      upper_hit_sample_size = NA_real_,
+      max_percent_below = NA_real_
+    ))
+  }
+
+  curve <- dplyr::arrange(
+    dplyr::mutate(
+      curve,
+      percent_below = normalize_percent_below(percent_below),
+      sample_size = as.numeric(sample_size)
+    ),
+    sample_size
+  )
+
+  lower_hit <- dplyr::slice_head(
+    dplyr::filter(curve, percent_below >= lower_target),
+    n = 1
+  )
+  upper_hit <- dplyr::slice_head(
+    dplyr::filter(curve, percent_below >= upper_target),
+    n = 1
+  )
+
+  lower_sample <- if (nrow(lower_hit) > 0) lower_hit$sample_size[[1]] else NA_real_
+  upper_sample <- if (nrow(upper_hit) > 0) upper_hit$sample_size[[1]] else NA_real_
+
+  start_sample_size <- if (!is.na(lower_sample)) {
+    floor(lower_sample / step) * step
+  } else {
+    min_start
+  }
+  start_sample_size <- max(min_start, start_sample_size)
+
+  stop_sample_size <- if (!is.na(upper_sample)) {
+    ceiling(upper_sample / step) * step
+  } else {
+    max(curve$sample_size, na.rm = TRUE)
+  }
+  stop_sample_size <- min(max_stop, stop_sample_size)
+
+  if (stop_sample_size < start_sample_size) {
+    stop_sample_size <- min(
+      max_stop,
+      max(
+        start_sample_size,
+        ceiling(max(curve$sample_size, na.rm = TRUE) / step) * step
+      )
+    )
+  }
+
+  tibble::tibble(
+    lower_target = lower_target,
+    upper_target = upper_target,
+    start_sample_size = start_sample_size,
+    stop_sample_size = stop_sample_size,
+    lower_hit_sample_size = lower_sample,
+    upper_hit_sample_size = upper_sample,
+    max_percent_below = max(curve$percent_below, na.rm = TRUE)
+  )
+}
+
+extract_overall_curve <- function(run_obj) {
+  if (is.list(run_obj) && !is.null(run_obj$overall_curve)) {
+    return(run_obj$overall_curve)
+  }
+  if (is.list(run_obj) && !is.null(run_obj$proportion_summary)) {
+    return(run_obj$proportion_summary)
+  }
+  NULL
+}
+
+build_followup_manifest <- function(jobs,
+                                    out_dir,
+                                    lower_target = 70,
+                                    upper_target = 95,
+                                    min_start = 20,
+                                    max_stop = 500,
+                                    step = 5) {
+  purrr::pmap_dfr(
+    jobs,
+    function(name, data_file, item_col, mean_col, sd_col, n_per_item, min_score, max_score, output, status) {
+      out_file <- file.path(out_dir, output)
+      if (!file.exists(out_file)) {
+        return(tibble::tibble(
+          name = name,
+          output = output,
+          status = status,
+          pilot_file = out_file,
+          lower_target = lower_target,
+          upper_target = upper_target,
+          start_sample_size = NA_real_,
+          stop_sample_size = NA_real_,
+          lower_hit_sample_size = NA_real_,
+          upper_hit_sample_size = NA_real_,
+          max_percent_below = NA_real_
+        ))
+      }
+
+      run_obj <- readRDS(out_file)
+      curve <- extract_overall_curve(run_obj)
+      window <- recommend_followup_window(
+        curve = curve,
+        lower_target = lower_target,
+        upper_target = upper_target,
+        min_start = min_start,
+        max_stop = max_stop,
+        step = step
+      )
+
+      dplyr::bind_cols(
+        tibble::tibble(
+          name = name,
+          output = output,
+          status = status,
+          pilot_file = out_file
+        ),
+        window
+      )
+    }
+  )
 }
 
 build_jobs <- function() {
@@ -642,8 +671,14 @@ build_jobs <- function() {
 
 run_job <- function(job, udpipe_models, stroke_tagger = NULL,
                     skip_existing = TRUE,
+                    out_dir = "simulations",
+                    start = 20,
+                    stop = 100,
+                    increase = 5,
+                    nsim = 500,
+                    power_levels = c(80, 85, 90, 95),
                     log_file = "estimate_r_ss_batch.log") {
-  out_file <- file.path("simulations", job$output)
+  out_file <- file.path(out_dir, job$output)
 
   if (skip_existing && file.exists(out_file)) {
     log_line("skip ", job$name, " -> existing ", out_file, log_file = log_file)
@@ -659,7 +694,7 @@ run_job <- function(job, udpipe_models, stroke_tagger = NULL,
   }, add = TRUE)
 
   df <- tag_df_with_pos_length(
-    df, job$item_col, udpipe_models, stroke_tagger, log_file
+    df, job$item_col, udpipe_models, stroke_tagger
   )
 
   saved_sim <- run_simulation_pipeline(
@@ -669,11 +704,16 @@ run_job <- function(job, udpipe_models, stroke_tagger = NULL,
     sd_col = job$sd_col,
     n_per_item = job$n_per_item,
     min_score = job$min_score,
-    max_score = job$max_score
+    max_score = job$max_score,
+    start = start,
+    stop = stop,
+    increase = increase,
+    nsim = nsim,
+    power_levels = power_levels
   )
 
   save_data <- build_save_data(saved_sim)
-  dir.create("simulations", showWarnings = FALSE, recursive = TRUE)
+  dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
   saveRDS(save_data, out_file)
 
   rm(saved_sim, save_data)
@@ -683,21 +723,54 @@ run_job <- function(job, udpipe_models, stroke_tagger = NULL,
   invisible(list(status = "done", file = out_file))
 }
 
-main <- function() {
-  rmd_path <- "estimate_r_ss.Rmd"
-  if (!file.exists(rmd_path)) {
-    stop("Missing Rmd file: ", rmd_path)
+run_jobs_stage <- function(jobs,
+                           udpipe_models,
+                           stroke_tagger = NULL,
+                           skip_existing = TRUE,
+                           out_dir = "simulations",
+                           start = 20,
+                           stop = 100,
+                           increase = 5,
+                           nsim = 500,
+                           power_levels = c(80, 85, 90, 95),
+                           log_file = "estimate_r_ss_batch.log") {
+  results <- vector("list", nrow(jobs))
+  for (i in seq_len(nrow(jobs))) {
+    job <- jobs[i, , drop = FALSE]
+    results[[i]] <- tryCatch(
+      run_job(
+        job,
+        udpipe_models,
+        stroke_tagger,
+        skip_existing = skip_existing,
+        out_dir = out_dir,
+        start = start,
+        stop = stop,
+        increase = increase,
+        nsim = nsim,
+        power_levels = power_levels,
+        log_file = log_file
+      ),
+      error = function(e) {
+        log_line("error ", job$name, ": ", conditionMessage(e), log_file = log_file)
+        NULL
+      }
+    )
   }
 
+  invisible(results)
+}
+
+main <- function() {
+  setwd(this_dir())
   attach_required_packages()
-  setwd(dirname(normalizePath(rmd_path)))
+  load_shared_functions("functions.R")
   dir.create("simulations", showWarnings = FALSE, recursive = TRUE)
 
   log_file <- "estimate_r_ss_batch.log"
   cat("", file = log_file)
 
-  log_line("loading Rmd functions from ", rmd_path, log_file = log_file)
-  load_rmd_functions(rmd_path)
+  log_line("loading shared functions from functions.R", log_file = log_file)
 
   jobs <- build_jobs()
   jobs <- jobs[jobs$status != "done", , drop = FALSE]
@@ -752,20 +825,19 @@ main <- function() {
     return(invisible(NULL))
   }
 
-  results <- vector("list", nrow(jobs))
-  for (i in seq_len(nrow(jobs))) {
-    job <- jobs[i, , drop = FALSE]
-    results[[i]] <- tryCatch(
-      run_job(job, udpipe_models, stroke_tagger,
-              skip_existing = TRUE, log_file = log_file),
-      error = function(e) {
-        log_line("error ", job$name, ": ", conditionMessage(e), log_file = log_file)
-        NULL
-      }
-    )
-  }
-
-  invisible(results)
+  run_jobs_stage(
+    jobs = jobs,
+    udpipe_models = udpipe_models,
+    stroke_tagger = stroke_tagger,
+    skip_existing = TRUE,
+    out_dir = "simulations",
+    start = 20,
+    stop = 100,
+    increase = 5,
+    nsim = 500,
+    power_levels = c(80, 85, 90, 95),
+    log_file = log_file
+  )
 }
 
-main()
+if (sys.nframe() == 0L) main()
