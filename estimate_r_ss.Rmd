@@ -973,7 +973,6 @@ dfs <- list(
   montefinese = rio::import("data/2013_Montefinese_BRM.csv"),
   montefinese14 = rio::import("data/2014_Montefinese_BRM.csv"),
   moreno = rio::import("data/2014_Moreno_BRM.csv"),
-  juhasz = rio::import("data/2015_Juhasz_BRM.csv"), 
   guasch = rio::import("data/2016_Guasch_BRM.csv"),
   hinojosa = rio::import("data/2016_Hinojosa_BRM.csv"),
   sianipar = rio::import("data/2016_Sianipar_FrontPsychol.csv"),
@@ -982,7 +981,7 @@ dfs <- list(
   borelli = rio::import("data/2018_Borelli_PLOSONE.csv"),
   chedid = rio::import("data/2019_Chedid_BRM.csv"),
   bonin = rio::import("data/2022_Bonin_BRM.csv"),
-  yao = rio::import("data/2016_Yao_BRM.pdf"),
+  yao = rio::import("data/2016_Yao_BRM.csv"),
   mikla = rio::import("data/2018_Miklashevsky_JPsycholinguistRes.xlsx"),
   morucci = rio::import("data/2019_Morucci_JCogn.csv"),
   scott = rio::import("data/2019_Scott_BRM.csv"),
@@ -990,15 +989,16 @@ dfs <- list(
   lima = rio::import("data/2021_de Lima_SAGEOpen.csv"),
   liu = rio::import("data/2021_Liu_FrontPsychol.csv"),
   petit = rio::import("data/2021_Peti-Stantic_BRM.xlsx"),
-  ballot = rio::import("2022_Ballot_BRM.xlsx"),
+  ballot = rio::import("data/2022_Ballot_BRM.xlsx"),
   sarli = rio::import("data/2022_Sarli_BRM.xlsx"),
   raslescu = rio::import("data/2023_Raslescu_DIB.xlsx"),
-  
+  su = rio::import("data/2023_Su_BRM_2.xlsx"),
   chan = rio::import("data/2024_Chan_BRM.xlsx"),
   conca = rio::import("data/2024_Conca_BRM.xlsx"),
   falcinelli = rio::import("data/2024_Falcinellli_Collabra.xlsx"),
   mahjou = rio::import("data/2024_Mahjoubnavaz_JPsycholinguistRes.xlsx"),
-  borsa = rio::import("data/2025_Borsa_BrainSci.xlsx")
+  borsa = rio::import("data/2025_Borsa_BrainSci.xlsx"),
+  kraljevic = rio::import("data/2018_Kraljevic_Suvremena.csv")
   
 )
 
@@ -1016,9 +1016,8 @@ dfs <- list(
 # "data/2021_Borelli_PLOSONE.docx"
 # "data/2021_Song_SAGE Open.xls"
 # "data/2023_Su_BRM.csv"
-
-
-#   "data/2023_Su_BRM_2.pdf",
+# "data/2015_Juhasz_BRM.csv"
+# "2001_Balota_CogMem.xls"
 ```
 
 ## Get Word Length, Stroke Count, and POS
@@ -1044,6 +1043,7 @@ for (lang in languages) {
   # Map language names to local model files
   lang_map <- list(
     "chinese-gsd" = "chinese-gsd-ud-2.5-191206.udpipe",
+    "chinese" = "chinese-gsd-ud-2.5-191206.udpipe",
     "dutch" = "dutch-alpino-ud-2.5-191206.udpipe",
     "english" = "english-ewt-ud-2.5-191206.udpipe",
     "french" = "french-gsd-ud-2.5-191206.udpipe",
@@ -1051,7 +1051,11 @@ for (lang in languages) {
     "indonesian" = "indonesian-gsd-ud-2.5-191206.udpipe",
     "italian" = "italian-isdt-ud-2.5-191206.udpipe",
     "spanish" = "spanish-gsd-ud-2.5-191206.udpipe",
-    "finnish" = "finnish-tdt-ud-2.5-191206.udpipe"
+    "finnish" = "finnish-tdt-ud-2.5-191206.udpipe",
+    "croatian" = "croatian-set-ud-2.5-191206.udpipe",
+    "portuguese" = "portuguese-bosque-ud-2.5-191206.udpipe",
+    "russian" = "russian-gsd-ud-2.5-191206.udpipe",
+    "turkish" = "russian-gsd-ud-2.5-191206.udpipe"
   )
   
   # Check if local model file exists
@@ -1281,7 +1285,7 @@ save_data <- build_save_data(saved_sim)
 saveRDS(save_data, "simulations/dedeyne.rds")
 ```
 
-### ferrand done
+### ferrand - done
 
 ```{r eval = F}
 saved_sim <- run_simulation_pipeline(df = dfs[["ferrand"]],
@@ -1366,16 +1370,16 @@ save_data <- build_save_data(saved_sim)
 saveRDS(save_data, "simulations/desrochers10.rds")
 ```
   
-### eilola to do
+### eilola ready
 
 ```{r eval = F}
 saved_sim <- run_simulation_pipeline(df = dfs[["eilola"]],
-                        item_col = "word_italian",
-                        mean_col = "familiar_mean",
-                        sd_col = "familiar_sd",
-                        n_per_item = 44,
-                        min_score = 1,
-                        max_score = 7)
+                        item_col = "word_finnish",
+                        mean_col = "familiar_mean_finnish",
+                        sd_col = "familiar_sd_finnish",
+                        n_per_item = 152,
+                        min_score = 0,
+                        max_score = 9)
 beepr::beep()
 
 save_data <- build_save_data(saved_sim)
@@ -1385,12 +1389,12 @@ saveRDS(save_data, "simulations/eilola_finnish.rds")
 
 ```{r eval = F}
 saved_sim <- run_simulation_pipeline(df = dfs[["eilola"]],
-                        item_col = "word_italian",
-                        mean_col = "familiar_mean",
-                        sd_col = "familiar_sd",
-                        n_per_item = 44,
-                        min_score = 1,
-                        max_score = 7)
+                        item_col = "word_english",
+                        mean_col = "familiar_mean_english",
+                        sd_col = "familiar_mean_english",
+                        n_per_item = 68,
+                        min_score = 0,
+                        max_score = 9)
 beepr::beep()
 
 save_data <- build_save_data(saved_sim)
@@ -1483,23 +1487,6 @@ save_data <- build_save_data(saved_sim)
 saveRDS(save_data, "simulations/moreno.rds")
 ```
   
-### juhasz to do
-
-```{r eval = F}
-saved_sim <- run_simulation_pipeline(df = dfs[["juhasz"]],
-                        item_col = "word_italian",
-                        mean_col = "familiar_mean",
-                        sd_col = "familiar_sd",
-                        n_per_item = 44,
-                        min_score = 1,
-                        max_score = 7)
-beepr::beep()
-
-save_data <- build_save_data(saved_sim)
-
-saveRDS(save_data, "simulations/juhasz.rds")
-```
-  
 ### guasch to do
 
 ```{r eval = F}
@@ -1568,16 +1555,16 @@ save_data <- build_save_data(saved_sim)
 saveRDS(save_data, "simulations/soares.rds")
 ```
   
-### yee to do
+### yee ready
 
 ```{r eval = F}
 saved_sim <- run_simulation_pipeline(df = dfs[["yee"]],
-                        item_col = "word_italian",
+                        item_col = "word_chinese_gsd",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
-                        n_per_item = 44,
+                        n_per_item = 32,
                         min_score = 1,
-                        max_score = 7)
+                        max_score = 5)
 beepr::beep()
 
 save_data <- build_save_data(saved_sim)
@@ -1602,16 +1589,16 @@ save_data <- build_save_data(saved_sim)
 saveRDS(save_data, "simulations/borelli.rds")
 ```
 
-### chedid to do
+### chedid ready
 
 ```{r eval = F}
 saved_sim <- run_simulation_pipeline(df = dfs[["chedid"]],
-                        item_col = "word_italian",
-                        mean_col = "familiar_mean",
-                        sd_col = "familiar_sd",
-                        n_per_item = 44,
-                        min_score = 1,
-                        max_score = 7)
+                        item_col = "word_french",
+                        mean_col = "familiarity_mean_conceptual",
+                        sd_col = "familiarity_sd_conceptual",
+                        n_per_item = 23,
+                        min_score = 0,
+                        max_score = 100)
 beepr::beep()
 
 save_data <- build_save_data(saved_sim)
@@ -1619,10 +1606,44 @@ save_data <- build_save_data(saved_sim)
 saveRDS(save_data, "simulations/chedid.rds")
 ```  
 
-### bonin to do
+### bonin ready
 
 ```{r eval = F}
 saved_sim <- run_simulation_pipeline(df = dfs[["bonin"]],
+                        item_col = "word_french",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 28,
+                        min_score = 1,
+                        max_score = 5)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/bonin.rds")
+```
+
+### yao ready
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["yao"]],
+                        item_col = "word_chinese-gsd",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 48,
+                        min_score = 1,
+                        max_score = 9)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/yao.rds")
+```
+
+### mikla to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["mikla"]],
                         item_col = "word_italian",
                         mean_col = "familiar_mean",
                         sd_col = "familiar_sd",
@@ -1633,6 +1654,277 @@ beepr::beep()
 
 save_data <- build_save_data(saved_sim)
 
-saveRDS(save_data, "simulations/bonin.rds")
+saveRDS(save_data, "simulations/mikla.rds")
 ```
 
+### morucci to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["morucci"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/morucci.rds")
+```
+
+### scott ready
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["scott"]],
+                        item_col = "word_english",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 22,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/scott.rds")
+```
+
+### verheyen ready
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["verheyen"]],
+                        item_col = "word_dutch",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 13,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/verheyen.rds")
+```
+
+### lima to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["lima"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/lima.rds")
+```
+
+### liu ready
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["liu"]],
+                        item_col = "word_chinese",
+                        mean_col = "familiarity_mean_all",
+                        sd_col = "familiarity_sd_all",
+                        n_per_item = 20,
+                        min_score = 1,
+                        max_score = 9)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/liu.rds")
+```
+
+### petit ready
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["petit"]],
+                        item_col = "word_croatian",
+                        mean_col = "freq_subjective_mean_all",
+                        sd_col = "freq_subjective_sd_all",
+                        n_per_item = 19,
+                        min_score = 1,
+                        max_score = 5)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/petit.rds")
+```
+
+### ballot ready
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["ballot"]],
+                        item_col = "word_french",
+                        mean_col = "freq_subjective_mean_all",
+                        sd_col = "freq_subjective_sd_all",
+                        n_per_item = 137,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/ballot.rds")
+```
+
+### sarli to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["sarli"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/sarli.rds")
+```
+
+### raslescu ready
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["raslescu"]],
+                        item_col = "word_english",
+                        mean_col = "freq_mean",
+                        sd_col = "freq_sd",
+                        n_per_item = 198,
+                        min_score = 0,
+                        max_score = 100)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/raslescu.rds")
+```
+
+### su ready
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["su"]],
+                        item_col = "word_chinese-gsds",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 21,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/su.rds")
+```
+
+### chan ready
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["chan"]],
+                        item_col = "word_chinese-gsd",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 20,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/chan.rds")
+```
+
+### conca to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["conca"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/conca.rds")
+```
+
+### falcinelli to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["falcinelli"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/falcinelli.rds")
+```
+
+### mahjou to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["mahjou"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/mahjou.rds")
+```
+
+### borsa to do
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["borsa"]],
+                        item_col = "word_italian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 44,
+                        min_score = 1,
+                        max_score = 7)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/borsa.rds")
+```
+
+### kraljevic ready
+
+```{r eval = F}
+saved_sim <- run_simulation_pipeline(df = dfs[["kraljevic"]],
+                        item_col = "word_croatian",
+                        mean_col = "familiar_mean",
+                        sd_col = "familiar_sd",
+                        n_per_item = 33,
+                        min_score = 1,
+                        max_score = 5)
+beepr::beep()
+
+save_data <- build_save_data(saved_sim)
+
+saveRDS(save_data, "simulations/kraljevic.rds")
+```
