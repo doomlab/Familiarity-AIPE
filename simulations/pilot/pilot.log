@@ -109,3 +109,57 @@
 [2026-04-28 16:11:25] done  morrow  ->  simulations/pilot/morrow_young.rds 
 [2026-04-28 16:11:25] start  dedeyne  ->  simulations/pilot/dedeyne.rds 
 [2026-04-28 16:11:25] imported  dedeyne  rows:  668 
+[2026-04-28 16:13:45] done  dedeyne  ->  simulations/pilot/dedeyne.rds 
+[2026-04-28 16:13:45] start  ferrand  ->  simulations/pilot/ferrand.rds 
+[2026-04-28 16:13:45] imported  ferrand  rows:  1493 
+[2026-04-28 16:13:45] sampling  1000  rows for  ferrand  test run 
+[2026-04-28 16:17:46] done  ferrand  ->  simulations/pilot/ferrand.rds 
+[2026-04-28 16:17:46] skip  janschewitz  -> existing  simulations/pilot/janschewitz.rds 
+[2026-04-28 16:17:46] skip  desrochers  -> existing  simulations/pilot/desrochers.rds 
+[2026-04-28 16:17:46] skip  dellarosa  -> existing  simulations/pilot/dellarosa.rds 
+[2026-04-28 16:17:46] skip  desrochers10  -> existing  simulations/pilot/desrochers10.rds 
+[2026-04-28 16:17:46] skip  eilola  -> existing  simulations/pilot/eilola_finnish.rds 
+[2026-04-28 16:17:46] skip  eilola  -> existing  simulations/pilot/eilola_english.rds 
+[2026-04-28 16:17:46] skip  schroder  -> existing  simulations/pilot/schroder.rds 
+[2026-04-28 16:17:46] skip  ferre  -> existing  simulations/pilot/ferre.rds 
+[2026-04-28 16:17:46] skip  montefinese14  -> existing  simulations/pilot/montefinese14.rds 
+[2026-04-28 16:17:46] skip  moreno  -> existing  simulations/pilot/moreno.rds 
+[2026-04-28 16:17:46] skip  guasch  -> existing  simulations/pilot/guasch.rds 
+[2026-04-28 16:17:46] skip  hinojosa  -> existing  simulations/pilot/hinojosa.rds 
+[2026-04-28 16:17:46] skip  sianipar  -> existing  simulations/pilot/sianipar.rds 
+[2026-04-28 16:17:46] skip  soares  -> existing  simulations/pilot/soares.rds 
+[2026-04-28 16:17:46] skip  yee  -> existing  simulations/pilot/yee.rds 
+[2026-04-28 16:17:46] skip  chedid  -> existing  simulations/pilot/chedid.rds 
+[2026-04-28 16:17:46] skip  bonin  -> existing  simulations/pilot/bonin.rds 
+[2026-04-28 16:17:46] skip  yao  -> existing  simulations/pilot/yao.rds 
+[2026-04-28 16:17:46] skip  mikla  -> existing  simulations/pilot/mikla.rds 
+[2026-04-28 16:17:46] skip  scott  -> existing  simulations/pilot/scott.rds 
+[2026-04-28 16:17:46] skip  verheyen  -> existing  simulations/pilot/verheyen.rds 
+[2026-04-28 16:17:46] skip  lima  -> existing  simulations/pilot/lima.rds 
+[2026-04-28 16:17:46] skip  liu  -> existing  simulations/pilot/liu.rds 
+[2026-04-28 16:17:46] skip  petit  -> existing  simulations/pilot/petit.rds 
+[2026-04-28 16:17:46] skip  ballot  -> existing  simulations/pilot/ballot.rds 
+[2026-04-28 16:17:46] skip  sarli  -> existing  simulations/pilot/sarli.rds 
+[2026-04-28 16:17:46] skip  raslescu  -> existing  simulations/pilot/raslescu.rds 
+[2026-04-28 16:17:46] start  su  ->  simulations/pilot/su.rds 
+[2026-04-28 16:17:46] imported  su  rows:  24325 
+[2026-04-28 16:17:46] sampling  1000  rows for  su  test run 
+[2026-04-28 16:22:14] done  su  ->  simulations/pilot/su.rds 
+[2026-04-28 16:22:14] start  chan  ->  simulations/pilot/chan.rds 
+[2026-04-28 16:22:14] imported  chan  rows:  25281 
+[2026-04-28 16:22:14] sampling  1000  rows for  chan  test run 
+[2026-04-28 16:26:02] done  chan  ->  simulations/pilot/chan.rds 
+[2026-04-28 16:26:02] start  conca  ->  simulations/pilot/conca.rds 
+[2026-04-28 16:26:02] imported  conca  rows:  503 
+[2026-04-28 16:28:35] done  conca  ->  simulations/pilot/conca.rds 
+[2026-04-28 16:28:35] start  falcinelli  ->  simulations/pilot/falcinelli.rds 
+[2026-04-28 16:28:35] imported  falcinelli  rows:  200 
+[2026-04-28 16:30:01] done  falcinelli  ->  simulations/pilot/falcinelli.rds 
+[2026-04-28 16:30:01] start  falcinelli  ->  simulations/pilot/falcinelli_freq.rds 
+[2026-04-28 16:30:01] imported  falcinelli  rows:  200 
+[2026-04-28 16:32:29] done  falcinelli  ->  simulations/pilot/falcinelli_freq.rds 
+[2026-04-28 16:32:29] start  mahjou  ->  simulations/pilot/mahjou.rds 
+[2026-04-28 16:32:29] imported  mahjou  rows:  718 
+[2026-04-28 16:38:42] done  mahjou  ->  simulations/pilot/mahjou.rds 
+[2026-04-28 16:38:42] start  borsa  ->  simulations/pilot/borsa.rds 
+[2026-04-28 16:38:42] imported  borsa  rows:  964 
