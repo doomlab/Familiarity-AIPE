@@ -105,6 +105,7 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
   }
 
   sim_files <- list.files(sim_dir, pattern = "\\.rds$", full.names = TRUE)
+  sim_files <- sim_files[!grepl("manifest", basename(sim_files), ignore.case = TRUE)]
   if (length(sim_files) == 0) {
     stop(sprintf("No .rds files found in %s", sim_dir))
   }
@@ -132,7 +133,32 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
     NULL
   }
 
+  extract_overall_curve <- function(run_obj) {
+    if (is.list(run_obj) && !is.null(run_obj$overall_curve)) {
+      return(run_obj$overall_curve)
+    }
+    if (is.list(run_obj) && !is.null(run_obj$proportion_summary)) {
+      return(run_obj$proportion_summary)
+    }
+    NULL
+  }
+
   extract_subgroup_power <- function(run_obj, field_name) {
+    if (!is.list(run_obj) || is.null(run_obj[[field_name]])) {
+      return(tibble::tibble())
+    }
+
+    purrr::imap_dfr(run_obj[[field_name]], function(tbl, group_name) {
+      if (is.null(tbl) || nrow(tbl) == 0) {
+        return(tibble::tibble())
+      }
+
+      tbl %>%
+        mutate(group = as.character(group_name))
+    })
+  }
+
+  extract_subgroup_curve <- function(run_obj, field_name) {
     if (!is.list(run_obj) || is.null(run_obj[[field_name]])) {
       return(tibble::tibble())
     }
@@ -283,10 +309,30 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
       )
   })
 
+  overall_curve <- purrr::imap_dfr(runs, function(run_obj, i) {
+    curve_tbl <- extract_overall_curve(run_obj)
+    if (is.null(curve_tbl) || nrow(curve_tbl) == 0) {
+      return(tibble::tibble())
+    }
+
+    curve_tbl %>%
+      mutate(
+        run_id = run_ids[[i]],
+        source_file = sim_files[[i]]
+      )
+  })
+
   pos_power <- purrr::imap_dfr(runs, function(run_obj, i) {
     power_tbl <- extract_subgroup_power(run_obj, "pos_power")
     if (nrow(power_tbl) == 0) return(tibble::tibble())
     power_tbl %>%
+      mutate(run_id = run_ids[[i]], source_file = sim_files[[i]])
+  })
+
+  pos_curve <- purrr::imap_dfr(runs, function(run_obj, i) {
+    curve_tbl <- extract_subgroup_curve(run_obj, "pos_curve")
+    if (nrow(curve_tbl) == 0) return(tibble::tibble())
+    curve_tbl %>%
       mutate(run_id = run_ids[[i]], source_file = sim_files[[i]])
   })
 
@@ -304,6 +350,13 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
       mutate(run_id = run_ids[[i]], source_file = sim_files[[i]])
   })
 
+  length_curve <- purrr::imap_dfr(runs, function(run_obj, i) {
+    curve_tbl <- extract_subgroup_curve(run_obj, "length_curve")
+    if (nrow(curve_tbl) == 0) return(tibble::tibble())
+    curve_tbl %>%
+      mutate(run_id = run_ids[[i]], source_file = sim_files[[i]])
+  })
+
   length_rel <- purrr::imap_dfr(runs, function(run_obj, i) {
     rel_tbl <- extract_subgroup_rel(run_obj, "length_rel")
     if (nrow(rel_tbl) == 0) return(tibble::tibble())
@@ -318,6 +371,13 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
       mutate(run_id = run_ids[[i]], source_file = sim_files[[i]])
   })
 
+  stroke_curve <- purrr::imap_dfr(runs, function(run_obj, i) {
+    curve_tbl <- extract_subgroup_curve(run_obj, "stroke_curve")
+    if (nrow(curve_tbl) == 0) return(tibble::tibble())
+    curve_tbl %>%
+      mutate(run_id = run_ids[[i]], source_file = sim_files[[i]])
+  })
+
   stroke_rel <- purrr::imap_dfr(runs, function(run_obj, i) {
     rel_tbl <- extract_subgroup_rel(run_obj, "stroke_rel")
     if (nrow(rel_tbl) == 0) return(tibble::tibble())
@@ -326,14 +386,28 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
   })
 
   if (nrow(overall_power) == 0 && nrow(overall_rel) == 0 &&
+      nrow(overall_curve) == 0 &&
       nrow(pos_power) == 0 && nrow(pos_rel) == 0 &&
+      nrow(pos_curve) == 0 &&
       nrow(length_power) == 0 && nrow(length_rel) == 0 &&
-      nrow(stroke_power) == 0 && nrow(stroke_rel) == 0) {
+      nrow(length_curve) == 0 &&
+      nrow(stroke_power) == 0 && nrow(stroke_rel) == 0 &&
+      nrow(stroke_curve) == 0) {
     return(list(
       files = sim_files,
       runs = runs,
       overall_power = overall_power,
       overall_rel = overall_rel,
+      overall_curve = overall_curve,
+      pos_power = pos_power,
+      pos_curve = pos_curve,
+      pos_rel = pos_rel,
+      length_power = length_power,
+      length_curve = length_curve,
+      length_rel = length_rel,
+      stroke_power = stroke_power,
+      stroke_curve = stroke_curve,
+      stroke_rel = stroke_rel,
       recommendation_summary = tibble::tibble(),
       recommendation_plot = NULL
     ))
@@ -471,6 +545,16 @@ load_and_summarize_simulations <- function(sim_dir = "simulations") {
     runs = runs,
     overall_power = overall_power,
     overall_rel = overall_rel,
+    overall_curve = overall_curve,
+    pos_power = pos_power,
+    pos_curve = pos_curve,
+    pos_rel = pos_rel,
+    length_power = length_power,
+    length_curve = length_curve,
+    length_rel = length_rel,
+    stroke_power = stroke_power,
+    stroke_curve = stroke_curve,
+    stroke_rel = stroke_rel,
     recommendation_summary = recommendation_summary,
     recommendation_plot = recommendation_plot,
     reliability_summary = reliability_summary,
