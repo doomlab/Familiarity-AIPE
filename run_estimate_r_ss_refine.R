@@ -99,7 +99,7 @@ main <- function() {
       start_size,
       " stop=",
       stop_size,
-      " nsim=500",
+      " nsim=100",
       log_file = log_file
     )
 
@@ -113,7 +113,7 @@ main <- function() {
         start = start_size,
         stop = stop_size,
         increase = 5,
-        nsim = 500,
+        nsim = 100,
         power_levels = c(70, 75, 80, 85, 90, 95),
         log_file = log_file
       ),
