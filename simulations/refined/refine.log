@@ -1,0 +1,209 @@
+[2026-04-29 19:52:53] loading shared functions from functions.R 
+[2026-04-29 19:52:53] loading udpipe models 
+[2026-04-29 19:52:54] loaded udpipe model:  english 
+[2026-04-29 19:52:55] loaded udpipe model:  italian 
+[2026-04-29 19:52:56] loaded udpipe model:  dutch 
+[2026-04-29 19:52:58] loaded udpipe model:  french 
+[2026-04-29 19:52:59] loaded udpipe model:  finnish 
+[2026-04-29 19:53:00] loaded udpipe model:  german 
+[2026-04-29 19:53:02] loaded udpipe model:  spanish 
+[2026-04-29 19:53:03] loaded udpipe model:  indonesian 
+[2026-04-29 19:53:04] loaded udpipe model:  chinese-gsd 
+[2026-04-29 19:53:05] loaded udpipe model:  russian 
+[2026-04-29 19:53:06] loaded udpipe model:  portuguese 
+[2026-04-29 19:53:07] loaded udpipe model:  chinese 
+[2026-04-29 19:53:08] loaded udpipe model:  croatian 
+[2026-04-29 19:53:09] loaded udpipe model:  chinese-gsds 
+[2026-04-29 19:53:10] loaded udpipe model:  turkish 
+[2026-04-29 19:53:11] loaded udpipe model:  persian 
+[2026-04-29 19:53:33] refine  zechmeister  using start= 60  stop= 80  nsim=100 
+[2026-04-29 19:53:33] start  zechmeister  ->  simulations/refined/zechmeister.rds 
+[2026-04-29 19:53:33] imported  zechmeister  rows:  192 
+[2026-04-29 19:56:05] done  zechmeister  ->  simulations/refined/zechmeister.rds 
+[2026-04-29 19:56:05] refine  gilhooly  using start= 60  stop= 80  nsim=100 
+[2026-04-29 19:56:05] start  gilhooly  ->  simulations/refined/gilhooly.rds 
+[2026-04-29 19:56:05] imported  gilhooly  rows:  205 
+[2026-04-29 19:57:51] done  gilhooly  ->  simulations/refined/gilhooly.rds 
+[2026-04-29 19:57:51] refine  surprenant  using start= 80  stop= 110  nsim=100 
+[2026-04-29 19:57:51] start  surprenant  ->  simulations/refined/surprenant.rds 
+[2026-04-29 19:57:51] imported  surprenant  rows:  199 
+[2026-04-29 20:02:54] done  surprenant  ->  simulations/refined/surprenant.rds 
+[2026-04-29 20:02:54] refine  barca  using start= 90  stop= 150  nsim=100 
+[2026-04-29 20:02:54] start  barca  ->  simulations/refined/barca.rds 
+[2026-04-29 20:02:54] imported  barca  rows:  626 
+[2026-04-29 20:17:17] done  barca  ->  simulations/refined/barca.rds 
+[2026-04-29 20:17:17] refine  morrow  using start= 70  stop= 100  nsim=100 
+[2026-04-29 20:17:17] start  morrow  ->  simulations/refined/morrow_old.rds 
+[2026-04-29 20:17:17] imported  morrow  rows:  889 
+[2026-04-29 20:28:05] done  morrow  ->  simulations/refined/morrow_old.rds 
+[2026-04-29 20:28:05] refine  morrow  using start= 70  stop= 100  nsim=100 
+[2026-04-29 20:28:05] start  morrow  ->  simulations/refined/morrow_young.rds 
+[2026-04-29 20:28:05] imported  morrow  rows:  889 
+[2026-04-29 20:38:54] done  morrow  ->  simulations/refined/morrow_young.rds 
+[2026-04-29 20:38:54] refine  dedeyne  using start= 40  stop= 60  nsim=100 
+[2026-04-29 20:38:54] start  dedeyne  ->  simulations/refined/dedeyne.rds 
+[2026-04-29 20:38:54] imported  dedeyne  rows:  668 
+[2026-04-29 20:43:33] done  dedeyne  ->  simulations/refined/dedeyne.rds 
+[2026-04-29 20:43:34] refine  ferrand  using start= 40  stop= 60  nsim=100 
+[2026-04-29 20:43:34] start  ferrand  ->  simulations/refined/ferrand.rds 
+[2026-04-29 20:43:34] imported  ferrand  rows:  1493 
+[2026-04-29 20:43:34] sampling  1000  rows for  ferrand  test run 
+[2026-04-29 20:50:29] done  ferrand  ->  simulations/refined/ferrand.rds 
+[2026-04-29 20:50:29] refine  janschewitz  using start= 260  stop= 300  nsim=100 
+[2026-04-29 20:50:29] start  janschewitz  ->  simulations/refined/janschewitz.rds 
+[2026-04-29 20:50:29] imported  janschewitz  rows:  1380 
+[2026-04-29 20:50:29] sampling  1000  rows for  janschewitz  test run 
+[2026-04-29 20:59:44] done  janschewitz  ->  simulations/refined/janschewitz.rds 
+[2026-04-29 20:59:44] refine  desrochers  using start= 80  stop= 110  nsim=100 
+[2026-04-29 20:59:44] start  desrochers  ->  simulations/refined/desrochers.rds 
+[2026-04-29 20:59:44] imported  desrochers  rows:  3600 
+[2026-04-29 20:59:44] sampling  1000  rows for  desrochers  test run 
+[2026-04-29 21:10:43] done  desrochers  ->  simulations/refined/desrochers.rds 
+[2026-04-29 21:10:43] refine  dellarosa  using start= 40  stop= 50  nsim=100 
+[2026-04-29 21:10:43] start  dellarosa  ->  simulations/refined/dellarosa.rds 
+[2026-04-29 21:10:43] imported  dellarosa  rows:  417 
+[2026-04-29 21:12:59] done  dellarosa  ->  simulations/refined/dellarosa.rds 
+[2026-04-29 21:12:59] refine  desrochers10  using start= 130  stop= 160  nsim=100 
+[2026-04-29 21:12:59] start  desrochers10  ->  simulations/refined/desrochers10.rds 
+[2026-04-29 21:12:59] imported  desrochers10  rows:  3600 
+[2026-04-29 21:12:59] sampling  1000  rows for  desrochers10  test run 
+[2026-04-29 21:24:38] done  desrochers10  ->  simulations/refined/desrochers10.rds 
+[2026-04-29 21:24:39] refine  eilola  using start= 180  stop= 220  nsim=100 
+[2026-04-29 21:24:39] start  eilola  ->  simulations/refined/eilola_finnish.rds 
+[2026-04-29 21:24:39] imported  eilola  rows:  210 
+[2026-04-29 21:29:15] done  eilola  ->  simulations/refined/eilola_finnish.rds 
+[2026-04-29 21:29:15] refine  eilola  using start= 90  stop= 110  nsim=100 
+[2026-04-29 21:29:15] start  eilola  ->  simulations/refined/eilola_english.rds 
+[2026-04-29 21:29:15] imported  eilola  rows:  210 
+[2026-04-29 21:31:13] done  eilola  ->  simulations/refined/eilola_english.rds 
+[2026-04-29 21:31:13] refine  schroder  using start= 30  stop= 40  nsim=100 
+[2026-04-29 21:31:13] start  schroder  ->  simulations/refined/schroder.rds 
+[2026-04-29 21:31:13] imported  schroder  rows:  7710 
+[2026-04-29 21:31:13] sampling  1000  rows for  schroder  test run 
+[2026-04-29 21:32:06] done  schroder  ->  simulations/refined/schroder.rds 
+[2026-04-29 21:32:06] refine  ferre  using start= 40  stop= 50  nsim=100 
+[2026-04-29 21:32:06] start  ferre  ->  simulations/refined/ferre.rds 
+[2026-04-29 21:32:06] imported  ferre  rows:  380 
+[2026-04-29 21:34:33] done  ferre  ->  simulations/refined/ferre.rds 
+[2026-04-29 21:34:33] refine  montefinese14  using start= 30  stop= 50  nsim=100 
+[2026-04-29 21:34:33] start  montefinese14  ->  simulations/refined/montefinese14.rds 
+[2026-04-29 21:34:33] imported  montefinese14  rows:  1127 
+[2026-04-29 21:34:33] sampling  1000  rows for  montefinese14  test run 
+[2026-04-29 21:41:17] done  montefinese14  ->  simulations/refined/montefinese14.rds 
+[2026-04-29 21:41:17] refine  moreno  using start= 30  stop= 40  nsim=100 
+[2026-04-29 21:41:17] start  moreno  ->  simulations/refined/moreno.rds 
+[2026-04-29 21:41:17] imported  moreno  rows:  820 
+[2026-04-29 21:44:44] done  moreno  ->  simulations/refined/moreno.rds 
+[2026-04-29 21:44:45] refine  guasch  using start= 30  stop= 50  nsim=100 
+[2026-04-29 21:44:45] start  guasch  ->  simulations/refined/guasch.rds 
+[2026-04-29 21:44:45] imported  guasch  rows:  1400 
+[2026-04-29 21:44:45] sampling  1000  rows for  guasch  test run 
+[2026-04-29 21:51:18] done  guasch  ->  simulations/refined/guasch.rds 
+[2026-04-29 21:51:18] refine  hinojosa  using start= 40  stop= 60  nsim=100 
+[2026-04-29 21:51:18] start  hinojosa  ->  simulations/refined/hinojosa.rds 
+[2026-04-29 21:51:18] imported  hinojosa  rows:  875 
+[2026-04-29 21:57:20] done  hinojosa  ->  simulations/refined/hinojosa.rds 
+[2026-04-29 21:57:20] refine  sianipar  using start= 80  stop= 90  nsim=100 
+[2026-04-29 21:57:20] start  sianipar  ->  simulations/refined/sianipar.rds 
+[2026-04-29 21:57:20] imported  sianipar  rows:  1490 
+[2026-04-29 21:57:20] sampling  1000  rows for  sianipar  test run 
+[2026-04-29 22:01:54] done  sianipar  ->  simulations/refined/sianipar.rds 
+[2026-04-29 22:01:54] refine  soares  using start= 60  stop= 80  nsim=100 
+[2026-04-29 22:01:54] start  soares  ->  simulations/refined/soares.rds 
+[2026-04-29 22:01:54] imported  soares  rows:  3800 
+[2026-04-29 22:01:54] sampling  1000  rows for  soares  test run 
+[2026-04-29 22:09:23] done  soares  ->  simulations/refined/soares.rds 
+[2026-04-29 22:09:24] refine  yee  using start= 50  stop= 90  nsim=100 
+[2026-04-29 22:09:24] start  yee  ->  simulations/refined/yee.rds 
+[2026-04-29 22:09:24] imported  yee  rows:  292 
+[2026-04-29 22:12:34] done  yee  ->  simulations/refined/yee.rds 
+[2026-04-29 22:12:34] refine  chedid  using start= 60  stop= 140  nsim=100 
+[2026-04-29 22:12:34] start  chedid  ->  simulations/refined/chedid.rds 
+[2026-04-29 22:12:34] imported  chedid  rows:  3596 
+[2026-04-29 22:12:34] sampling  1000  rows for  chedid  test run 
+[2026-04-29 22:39:56] done  chedid  ->  simulations/refined/chedid.rds 
+[2026-04-29 22:39:56] refine  bonin  using start= 40  stop= 60  nsim=100 
+[2026-04-29 22:39:56] start  bonin  ->  simulations/refined/bonin.rds 
+[2026-04-29 22:39:56] imported  bonin  rows:  506 
+[2026-04-29 22:43:34] done  bonin  ->  simulations/refined/bonin.rds 
+[2026-04-29 22:43:34] refine  yao  using start= 90  stop= 140  nsim=100 
+[2026-04-29 22:43:34] start  yao  ->  simulations/refined/yao.rds 
+[2026-04-29 22:43:34] imported  yao  rows:  1100 
+[2026-04-29 22:43:34] sampling  1000  rows for  yao  test run 
+[2026-04-29 22:59:35] done  yao  ->  simulations/refined/yao.rds 
+[2026-04-29 22:59:35] refine  mikla  using start= 30  stop= 50  nsim=100 
+[2026-04-29 22:59:35] start  mikla  ->  simulations/refined/mikla.rds 
+[2026-04-29 22:59:37] imported  mikla  rows:  506 
+[2026-04-29 23:04:15] done  mikla  ->  simulations/refined/mikla.rds 
+[2026-04-29 23:04:15] refine  scott  using start= 40  stop= 60  nsim=100 
+[2026-04-29 23:04:15] start  scott  ->  simulations/refined/scott.rds 
+[2026-04-29 23:04:15] imported  scott  rows:  5553 
+[2026-04-29 23:04:15] sampling  1000  rows for  scott  test run 
+[2026-04-29 23:11:29] done  scott  ->  simulations/refined/scott.rds 
+[2026-04-29 23:11:29] refine  verheyen  using start= 20  stop= 40  nsim=100 
+[2026-04-29 23:11:29] start  verheyen  ->  simulations/refined/verheyen.rds 
+[2026-04-29 23:11:29] imported  verheyen  rows:  1000 
+[2026-04-29 23:19:09] done  verheyen  ->  simulations/refined/verheyen.rds 
+[2026-04-29 23:19:09] refine  lima  using start= 30  stop= 60  nsim=100 
+[2026-04-29 23:19:09] start  lima  ->  simulations/refined/lima.rds 
+[2026-04-29 23:19:09] imported  lima  rows:  80 
+[2026-04-29 23:21:03] done  lima  ->  simulations/refined/lima.rds 
+[2026-04-29 23:21:04] refine  liu  using start= 30  stop= 60  nsim=100 
+[2026-04-29 23:21:04] start  liu  ->  simulations/refined/liu.rds 
+[2026-04-29 23:21:04] imported  liu  rows:  2062 
+[2026-04-29 23:21:04] sampling  1000  rows for  liu  test run 
+[2026-04-29 23:29:30] done  liu  ->  simulations/refined/liu.rds 
+[2026-04-29 23:29:30] refine  petit  using start= 30  stop= 40  nsim=100 
+[2026-04-29 23:29:30] start  petit  ->  simulations/refined/petit.rds 
+[2026-04-29 23:29:30] imported  petit  rows:  6000 
+[2026-04-29 23:29:31] sampling  1000  rows for  petit  test run 
+[2026-04-29 23:33:46] done  petit  ->  simulations/refined/petit.rds 
+[2026-04-29 23:33:46] refine  ballot  using start= 190  stop= 240  nsim=100 
+[2026-04-29 23:33:46] start  ballot  ->  simulations/refined/ballot.rds 
+[2026-04-29 23:33:46] imported  ballot  rows:  1286 
+[2026-04-29 23:33:46] sampling  1000  rows for  ballot  test run 
+[2026-04-29 23:57:04] done  ballot  ->  simulations/refined/ballot.rds 
+[2026-04-29 23:57:04] refine  sarli  using start= 30  stop= 50  nsim=100 
+[2026-04-29 23:57:04] start  sarli  ->  simulations/refined/sarli.rds 
+[2026-04-29 23:57:04] imported  sarli  rows:  1034 
+[2026-04-29 23:57:04] sampling  1000  rows for  sarli  test run 
+[2026-04-30 00:04:15] done  sarli  ->  simulations/refined/sarli.rds 
+[2026-04-30 00:04:15] refine  raslescu  using start= 240  stop= 280  nsim=100 
+[2026-04-30 00:04:15] start  raslescu  ->  simulations/refined/raslescu.rds 
+[2026-04-30 00:04:16] imported  raslescu  rows:  300 
+[2026-04-30 00:11:15] done  raslescu  ->  simulations/refined/raslescu.rds 
+[2026-04-30 00:11:15] refine  su  using start= 40  stop= 60  nsim=100 
+[2026-04-30 00:11:15] start  su  ->  simulations/refined/su.rds 
+[2026-04-30 00:11:15] imported  su  rows:  24325 
+[2026-04-30 00:11:15] sampling  1000  rows for  su  test run 
+[2026-04-30 00:17:48] done  su  ->  simulations/refined/su.rds 
+[2026-04-30 00:17:48] refine  chan  using start= 30  stop= 50  nsim=100 
+[2026-04-30 00:17:48] start  chan  ->  simulations/refined/chan.rds 
+[2026-04-30 00:17:48] imported  chan  rows:  25281 
+[2026-04-30 00:17:48] sampling  1000  rows for  chan  test run 
+[2026-04-30 00:23:02] done  chan  ->  simulations/refined/chan.rds 
+[2026-04-30 00:23:03] refine  conca  using start= 20  stop= 40  nsim=100 
+[2026-04-30 00:23:03] start  conca  ->  simulations/refined/conca.rds 
+[2026-04-30 00:23:03] imported  conca  rows:  503 
+[2026-04-30 00:27:21] done  conca  ->  simulations/refined/conca.rds 
+[2026-04-30 00:27:21] refine  falcinelli  using start= 30  stop= 50  nsim=100 
+[2026-04-30 00:27:21] start  falcinelli  ->  simulations/refined/falcinelli.rds 
+[2026-04-30 00:27:21] imported  falcinelli  rows:  200 
+[2026-04-30 00:30:01] done  falcinelli  ->  simulations/refined/falcinelli.rds 
+[2026-04-30 00:30:01] refine  falcinelli  using start= 30  stop= 50  nsim=100 
+[2026-04-30 00:30:01] start  falcinelli  ->  simulations/refined/falcinelli_freq.rds 
+[2026-04-30 00:30:01] imported  falcinelli  rows:  200 
+[2026-04-30 00:32:42] done  falcinelli  ->  simulations/refined/falcinelli_freq.rds 
+[2026-04-30 00:32:42] refine  mahjou  using start= 70  stop= 90  nsim=100 
+[2026-04-30 00:32:42] start  mahjou  ->  simulations/refined/mahjou.rds 
+[2026-04-30 00:32:42] imported  mahjou  rows:  718 
+[2026-04-30 00:38:06] done  mahjou  ->  simulations/refined/mahjou.rds 
+[2026-04-30 00:38:06] refine  borsa  using start= 30  stop= 50  nsim=100 
+[2026-04-30 00:38:06] start  borsa  ->  simulations/refined/borsa.rds 
+[2026-04-30 00:38:06] imported  borsa  rows:  964 
+[2026-04-30 00:45:16] done  borsa  ->  simulations/refined/borsa.rds 
+[2026-04-30 00:45:16] refine  kraljevic  using start= 60  stop= 120  nsim=100 
+[2026-04-30 00:45:16] start  kraljevic  ->  simulations/refined/kraljevic.rds 
+[2026-04-30 00:45:16] imported  kraljevic  rows:  2873 
+[2026-04-30 00:45:16] sampling  1000  rows for  kraljevic  test run 
+[2026-04-30 00:58:58] done  kraljevic  ->  simulations/refined/kraljevic.rds 
