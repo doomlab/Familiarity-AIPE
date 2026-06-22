@@ -20,6 +20,10 @@ run_population_pipeline <- function(
     maximum = max_score
   )
 
+  cat(sprintf("    [%s] simulate_samples (n_items=%d start=%d stop=%d nsim=%d)\n",
+              format(Sys.time(), "%H:%M:%S"),
+              n_distinct(population$item), start, stop, nsim))
+
   samples <- simulate_samples(
     start = start,
     stop = stop,
@@ -35,6 +39,9 @@ run_population_pipeline <- function(
       filter(is.finite(.data[["score"]]))
   })
 
+  cat(sprintf("    [%s] calculate_proportion (n_samples=%d)\n",
+              format(Sys.time(), "%H:%M:%S"), length(samples)))
+
   proportion_summary <- calculate_proportion(
     samples = samples,
     cutoff = cutoff$cutoff,
@@ -48,6 +55,9 @@ run_population_pipeline <- function(
               nrow(proportion_summary),
               if (nrow(proportion_summary) > 0) min(proportion_summary$percent_below, na.rm = TRUE) else NA,
               if (nrow(proportion_summary) > 0) max(proportion_summary$percent_below, na.rm = TRUE) else NA))
+
+  cat(sprintf("    [%s] calculate_correction\n",
+              format(Sys.time(), "%H:%M:%S")))
 
   corrected_summary <- calculate_correction(
     proportion_summary = proportion_summary,
@@ -819,13 +829,20 @@ run_simulation_pipeline <- function(
     stroke_results <- list()
     for (stroke in valid_stroke$stroke_bucket) {
       binned_stroke <- as.character(stroke)
-      cat(sprintf("  stroke subgroup: %s\n", binned_stroke))
+      cat(sprintf("  [%s] stroke subgroup: %s\n",
+                  format(Sys.time(), "%H:%M:%S"), binned_stroke))
 
       if (!(binned_stroke %in% names(stroke_results))) {
         df_stroke <- sim_data %>%
           filter(.data[["stroke_bucket"]] == .env$stroke)
 
+        cat(sprintf("    rows: %d  items: %d\n",
+                    nrow(df_stroke),
+                    dplyr::n_distinct(df_stroke[[item_col]])))
+
         if (nrow(df_stroke) > 0) {
+          cat(sprintf("    [%s] simulate_samples start\n",
+                      format(Sys.time(), "%H:%M:%S")))
           stroke_pipeline <- run_population_pipeline(
             population = df_stroke,
             min_score = min_score,
@@ -839,7 +856,8 @@ run_simulation_pipeline <- function(
           )
 
           stroke_results[[binned_stroke]] <- stroke_pipeline
-          cat(sprintf("  stroke subgroup done: %s\n", binned_stroke))
+          cat(sprintf("  [%s] stroke subgroup done: %s\n",
+                      format(Sys.time(), "%H:%M:%S"), binned_stroke))
         }
       }
     }

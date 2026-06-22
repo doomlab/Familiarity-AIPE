@@ -25,3 +25,8 @@
 [2026-06-22 10:58:05] extend  raslescu  ( raslescu.rds )  start= 240  stop= 500  nsim=100 
 [2026-06-22 10:58:05] start  raslescu  ->  simulations/refined/raslescu.rds 
 [2026-06-22 10:58:05] imported  raslescu  rows:  300 
+[2026-06-22 11:10:00] done  raslescu  ->  simulations/refined/raslescu.rds 
+[2026-06-22 11:10:00] extend  chan  ( chan.rds )  start= 20  stop= 300  nsim=100 
+[2026-06-22 11:10:00] start  chan  ->  simulations/refined/chan.rds 
+[2026-06-22 11:10:00] imported  chan  rows:  25281 
+[2026-06-22 11:10:00] sampling  1000  rows for  chan  test run 

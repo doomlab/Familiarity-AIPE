@@ -14,13 +14,12 @@ this_dir <- function() {
 setwd(this_dir())
 source("run_estimate_r_ss_batch.R")
 
-# Jobs that still need extending (guasch completed on 2026-06-19).
-# raslescu: step=10, stop=500 to avoid the 128 GB memory crash at stop=800.
+# Completed: guasch (2026-06-19), raslescu (2026-06-22).
 extend_specs <- data.frame(
-  output        = c("chan.rds", "kraljevic.rds", "raslescu.rds"),
-  start         = c(20L,        60L,             240L),
-  stop          = c(300L,       500L,            500L),
-  step          = c(5L,         5L,              10L),
+  output = c("chan.rds", "kraljevic.rds"),
+  start  = c(20L,        60L),
+  stop   = c(300L,       500L),
+  step   = c(5L,         5L),
   stringsAsFactors = FALSE
 )
 
