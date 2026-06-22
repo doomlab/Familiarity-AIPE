@@ -1,0 +1,27 @@
+[2026-06-19 14:59:01] starting extension run for  4  jobs 
+[2026-06-19 14:59:01] loading udpipe models 
+[2026-06-19 14:59:02] loaded udpipe model:  spanish 
+[2026-06-19 14:59:03] loaded udpipe model:  english 
+[2026-06-19 14:59:03] loaded udpipe model:  chinese-gsd 
+[2026-06-19 14:59:04] loaded udpipe model:  croatian 
+[2026-06-19 14:59:07] extend  guasch  ( guasch.rds )  start= 20  stop= 200  nsim=100 
+[2026-06-19 14:59:07] start  guasch  ->  simulations/refined/guasch.rds 
+[2026-06-19 14:59:07] imported  guasch  rows:  1400 
+[2026-06-19 14:59:07] sampling  1000  rows for  guasch  test run 
+[2026-06-19 15:28:54] done  guasch  ->  simulations/refined/guasch.rds 
+[2026-06-19 15:28:54] extend  raslescu  ( raslescu.rds )  start= 240  stop= 800  nsim=100 
+[2026-06-19 15:28:54] start  raslescu  ->  simulations/refined/raslescu.rds 
+[2026-06-19 15:28:54] imported  raslescu  rows:  300 
+[2026-06-20 07:10:10] error  raslescu :  vector memory limit of 128.0 Gb reached, see mem.maxVSize() 
+[2026-06-20 07:10:10] extend  chan  ( chan.rds )  start= 20  stop= 300  nsim=100 
+[2026-06-20 07:10:10] start  chan  ->  simulations/refined/chan.rds 
+[2026-06-20 07:10:10] imported  chan  rows:  25281 
+[2026-06-20 07:10:10] sampling  1000  rows for  chan  test run 
+[2026-06-22 10:58:01] starting extension run for  3  jobs 
+[2026-06-22 10:58:01] loading udpipe models 
+[2026-06-22 10:58:02] loaded udpipe model:  english 
+[2026-06-22 10:58:03] loaded udpipe model:  chinese-gsd 
+[2026-06-22 10:58:03] loaded udpipe model:  croatian 
+[2026-06-22 10:58:05] extend  raslescu  ( raslescu.rds )  start= 240  stop= 500  nsim=100 
+[2026-06-22 10:58:05] start  raslescu  ->  simulations/refined/raslescu.rds 
+[2026-06-22 10:58:05] imported  raslescu  rows:  300 

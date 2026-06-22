@@ -1,0 +1,201 @@
+---
+title: "Simulation Results Summary: Pilot Data"
+author: "Erin M. Buchanan"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+## Libraries
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(purrr)
+library(readr)
+library(tidyr)
+library(magrittr)
+```
+
+## Shared Functions
+
+```{r}
+source("functions.R")
+pilot_dir <- "simulations/pilot"
+pilot_summary <- load_and_summarize_simulations(pilot_dir)
+power_buckets <- c(80, 85, 90, 95)
+```
+
+## Pilot Figure Power Overall
+
+```{r}
+pilot_violin_data <- pilot_summary$overall_power %>%
+  mutate(power_level = rep(c(70, 75, 80, 85, 90, 95), length(unique(pilot_summary$overall_power$run_id)))) %>% 
+  filter(power_level > 79) %>% 
+  mutate(corrected_sample_size = ifelse(corrected_sample_size < 20, 20, corrected_sample_size),
+         power_level = as.factor(power_level))
+
+pilot_violin_data %>% 
+  group_by(power_level) %>% 
+  summarize(m = mean(corrected_sample_size),
+            sd = sd(corrected_sample_size),
+            med = median(corrected_sample_size))
+
+table(pilot_violin_data$power_level, 
+      pilot_violin_data$sample_size)
+
+# View(pilot_violin_data %>% 
+#        filter(sample_size <= 50) %>% 
+#        filter(power_level == 80))
+  
+ggplot(pilot_violin_data, aes(
+  x = power_level,
+  y = corrected_sample_size
+)) +
+  geom_violin(fill = "#d9e7ff", color = "#1f4e79", trim = FALSE, alpha = 0.8) +
+  geom_boxplot(width = 0.12, outlier.alpha = 0.25, fill = "white") +
+  labs(
+    x = "Power cutoff",
+    y = "Suggested sample size",
+    title = "Pilot sample size suggestions by power target"
+  ) +
+  theme_minimal()
+
+ggplot(
+  pilot_summary$overall_curve,
+  aes(x = sample_size, y = percent_below)
+) +
+  geom_point(alpha = 0.35, size = 1.6, color = "#1f4e79") +
+  labs(
+    x = "Sample size",
+    y = "Power",
+    title = "Raw power curve by sample size"
+  ) +
+  theme_minimal()
+```
+
+## Pilot Figure Reliability Overall
+
+```{r}
+pilot_rel_violin_data <- pilot_summary$overall_rel 
+
+ggplot(pilot_rel_violin_data, aes(x = sample_size, y = reliability_m)) +
+  geom_point(alpha = 0.35, size = 1.6, color = "#1f4e79") +
+  labs(
+    x = "Sample Size",
+    y = "Reliability",
+    title = "Pilot sample size suggestions by reliability target"
+  ) +
+  theme_minimal()
+```
+
+## POS Power Chart
+
+```{r}
+pilot_violin_data <- pilot_summary$pos_power %>%
+  mutate(group = as.factor(group),
+         power_level = rep(c(70, 75, 80, 85, 90, 95), length.out = nrow(.))
+  ) %>% 
+  filter(power_level > 79) %>% 
+  mutate(corrected_sample_size = ifelse(corrected_sample_size < 20, 20, corrected_sample_size),
+         power_level = as.factor(power_level)) %>% 
+  filter(power_level == "80")
+  
+ggplot(pilot_violin_data, aes(
+  x = group,
+  y = corrected_sample_size
+)) +
+  geom_violin(fill = "#d9e7ff", color = "#1f4e79", trim = FALSE, alpha = 0.8) +
+  geom_boxplot(width = 0.12, outlier.alpha = 0.25, fill = "white") +
+  labs(
+    x = "Power cutoff",
+    y = "Suggested sample size",
+    title = "Pilot sample size suggestions by part of speech"
+  ) +
+  theme_minimal()
+
+ggplot(pilot_summary$pos_curve, aes(x = sample_size, y = percent_below, color = group)) +
+  geom_point(alpha = 0.35, size = 1.6) +
+  labs(
+    x = "Sample size",
+    y = "Power",
+    color = "Group",
+    title = "POS power curve by sample size"
+  ) +
+  theme_minimal()
+```
+
+## POS Reliability Chart
+
+```{r}
+pos_rel_data <- pilot_summary$pos_rel %>%
+  mutate(group = as.factor(group))
+
+ggplot(pos_rel_data, aes(x = sample_size, y = reliability_m, color = group)) +
+  geom_point(alpha = 0.35, size = 1.6) +
+  labs(
+    x = "Sample size",
+    y = "Reliability",
+    color = "Group",
+    title = "POS reliability by sample size"
+  ) +
+  theme_minimal()
+```
+
+
+## Length Power Chart
+
+```{r}
+pilot_violin_data <- pilot_summary$length_power %>%
+  mutate(group = factor(group, levels = c("3", "4", "5", "6", "7", "8", "9", "10", "11+")),
+         power_level = rep(c(70, 75, 80, 85, 90, 95), length.out = nrow(.)),
+  ) %>% 
+  filter(power_level > 79) %>% 
+  mutate(corrected_sample_size = ifelse(corrected_sample_size < 20, 20, corrected_sample_size),
+         power_level = as.factor(power_level)) %>% 
+  filter(power_level == "80") 
+  
+ggplot(pilot_violin_data, aes(
+  x = group,
+  y = corrected_sample_size
+)) +
+  geom_violin(fill = "#d9e7ff", color = "#1f4e79", trim = FALSE, alpha = 0.8) +
+  geom_boxplot(width = 0.12, outlier.alpha = 0.25, fill = "white") +
+  labs(
+    x = "Power cutoff",
+    y = "Suggested sample size",
+    title = "Pilot sample size suggestions by length"
+  ) +
+  theme_minimal()
+
+ggplot(pilot_summary$length_curve %>% 
+         mutate(group = factor(group, levels = c("3", "4", "5", "6", "7", "8", "9", "10", "11+"))), aes(x = sample_size, y = percent_below, color = group)) +
+  geom_point(alpha = 0.35, size = 1.6) +
+  labs(
+    x = "Sample size",
+    y = "Power",
+    color = "Group",
+    title = "POS power curve by sample size"
+  ) +
+  theme_minimal()
+```
+
+## Length Reliability Chart
+
+```{r}
+length_rel_data <- pilot_summary$length_rel %>%
+  mutate(group = factor(group, levels = c("3", "4", "5", "6", "7", "8", "9", "10", "11+")))
+
+ggplot(length_rel_data, aes(x = sample_size, y = reliability_m, color = group)) +
+  geom_point(alpha = 0.35, size = 1.6) +
+  labs(
+    x = "Sample size",
+    y = "Reliability",
+    color = "Group",
+    title = "Length reliability by sample size"
+  ) +
+  theme_minimal()
+```
