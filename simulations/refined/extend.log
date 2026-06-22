@@ -30,3 +30,24 @@
 [2026-06-22 11:10:00] start  chan  ->  simulations/refined/chan.rds 
 [2026-06-22 11:10:00] imported  chan  rows:  25281 
 [2026-06-22 11:10:00] sampling  1000  rows for  chan  test run 
+[2026-06-22 14:26:39] starting extension run for  2  jobs 
+[2026-06-22 14:26:39] loading udpipe models 
+[2026-06-22 14:26:39] loaded udpipe model:  chinese-gsd 
+[2026-06-22 14:26:40] loaded udpipe model:  croatian 
+[2026-06-22 14:26:42] extend  chan  ( chan.rds )  start= 20  stop= 300  nsim=100 
+[2026-06-22 14:26:42] start  chan  ->  simulations/refined/chan.rds 
+[2026-06-22 14:26:42] imported  chan  rows:  25281 
+[2026-06-22 14:26:42] sampling  1000  rows for  chan  test run 
+[2026-06-22 16:27:43] starting extension run for  2  jobs 
+[2026-06-22 16:27:43] loading udpipe models 
+[2026-06-22 16:27:44] loaded udpipe model:  chinese-gsd 
+[2026-06-22 16:27:44] loaded udpipe model:  croatian 
+[2026-06-22 16:27:46] extend  chan  ( chan.rds )  start= 20  stop= 300  nsim=100 
+[2026-06-22 16:27:46] start  chan  ->  simulations/refined/chan.rds 
+[2026-06-22 16:27:46] imported  chan  rows:  25281 
+[2026-06-22 16:27:46] sampling  1000  rows for  chan  test run 
+[2026-06-22 16:56:59] done  chan  ->  simulations/refined/chan.rds 
+[2026-06-22 16:56:59] extend  kraljevic  ( kraljevic.rds )  start= 60  stop= 500  nsim=100 
+[2026-06-22 16:56:59] start  kraljevic  ->  simulations/refined/kraljevic.rds 
+[2026-06-22 16:56:59] imported  kraljevic  rows:  2873 
+[2026-06-22 16:56:59] sampling  1000  rows for  kraljevic  test run 

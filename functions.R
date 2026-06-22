@@ -740,6 +740,14 @@ run_simulation_pipeline <- function(
         df_pos <- sim_data %>%
           filter(.data[["pos"]] == .env$binned_pos)
 
+        unique_pos_items <- unique(df_pos$item)
+        if (length(unique_pos_items) > 200) {
+          cat(sprintf("    capping POS items: %d -> 200\n",
+                      length(unique_pos_items)))
+          df_pos <- df_pos %>%
+            filter(item %in% sample(unique_pos_items, 200))
+        }
+
         if (nrow(df_pos) > 0) {
           pos_pipeline <- run_population_pipeline(
             population = df_pos,
@@ -779,6 +787,14 @@ run_simulation_pipeline <- function(
       if (!(binned_len %in% names(length_results))) {
         df_len <- sim_data %>%
           filter(.data[["length_bucket"]] == .env$len)
+
+        unique_len_items <- unique(df_len$item)
+        if (length(unique_len_items) > 200) {
+          cat(sprintf("    capping length items: %d -> 200\n",
+                      length(unique_len_items)))
+          df_len <- df_len %>%
+            filter(item %in% sample(unique_len_items, 200))
+        }
 
         if (nrow(df_len) > 0) {
           length_pipeline <- run_population_pipeline(
@@ -836,9 +852,14 @@ run_simulation_pipeline <- function(
         df_stroke <- sim_data %>%
           filter(.data[["stroke_bucket"]] == .env$stroke)
 
-        cat(sprintf("    rows: %d  items: %d\n",
-                    nrow(df_stroke),
-                    dplyr::n_distinct(df_stroke[[item_col]])))
+        unique_stroke_items <- unique(df_stroke$item)
+        cat(sprintf("    items: %d\n", length(unique_stroke_items)))
+        if (length(unique_stroke_items) > 200) {
+          cat(sprintf("    capping stroke items: %d -> 200\n",
+                      length(unique_stroke_items)))
+          df_stroke <- df_stroke %>%
+            filter(item %in% sample(unique_stroke_items, 200))
+        }
 
         if (nrow(df_stroke) > 0) {
           cat(sprintf("    [%s] simulate_samples start\n",
