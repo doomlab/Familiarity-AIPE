@@ -65,3 +65,5 @@
 [2026-06-23 07:51:11] start  kraljevic  ->  simulations/refined/kraljevic.rds 
 [2026-06-23 07:51:12] imported  kraljevic  rows:  2873 
 [2026-06-23 07:51:12] sampling  1000  rows for  kraljevic  test run 
+[2026-06-23 08:57:09] done  kraljevic  ->  simulations/refined/kraljevic.rds 
+[2026-06-23 08:57:10] extension run complete 
