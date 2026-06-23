@@ -58,3 +58,10 @@
 [2026-06-22 19:09:44] start  kraljevic  ->  simulations/refined/kraljevic.rds 
 [2026-06-22 19:09:44] imported  kraljevic  rows:  2873 
 [2026-06-22 19:09:44] sampling  1000  rows for  kraljevic  test run 
+[2026-06-23 07:51:09] starting extension run for  1  jobs 
+[2026-06-23 07:51:09] loading udpipe models 
+[2026-06-23 07:51:10] loaded udpipe model:  croatian 
+[2026-06-23 07:51:11] extend  kraljevic  ( kraljevic.rds )  start= 60  stop= 300  nsim=100 
+[2026-06-23 07:51:11] start  kraljevic  ->  simulations/refined/kraljevic.rds 
+[2026-06-23 07:51:12] imported  kraljevic  rows:  2873 
+[2026-06-23 07:51:12] sampling  1000  rows for  kraljevic  test run 

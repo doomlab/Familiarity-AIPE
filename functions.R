@@ -657,9 +657,34 @@ run_simulation_pipeline <- function(
   increase = 5,
   nsim = 500,
   power_levels = c(80, 85, 90, 95),
-  length_col = "word_length"
+  length_col = "word_length",
+  out_file = NULL
 ) {
   cat(sprintf("Pipeline started: %s\n", item_col))
+
+  pos_results        <- NULL
+  length_results     <- NULL
+  stroke_results     <- NULL
+  split_half_by_pos    <- NULL
+  split_half_by_length <- NULL
+  split_half_by_stroke <- NULL
+
+  save_checkpoint <- function() {
+    if (is.null(out_file)) return(invisible(NULL))
+    partial <- list(
+      corrected_summary    = core_results$corrected_summary,
+      proportion_summary   = core_results$proportion_summary,
+      split_half_rel       = split_half_rel,
+      pos_pipelines        = pos_results,
+      length_pipelines     = length_results,
+      stroke_pipelines     = stroke_results,
+      split_half_by_pos    = split_half_by_pos,
+      split_half_by_length = split_half_by_length,
+      split_half_by_stroke = split_half_by_stroke
+    )
+    saveRDS(build_save_data(partial), out_file)
+    cat(sprintf("  [%s] checkpoint saved\n", format(Sys.time(), "%H:%M:%S")))
+  }
 
   core_results <- run_simulation_core(
     df = df,
@@ -693,6 +718,7 @@ run_simulation_pipeline <- function(
     })
   )
   cat("  split-half reliability done\n")
+  save_checkpoint()
 
   if ("pos" %in% names(sim_data)) {
     split_half_by_pos <- split_half_by_subgroup_samples(
@@ -731,40 +757,62 @@ run_simulation_pipeline <- function(
       summarise(n_items = n_distinct(.data[[item_col]]), .groups = "drop")
     valid_pos <- pos_counts_check %>% filter(n_items >= 10)
 
-    pos_results <- list()
+    pos_ckpt_file <- if (!is.null(out_file)) {
+      paste0(out_file, ".pos.rds")
+    } else NULL
+
+    pos_results <- if (!is.null(pos_ckpt_file) &&
+                       file.exists(pos_ckpt_file)) {
+      cat(sprintf("  loading POS checkpoint: %s\n", pos_ckpt_file))
+      readRDS(pos_ckpt_file)
+    } else {
+      list()
+    }
+
     for (pos in valid_pos$pos) {
       binned_pos <- pos
+
+      if (binned_pos %in% names(pos_results)) {
+        cat(sprintf("  POS subgroup skipped (cached): %s\n", binned_pos))
+        next
+      }
+
       cat(sprintf("  POS subgroup: %s\n", binned_pos))
 
-      if (!(binned_pos %in% names(pos_results))) {
-        df_pos <- sim_data %>%
-          filter(.data[["pos"]] == .env$binned_pos)
+      df_pos <- sim_data %>%
+        filter(.data[["pos"]] == .env$binned_pos)
 
-        unique_pos_items <- unique(df_pos$item)
-        if (length(unique_pos_items) > 200) {
-          cat(sprintf("    capping POS items: %d -> 200\n",
-                      length(unique_pos_items)))
-          df_pos <- df_pos %>%
-            filter(item %in% sample(unique_pos_items, 200))
-        }
-
-        if (nrow(df_pos) > 0) {
-          pos_pipeline <- run_population_pipeline(
-            population = df_pos,
-            min_score = min_score,
-            max_score = max_score,
-            n_per_item = n_per_item,
-            start = start,
-            stop = stop,
-            increase = increase,
-            nsim = nsim,
-            power_levels = power_levels
-          )
-
-          pos_results[[binned_pos]] <- pos_pipeline
-          cat(sprintf("  POS subgroup done: %s\n", binned_pos))
-        }
+      unique_pos_items <- unique(df_pos$item)
+      if (length(unique_pos_items) > 200) {
+        cat(sprintf("    capping POS items: %d -> 200\n",
+                    length(unique_pos_items)))
+        df_pos <- df_pos %>%
+          filter(item %in% sample(unique_pos_items, 200))
       }
+
+      if (nrow(df_pos) > 0) {
+        pos_pipeline <- run_population_pipeline(
+          population = df_pos,
+          min_score = min_score,
+          max_score = max_score,
+          n_per_item = n_per_item,
+          start = start,
+          stop = stop,
+          increase = increase,
+          nsim = nsim,
+          power_levels = power_levels
+        )
+
+        pos_results[[binned_pos]] <- pos_pipeline
+        cat(sprintf("  POS subgroup done: %s\n", binned_pos))
+
+        if (!is.null(pos_ckpt_file)) saveRDS(pos_results, pos_ckpt_file)
+        save_checkpoint()
+      }
+    }
+
+    if (!is.null(pos_ckpt_file) && file.exists(pos_ckpt_file)) {
+      file.remove(pos_ckpt_file)
     }
   } else {
     warning("'pos' column not found in data. Skipping POS subgroup analysis.")
@@ -779,45 +827,68 @@ run_simulation_pipeline <- function(
       summarise(n_items = n_distinct(.data[[item_col]]), .groups = "drop")
     valid_length <- length_counts_check %>% filter(n_items >= 10)
 
-    length_results <- list()
+    length_ckpt_file <- if (!is.null(out_file)) {
+      paste0(out_file, ".length.rds")
+    } else NULL
+
+    length_results <- if (!is.null(length_ckpt_file) &&
+                          file.exists(length_ckpt_file)) {
+      cat(sprintf("  loading length checkpoint: %s\n", length_ckpt_file))
+      readRDS(length_ckpt_file)
+    } else {
+      list()
+    }
+
     for (len in valid_length$length_bucket) {
       binned_len <- as.character(len)
+
+      if (binned_len %in% names(length_results)) {
+        cat(sprintf("  length subgroup skipped (cached): %s\n", binned_len))
+        next
+      }
+
       cat(sprintf("  length subgroup: %s\n", binned_len))
 
-      if (!(binned_len %in% names(length_results))) {
-        df_len <- sim_data %>%
-          filter(.data[["length_bucket"]] == .env$len)
+      df_len <- sim_data %>%
+        filter(.data[["length_bucket"]] == .env$len)
 
-        unique_len_items <- unique(df_len$item)
-        if (length(unique_len_items) > 200) {
-          cat(sprintf("    capping length items: %d -> 200\n",
-                      length(unique_len_items)))
-          df_len <- df_len %>%
-            filter(item %in% sample(unique_len_items, 200))
-        }
-
-        if (nrow(df_len) > 0) {
-          length_pipeline <- run_population_pipeline(
-            population = df_len,
-            min_score = min_score,
-            max_score = max_score,
-            n_per_item = n_per_item,
-            start = start,
-            stop = stop,
-            increase = increase,
-            nsim = nsim,
-            power_levels = power_levels
-          )
-
-          length_results[[binned_len]] <- length_pipeline
-          cat(sprintf("  length subgroup done: %s\n", binned_len))
-        }
+      unique_len_items <- unique(df_len$item)
+      if (length(unique_len_items) > 200) {
+        cat(sprintf("    capping length items: %d -> 200\n",
+                    length(unique_len_items)))
+        df_len <- df_len %>%
+          filter(item %in% sample(unique_len_items, 200))
       }
+
+      if (nrow(df_len) > 0) {
+        length_pipeline <- run_population_pipeline(
+          population = df_len,
+          min_score = min_score,
+          max_score = max_score,
+          n_per_item = n_per_item,
+          start = start,
+          stop = stop,
+          increase = increase,
+          nsim = nsim,
+          power_levels = power_levels
+        )
+
+        length_results[[binned_len]] <- length_pipeline
+        cat(sprintf("  length subgroup done: %s\n", binned_len))
+
+        if (!is.null(length_ckpt_file)) saveRDS(length_results, length_ckpt_file)
+        save_checkpoint()
+      }
+    }
+
+    if (!is.null(length_ckpt_file) && file.exists(length_ckpt_file)) {
+      file.remove(length_ckpt_file)
     }
   } else {
     warning("length_bucket column not found in data. Skipping length subgroup analysis.")
     length_results <- NULL
   }
+  save_checkpoint()
 
   if ("stroke_bucket" %in% names(sim_data)) {
     split_half_by_stroke <- split_half_by_subgroup_samples(
@@ -842,45 +913,70 @@ run_simulation_pipeline <- function(
       summarise(n_items = n_distinct(.data[[item_col]]), .groups = "drop")
     valid_stroke <- stroke_counts_check %>% filter(n_items >= 10)
 
-    stroke_results <- list()
+    stroke_ckpt_file <- if (!is.null(out_file)) {
+      paste0(out_file, ".stroke.rds")
+    } else NULL
+
+    stroke_results <- if (!is.null(stroke_ckpt_file) &&
+                          file.exists(stroke_ckpt_file)) {
+      cat(sprintf("  loading stroke checkpoint: %s\n", stroke_ckpt_file))
+      readRDS(stroke_ckpt_file)
+    } else {
+      list()
+    }
+
     for (stroke in valid_stroke$stroke_bucket) {
       binned_stroke <- as.character(stroke)
+
+      if (binned_stroke %in% names(stroke_results)) {
+        cat(sprintf("  [%s] stroke subgroup skipped (cached): %s\n",
+                    format(Sys.time(), "%H:%M:%S"), binned_stroke))
+        next
+      }
+
       cat(sprintf("  [%s] stroke subgroup: %s\n",
                   format(Sys.time(), "%H:%M:%S"), binned_stroke))
 
-      if (!(binned_stroke %in% names(stroke_results))) {
-        df_stroke <- sim_data %>%
-          filter(.data[["stroke_bucket"]] == .env$stroke)
+      df_stroke <- sim_data %>%
+        filter(.data[["stroke_bucket"]] == .env$stroke)
 
-        unique_stroke_items <- unique(df_stroke$item)
-        cat(sprintf("    items: %d\n", length(unique_stroke_items)))
-        if (length(unique_stroke_items) > 200) {
-          cat(sprintf("    capping stroke items: %d -> 200\n",
-                      length(unique_stroke_items)))
-          df_stroke <- df_stroke %>%
-            filter(item %in% sample(unique_stroke_items, 200))
-        }
-
-        if (nrow(df_stroke) > 0) {
-          cat(sprintf("    [%s] simulate_samples start\n",
-                      format(Sys.time(), "%H:%M:%S")))
-          stroke_pipeline <- run_population_pipeline(
-            population = df_stroke,
-            min_score = min_score,
-            max_score = max_score,
-            n_per_item = n_per_item,
-            start = start,
-            stop = stop,
-            increase = increase,
-            nsim = nsim,
-            power_levels = power_levels
-          )
-
-          stroke_results[[binned_stroke]] <- stroke_pipeline
-          cat(sprintf("  [%s] stroke subgroup done: %s\n",
-                      format(Sys.time(), "%H:%M:%S"), binned_stroke))
-        }
+      unique_stroke_items <- unique(df_stroke$item)
+      cat(sprintf("    items: %d\n", length(unique_stroke_items)))
+      if (length(unique_stroke_items) > 200) {
+        cat(sprintf("    capping stroke items: %d -> 200\n",
+                    length(unique_stroke_items)))
+        df_stroke <- df_stroke %>%
+          filter(item %in% sample(unique_stroke_items, 200))
       }
+
+      if (nrow(df_stroke) > 0) {
+        cat(sprintf("    [%s] simulate_samples start\n",
+                    format(Sys.time(), "%H:%M:%S")))
+        stroke_pipeline <- run_population_pipeline(
+          population = df_stroke,
+          min_score = min_score,
+          max_score = max_score,
+          n_per_item = n_per_item,
+          start = start,
+          stop = stop,
+          increase = increase,
+          nsim = nsim,
+          power_levels = power_levels
+        )
+
+        stroke_results[[binned_stroke]] <- stroke_pipeline
+        cat(sprintf("  [%s] stroke subgroup done: %s\n",
+                    format(Sys.time(), "%H:%M:%S"), binned_stroke))
+
+        if (!is.null(stroke_ckpt_file)) {
+          saveRDS(stroke_results, stroke_ckpt_file)
+        }
+        save_checkpoint()
+      }
+    }
+
+    if (!is.null(stroke_ckpt_file) && file.exists(stroke_ckpt_file)) {
+      file.remove(stroke_ckpt_file)
     }
   } else {
     warning("stroke_bucket column not found in data. Skipping stroke subgroup analysis.")

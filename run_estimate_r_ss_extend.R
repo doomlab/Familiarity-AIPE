@@ -18,7 +18,7 @@ source("run_estimate_r_ss_batch.R")
 extend_specs <- data.frame(
   output = "kraljevic.rds",
   start  = 60L,
-  stop   = 500L,
+  stop   = 300L,
   step   = 5L,
   stringsAsFactors = FALSE
 )

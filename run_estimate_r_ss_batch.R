@@ -712,6 +712,8 @@ run_job <- function(job, udpipe_models, stroke_tagger = NULL,
     df, job$item_col, udpipe_models, stroke_tagger
   )
 
+  dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
+
   saved_sim <- run_simulation_pipeline(
     df = df,
     item_col = job$item_col,
@@ -724,11 +726,11 @@ run_job <- function(job, udpipe_models, stroke_tagger = NULL,
     stop = stop,
     increase = increase,
     nsim = nsim,
-    power_levels = power_levels
+    power_levels = power_levels,
+    out_file = out_file
   )
 
   save_data <- build_save_data(saved_sim)
-  dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
   saveRDS(save_data, out_file)
 
   rm(saved_sim, save_data)
