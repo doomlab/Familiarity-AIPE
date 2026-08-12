@@ -83,3 +83,75 @@
 [2026-08-12 18:18:22] loaded udpipe model:  spanish 
 [2026-08-12 18:18:23] start  ferre  ->  simulations/refined/ferre.rds 
 [2026-08-12 18:18:23] imported  ferre  rows:  380 
+[2026-08-12 18:22:15] done  ferre  ->  simulations/refined/ferre.rds 
+[2026-08-12 18:22:15] refine  montefinese14  using start= 30  stop= 50  nsim=100 (subprocess,  normal ) 
+[2026-08-12 18:22:17] loaded udpipe model:  italian 
+[2026-08-12 18:22:19] start  montefinese14  ->  simulations/refined/montefinese14.rds 
+[2026-08-12 18:22:19] imported  montefinese14  rows:  1127 
+[2026-08-12 18:22:19] sampling  1000  rows for  montefinese14  test run 
+[2026-08-12 18:29:57] done  montefinese14  ->  simulations/refined/montefinese14.rds 
+[2026-08-12 18:29:57] refine  moreno  using start= 30  stop= 40  nsim=100 (subprocess,  normal ) 
+[2026-08-12 18:30:00] loaded udpipe model:  spanish 
+[2026-08-12 18:30:02] start  moreno  ->  simulations/refined/moreno.rds 
+[2026-08-12 18:30:02] imported  moreno  rows:  820 
+[2026-08-12 18:34:04] done  moreno  ->  simulations/refined/moreno.rds 
+[2026-08-12 18:34:04] refine  guasch  using start= 30  stop= 50  nsim=100 (subprocess,  normal ) 
+[2026-08-12 18:34:06] loaded udpipe model:  spanish 
+[2026-08-12 18:34:08] start  guasch  ->  simulations/refined/guasch.rds 
+[2026-08-12 18:34:08] imported  guasch  rows:  1400 
+[2026-08-12 18:34:08] sampling  1000  rows for  guasch  test run 
+[2026-08-12 18:41:31] done  guasch  ->  simulations/refined/guasch.rds 
+[2026-08-12 18:41:31] refine  hinojosa  using start= 40  stop= 60  nsim=100 (subprocess,  normal ) 
+[2026-08-12 18:41:34] loaded udpipe model:  spanish 
+[2026-08-12 18:41:36] start  hinojosa  ->  simulations/refined/hinojosa.rds 
+[2026-08-12 18:41:36] imported  hinojosa  rows:  875 
+[2026-08-12 18:49:39] done  hinojosa  ->  simulations/refined/hinojosa.rds 
+[2026-08-12 18:49:39] refine  sianipar  using start= 80  stop= 90  nsim=100 (subprocess,  normal ) 
+[2026-08-12 18:49:42] loaded udpipe model:  indonesian 
+[2026-08-12 18:49:44] start  sianipar  ->  simulations/refined/sianipar.rds 
+[2026-08-12 18:49:44] imported  sianipar  rows:  1490 
+[2026-08-12 18:49:44] sampling  1000  rows for  sianipar  test run 
+[2026-08-12 19:05:54] done  sianipar  ->  simulations/refined/sianipar.rds 
+[2026-08-12 19:05:54] refine  soares  using start= 60  stop= 80  nsim=100 (subprocess,  normal ) 
+[2026-08-12 19:05:57] loaded udpipe model:  spanish 
+[2026-08-12 19:06:00] start  soares  ->  simulations/refined/soares.rds 
+[2026-08-12 19:06:00] imported  soares  rows:  3800 
+[2026-08-12 19:06:00] sampling  1000  rows for  soares  test run 
+[2026-08-12 19:25:08] done  soares  ->  simulations/refined/soares.rds 
+[2026-08-12 19:25:08] refine  yee  using start= 50  stop= 90  nsim=100 (subprocess,  normal ) 
+[2026-08-12 19:25:11] loaded udpipe model:  chinese-gsd 
+[2026-08-12 19:25:13] start  yee  ->  simulations/refined/yee.rds 
+[2026-08-12 19:25:13] imported  yee  rows:  292 
+[2026-08-12 19:29:29] done  yee  ->  simulations/refined/yee.rds 
+[2026-08-12 19:29:30] refine  chedid  using start= 60  stop= 140  nsim=100 (subprocess,  normal ) 
+[2026-08-12 19:29:33] loaded udpipe model:  french 
+[2026-08-12 19:29:35] start  chedid  ->  simulations/refined/chedid.rds 
+[2026-08-12 19:29:35] imported  chedid  rows:  3596 
+[2026-08-12 19:29:35] sampling  1000  rows for  chedid  test run 
+[2026-08-12 20:18:53] done  chedid  ->  simulations/refined/chedid.rds 
+[2026-08-12 20:18:53] refine  bonin  using start= 40  stop= 60  nsim=100 (subprocess,  normal ) 
+[2026-08-12 20:18:55] loaded udpipe model:  french 
+[2026-08-12 20:18:56] start  bonin  ->  simulations/refined/bonin.rds 
+[2026-08-12 20:18:56] imported  bonin  rows:  506 
+[2026-08-12 20:22:26] done  bonin  ->  simulations/refined/bonin.rds 
+[2026-08-12 20:22:26] refine  yao  using start= 90  stop= 140  nsim=100 (subprocess,  normal ) 
+[2026-08-12 20:22:28] loaded udpipe model:  chinese-gsd 
+[2026-08-12 20:22:29] start  yao  ->  simulations/refined/yao.rds 
+[2026-08-12 20:22:29] imported  yao  rows:  1100 
+[2026-08-12 20:22:29] sampling  1000  rows for  yao  test run 
+[2026-08-12 20:38:41] done  yao  ->  simulations/refined/yao.rds 
+[2026-08-12 20:38:41] refine  mikla  using start= 30  stop= 50  nsim=100 (subprocess,  normal ) 
+[2026-08-12 20:38:43] loaded udpipe model:  russian 
+[2026-08-12 20:38:45] start  mikla  ->  simulations/refined/mikla.rds 
+[2026-08-12 20:38:45] imported  mikla  rows:  506 
+[2026-08-12 20:43:25] done  mikla  ->  simulations/refined/mikla.rds 
+[2026-08-12 20:43:26] refine  scott  using start= 40  stop= 60  nsim=100 (subprocess,  normal ) 
+[2026-08-12 20:43:28] loaded udpipe model:  english 
+[2026-08-12 20:43:30] start  scott  ->  simulations/refined/scott.rds 
+[2026-08-12 20:43:30] imported  scott  rows:  5553 
+[2026-08-12 20:43:30] sampling  1000  rows for  scott  test run 
+[2026-08-12 20:54:34] done  scott  ->  simulations/refined/scott.rds 
+[2026-08-12 20:54:34] refine  verheyen  using start= 20  stop= 40  nsim=100 (subprocess,  normal ) 
+[2026-08-12 20:54:36] loaded udpipe model:  dutch 
+[2026-08-12 20:54:38] start  verheyen  ->  simulations/refined/verheyen.rds 
+[2026-08-12 20:54:38] imported  verheyen  rows:  1000 
