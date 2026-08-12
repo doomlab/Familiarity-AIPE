@@ -15,11 +15,21 @@ setwd(this_dir())
 source("run_estimate_r_ss_batch.R")
 
 # Completed: guasch (2026-06-19), raslescu (2026-06-22), chan (2026-06-22).
+#
+# force_mode overrides needs_chunked_run()'s row-count estimate for a job
+# (NA = let the heuristic decide). kraljevic is forced to "chunked" because
+# it's the dataset that historically needed this extend step in the first
+# place (it didn't finish under the normal path) - the row-count estimate
+# for its 60-300 window comes in under CHUNKED_ROW_BUDGET, but that budget
+# is calibrated from a different project and its own header comment notes
+# row count isn't a reliable predictor of actual memory blowup, so a known
+# problem job shouldn't be left to the heuristic.
 extend_specs <- data.frame(
-  output = "kraljevic.rds",
-  start  = 60L,
-  stop   = 300L,
-  step   = 5L,
+  output     = "kraljevic.rds",
+  start      = 60L,
+  stop       = 300L,
+  step       = 5L,
+  force_mode = "chunked",
   stringsAsFactors = FALSE
 )
 
@@ -54,17 +64,26 @@ main <- function() {
     job  <- jobs[i, , drop = FALSE]
     spec <- extend_specs[extend_specs$output == job$output, ]
 
-    n_items_est <- tryCatch({
-      job_df <- rio::import(job$data_file)
-      if (nrow(job_df) > max_rows) job_df <- job_df[seq_len(max_rows), , drop = FALSE]
-      n_distinct(job_df[[job$item_col]])
-    }, error = function(e) NA_real_)
+    if (!is.na(spec$force_mode)) {
+      run_mode <- spec$force_mode
+      log_line(
+        "forcing ", job$name, " to mode=", run_mode,
+        " (bypassing needs_chunked_run() estimate)",
+        log_file = log_file
+      )
+    } else {
+      n_items_est <- tryCatch({
+        job_df <- rio::import(job$data_file)
+        if (nrow(job_df) > max_rows) job_df <- job_df[seq_len(max_rows), , drop = FALSE]
+        n_distinct(job_df[[job$item_col]])
+      }, error = function(e) NA_real_)
 
-    chunked <- needs_chunked_run(
-      n_items = n_items_est, start = spec$start, stop = spec$stop,
-      increase = spec$step, nsim = 100
-    )
-    run_mode <- if (isTRUE(chunked)) "chunked" else "normal"
+      chunked <- needs_chunked_run(
+        n_items = n_items_est, start = spec$start, stop = spec$stop,
+        increase = spec$step, nsim = 100
+      )
+      run_mode <- if (isTRUE(chunked)) "chunked" else "normal"
+    }
 
     log_line(
       "extend ", job$name,
