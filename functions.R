@@ -707,9 +707,38 @@ run_simulation_pipeline <- function(
   sample_sizes <- rep(seq(start, stop, by = increase), each = nsim)
   sample_sizes <- sample_sizes[1:length(samples)]
 
+  # Reliability must always be estimated starting at n = 20, regardless of
+  # the `start` used for the power sample-size search (which may be raised
+  # above 20 to skip a range already known not to reach the target power).
+  rel_floor <- 20
+  if (start > rel_floor) {
+    cat(sprintf("  extending reliability range down to n=%d (power search starts at n=%d)\n",
+                rel_floor, start))
+    rel_extra_samples <- simulate_samples(
+      start = rel_floor,
+      stop = start - increase,
+      increase = increase,
+      population = sim_data,
+      replace = TRUE,
+      nsim = nsim,
+      grouping_items = "item"
+    )
+    rel_extra_samples <- purrr::map(rel_extra_samples, function(sample_dat) {
+      sample_dat %>% filter(is.finite(.data[["score"]]))
+    })
+    rel_extra_sizes <- rep(seq(rel_floor, start - increase, by = increase), each = nsim)
+    rel_extra_sizes <- rel_extra_sizes[1:length(rel_extra_samples)]
+
+    rel_samples <- c(rel_extra_samples, samples)
+    rel_sample_sizes <- c(rel_extra_sizes, sample_sizes)
+  } else {
+    rel_samples <- samples
+    rel_sample_sizes <- sample_sizes
+  }
+
   split_half_rel <- data.frame(
-    sample_size = sample_sizes,
-    reliability = map_dbl(samples, function(sample_dat) {
+    sample_size = rel_sample_sizes,
+    reliability = map_dbl(rel_samples, function(sample_dat) {
       split_half_item_rel(
         dat = sample_dat,
         item_col = "item",
@@ -722,8 +751,8 @@ run_simulation_pipeline <- function(
 
   if ("pos" %in% names(sim_data)) {
     split_half_by_pos <- split_half_by_subgroup_samples(
-      samples = samples,
-      sample_sizes = sample_sizes,
+      samples = rel_samples,
+      sample_sizes = rel_sample_sizes,
       item_col = "item",
       score_col = "score",
       group_col = "pos",
@@ -737,8 +766,8 @@ run_simulation_pipeline <- function(
 
   if ("length_bucket" %in% names(sim_data)) {
     split_half_by_length <- split_half_by_subgroup_samples(
-      samples = samples,
-      sample_sizes = sample_sizes,
+      samples = rel_samples,
+      sample_sizes = rel_sample_sizes,
       item_col = "item",
       score_col = "score",
       group_col = "length_bucket",
@@ -892,8 +921,8 @@ run_simulation_pipeline <- function(
 
   if ("stroke_bucket" %in% names(sim_data)) {
     split_half_by_stroke <- split_half_by_subgroup_samples(
-      samples = samples,
-      sample_sizes = sample_sizes,
+      samples = rel_samples,
+      sample_sizes = rel_sample_sizes,
       item_col = "item",
       score_col = "score",
       group_col = "stroke_bucket",
