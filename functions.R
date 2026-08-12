@@ -1039,12 +1039,13 @@ run_simulation_pipeline <- function(
 # *sum* over all steps, not any single step. This version simulates,
 # summarizes, and discards one sample size at a time, checkpointing
 # out_file after every step so a killed/crashed job doesn't lose already-
-# computed steps. It skips the POS/length/stroke subgroup breakdown to
-# keep peak memory bounded - those are the most expensive part of the
-# normal pipeline and are non-essential for jobs already flagged as too
-# large to run normally. See needs_chunked_run() / run_job_chunked() in
-# run_estimate_r_ss_batch.R for when this gets used instead of the normal
-# path.
+# computed steps. It still runs the POS and length subgroup breakdowns
+# (these matter for this study), computed step-by-step alongside the
+# overall estimates rather than by rerunning the whole pipeline per
+# subgroup - only the stroke breakdown is skipped, since that only applies
+# to Chinese items and requires a separate Python-backed tagging pass. See
+# needs_chunked_run() / run_job_chunked() in run_estimate_r_ss_batch.R for
+# when this gets used instead of the normal path.
 run_simulation_pipeline_chunked <- function(
   df,
   item_col,
@@ -1058,6 +1059,7 @@ run_simulation_pipeline_chunked <- function(
   increase = 5,
   nsim = 500,
   power_levels = c(80, 85, 90, 95),
+  min_items = 10,
   out_file = NULL,
   log_file = "estimate_r_ss_batch.log"
 ) {
@@ -1084,7 +1086,7 @@ run_simulation_pipeline_chunked <- function(
     unnest(scores) %>%
     mutate(score = round(scores)) %>%
     filter(is.finite(.data[["score"]])) %>%
-    select(item, score)
+    select(item, score, any_of(c("pos", "length_bucket")))
 
   cat(sprintf("  simulated data ready: %d rows\n", nrow(sim_data)))
 
@@ -1099,6 +1101,37 @@ run_simulation_pipeline_chunked <- function(
   )
   cat(sprintf("  cutoff: %.3f  prop_var: %.4f  n_items: %d\n",
               cutoff$cutoff, cutoff$prop_var, n_distinct(population$item)))
+
+  # Cutoffs for each valid POS/length subgroup, computed once up front
+  # against the full population (cheap - no sample simulation involved)
+  # so each step only has to simulate/discard, not recompute this.
+  subgroup_cutoffs <- function(group_col) {
+    if (!group_col %in% names(population)) return(list())
+    valid_groups <- population %>%
+      distinct(item, .data[[group_col]]) %>%
+      group_by(.data[[group_col]]) %>%
+      summarise(n_items = n_distinct(item), .groups = "drop") %>%
+      filter(n_items >= min_items) %>%
+      pull(.data[[group_col]])
+
+    stats::setNames(
+      lapply(valid_groups, function(grp) {
+        calculate_cutoff(
+          population = population %>% filter(.data[[group_col]] == .env$grp),
+          grouping_items = "item",
+          score = "score",
+          minimum = min_score,
+          maximum = max_score
+        )
+      }),
+      as.character(valid_groups)
+    )
+  }
+
+  pos_cutoffs <- subgroup_cutoffs("pos")
+  length_cutoffs <- subgroup_cutoffs("length_bucket")
+  cat(sprintf("  subgroup cutoffs: %d pos, %d length\n",
+              length(pos_cutoffs), length(length_cutoffs)))
 
   # Reliability must always be estimated starting at n = 20, regardless of
   # the `start` used for the power sample-size search - see
@@ -1117,13 +1150,29 @@ run_simulation_pipeline_chunked <- function(
 
   proportion_summary_parts <- vector("list", length(power_sample_sizes))
   split_half_rel_parts <- vector("list", length(rel_sample_sizes))
+  split_half_by_pos_parts <- vector("list", length(rel_sample_sizes))
+  split_half_by_length_parts <- vector("list", length(rel_sample_sizes))
+  pos_proportion_parts <- stats::setNames(
+    vector("list", length(pos_cutoffs)), names(pos_cutoffs)
+  )
+  length_proportion_parts <- stats::setNames(
+    vector("list", length(length_cutoffs)), names(length_cutoffs)
+  )
 
   save_checkpoint <- function(power_step_i, rel_step_i) {
     if (is.null(out_file)) return(invisible(NULL))
     partial <- list(
-      corrected_summary  = NULL,
-      proportion_summary = dplyr::bind_rows(proportion_summary_parts[seq_len(power_step_i)]),
-      split_half_rel     = dplyr::bind_rows(split_half_rel_parts[seq_len(rel_step_i)])
+      corrected_summary     = NULL,
+      proportion_summary    = dplyr::bind_rows(proportion_summary_parts[seq_len(power_step_i)]),
+      split_half_rel        = dplyr::bind_rows(split_half_rel_parts[seq_len(rel_step_i)]),
+      split_half_by_pos     = dplyr::bind_rows(split_half_by_pos_parts[seq_len(rel_step_i)]),
+      split_half_by_length  = dplyr::bind_rows(split_half_by_length_parts[seq_len(rel_step_i)]),
+      pos_pipelines = purrr::imap(pos_proportion_parts, function(parts, grp) {
+        list(proportion_summary = dplyr::bind_rows(parts))
+      }),
+      length_pipelines = purrr::imap(length_proportion_parts, function(parts, grp) {
+        list(proportion_summary = dplyr::bind_rows(parts))
+      })
     )
     saveRDS(build_save_data(partial), out_file)
   }
@@ -1155,6 +1204,30 @@ run_simulation_pipeline_chunked <- function(
         grouping_items = "item",
         score = "score"
       )
+
+      for (grp in names(pos_cutoffs)) {
+        grp_samples <- purrr::map(step_samples, function(sample_dat) {
+          sample_dat %>% filter(.data[["pos"]] == .env$grp)
+        })
+        pos_proportion_parts[[grp]][[power_step_i]] <- calculate_proportion(
+          samples = grp_samples,
+          cutoff = pos_cutoffs[[grp]]$cutoff,
+          grouping_items = "item",
+          score = "score"
+        )
+      }
+
+      for (grp in names(length_cutoffs)) {
+        grp_samples <- purrr::map(step_samples, function(sample_dat) {
+          sample_dat %>% filter(.data[["length_bucket"]] == .env$grp)
+        })
+        length_proportion_parts[[grp]][[power_step_i]] <- calculate_proportion(
+          samples = grp_samples,
+          cutoff = length_cutoffs[[grp]]$cutoff,
+          grouping_items = "item",
+          score = "score"
+        )
+      }
     }
 
     split_half_rel_parts[[i]] <- data.frame(
@@ -1168,6 +1241,28 @@ run_simulation_pipeline_chunked <- function(
       })
     )
 
+    if ("pos" %in% names(sim_data)) {
+      split_half_by_pos_parts[[i]] <- split_half_by_subgroup_samples(
+        samples = step_samples,
+        sample_sizes = rep(n, length(step_samples)),
+        item_col = "item",
+        score_col = "score",
+        group_col = "pos",
+        min_items = min_items
+      )
+    }
+
+    if ("length_bucket" %in% names(sim_data)) {
+      split_half_by_length_parts[[i]] <- split_half_by_subgroup_samples(
+        samples = step_samples,
+        sample_sizes = rep(n, length(step_samples)),
+        item_col = "item",
+        score_col = "score",
+        group_col = "length_bucket",
+        min_items = min_items
+      )
+    }
+
     rm(step_samples)
     gc()
 
@@ -1176,6 +1271,8 @@ run_simulation_pipeline_chunked <- function(
 
   proportion_summary <- dplyr::bind_rows(proportion_summary_parts)
   split_half_rel <- dplyr::bind_rows(split_half_rel_parts)
+  split_half_by_pos <- dplyr::bind_rows(split_half_by_pos_parts)
+  split_half_by_length <- dplyr::bind_rows(split_half_by_length_parts)
 
   corrected_summary <- calculate_correction(
     proportion_summary = proportion_summary,
@@ -1184,13 +1281,36 @@ run_simulation_pipeline_chunked <- function(
     power_levels = power_levels
   )
 
+  build_subgroup_pipelines <- function(proportion_parts, cutoffs) {
+    purrr::imap(proportion_parts, function(parts, grp) {
+      grp_proportion_summary <- dplyr::bind_rows(parts)
+      list(
+        cutoff = cutoffs[[grp]],
+        proportion_summary = grp_proportion_summary,
+        corrected_summary = calculate_correction(
+          proportion_summary = grp_proportion_summary,
+          pilot_sample_size = n_per_item,
+          proportion_variability = cutoffs[[grp]]$prop_var,
+          power_levels = power_levels
+        )
+      )
+    })
+  }
+
+  pos_pipelines <- build_subgroup_pipelines(pos_proportion_parts, pos_cutoffs)
+  length_pipelines <- build_subgroup_pipelines(length_proportion_parts, length_cutoffs)
+
   cat("  split-half reliability done\n")
 
   if (!is.null(out_file)) {
     saveRDS(build_save_data(list(
       corrected_summary = corrected_summary,
       proportion_summary = proportion_summary,
-      split_half_rel = split_half_rel
+      split_half_rel = split_half_rel,
+      split_half_by_pos = split_half_by_pos,
+      split_half_by_length = split_half_by_length,
+      pos_pipelines = pos_pipelines,
+      length_pipelines = length_pipelines
     )), out_file)
     cat(sprintf("  [%s] final checkpoint saved\n", format(Sys.time(), "%H:%M:%S")))
   }
@@ -1204,11 +1324,11 @@ run_simulation_pipeline_chunked <- function(
     proportion_summary = proportion_summary,
     corrected_summary = corrected_summary,
     split_half_rel = split_half_rel,
-    split_half_by_pos = NULL,
-    split_half_by_length = NULL,
+    split_half_by_pos = split_half_by_pos,
+    split_half_by_length = split_half_by_length,
     split_half_by_stroke = NULL,
-    pos_pipelines = NULL,
-    length_pipelines = NULL,
+    pos_pipelines = pos_pipelines,
+    length_pipelines = length_pipelines,
     stroke_pipelines = NULL
   )
 }

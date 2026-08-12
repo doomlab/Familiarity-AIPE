@@ -19,10 +19,10 @@
 #
 # <mode> is "normal" (default, if omitted) or "chunked". "chunked" routes
 # to run_job_chunked(), which simulates/summarizes one sample size at a
-# time instead of holding the whole window in memory at once, and skips
-# POS/length/stroke tagging and subgroup analysis - for jobs whose window
-# is large enough that the normal path risks exhausting memory. See
-# needs_chunked_run() in run_estimate_r_ss_batch.R.
+# time instead of holding the whole window in memory at once - for jobs
+# whose window is large enough that the normal path risks exhausting
+# memory. It still tags and reports POS/length subgroups; only the stroke
+# breakdown is skipped. See needs_chunked_run() in run_estimate_r_ss_batch.R.
 #
 # <skip_existing> is "true" (default, if omitted) or "false". Extend runs
 # pass "false" since they intentionally overwrite an existing refined
@@ -70,9 +70,12 @@ if (nrow(job) == 0) {
   stop("job with output '", job_output, "' not found in build_jobs()")
 }
 
+udpipe_models <- load_udpipe_models(job, log_file = log_file)
+
 if (mode == "chunked") {
   run_job_chunked(
     job = job,
+    udpipe_models = udpipe_models,
     skip_existing = skip_existing,
     out_dir = out_dir,
     start = start_size,
@@ -83,8 +86,6 @@ if (mode == "chunked") {
     log_file = log_file
   )
 } else {
-  udpipe_models <- load_udpipe_models(job, log_file = log_file)
-
   local({
     py <- tryCatch(
       reticulate::conda_python("r-reticulate"),

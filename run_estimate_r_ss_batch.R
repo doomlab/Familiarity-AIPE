@@ -770,12 +770,14 @@ run_job <- function(job, udpipe_models, stroke_tagger = NULL,
 # hanging (see CHUNKED_ROW_BUDGET / needs_chunked_run() above). Delegates
 # to run_simulation_pipeline_chunked() (functions.R), which simulates and
 # summarizes one sample size at a time instead of holding every step in
-# memory at once, and checkpoints out_file after every step. Skips
-# udpipe/stroke POS tagging and the POS/length/stroke subgroup breakdown
-# entirely to keep peak memory bounded - only intended to be called for
-# jobs needs_chunked_run() flags; normal-sized jobs should keep using
-# run_job(), which also produces the subgroup breakdown.
-run_job_chunked <- function(job,
+# memory at once, and checkpoints out_file after every step. Still tags
+# and reports POS and length subgroups (those matter for this study);
+# only the stroke breakdown is skipped, since it needs a separate
+# Python-backed tagging pass and only applies to Chinese items. Only
+# intended to be called for jobs needs_chunked_run() flags - normal-sized
+# jobs should keep using run_job(), which also produces the stroke
+# breakdown.
+run_job_chunked <- function(job, udpipe_models,
                             skip_existing = TRUE,
                             out_dir = "simulations",
                             start = 20,
@@ -813,6 +815,10 @@ run_job_chunked <- function(job,
     )
     df <- dplyr::slice_sample(df, n = max_rows)
   }
+
+  df <- tag_df_with_pos_length(
+    df, job$item_col, udpipe_models, stroke_tagger = NULL
+  )
 
   dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
 
