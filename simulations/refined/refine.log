@@ -3,3 +3,45 @@
 [2026-08-12 15:00:20] loaded udpipe model:  english 
 [2026-08-12 15:00:24] start  zechmeister  ->  simulations/refined/zechmeister.rds 
 [2026-08-12 15:00:24] imported  zechmeister  rows:  192 
+[2026-08-12 15:07:27] done  zechmeister  ->  simulations/refined/zechmeister.rds 
+[2026-08-12 15:07:27] refine  gilhooly  using start= 60  stop= 80  nsim=100 (subprocess,  normal ) 
+[2026-08-12 15:07:31] loaded udpipe model:  english 
+[2026-08-12 15:07:35] start  gilhooly  ->  simulations/refined/gilhooly.rds 
+[2026-08-12 15:07:35] imported  gilhooly  rows:  205 
+[2026-08-12 15:13:11] done  gilhooly  ->  simulations/refined/gilhooly.rds 
+[2026-08-12 15:13:11] refine  surprenant  using start= 80  stop= 110  nsim=100 (subprocess,  normal ) 
+[2026-08-12 15:13:15] loaded udpipe model:  english 
+[2026-08-12 15:13:19] start  surprenant  ->  simulations/refined/surprenant.rds 
+[2026-08-12 15:13:19] imported  surprenant  rows:  199 
+[2026-08-12 15:26:53] done  surprenant  ->  simulations/refined/surprenant.rds 
+[2026-08-12 15:26:53] refine  barca  using start= 90  stop= 150  nsim=100 (subprocess,  normal ) 
+[2026-08-12 15:26:57] loaded udpipe model:  italian 
+[2026-08-12 15:27:01] start  barca  ->  simulations/refined/barca.rds 
+[2026-08-12 15:27:01] imported  barca  rows:  626 
+[2026-08-12 15:55:48] done  barca  ->  simulations/refined/barca.rds 
+[2026-08-12 15:55:48] refine  morrow  using start= 70  stop= 100  nsim=100 (subprocess,  normal ) 
+[2026-08-12 15:55:50] loaded udpipe model:  english 
+[2026-08-12 15:55:51] start  morrow  ->  simulations/refined/morrow_old.rds 
+[2026-08-12 15:55:51] imported  morrow  rows:  889 
+[2026-08-12 16:09:42] done  morrow  ->  simulations/refined/morrow_old.rds 
+[2026-08-12 16:09:42] refine  morrow  using start= 70  stop= 100  nsim=100 (subprocess,  normal ) 
+[2026-08-12 16:09:43] loaded udpipe model:  english 
+[2026-08-12 16:09:45] start  morrow  ->  simulations/refined/morrow_young.rds 
+[2026-08-12 16:09:45] imported  morrow  rows:  889 
+[2026-08-12 16:24:03] done  morrow  ->  simulations/refined/morrow_young.rds 
+[2026-08-12 16:24:03] refine  dedeyne  using start= 40  stop= 60  nsim=100 (subprocess,  normal ) 
+[2026-08-12 16:24:06] loaded udpipe model:  dutch 
+[2026-08-12 16:24:08] start  dedeyne  ->  simulations/refined/dedeyne.rds 
+[2026-08-12 16:24:08] imported  dedeyne  rows:  668 
+[2026-08-12 16:28:40] done  dedeyne  ->  simulations/refined/dedeyne.rds 
+[2026-08-12 16:28:40] refine  ferrand  using start= 40  stop= 60  nsim=100 (subprocess,  normal ) 
+[2026-08-12 16:28:42] loaded udpipe model:  french 
+[2026-08-12 16:28:44] start  ferrand  ->  simulations/refined/ferrand.rds 
+[2026-08-12 16:28:44] imported  ferrand  rows:  1493 
+[2026-08-12 16:28:44] sampling  1000  rows for  ferrand  test run 
+[2026-08-12 16:34:55] done  ferrand  ->  simulations/refined/ferrand.rds 
+[2026-08-12 16:34:55] refine  janschewitz  using start= 260  stop= 300  nsim=100 (subprocess,  normal ) 
+[2026-08-12 16:34:56] loaded udpipe model:  english 
+[2026-08-12 16:34:58] start  janschewitz  ->  simulations/refined/janschewitz.rds 
+[2026-08-12 16:34:58] imported  janschewitz  rows:  1380 
+[2026-08-12 16:34:58] sampling  1000  rows for  janschewitz  test run 
