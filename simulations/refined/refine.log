@@ -45,3 +45,41 @@
 [2026-08-12 16:34:58] start  janschewitz  ->  simulations/refined/janschewitz.rds 
 [2026-08-12 16:34:58] imported  janschewitz  rows:  1380 
 [2026-08-12 16:34:58] sampling  1000  rows for  janschewitz  test run 
+[2026-08-12 17:03:37] done  janschewitz  ->  simulations/refined/janschewitz.rds 
+[2026-08-12 17:03:37] refine  desrochers  using start= 80  stop= 110  nsim=100 (subprocess,  normal ) 
+[2026-08-12 17:03:40] loaded udpipe model:  french 
+[2026-08-12 17:03:41] start  desrochers  ->  simulations/refined/desrochers.rds 
+[2026-08-12 17:03:41] imported  desrochers  rows:  3600 
+[2026-08-12 17:03:41] sampling  1000  rows for  desrochers  test run 
+[2026-08-12 17:23:04] done  desrochers  ->  simulations/refined/desrochers.rds 
+[2026-08-12 17:23:04] refine  dellarosa  using start= 40  stop= 50  nsim=100 (subprocess,  normal ) 
+[2026-08-12 17:23:06] loaded udpipe model:  italian 
+[2026-08-12 17:23:08] start  dellarosa  ->  simulations/refined/dellarosa.rds 
+[2026-08-12 17:23:08] imported  dellarosa  rows:  417 
+[2026-08-12 17:26:15] done  dellarosa  ->  simulations/refined/dellarosa.rds 
+[2026-08-12 17:26:15] refine  desrochers10  using start= 130  stop= 160  nsim=100 (subprocess,  normal ) 
+[2026-08-12 17:26:17] loaded udpipe model:  french 
+[2026-08-12 17:26:19] start  desrochers10  ->  simulations/refined/desrochers10.rds 
+[2026-08-12 17:26:19] imported  desrochers10  rows:  3600 
+[2026-08-12 17:26:19] sampling  1000  rows for  desrochers10  test run 
+[2026-08-12 17:57:32] done  desrochers10  ->  simulations/refined/desrochers10.rds 
+[2026-08-12 17:57:32] refine  eilola  using start= 180  stop= 220  nsim=100 (subprocess,  normal ) 
+[2026-08-12 17:57:34] loaded udpipe model:  finnish 
+[2026-08-12 17:57:35] start  eilola  ->  simulations/refined/eilola_finnish.rds 
+[2026-08-12 17:57:35] imported  eilola  rows:  210 
+[2026-08-12 18:11:48] done  eilola  ->  simulations/refined/eilola_finnish.rds 
+[2026-08-12 18:11:49] refine  eilola  using start= 90  stop= 110  nsim=100 (subprocess,  normal ) 
+[2026-08-12 18:11:51] loaded udpipe model:  english 
+[2026-08-12 18:11:53] start  eilola  ->  simulations/refined/eilola_english.rds 
+[2026-08-12 18:11:53] imported  eilola  rows:  210 
+[2026-08-12 18:16:59] done  eilola  ->  simulations/refined/eilola_english.rds 
+[2026-08-12 18:16:59] refine  schroder  using start= 30  stop= 40  nsim=100 (subprocess,  normal ) 
+[2026-08-12 18:17:01] loaded udpipe model:  german 
+[2026-08-12 18:17:03] start  schroder  ->  simulations/refined/schroder.rds 
+[2026-08-12 18:17:03] imported  schroder  rows:  7710 
+[2026-08-12 18:17:03] sampling  1000  rows for  schroder  test run 
+[2026-08-12 18:18:18] done  schroder  ->  simulations/refined/schroder.rds 
+[2026-08-12 18:18:19] refine  ferre  using start= 40  stop= 50  nsim=100 (subprocess,  normal ) 
+[2026-08-12 18:18:22] loaded udpipe model:  spanish 
+[2026-08-12 18:18:23] start  ferre  ->  simulations/refined/ferre.rds 
+[2026-08-12 18:18:23] imported  ferre  rows:  380 
