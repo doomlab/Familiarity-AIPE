@@ -155,3 +155,81 @@
 [2026-08-12 20:54:36] loaded udpipe model:  dutch 
 [2026-08-12 20:54:38] start  verheyen  ->  simulations/refined/verheyen.rds 
 [2026-08-12 20:54:38] imported  verheyen  rows:  1000 
+[2026-08-12 21:01:32] done  verheyen  ->  simulations/refined/verheyen.rds 
+[2026-08-12 21:01:32] refine  lima  using start= 30  stop= 60  nsim=100 (subprocess,  normal ) 
+[2026-08-12 21:01:35] loaded udpipe model:  portuguese 
+[2026-08-12 21:01:37] start  lima  ->  simulations/refined/lima.rds 
+[2026-08-12 21:01:37] imported  lima  rows:  80 
+[2026-08-12 21:03:49] done  lima  ->  simulations/refined/lima.rds 
+[2026-08-12 21:03:49] refine  liu  using start= 30  stop= 60  nsim=100 (subprocess,  normal ) 
+[2026-08-12 21:03:52] loaded udpipe model:  chinese 
+[2026-08-12 21:03:56] start  liu  ->  simulations/refined/liu.rds 
+[2026-08-12 21:03:56] imported  liu  rows:  2062 
+[2026-08-12 21:03:56] sampling  1000  rows for  liu  test run 
+[2026-08-12 21:10:08] done  liu  ->  simulations/refined/liu.rds 
+[2026-08-12 21:10:08] refine  petit  using start= 30  stop= 40  nsim=100 (subprocess,  normal ) 
+[2026-08-12 21:10:11] loaded udpipe model:  croatian 
+[2026-08-12 21:10:13] start  petit  ->  simulations/refined/petit.rds 
+[2026-08-12 21:10:14] imported  petit  rows:  6000 
+[2026-08-12 21:10:14] sampling  1000  rows for  petit  test run 
+[2026-08-12 21:14:47] done  petit  ->  simulations/refined/petit.rds 
+[2026-08-12 21:14:47] refine  ballot  using start= 190  stop= 240  nsim=100 (subprocess,  normal ) 
+[2026-08-12 21:14:49] loaded udpipe model:  french 
+[2026-08-12 21:14:51] start  ballot  ->  simulations/refined/ballot.rds 
+[2026-08-12 21:14:51] imported  ballot  rows:  1286 
+[2026-08-12 21:14:51] sampling  1000  rows for  ballot  test run 
+[2026-08-12 21:58:21] done  ballot  ->  simulations/refined/ballot.rds 
+[2026-08-12 21:58:22] refine  sarli  using start= 30  stop= 50  nsim=100 (subprocess,  normal ) 
+[2026-08-12 21:58:25] loaded udpipe model:  spanish 
+[2026-08-12 21:58:28] start  sarli  ->  simulations/refined/sarli.rds 
+[2026-08-12 21:58:28] imported  sarli  rows:  1034 
+[2026-08-12 21:58:28] sampling  1000  rows for  sarli  test run 
+[2026-08-12 22:08:56] done  sarli  ->  simulations/refined/sarli.rds 
+[2026-08-12 22:08:56] refine  raslescu  using start= 240  stop= 280  nsim=100 (subprocess,  normal ) 
+[2026-08-12 22:08:59] loaded udpipe model:  english 
+[2026-08-12 22:09:02] start  raslescu  ->  simulations/refined/raslescu.rds 
+[2026-08-12 22:09:02] imported  raslescu  rows:  300 
+[2026-08-12 22:40:48] done  raslescu  ->  simulations/refined/raslescu.rds 
+[2026-08-12 22:40:48] refine  su  using start= 40  stop= 60  nsim=100 (subprocess,  normal ) 
+[2026-08-12 22:40:52] loaded udpipe model:  chinese-gsds 
+[2026-08-12 22:40:55] start  su  ->  simulations/refined/su.rds 
+[2026-08-12 22:40:55] imported  su  rows:  24325 
+[2026-08-12 22:40:55] sampling  1000  rows for  su  test run 
+[2026-08-12 22:49:07] done  su  ->  simulations/refined/su.rds 
+[2026-08-12 22:49:07] refine  chan  using start= 30  stop= 50  nsim=100 (subprocess,  normal ) 
+[2026-08-12 22:49:09] loaded udpipe model:  chinese-gsd 
+[2026-08-12 22:49:11] start  chan  ->  simulations/refined/chan.rds 
+[2026-08-12 22:49:12] imported  chan  rows:  25281 
+[2026-08-12 22:49:12] sampling  1000  rows for  chan  test run 
+[2026-08-12 22:54:15] done  chan  ->  simulations/refined/chan.rds 
+[2026-08-12 22:54:15] refine  conca  using start= 20  stop= 40  nsim=100 (subprocess,  normal ) 
+[2026-08-12 22:54:18] loaded udpipe model:  turkish 
+[2026-08-12 22:54:20] start  conca  ->  simulations/refined/conca.rds 
+[2026-08-12 22:54:20] imported  conca  rows:  503 
+[2026-08-12 22:58:56] done  conca  ->  simulations/refined/conca.rds 
+[2026-08-12 22:58:56] refine  falcinelli  using start= 30  stop= 50  nsim=100 (subprocess,  normal ) 
+[2026-08-12 22:58:59] loaded udpipe model:  italian 
+[2026-08-12 22:59:01] start  falcinelli  ->  simulations/refined/falcinelli.rds 
+[2026-08-12 22:59:01] imported  falcinelli  rows:  200 
+[2026-08-12 23:02:19] done  falcinelli  ->  simulations/refined/falcinelli.rds 
+[2026-08-12 23:02:20] refine  falcinelli  using start= 30  stop= 50  nsim=100 (subprocess,  normal ) 
+[2026-08-12 23:02:22] loaded udpipe model:  italian 
+[2026-08-12 23:02:25] start  falcinelli  ->  simulations/refined/falcinelli_freq.rds 
+[2026-08-12 23:02:25] imported  falcinelli  rows:  200 
+[2026-08-12 23:04:36] done  falcinelli  ->  simulations/refined/falcinelli_freq.rds 
+[2026-08-12 23:04:36] refine  mahjou  using start= 70  stop= 90  nsim=100 (subprocess,  normal ) 
+[2026-08-12 23:04:38] loaded udpipe model:  persian 
+[2026-08-12 23:04:39] start  mahjou  ->  simulations/refined/mahjou.rds 
+[2026-08-12 23:04:39] imported  mahjou  rows:  718 
+[2026-08-12 23:14:20] done  mahjou  ->  simulations/refined/mahjou.rds 
+[2026-08-12 23:14:20] refine  borsa  using start= 30  stop= 50  nsim=100 (subprocess,  normal ) 
+[2026-08-12 23:14:22] loaded udpipe model:  italian 
+[2026-08-12 23:14:24] start  borsa  ->  simulations/refined/borsa.rds 
+[2026-08-12 23:14:24] imported  borsa  rows:  964 
+[2026-08-12 23:21:15] done  borsa  ->  simulations/refined/borsa.rds 
+[2026-08-12 23:21:16] refine  kraljevic  using start= 60  stop= 120  nsim=100 (subprocess,  normal ) 
+[2026-08-12 23:21:18] loaded udpipe model:  croatian 
+[2026-08-12 23:21:19] start  kraljevic  ->  simulations/refined/kraljevic.rds 
+[2026-08-12 23:21:19] imported  kraljevic  rows:  2873 
+[2026-08-12 23:21:19] sampling  1000  rows for  kraljevic  test run 
+[2026-08-12 23:39:50] done  kraljevic  ->  simulations/refined/kraljevic.rds 
