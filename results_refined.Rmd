@@ -1,201 +1,485 @@
 ---
-title: "Simulation Results Summary: Refined Data"
+title: "Sample Size Estimation for Familiarity Norming"
 author: "Erin M. Buchanan"
-date: "`r Sys.Date()`"
-output: html_document
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: hide
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-```
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 8, fig.height = 5)
 
-## Libraries
-
-```{r}
 library(dplyr)
 library(ggplot2)
 library(purrr)
-library(readr)
 library(tidyr)
-library(magrittr)
-```
+library(tibble)
+library(DT)
 
-## Shared Functions
-
-```{r}
 source("functions.R")
 refined_dir <- "simulations/refined"
 refined_summary <- load_and_summarize_simulations(refined_dir)
-power_buckets <- c(80, 85, 90, 95)
+
+# `overall_power`/`pos_power`/`length_power` (semanticprimeR::calculate_correction)
+# record, for each dataset run (and, for the subgroup tables, each group
+# within that run), the *achieved* percent_below nearest each requested
+# power level (a near-continuous number like 76.85, not a clean 80) - but
+# always in the fixed order of REFINE_POWER_LEVELS below, up to six rows
+# per run/group (fewer if the search window didn't reach the higher
+# levels - percent_below is monotonic in sample_size, so any missing
+# levels are always the highest ones, never a gap in the middle).
+# Grouping directly on the raw percent_below value treats every run's
+# slightly-different achieved value as its own bin, so pools across runs
+# barely happen. Binning by position within each run recovers the
+# intended target instead.
+REFINE_POWER_LEVELS <- c(70, 75, 80, 85, 90, 95)
+TARGET_POWER <- 80
+TARGET_RELIABILITY <- 0.80
 ```
 
-## Refined Figure Power Overall
+```{r helpers}
+label_by_target <- function(power_tbl, group_vars = "run_id", power_levels = REFINE_POWER_LEVELS) {
+  power_tbl %>%
+    dplyr::group_by(dplyr::across(dplyr::all_of(group_vars))) %>%
+    dplyr::mutate(target_power = power_levels[((dplyr::row_number() - 1) %% length(power_levels)) + 1]) %>%
+    dplyr::ungroup()
+}
 
-```{r}
-refined_violin_data <- refined_summary$overall_power %>%
-  mutate(power_level = rep(c(70, 75, 80, 85, 90, 95), length(unique(refined_summary$overall_power$run_id)))) %>% 
-  filter(power_level > 79) %>% 
-  mutate(corrected_sample_size = ifelse(corrected_sample_size < 20, 20, corrected_sample_size),
-         power_level = as.factor(power_level))
+summarize_by_target <- function(power_tbl, group_vars = "run_id", power_levels = REFINE_POWER_LEVELS) {
+  label_by_target(power_tbl, group_vars, power_levels) %>%
+    dplyr::group_by(target_power) %>%
+    dplyr::summarise(
+      n_runs = sum(!is.na(corrected_sample_size)),
+      mean_recommended_sample_size = mean(corrected_sample_size, na.rm = TRUE),
+      median_recommended_sample_size = median(corrected_sample_size, na.rm = TRUE),
+      sd_recommended_sample_size = sd(corrected_sample_size, na.rm = TRUE),
+      min_recommended_sample_size = min(corrected_sample_size, na.rm = TRUE),
+      max_recommended_sample_size = max(corrected_sample_size, na.rm = TRUE),
+      .groups = "drop"
+    ) %>%
+    dplyr::arrange(target_power) %>%
+    dplyr::mutate(recommended_sample_size = ceiling(cummax(median_recommended_sample_size)))
+}
 
-refined_violin_data %>% 
-  group_by(power_level) %>% 
-  summarize(m = mean(corrected_sample_size),
-            sd = sd(corrected_sample_size),
-            med = median(corrected_sample_size))
+# Standard 1.5x IQR rule. Applied separately to the precision-recommended
+# and reliability-recommended sample sizes for a group, so a handful of
+# very small/noisy source datasets (which can swing corrected_sample_size
+# or the reliability-hit sample size wildly) don't dominate the average.
+IQR_MULTIPLIER <- 1.5
 
-table(refined_violin_data$power_level, 
-      refined_violin_data$sample_size)
+iqr_bounds <- function(x, multiplier = IQR_MULTIPLIER) {
+  x <- x[is.finite(x)]
+  if (length(x) < 4) return(c(lower = -Inf, upper = Inf))
+  qs <- stats::quantile(x, probs = c(0.25, 0.75), na.rm = TRUE, type = 7)
+  iqr <- qs[[2]] - qs[[1]]
+  c(lower = qs[[1]] - multiplier * iqr, upper = qs[[2]] + multiplier * iqr)
+}
 
-# View(refined_violin_data %>% 
-#        filter(sample_size <= 50) %>% 
-#        filter(power_level == 80))
-  
-ggplot(refined_violin_data, aes(
-  x = power_level,
-  y = corrected_sample_size
-)) +
-  geom_violin(fill = "#d9e7ff", color = "#1f4e79", trim = FALSE, alpha = 0.8) +
-  geom_boxplot(width = 0.12, outlier.alpha = 0.25, fill = "white") +
-  labs(
-    x = "Power cutoff",
-    y = "Suggested sample size",
-    title = "refined sample size suggestions by power target"
-  ) +
-  theme_minimal()
+n_at_precision_per_run <- function(power_tbl, group_vars = "run_id", target_power = TARGET_POWER) {
+  label_by_target(power_tbl, group_vars) %>%
+    dplyr::filter(target_power == !!target_power) %>%
+    dplyr::transmute(run_id, n_precision = corrected_sample_size)
+}
 
-ggplot(
-  refined_summary$overall_curve,
-  aes(x = sample_size, y = percent_below)
-) +
-  geom_point(alpha = 0.35, size = 1.6, color = "#1f4e79") +
-  labs(
-    x = "Sample size",
-    y = "Power",
-    title = "Raw power curve by sample size"
-  ) +
-  theme_minimal()
+# Reliability is never estimated below n = 20 (see run_simulation_pipeline() /
+# run_simulation_pipeline_chunked() in functions.R), so the sample size at
+# which a run first hits the reliability target is naturally floored at 20 -
+# even a dataset that happens to hit 80% reliability at very small n can't
+# pull this metric below the floor.
+n_at_reliability_per_run <- function(rel_tbl, target_reliability = TARGET_RELIABILITY) {
+  rel_tbl %>%
+    dplyr::mutate(
+      reliability_m = as.numeric(reliability_m),
+      sample_size = as.numeric(sample_size)
+    ) %>%
+    dplyr::filter(is.finite(reliability_m)) %>%
+    dplyr::group_by(run_id) %>%
+    dplyr::filter(reliability_m >= target_reliability) %>%
+    dplyr::arrange(sample_size) %>%
+    dplyr::slice_head(n = 1) %>%
+    dplyr::ungroup() %>%
+    dplyr::transmute(run_id, n_reliability = sample_size)
+}
+
+# For one group (Overall, a POS tag, or a length bucket): per-run n needed
+# for target_power% precision and for target_reliability split-half
+# reliability, IQR-outlier-trimmed separately, then averaged together into
+# a single recommended sample size.
+summarize_group_recommendation <- function(power_tbl, rel_tbl,
+                                           target_power = TARGET_POWER,
+                                           target_reliability = TARGET_RELIABILITY) {
+  precision_per_run <- n_at_precision_per_run(power_tbl, target_power = target_power)
+  reliability_per_run <- n_at_reliability_per_run(rel_tbl, target_reliability = target_reliability)
+
+  precision_bounds <- iqr_bounds(precision_per_run$n_precision)
+  reliability_bounds <- iqr_bounds(reliability_per_run$n_reliability)
+
+  per_run <- precision_per_run %>%
+    dplyr::full_join(reliability_per_run, by = "run_id") %>%
+    dplyr::mutate(
+      precision_outlier = is.finite(n_precision) &
+        (n_precision < precision_bounds[["lower"]] | n_precision > precision_bounds[["upper"]]),
+      reliability_outlier = is.finite(n_reliability) &
+        (n_reliability < reliability_bounds[["lower"]] | n_reliability > reliability_bounds[["upper"]])
+    )
+
+  precision_clean <- per_run$n_precision[is.finite(per_run$n_precision) & !per_run$precision_outlier]
+  reliability_clean <- per_run$n_reliability[is.finite(per_run$n_reliability) & !per_run$reliability_outlier]
+
+  precision_median <- stats::median(precision_clean)
+  reliability_median <- stats::median(reliability_clean)
+
+  list(
+    per_run = per_run,
+    precision_n_total = nrow(precision_per_run),
+    precision_n_kept = length(precision_clean),
+    precision_median = precision_median,
+    reliability_n_total = nrow(reliability_per_run),
+    reliability_n_kept = length(reliability_clean),
+    reliability_median = reliability_median,
+    recommended_n = mean(c(precision_median, reliability_median))
+  )
+}
+
+# Renders the table/plot/recommendation block for one group (Overall, a
+# POS tag, or a length bucket) - shared by the Overall/POS/Length sections
+# below so the reporting logic only has to be written once.
+render_group_section <- function(label, power_tbl, rel_tbl, group_vars = "run_id") {
+  n_runs <- dplyr::n_distinct(power_tbl$run_id)
+  cat(sprintf("Based on %d dataset run(s).\n\n", n_runs))
+
+  if (n_runs == 0) {
+    cat("No data available for this group.\n\n---\n")
+    return(invisible(NULL))
+  }
+
+  target_summary <- summarize_by_target(power_tbl, group_vars = group_vars)
+  labeled_power <- label_by_target(power_tbl, group_vars = group_vars)
+
+  cat("**Recommended sample size per item, by target precision (% of simulations hitting the AIPE cutoff):**\n\n")
+  print(htmltools::tagList(DT::datatable(
+    target_summary %>%
+      dplyr::mutate(dplyr::across(where(is.numeric), ~ round(.x, 2))),
+    rownames = FALSE, options = list(dom = "t", pageLength = 10)
+  )))
+
+  box_dat <- labeled_power %>%
+    dplyr::mutate(target_power = factor(target_power, levels = REFINE_POWER_LEVELS))
+  print(
+    ggplot2::ggplot(box_dat, ggplot2::aes(x = target_power, y = corrected_sample_size)) +
+      ggplot2::geom_boxplot(fill = "#d9e7ff", outlier.alpha = 0.2, width = 0.6) +
+      ggplot2::geom_jitter(width = 0.12, alpha = 0.35, size = 1.4) +
+      ggplot2::geom_line(
+        data = target_summary %>% dplyr::mutate(target_power = factor(target_power, levels = REFINE_POWER_LEVELS)),
+        ggplot2::aes(x = target_power, y = recommended_sample_size, group = 1),
+        color = "#b00020", linewidth = 0.9
+      ) +
+      ggplot2::geom_point(
+        data = target_summary %>% dplyr::mutate(target_power = factor(target_power, levels = REFINE_POWER_LEVELS)),
+        ggplot2::aes(x = target_power, y = recommended_sample_size),
+        color = "#b00020", size = 2.5
+      ) +
+      ggplot2::labs(
+        x = "Target precision (%)", y = "Corrected sample size",
+        title = paste0(label, ": spread of per-dataset recommendations"),
+        subtitle = "red line = across-run running max of the median"
+      ) +
+      ggplot2::theme_minimal()
+  )
+
+  rec <- summarize_group_recommendation(power_tbl, rel_tbl)
+
+  if (nrow(rel_tbl) > 0) {
+    cat("\n\n**Reliability by sample size (median across runs):**\n\n")
+    rel_curve <- rel_tbl %>%
+      dplyr::mutate(sample_size = as.numeric(sample_size), reliability_m = as.numeric(reliability_m)) %>%
+      dplyr::group_by(sample_size) %>%
+      dplyr::summarise(median_reliability = median(reliability_m, na.rm = TRUE), .groups = "drop")
+
+    print(
+      ggplot2::ggplot(rel_curve, ggplot2::aes(x = sample_size, y = median_reliability)) +
+        ggplot2::geom_point(alpha = 0.5, size = 1.8, color = "#1f4e79") +
+        ggplot2::geom_hline(yintercept = TARGET_RELIABILITY, linetype = "dashed", color = "#b00020") +
+        ggplot2::labs(
+          x = "Sample size", y = "Median split-half reliability",
+          title = paste0(label, ": reliability curve across dataset runs"),
+          subtitle = sprintf("dashed line = %.0f%% target", TARGET_RELIABILITY * 100)
+        ) +
+        ggplot2::theme_minimal()
+    )
+  }
+
+  cat(sprintf(
+    "\n\n**Recommended n (%d%% precision + %d%% reliability, IQR-trimmed medians averaged): %.1f -> %d participants/item**\n\n",
+    TARGET_POWER, TARGET_RELIABILITY * 100, rec$recommended_n, ceiling(rec$recommended_n)
+  ))
+  cat(sprintf(
+    "- Precision: %.1f (median of %d/%d runs kept after IQR trim)\n",
+    rec$precision_median, rec$precision_n_kept, rec$precision_n_total
+  ))
+  cat(sprintf(
+    "- Reliability: %.1f (median of %d/%d runs kept after IQR trim)\n",
+    rec$reliability_median, rec$reliability_n_kept, rec$reliability_n_total
+  ))
+
+  cat("\n\n**Per-dataset detail (n at target precision, n at target reliability, outlier flags):**\n\n")
+  print(htmltools::tagList(DT::datatable(
+    rec$per_run %>%
+      dplyr::mutate(dplyr::across(c(n_precision, n_reliability), ~ round(.x, 1))) %>%
+      dplyr::arrange(dplyr::desc(n_precision)),
+    rownames = FALSE, options = list(pageLength = 10)
+  )))
+
+  cat("\n\n---\n")
+
+  rec
+}
 ```
 
-## refined Figure Reliability Overall
+## Sample Size Estimation for Familiarity Norming
 
-```{r}
-refined_rel_violin_data <- refined_summary$overall_rel 
+We applied the accuracy in parameter estimation (AIPE) and Monte Carlo
+simulation procedure described by Buchanan et al. (2026) to estimate
+sample sizes for familiarity ratings across published psycholinguistic
+norming datasets. The procedure uses existing norming data to simulate
+the number of participants needed for items to be considered
+"well measured" - that is, for their standard errors (SEs) to fall
+below a data-driven criterion. All analyses were carried out in R using
+the `semanticprimeR` package. The full methodology is documented in
+`README.md`; in brief:
 
-ggplot(refined_rel_violin_data, aes(x = sample_size, y = reliability_m)) +
-  geom_point(alpha = 0.35, size = 1.6, color = "#1f4e79") +
-  labs(
-    x = "Sample Size",
-    y = "Reliability",
-    title = "refined sample size suggestions by reliability target"
-  ) +
-  theme_minimal()
+1. **Simulate from known population norms.** For each dataset, we drew
+   `n_per_item` observations per item from a truncated normal
+   distribution, using each dataset's reported item-level means and
+   standard deviations. 43 datasets were processed, spanning norming
+   studies published between 1975 and 2025 across 16 languages.
+2. **Pilot, then refine.** A coarse pilot sweep (sample sizes 20-500,
+   step 10, 10 simulations/step) located roughly where each dataset's
+   precision curve crosses 70% and 95%. A narrower, high-precision
+   refine stage (step 5, 100 simulations/step) then reran the
+   simulation within that dataset-specific window. **This document
+   reads the refined-stage output only**, since that is the
+   higher-precision, final estimate.
+3. **Precision.** At each sample size, we calculated the SE for each
+   item and the proportion of items whose SE fell below the 4th-decile
+   cutoff, then applied a correction factor (following Buchanan et al.)
+   to account for the known upward bias introduced by small pilot
+   samples. Sample size recommendations are derived at four
+   power-analogue thresholds - 80%, 85%, 90%, 95% of items meeting the
+   SE criterion.
+4. **Reliability.** Split-half reliability (participants per item split
+   in half, half-means correlated, Spearman-Brown corrected) was
+   calculated at each sample size, starting at *n* = 20 regardless of
+   where the precision search window began, so the reliability curve
+   never drops below a floor of 20 raters per item.
+5. **POS and word length splits.** Each dataset was additionally split
+   by part-of-speech (UDPipe-tagged) and word length prior to
+   simulation, to check whether recommendations vary by lexical class.
+
+## Target Criteria and Outlier Handling
+
+We target `r TARGET_POWER`% power (AIPE precision) and
+`r TARGET_RELIABILITY * 100`% split-half reliability, and report the
+recommended sample size as the average of those two numbers. Precision
+and reliability answer different questions about the same design (how
+accurately measured is the estimated mean vs. how consistent are the
+item scores), so averaging them gives one practical number rather than
+always taking the stricter of the two. Reliability is only ever
+estimated starting at *n* = 20 (see `functions.R`), so even a dataset
+that happens to reach the reliability target at a very small sample
+size cannot pull the recommended sample size below 20.
+
+Each of these numbers is computed per dataset run (i.e., per source
+paper/corpus) before pooling: every dataset run contributes one
+"n needed for `r TARGET_POWER`% precision" value and one
+"n needed for `r TARGET_RELIABILITY * 100`% reliability" value. A
+handful of source datasets are small, noisy, or otherwise unusual and
+can pull these per-run numbers to extreme highs or lows. Before pooling
+across runs, we drop outlier runs using the standard 1.5 x IQR rule
+(values more than 1.5 interquartile ranges below Q1 or above Q3 are
+dropped), applied separately to the precision values and the
+reliability values. We then take the median of the remaining runs for
+each metric (median rather than mean, since a handful of runs can still
+sit near the outlier boundary without being dropped outright - in
+practice the two are close once outliers are trimmed, but median is the
+more standard choice for a "typical" recommendation). The tables below
+show which runs were considered outliers.
+
+## Loading Refined Results
+
+```{r load-results, results='asis'}
+cat(sprintf(
+  "Loaded refined output for **%d dataset run(s)**.\n\n",
+  dplyr::n_distinct(refined_summary$overall_power$run_id)
+))
 ```
 
-## POS Power Chart
+Each dataset contributes one simulation "run" (i.e., one row per source
+paper/corpus that reported familiarity for the words in our stimuli
+set). The results below pool across *all* dataset runs, since our own
+norming study will draw one sample of participants per item.
 
-```{r}
-refined_violin_data <- refined_summary$pos_power %>%
-  mutate(group = as.factor(group),
-         power_level = rep(c(70, 75, 80, 85, 90, 95), length.out = nrow(.))
-  ) %>% 
-  filter(power_level > 79) %>% 
-  mutate(corrected_sample_size = ifelse(corrected_sample_size < 20, 20, corrected_sample_size),
-         power_level = as.factor(power_level)) %>% 
-  filter(power_level == "80")
-  
-ggplot(refined_violin_data, aes(
-  x = group,
-  y = corrected_sample_size
-)) +
-  geom_violin(fill = "#d9e7ff", color = "#1f4e79", trim = FALSE, alpha = 0.8) +
-  geom_boxplot(width = 0.12, outlier.alpha = 0.25, fill = "white") +
-  labs(
-    x = "Power cutoff",
-    y = "Suggested sample size",
-    title = "refined sample size suggestions by part of speech"
-  ) +
-  theme_minimal()
+## Overall Results
 
-ggplot(refined_summary$pos_curve, aes(x = sample_size, y = percent_below, color = group)) +
-  geom_point(alpha = 0.35, size = 1.6) +
-  labs(
-    x = "Sample size",
-    y = "Power",
-    color = "Group",
-    title = "POS power curve by sample size"
-  ) +
-  theme_minimal()
+```{r overall-results, results='asis'}
+overall_rec <- render_group_section(
+  "Overall",
+  refined_summary$overall_power,
+  refined_summary$overall_rel
+)
 ```
 
-## POS Reliability Chart
+## Results by Part of Speech {.tabset}
 
-```{r}
-pos_rel_data <- refined_summary$pos_rel %>%
-  mutate(group = as.factor(group))
-
-ggplot(pos_rel_data, aes(x = sample_size, y = reliability_m, color = group)) +
-  geom_point(alpha = 0.35, size = 1.6) +
-  labs(
-    x = "Sample size",
-    y = "Reliability",
-    color = "Group",
-    title = "POS reliability by sample size"
-  ) +
-  theme_minimal()
+```{r pos-results, results='asis'}
+pos_groups <- sort(unique(refined_summary$pos_power$group))
+pos_rec_by_group <- purrr::map(pos_groups, function(g) {
+  cat(sprintf("\n### %s\n\n", g))
+  render_group_section(
+    paste0("POS: ", g),
+    refined_summary$pos_power %>% dplyr::filter(group == g),
+    refined_summary$pos_rel %>% dplyr::filter(group == g)
+  )
+}) %>% setNames(pos_groups)
 ```
 
+## Results by Word Length {.tabset}
 
-## Length Power Chart
+```{r length-results, results='asis'}
+length_levels <- c("3", "4", "5", "6", "7", "8", "9", "10", "11+")
+length_groups <- length_levels[length_levels %in% unique(refined_summary$length_power$group)]
 
-```{r}
-refined_violin_data <- refined_summary$length_power %>%
-  mutate(group = factor(group, levels = c("3", "4", "5", "6", "7", "8", "9", "10", "11+")),
-         power_level = rep(c(70, 75, 80, 85, 90, 95), length.out = nrow(.)),
-  ) %>% 
-  filter(power_level > 79) %>% 
-  mutate(corrected_sample_size = ifelse(corrected_sample_size < 20, 20, corrected_sample_size),
-         power_level = as.factor(power_level)) %>% 
-  filter(power_level == "80") 
-  
-ggplot(refined_violin_data, aes(
-  x = group,
-  y = corrected_sample_size
-)) +
-  geom_violin(fill = "#d9e7ff", color = "#1f4e79", trim = FALSE, alpha = 0.8) +
-  geom_boxplot(width = 0.12, outlier.alpha = 0.25, fill = "white") +
-  labs(
-    x = "Power cutoff",
-    y = "Suggested sample size",
-    title = "refined sample size suggestions by length"
-  ) +
-  theme_minimal()
-
-ggplot(refined_summary$length_curve %>% 
-         mutate(group = factor(group, levels = c("3", "4", "5", "6", "7", "8", "9", "10", "11+"))), aes(x = sample_size, y = percent_below, color = group)) +
-  geom_point(alpha = 0.35, size = 1.6) +
-  labs(
-    x = "Sample size",
-    y = "Power",
-    color = "Group",
-    title = "POS power curve by sample size"
-  ) +
-  theme_minimal()
+length_rec_by_group <- purrr::map(length_groups, function(g) {
+  cat(sprintf("\n### %s letters\n\n", g))
+  render_group_section(
+    paste0("Length: ", g),
+    refined_summary$length_power %>% dplyr::filter(group == g),
+    refined_summary$length_rel %>% dplyr::filter(group == g)
+  )
+}) %>% setNames(length_groups)
 ```
 
-## Length Reliability Chart
+## Comparison Across Subgroups
 
-```{r}
-length_rel_data <- refined_summary$length_rel %>%
-  mutate(group = factor(group, levels = c("3", "4", "5", "6", "7", "8", "9", "10", "11+")))
+The POS and word-length breakdowns above are exploratory: they show
+whether any lexical class needs a *different* number of raters than the
+study as a whole, not a number to combine with the overall estimate.
+The chart below compares each subgroup's recommended n against the
+overall recommendation.
 
-ggplot(length_rel_data, aes(x = sample_size, y = reliability_m, color = group)) +
-  geom_point(alpha = 0.35, size = 1.6) +
-  labs(
-    x = "Sample size",
-    y = "Reliability",
-    color = "Group",
-    title = "Length reliability by sample size"
+```{r comparison-table}
+comparison_tbl <- dplyr::bind_rows(
+  tibble::tibble(category = "Overall", group = "Overall", recommended_n = overall_rec$recommended_n),
+  purrr::imap_dfr(pos_rec_by_group, ~ tibble::tibble(category = "POS", group = .y, recommended_n = .x$recommended_n)),
+  purrr::imap_dfr(length_rec_by_group, ~ tibble::tibble(category = "Length", group = .y, recommended_n = .x$recommended_n))
+) %>%
+  dplyr::mutate(recommended_n = round(recommended_n, 1))
+
+DT::datatable(comparison_tbl, rownames = FALSE, options = list(dom = "t", pageLength = 20))
+```
+
+```{r comparison-plot, fig.height=6}
+comparison_tbl %>%
+  dplyr::mutate(group = factor(group, levels = rev(c("Overall", pos_groups, length_groups)))) %>%
+  ggplot2::ggplot(ggplot2::aes(x = group, y = recommended_n, fill = category)) +
+  ggplot2::geom_col(width = 0.6) +
+  ggplot2::geom_hline(yintercept = overall_rec$recommended_n, linetype = "dashed", color = "#b00020") +
+  ggplot2::coord_flip() +
+  ggplot2::labs(
+    x = NULL, y = "Recommended sample size per item", fill = NULL,
+    title = "Recommended sample size: overall vs. subgroups",
+    subtitle = "dashed line = overall recommendation"
   ) +
-  theme_minimal()
+  ggplot2::theme_minimal()
+```
+
+The plot below overlays every subgroup's precision curve (recommended
+sample size at each target precision level,
+`r paste(REFINE_POWER_LEVELS, collapse = "/")`%) on two panels - all
+POS tags on the left, all word-length buckets on the right - so
+subgroups within each category can be compared directly against each
+other, with the overall curve repeated as a dashed grey reference in
+both panels. If POS and word length don't matter much for sample size
+planning, the colored curves should stay tightly bunched around their
+dashed reference.
+
+```{r subgroup-curves, fig.height=6, fig.width=12}
+library(patchwork)
+
+overall_curve <- summarize_by_target(refined_summary$overall_power) %>%
+  dplyr::mutate(target_power = factor(target_power, levels = REFINE_POWER_LEVELS))
+
+pos_curves <- purrr::map_dfr(pos_groups, function(g) {
+  summarize_by_target(refined_summary$pos_power %>% dplyr::filter(group == g)) %>%
+    dplyr::mutate(group = g)
+}) %>%
+  dplyr::mutate(
+    target_power = factor(target_power, levels = REFINE_POWER_LEVELS),
+    group = factor(group, levels = pos_groups)
+  )
+
+length_curves <- purrr::map_dfr(length_groups, function(g) {
+  summarize_by_target(refined_summary$length_power %>% dplyr::filter(group == g)) %>%
+    dplyr::mutate(group = g)
+}) %>%
+  dplyr::mutate(
+    target_power = factor(target_power, levels = REFINE_POWER_LEVELS),
+    group = factor(group, levels = length_groups)
+  )
+
+shared_y <- range(c(overall_curve$recommended_sample_size,
+                     pos_curves$recommended_sample_size,
+                     length_curves$recommended_sample_size), na.rm = TRUE)
+
+subgroup_curve_plot <- function(dat, title, legend_title) {
+  ggplot2::ggplot(dat, ggplot2::aes(x = target_power, y = recommended_sample_size, group = group)) +
+    ggplot2::geom_line(
+      data = overall_curve,
+      ggplot2::aes(x = target_power, y = recommended_sample_size, group = 1),
+      inherit.aes = FALSE,
+      color = "grey40", linetype = "dashed", linewidth = 1
+    ) +
+    ggplot2::geom_line(ggplot2::aes(color = group), linewidth = 0.7, alpha = 0.85) +
+    ggplot2::geom_point(ggplot2::aes(color = group), size = 1.6, alpha = 0.85) +
+    ggplot2::scale_color_viridis_d(option = "D") +
+    ggplot2::scale_y_continuous(limits = shared_y) +
+    ggplot2::labs(
+      x = "Target precision (%)", y = "Recommended sample size",
+      title = title, color = legend_title
+    ) +
+    ggplot2::theme_minimal(base_size = 18) +
+    ggplot2::theme(legend.position = "bottom")
+}
+
+pos_plot <- subgroup_curve_plot(pos_curves, " ", "POS")
+length_plot <- subgroup_curve_plot(length_curves, " ", "Length")
+
+(pos_plot | length_plot) 
+
+#+
+#  patchwork::plot_annotation(
+#    title = "Subgroup precision curves vs. the overall recommendation",
+#    subtitle = "Dashed grey = overall curve (repeated in every panel for reference); POS on the left, word length on the right"
+#  )
+
+ggsave(
+  filename = "comparison_aipe_rel.png",
+  dpi = 300
+)
+```
+
+```{r bottom-line, results='asis'}
+subgroup_max <- comparison_tbl %>%
+  dplyr::filter(category != "Overall") %>%
+  dplyr::filter(recommended_n == max(recommended_n, na.rm = TRUE))
+
+cat(sprintf(
+  "Bottom line: averaging %d%% precision and %d%% reliability (after dropping outlier dataset runs via the 1.5 x IQR rule) puts the overall recommended sample size at **%d participants per item**. The most demanding subgroup is %s (%s), at %.1f participants/item; every other subgroup falls at or below that.\n",
+  TARGET_POWER, TARGET_RELIABILITY * 100, ceiling(overall_rec$recommended_n),
+  subgroup_max$group[[1]], subgroup_max$category[[1]], subgroup_max$recommended_n[[1]]
+))
 ```
