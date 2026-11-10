@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(Rscript -e ' *)",
-      "Bash(grep -v \"^Attaching\\\\|^The following\\\\|masked from\\\\|setdiff\\\\|setequal\\\\|union\\\\|intersect\\\\|filter,\\\\|lag$\\\\|^$\")"
-    ]
-  }
-}
